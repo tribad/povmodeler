@@ -47,7 +47,6 @@ PMShell::PMShell( const QUrl &url )
    /***eticre view-hide Declare with name have "_" at first char***/
    show_list = false;
 
-   QString ruleFile = QStandardPaths::locate( QStandardPaths::GenericDataLocation, QString( "povmodeler/povmodelershell.rc" ) );
    QList<QToolBar *> allToolBars = this->findChildren<QToolBar *>();
    foreach(QToolBar *tb, allToolBars) {
        // This does not delete the tool bar.
@@ -72,6 +71,7 @@ PMShell::PMShell( const QUrl &url )
    fileMenu = new QMenu;
    insertMenu = new QMenu;
    menu_open_recent = new QMenu;
+
    fileMenu->setTitle("File");
    editMenu->setTitle(tr("Edit"));
    viewMenu->setTitle(tr("View"));
@@ -84,11 +84,13 @@ PMShell::PMShell( const QUrl &url )
    menu_Bar->addMenu(viewMenu);
    menu_Bar->addMenu(insertMenu);
    menu_Bar->addMenu(&settingsMenu);
+
    setMenuBar(menu_Bar);
 
    setupActions();
 
    m_pPart = new PMPart( this, this, true, this );
+
    m_pToolbar_sp->addActions( m_pPart->getMenu( "menuSolidPri" )->actions() );
    m_pToolbar_fp->addActions( m_pPart->getMenu( "menuFinitePatch" )->actions() );
    m_pToolbar_ip->addActions( m_pPart->getMenu( "menuInfiniteSolid" )->actions() );
