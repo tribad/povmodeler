@@ -38,6 +38,7 @@ add_definitions (-O0 -g)
 ########### next target ###############
 
 set(lpovmodeler_LIB_SRCS
+   pmimenubar.cpp
    povmodeleradaptator.cpp
    pmpart.cpp
    pmview.cpp
@@ -270,7 +271,6 @@ set(lpovmodeler_LIB_SRCS
    pmcolor.cpp
    pmpoint.cpp
    pmsymboltable.cpp
-   pmactions.cpp
    pmsplinesegment.cpp
    pmsorsegment.cpp
    pmpolynomexponents.cpp
