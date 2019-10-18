@@ -33,7 +33,7 @@ configure_file(config-povmodeler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-povm
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
 #include_directories( ${Qt5Gui_PRIVATE_INCLUDE_DIRS} )
-add_definitions (-O0 )
+add_definitions (-O0 -g)
 
 ########### next target ###############
 
