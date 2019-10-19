@@ -94,9 +94,70 @@ QTime PMDebugTime;
 PMPart::PMPart( QWidget* parentWidget,
                 QObject* parent,
                 bool readwrite,
-                PMShell* shell )
+                PMShell* shell, PMIMenuBar* menuBar)
     : m_commandManager( this )
 {
+    //
+    //  These are the povmodeller specific toolbars to create.
+    mToolBars.push_back(new QToolBar( "Solid Primitives" ));
+    mToolBars.push_back(new QToolBar( "Finite Patch" ));
+    mToolBars.push_back(new QToolBar( "Infinite Solid" ));
+    mToolBars.push_back(new QToolBar( "CSG" ));
+    mToolBars.push_back(new QToolBar( "Material" ));
+    mToolBars.push_back(new QToolBar( "Interior" ));
+    mToolBars.push_back(new QToolBar( "Texture" ));
+    mToolBars.push_back(new QToolBar( "Photons" ));
+    mToolBars.push_back(new QToolBar( "Athmospheric" ));
+    mToolBars.push_back(new QToolBar( "Transformation" ));
+    mToolBars.push_back(new QToolBar( "Global Detail Level" ));
+    //
+    //  If the menubar has been send as parameter here we setup submenus in the settings
+    //  menu.
+    if (menuBar != nullptr)
+    {
+        //
+        //  Extend the settings menu
+        QMenu*   settings = menuBar->GetMenu("Settings");
+        //
+        //  Check if we could find the settings menu.
+        if (settings != nullptr) {
+            //
+            //  Go find the pointer to the action where to insert the toolbar actions.
+            QAction* before = nullptr;
+            //
+            //  We do not use the short form of loops here cause we need access to the iterator.
+            for (auto action = settings->actions().begin(); action != settings->actions().end(); ++action) {
+                //
+                //  Check for the "Toolbars" entry.
+                if ((*action)->text() == "Toolbars") {
+                    //
+                    //  We insert the toolbars actions right before the action following "Toolbars"
+                    before = *(++action);
+                }
+            }
+            //
+            // Now go insert
+            for (auto toolbar : mToolBars) {
+                settings->insertAction(before, toolbar->toggleViewAction());
+            }
+        }
+        //
+        // Extend the edit menu
+        QMenu* edit = menuBar->GetMenu("Edit");
+        if (edit != nullptr) {
+
+        }
+        //
+        // Extend the file menu
+        QMenu* file = menuBar->GetMenu("File");
+        if (file != nullptr) {
+            QAction* before = menuBar->GetAction("File", "Revert");
+
+            file->insertAction( before , new QAction("Import") );
+            file->insertAction( before , new QAction("Export") );
+        }
+    }
+
    m_pActiveObject = nullptr;
    m_canDecode = false;
    m_pScene = nullptr;
@@ -124,7 +185,7 @@ PMPart::PMPart( QWidget* parentWidget,
    m_pInsertRuleSystem = new PMInsertRuleSystem( this );
    m_pIOManager = new PMIOManager( this );
    m_pInsertRuleSystem->loadRules( "baseinsertrules.xml" );
-   initActions();
+   initActions(menuBar);
    initDocument();
    initView( parentWidget );
    restoreConfig();
@@ -156,7 +217,7 @@ PMPart::PMPart( QWidget* parentWidget,
                 QObject* parent,
                 bool readwrite,
                 bool /*onlyCutPaste*/,
-                PMShell* shell
+                PMShell* shell, PMIMenuBar* menuBar
               )
       : m_commandManager( this )
 {
@@ -199,7 +260,7 @@ PMPart::PMPart( QWidget* parentWidget,
 
    if(m_pShell)
    {
-       initActions();
+       initActions(menuBar);
        initDocument();
    }
    initCopyPasteActions();
@@ -215,23 +276,16 @@ PMPart::PMPart( QWidget* parentWidget,
 
 PMPart::~PMPart()
 {
-    //deleteContents();
-    //qDebug(PMArea) << "pmpart01";
+    //
+    //  Remove the actions.
     for (auto actions : m_readWriteActions) {
         delete actions;
     }
+    //
+    // Its ok to check. But use less if we call it twice in a loop.
     if (m_hash_readWriteActions != nullptr) {
         delete m_hash_readWriteActions;
     }
-    //
-    //  Why should we delete our parent?
-    //  Deactivated.
-    //if (m_pparent != nullptr) {
-    //    delete m_pparent;
-    //}
-    //if (m_pwidget != nullptr) {
-    //    delete m_pwidget;
-    //}
     if (m_pView != nullptr) {
         delete m_pView;
     }
@@ -303,17 +357,17 @@ PMPart::~PMPart()
 QMenu* PMPart::getMenu( QString name )
 {
     if( name == "menuRenderModes" ) return  menuRenderModes;
-    if( name == "menu_gdl" ) return  menu_gdl;
-    if( name == "menuSolidPri" ) return  menuSolidPri;
-    if( name == "menuFinitePatch" ) return  menuFinitePatch;
-    if( name == "menuInfiniteSolid" ) return  menuInfiniteSolid;
-    if( name == "menuCsg" ) return  menuCsg;
-    if( name == "menuMaterial" ) return  menuMaterial;
-    if( name == "menuInterior" ) return  menuInterior;
-    if( name == "menuTexture" ) return  menuTexture;
-    if( name == "menuPhotons" ) return  menuPhotons;
-    if( name == "menuAthmo" ) return  menuAthmo;
-    if( name == "menuTrans" ) return  menuTrans;
+    if( name == "Global Detail Level" ) return  menu_gdl;
+    if( name == "Solid Primitives" ) return  menuSolidPri;
+    if( name == "Finite Patch" ) return  menuFinitePatch;
+    if( name == "Infinite Solid" ) return  menuInfiniteSolid;
+    if( name == "CSG" ) return  menuCsg;
+    if( name == "Material" ) return  menuMaterial;
+    if( name == "Interior" ) return  menuInterior;
+    if( name == "Texture" ) return  menuTexture;
+    if( name == "Photons" ) return  menuPhotons;
+    if( name == "Athmospheric" ) return  menuAthmo;
+    if( name == "Transformation" ) return  menuTrans;
     return nullptr;
 }
 
@@ -376,35 +430,30 @@ void PMPart::initCopyPasteActions()
 
 }
 
-void PMPart::initActions()
+void PMPart::initActions(PMIMenuBar* menuBar)
 {
-   fileMenu = m_pShell->get_fileMenu();
-   viewMenu = m_pShell->get_viewMenu();
-   insertMenu = m_pShell->get_insertMenu();
-   editMenu = m_pShell->get_editMenu();
-   menuSolidPri = new QMenu;
-   menuFinitePatch = new QMenu;
-   menuInfiniteSolid = new QMenu;
-   menuCsg = new QMenu;
-   menuMaterial = new QMenu;
-   menuInterior = new QMenu;
-   menuTexture = new QMenu;
-   menuPhotons = new QMenu;
-   menuAthmo = new QMenu;
-   menuTrans = new QMenu;
+    fileMenu   = menuBar->GetMenu("File");
+    viewMenu   = menuBar->GetMenu("View");
+    insertMenu = menuBar->GetMenu("Insert");
+    editMenu   = menuBar->GetMenu("Edit");
+    //
+    //  These are sub-menus for insert menu.
+    menuSolidPri = new QMenu;
+    menuFinitePatch = new QMenu;
+    menuInfiniteSolid = new QMenu;
+    menuCsg = new QMenu;
+    menuMaterial = new QMenu;
+    menuInterior = new QMenu;
+    menuTexture = new QMenu;
+    menuPhotons = new QMenu;
+    menuAthmo = new QMenu;
+    menuTrans = new QMenu;
 
-   initCopyPasteActions();
-   m_onlyCopyPaste = false;
+    initCopyPasteActions();
+    m_onlyCopyPaste = false;
 
-   fileMenu->addSeparator();
-
-   m_pImportAction = new QAction("Import");//m_pShell->get_fileMenu()->addAction( "Import" );
-   fileMenu->insertAction( fileMenu->actions().at(5) , m_pImportAction );
-   connect( m_pImportAction, SIGNAL( triggered( bool ) ), this, SLOT( slotFileImport() ) );
-
-   m_pExportAction = new QAction("Export");
-   fileMenu->insertAction( m_pShell->get_fileMenu()->actions().at(6) , m_pExportAction );
-   connect( m_pExportAction, SIGNAL( triggered( bool ) ), this, SLOT( slotFileExport() ) );
+    connect( menuBar->GetAction("File", "Import"), SIGNAL( triggered( bool ) ), this, SLOT( slotFileImport() ) );
+    connect( menuBar->GetAction("File", "Export"), SIGNAL( triggered( bool ) ), this, SLOT( slotFileExport() ) );
 
    viewMenu->addSeparator();
    m_pRenderComboAction = new QComboBox;

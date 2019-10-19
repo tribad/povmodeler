@@ -77,35 +77,19 @@ PMShell::PMShell( const QUrl &url )
 
    setupActions();
 
-   m_pPart = new PMPart( this, this, true, this );
+   m_pPart = new PMPart( this, this, true, this , menu_Bar);
+    //
+    //  Transfer the actions from the menu initialization to the toolbars.
+    std::vector<QToolBar*> toolbars = m_pPart->toolbars();
 
-   m_pToolbar_sp->addActions( m_pPart->getMenu( "menuSolidPri" )->actions() );
-   m_pToolbar_fp->addActions( m_pPart->getMenu( "menuFinitePatch" )->actions() );
-   m_pToolbar_ip->addActions( m_pPart->getMenu( "menuInfiniteSolid" )->actions() );
-   m_pToolbar_csg->addActions( m_pPart->getMenu( "menuCsg" )->actions() );
-   m_pToolbar_gdl->addActions( m_pPart->getMenu( "menu_gdl" )->actions() );
-   m_pToolbar_material->addActions( m_pPart->getMenu( "menuMaterial" )->actions() );
-   m_pToolbar_interior->addActions( m_pPart->getMenu( "menuInterior" )->actions() );
-   m_pToolbar_texture->addActions( m_pPart->getMenu( "menuTexture" )->actions() );
-   m_pToolbar_photons->addActions( m_pPart->getMenu( "menuPhotons" )->actions() );
-   m_pToolbar_athmo->addActions( m_pPart->getMenu( "menuAthmo" )->actions() );
-   m_pToolbar_transform->addActions( m_pPart->getMenu( "menuTrans" )->actions() );
-
-   addToolBar( m_pToolbar_sp );
-   addToolBar( m_pToolbar_fp );
-   addToolBar( m_pToolbar_ip );
-   addToolBar( m_pToolbar_csg );
-   addToolBar( m_pToolbar_gdl );
-   addToolBar( m_pToolbar_material );
-   addToolBar( m_pToolbar_interior );
-   addToolBar( m_pToolbar_texture );
-   addToolBar( m_pToolbar_photons );
-   addToolBar( m_pToolbar_athmo );
-   addToolBar( m_pToolbar_transform );
-   restoreRecent();
-   //restoreOptions();
-   setSize();
-   setupView();
+    for (auto toolbar : toolbars) {
+        toolbar->addActions(m_pPart->getMenu(toolbar->windowTitle())->actions());
+        addToolBar(toolbar);
+    }
+    restoreRecent();
+    //restoreOptions();
+    setSize();
+    setupView();
 
    m_pStatusBar = statusBar();
    m_pStatusBar->addWidget ( statusBarLabel, 1 );
@@ -172,68 +156,22 @@ void PMShell::setupActions()
     connect( menu_Bar->GetAction("Settings", "Show &List"),       SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
     connect( menu_Bar->GetAction("Settings", "Show &Path"),       SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
     connect( menu_Bar->GetAction("Settings", "Show &Status Bar"), SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-
-#if 0 //  gets moved to PMPart
-   m_pToolbarAction_sp = m_pToolbar_sp->toggleViewAction();
-   m_pToolbarAction_sp->setText("Solid Primitives");
-   settingsMenu->addAction( m_pToolbarAction_sp );
-
-   m_pToolbarAction_fp = m_pToolbar_fp->toggleViewAction();
-   m_pToolbarAction_fp->setText( "Finite Patch" );
-   settingsMenu->addAction( m_pToolbarAction_fp );
-
-   m_pToolbarAction_ip = m_pToolbar_ip->toggleViewAction();
-   m_pToolbarAction_ip->setText( "Infinite Solid" );
-   settingsMenu->addAction( m_pToolbarAction_ip );
-
-   m_pToolbarAction_csg = m_pToolbar_csg->toggleViewAction();
-   m_pToolbarAction_csg->setText( "CSG" );
-   settingsMenu->addAction( m_pToolbarAction_csg );
-
-   m_pToolbarAction_material = m_pToolbar_material->toggleViewAction();
-   m_pToolbarAction_material->setText( "Material" );
-   settingsMenu->addAction( m_pToolbarAction_material );
-
-   m_pToolbarAction_interior = m_pToolbar_interior->toggleViewAction();
-   m_pToolbarAction_interior->setText( "Interior" );
-   settingsMenu->addAction( m_pToolbarAction_interior );
-
-   m_pToolbarAction_texture = m_pToolbar_texture->toggleViewAction();
-   m_pToolbarAction_texture->setText( "Texture" );
-   settingsMenu->addAction( m_pToolbarAction_texture );
-
-   m_pToolbarAction_photons = m_pToolbar_photons->toggleViewAction();
-   m_pToolbarAction_photons->setText( "Photons" );
-   settingsMenu->addAction( m_pToolbarAction_photons );
-
-   m_pToolbarAction_athmo = m_pToolbar_athmo->toggleViewAction();
-   m_pToolbarAction_athmo->setText( "Athmospheric" );
-   settingsMenu->addAction( m_pToolbarAction_athmo );
-
-   m_pToolbarAction_transform = m_pToolbar_transform->toggleViewAction();
-   m_pToolbarAction_transform->setText( "Transformation" );
-   settingsMenu->addAction( m_pToolbarAction_transform );
-
-   m_pToolbarAction_gdl = m_pToolbar_gdl->toggleViewAction();
-   m_pToolbarAction_gdl->setText("Global Detail Level");
-   settingsMenu->addAction(m_pToolbarAction_gdl);
-#endif
-   connect( menu_Bar->GetAction("Settings", "Preferences" ),     SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
-   connect( menu_Bar->GetAction("Settings", "Save Options"),     SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-   //
-   //  View menu specific signal connects.
-   connect( menu_Bar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
-   connect( menu_Bar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
+    connect( menu_Bar->GetAction("Settings", "Preferences" ),     SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
+    connect( menu_Bar->GetAction("Settings", "Save Options"),     SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
+    //
+    //  View menu specific signal connects.
+    connect( menu_Bar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
+    connect( menu_Bar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
 #ifdef KPM_WITH_OBJECT_LIBRARY
-   connect( menu_Bar->GetAction("View", "New Library Browser"),  SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
+    connect( menu_Bar->GetAction("View", "New Library Browser"),  SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
 #endif
-   connect( menu_Bar->GetAction("View", "New Top View" ),        SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
-   connect( menu_Bar->GetAction("View", "New Bottom View" ),     SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
-   connect( menu_Bar->GetAction("View", "New Left View" ),       SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
-   connect( menu_Bar->GetAction("View", "New Right View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-   connect( menu_Bar->GetAction("View", "New Front View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-   connect( menu_Bar->GetAction("View", "New Back View" ),       SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
-   connect( menu_Bar->GetAction("View", "New Camera View"),      SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
+    connect( menu_Bar->GetAction("View", "New Top View" ),        SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
+    connect( menu_Bar->GetAction("View", "New Bottom View" ),     SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
+    connect( menu_Bar->GetAction("View", "New Left View" ),       SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
+    connect( menu_Bar->GetAction("View", "New Right View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+    connect( menu_Bar->GetAction("View", "New Front View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+    connect( menu_Bar->GetAction("View", "New Back View" ),       SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
+    connect( menu_Bar->GetAction("View", "New Camera View"),      SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
 
 #if 0
    layout_viewMenu_submenu = viewMenu->addMenu( tr( "View Layouts" ) );

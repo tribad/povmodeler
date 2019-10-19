@@ -22,9 +22,10 @@
 
 #include "pmobject.h"
 #include "pmcommandmanager.h"
+#include "pmimenubar.h"
 #include <QUrl>
 #include <QStringList>
-
+#include <QToolBar>
 class PMView;
 class PMShell;
 class PMScene;
@@ -60,7 +61,7 @@ public:
     */
    PMPart( QWidget* parentWidget,
            QObject* parent, bool readWrite,
-           PMShell* shell = nullptr );
+           PMShell* shell = nullptr , PMIMenuBar* menuBar = nullptr);
 
    /**
     * construtor of PMPart, calls all init functions to create the
@@ -68,7 +69,7 @@ public:
     */
    PMPart( QWidget* parentWidget,
            QObject* parent, bool readWrite,
-           bool onlyCutPaste, PMShell* shell = nullptr );
+           bool onlyCutPaste, PMShell* shell = nullptr , PMIMenuBar* menuBar = nullptr);
 
    /**
     * Destructor
@@ -266,6 +267,9 @@ public:
 
    bool ismodified;
 
+   //
+   //  return the list of Toolbar pointers
+   std::vector<QToolBar*> toolbars() {return mToolBars;}
 public slots:
    /**
     * Opens the import file dialog
@@ -780,7 +784,7 @@ protected:
    /**
     * Inits all actions
     */
-   void initActions();
+   void initActions(PMIMenuBar* menuBar);
    /**
     * Inits only actions related to copy&paste.
     * Required by the library browser.
@@ -802,6 +806,8 @@ protected:
    void clearSelection();
 
 private:
+   std::vector<QToolBar*> mToolBars;
+
    /**
     * Disables all actions, that modify the part
     */

@@ -13,7 +13,6 @@ public:
     virtual ~PMIMenuBar();
     QAction* GetAction(const QString& menuKey, const QString& actionTitle);
     QMenu* GetMenu(const QString& title);
-private:
     QMenu* AddMenu(const QString& title);
     QMenu* AddMenu(const QString& title, const QString& key, bool addToMenuBar=false);
 public:
