@@ -6,6 +6,8 @@ PMIMenuBar::PMIMenuBar()
     QMenu* m;
 
     m = AddMenu("File");
+    //
+    //  addAction() calls here are the standard calls to the QMenu object.
     m->addAction(new QAction( "New" ));
     m->addAction(new QAction("Open"));
 
@@ -23,6 +25,7 @@ PMIMenuBar::PMIMenuBar()
     AddMenu("Edit");
 
     m = AddMenu("View");
+
     m->addAction("New Object Tree");
     m->addAction("New Properties View");
     m->addAction("New Library Browser");
@@ -35,31 +38,23 @@ PMIMenuBar::PMIMenuBar()
     m->addAction("New Camera View");
     m->addSeparator();
 
-
     AddMenu("Insert");
 
     m = AddMenu("Settings");
 
-    m->addAction("Show &List");
-    m->addAction("Show &Path");
-    m->addAction("showStatusbar");
+    m->addAction("Show &List")->setCheckable( true );
+    m->addAction("Show &Path")->setCheckable( true );
+    m->addAction("showStatusbar")->setCheckable( true );
     m->addAction("");
+    //
+    //  This addition is a marker for the toolbar initialization sequence.
+    //  As it can be searched for and new toolbar activation action can be added later.
     m->addSection("Toolbars");
 
     m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
-    m->addAction("");
+    m->addSection("App. Layout");
+    m->addAction("Preferences");
+    m->addAction("Save Option");
 }
 
 PMIMenuBar::~PMIMenuBar() {

@@ -47,12 +47,14 @@ PMShell::PMShell( const QUrl &url )
    /***eticre view-hide Declare with name have "_" at first char***/
    show_list = false;
 
+   //
+   //  Do not know why this is important. But let it stay here. Does not harm.
+   //  Removing all toolbars that may be installed by magic.
    QList<QToolBar *> allToolBars = this->findChildren<QToolBar *>();
    foreach(QToolBar *tb, allToolBars) {
        // This does not delete the tool bar.
        this->removeToolBar(tb);
    }
-   m_pToolBar = new QToolBar;
    m_pToolbar_sp = new QToolBar;//solid primitives toolbar
    m_pToolbar_fp = new QToolBar;//finite patch toolbar
    m_pToolbar_csg = new QToolBar;//construct soid geom. toolbar
@@ -154,6 +156,8 @@ void PMShell::setSize()
 
 void PMShell::setupActions()
 {
+    //
+    //  File menu specific connects
     connect( menu_Bar->GetAction("File", "New"),     &QAction::triggered, this, &PMShell::slotFileNew );
     connect( menu_Bar->GetAction("File", "Open"),    &QAction::triggered, this, &PMShell::slotFileOpen );
     connect( menu_Bar->GetMenu("File/Recent File"),  &QMenu::triggered,   this, &PMShell::slotOpenRecent );
@@ -163,25 +167,13 @@ void PMShell::setupActions()
     connect( menu_Bar->GetAction("File", "Print"),   &QAction::triggered, this, &PMShell::slotFilePrint );
     connect( menu_Bar->GetAction("File", "Close"),   &QAction::triggered, this, &PMShell::slotFileClose );
     connect( menu_Bar->GetAction("File", "Quit"),    &QAction::triggered, this, &PMShell::shellClose );
+    //
+    //  Settings specific connects.
+    connect( menu_Bar->GetAction("Settings", "Show &List"),       SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
+    connect( menu_Bar->GetAction("Settings", "Show &Path"),       SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
+    connect( menu_Bar->GetAction("Settings", "Show &Status Bar"), SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
 
-   /***eticre add showlib***/
-   m_pListAction = settingsMenu->addAction("options_show_lib");
-   m_pListAction->setCheckable( true );
-   m_pListAction->setText( tr( "Show &List" ) );
-   connect( m_pListAction, SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
-   //m_pPathAction->setCheckedState( KGuiItem( tr( "Hide &List" ) ) );
-   
-   m_pPathAction = settingsMenu->addAction("options_show_path");
-   m_pPathAction->setCheckable( true );
-   m_pPathAction->setText( tr( "Show &Path" ) );
-   connect( m_pPathAction, SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
-
-   m_pStatusbarAction = settingsMenu->addAction("showStatusbar");
-   m_pStatusbarAction->setCheckable( true );
-   connect( m_pStatusbarAction, SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-   settingsMenu->addAction("");
-   settingsMenu->addSection("Toolbars");
-
+#if 0 //  gets moved to PMPart
    m_pToolbarAction_sp = m_pToolbar_sp->toggleViewAction();
    m_pToolbarAction_sp->setText("Solid Primitives");
    settingsMenu->addAction( m_pToolbarAction_sp );
@@ -225,30 +217,23 @@ void PMShell::setupActions()
    m_pToolbarAction_gdl = m_pToolbar_gdl->toggleViewAction();
    m_pToolbarAction_gdl->setText("Global Detail Level");
    settingsMenu->addAction(m_pToolbarAction_gdl);
-
-   settingsMenu->addAction("");
-   settingsMenu->addSection("App. Layout");
-
-   m_pPreferAaction = settingsMenu->addAction("Preferences");
-   connect( m_pPreferAaction, SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
-
-   m_pSaveOptions = settingsMenu->addAction("Save Option");
-   connect( m_pSaveOptions, SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-
+#endif
+   connect( menu_Bar->GetAction("Settings", "Preferences" ),     SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
+   connect( menu_Bar->GetAction("Settings", "Save Options"),     SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
+   //
+   //  View menu specific signal connects.
    connect( menu_Bar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
    connect( menu_Bar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
-
 #ifdef KPM_WITH_OBJECT_LIBRARY
-   connect( menu_Bar->GetAction("View", "New Library Browser"), SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
+   connect( menu_Bar->GetAction("View", "New Library Browser"),  SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
 #endif
-
-   connect( menu_Bar->GetAction("View", "New Top View" ), SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
-   connect( menu_Bar->GetAction("View", "New Bottom View" ), SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
-   connect( menu_Bar->GetAction("View", "New Left View" ), SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
-   connect( menu_Bar->GetAction("View", "New Right View" ), SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-   connect( menu_Bar->GetAction("View", "New Front View" ), SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-   connect( menu_Bar->GetAction("View", "New Back View" ), SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
-   connect( menu_Bar->GetAction("View", "New Camera View"), SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
+   connect( menu_Bar->GetAction("View", "New Top View" ),        SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
+   connect( menu_Bar->GetAction("View", "New Bottom View" ),     SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
+   connect( menu_Bar->GetAction("View", "New Left View" ),       SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
+   connect( menu_Bar->GetAction("View", "New Right View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+   connect( menu_Bar->GetAction("View", "New Front View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+   connect( menu_Bar->GetAction("View", "New Back View" ),       SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
+   connect( menu_Bar->GetAction("View", "New Camera View"),      SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
 
 #if 0
    layout_viewMenu_submenu = viewMenu->addMenu( tr( "View Layouts" ) );
