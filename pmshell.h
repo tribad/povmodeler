@@ -53,10 +53,10 @@ public:
 
    QMenu* getLayouts(){ return layout_viewMenu_submenu; }
 
-   QMenu* get_editMenu()   { return menu_Bar->GetMenu("Edit"); }
-   QMenu* get_viewMenu()   { return menu_Bar->GetMenu("View"); }
-   QMenu* get_fileMenu()   { return menu_Bar->GetMenu("File"); }
-   QMenu* get_insertMenu() { return menu_Bar->GetMenu("Insert"); }
+   QMenu* get_editMenu()   { return mMenuBar->GetMenu("Edit"); }
+   QMenu* get_viewMenu()   { return mMenuBar->GetMenu("View"); }
+   QMenu* get_fileMenu()   { return mMenuBar->GetMenu("File"); }
+   QMenu* get_insertMenu() { return mMenuBar->GetMenu("Insert"); }
    /**
     * Creates the actions
     */
@@ -199,7 +199,7 @@ private:
 
    QMenu* settingsMenu;
    QMenu* layout_viewMenu_submenu;
-   PMIMenuBar* menu_Bar;
+   PMIMenuBar* mMenuBar;
    QToolBar* m_pToolBar;
    QToolBar* m_pToolbar_sp;
    QToolBar* m_pToolbar_fp;

@@ -67,17 +67,17 @@ PMShell::PMShell( const QUrl &url )
    m_pToolbar_athmo = new QToolBar;
    m_pToolbar_transform = new QToolBar;
 
-   menu_Bar         = new PMIMenuBar;
+   mMenuBar         = new PMIMenuBar;
 
-   settingsMenu     = menu_Bar->GetMenu("Settings");
+   settingsMenu     = mMenuBar->GetMenu("Settings");
 
-   menu_Bar->GetMenu("File/Recent File")->setToolTipsVisible(true);
+   mMenuBar->GetMenu("File/Recent File")->setToolTipsVisible(true);
 
-   setMenuBar(menu_Bar);
+   setMenuBar(mMenuBar);
 
    setupActions();
 
-   m_pPart = new PMPart( this, this, true, this , menu_Bar);
+   m_pPart = new PMPart( this, this, true, this , mMenuBar);
     //
     //  Transfer the actions from the menu initialization to the toolbars.
     std::vector<QToolBar*> toolbars = m_pPart->toolbars();
@@ -142,36 +142,36 @@ void PMShell::setupActions()
 {
     //
     //  File menu specific connects
-    connect( menu_Bar->GetAction("File", "New"),     &QAction::triggered, this, &PMShell::slotFileNew );
-    connect( menu_Bar->GetAction("File", "Open"),    &QAction::triggered, this, &PMShell::slotFileOpen );
-    connect( menu_Bar->GetMenu("File/Recent File"),  &QMenu::triggered,   this, &PMShell::slotOpenRecent );
-    connect( menu_Bar->GetAction("File", "Save"),    &QAction::triggered, this, &PMShell::slotFileSave );
-    connect( menu_Bar->GetAction("File", "Save as"), &QAction::triggered, this, &PMShell::slotFileSaveAs );
-    connect( menu_Bar->GetAction("File", "Revert"),  &QAction::triggered, this, &PMShell::slotFileRevert );
-    connect( menu_Bar->GetAction("File", "Print"),   &QAction::triggered, this, &PMShell::slotFilePrint );
-    connect( menu_Bar->GetAction("File", "Close"),   &QAction::triggered, this, &PMShell::slotFileClose );
-    connect( menu_Bar->GetAction("File", "Quit"),    &QAction::triggered, this, &PMShell::shellClose );
+    connect( mMenuBar->GetAction("File", "New"),     &QAction::triggered, this, &PMShell::slotFileNew );
+    connect( mMenuBar->GetAction("File", "Open"),    &QAction::triggered, this, &PMShell::slotFileOpen );
+    connect( mMenuBar->GetMenu("File/Recent File"),  &QMenu::triggered,   this, &PMShell::slotOpenRecent );
+    connect( mMenuBar->GetAction("File", "Save"),    &QAction::triggered, this, &PMShell::slotFileSave );
+    connect( mMenuBar->GetAction("File", "Save as"), &QAction::triggered, this, &PMShell::slotFileSaveAs );
+    connect( mMenuBar->GetAction("File", "Revert"),  &QAction::triggered, this, &PMShell::slotFileRevert );
+    connect( mMenuBar->GetAction("File", "Print"),   &QAction::triggered, this, &PMShell::slotFilePrint );
+    connect( mMenuBar->GetAction("File", "Close"),   &QAction::triggered, this, &PMShell::slotFileClose );
+    connect( mMenuBar->GetAction("File", "Quit"),    &QAction::triggered, this, &PMShell::shellClose );
     //
     //  Settings specific connects.
-    connect( menu_Bar->GetAction("Settings", "Show &List"),       SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
-    connect( menu_Bar->GetAction("Settings", "Show &Path"),       SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
-    connect( menu_Bar->GetAction("Settings", "Show &Status Bar"), SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-    connect( menu_Bar->GetAction("Settings", "Preferences" ),     SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
-    connect( menu_Bar->GetAction("Settings", "Save Options"),     SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
+    connect( mMenuBar->GetAction("Settings", "Show &List"),       SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
+    connect( mMenuBar->GetAction("Settings", "Show &Path"),       SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
+    connect( mMenuBar->GetAction("Settings", "Show &Status Bar"), SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
+    connect( mMenuBar->GetAction("Settings", "Preferences" ),     SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
+    connect( mMenuBar->GetAction("Settings", "Save Options"),     SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
     //
     //  View menu specific signal connects.
-    connect( menu_Bar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
-    connect( menu_Bar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
+    connect( mMenuBar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
+    connect( mMenuBar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
 #ifdef KPM_WITH_OBJECT_LIBRARY
-    connect( menu_Bar->GetAction("View", "New Library Browser"),  SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
+    connect( mMenuBar->GetAction("View", "New Library Browser"),  SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
 #endif
-    connect( menu_Bar->GetAction("View", "New Top View" ),        SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
-    connect( menu_Bar->GetAction("View", "New Bottom View" ),     SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
-    connect( menu_Bar->GetAction("View", "New Left View" ),       SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
-    connect( menu_Bar->GetAction("View", "New Right View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-    connect( menu_Bar->GetAction("View", "New Front View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-    connect( menu_Bar->GetAction("View", "New Back View" ),       SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
-    connect( menu_Bar->GetAction("View", "New Camera View"),      SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
+    connect( mMenuBar->GetAction("View", "New Top View" ),        SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
+    connect( mMenuBar->GetAction("View", "New Bottom View" ),     SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
+    connect( mMenuBar->GetAction("View", "New Left View" ),       SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
+    connect( mMenuBar->GetAction("View", "New Right View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+    connect( mMenuBar->GetAction("View", "New Front View" ),      SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+    connect( mMenuBar->GetAction("View", "New Back View" ),       SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
+    connect( mMenuBar->GetAction("View", "New Camera View"),      SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
 
 #if 0
    layout_viewMenu_submenu = viewMenu->addMenu( tr( "View Layouts" ) );
@@ -397,8 +397,8 @@ void PMShell::restoreRecent()
            a->setToolTip( recent_urls.at(i).toString() );
            recentFileAction.insert( 0, a );
         }
-    menu_Bar->GetMenu("File/Recent File")->clear();
-    menu_Bar->GetMenu("File/Recent File")->addActions( recentFileAction );
+    mMenuBar->GetMenu("File/Recent File")->clear();
+    mMenuBar->GetMenu("File/Recent File")->addActions( recentFileAction );
 }
 
 void PMShell::slotOpenRecent( QAction* action )
