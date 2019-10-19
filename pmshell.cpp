@@ -55,29 +55,19 @@ PMShell::PMShell( const QUrl &url )
        // This does not delete the tool bar.
        this->removeToolBar(tb);
    }
-   m_pToolbar_sp = new QToolBar;//solid primitives toolbar
-   m_pToolbar_fp = new QToolBar;//finite patch toolbar
-   m_pToolbar_csg = new QToolBar;//construct soid geom. toolbar
-   m_pToolbar_gdl = new QToolBar;
-   m_pToolbar_ip = new QToolBar;
-   m_pToolbar_material = new QToolBar;
-   m_pToolbar_interior = new QToolBar;
-   m_pToolbar_texture = new QToolBar;
-   m_pToolbar_photons = new QToolBar;
-   m_pToolbar_athmo = new QToolBar;
-   m_pToolbar_transform = new QToolBar;
+    //
+    //  construct most of the menubar content
+    mMenuBar         = new PMIMenuBar;
 
-   mMenuBar         = new PMIMenuBar;
+    mMenuBar->GetMenu("File/Recent File")->setToolTipsVisible(true);
 
-   settingsMenu     = mMenuBar->GetMenu("Settings");
-
-   mMenuBar->GetMenu("File/Recent File")->setToolTipsVisible(true);
-
-   setMenuBar(mMenuBar);
-
-   setupActions();
-
-   m_pPart = new PMPart( this, this, true, this , mMenuBar);
+    setMenuBar(mMenuBar);
+    //
+    //  Connect the actions to the slots.
+    setupActions();
+    //
+    //  Create the povmodeler.
+    m_pPart = new PMPart( this, this, true, this , mMenuBar);
     //
     //  Transfer the actions from the menu initialization to the toolbars.
     std::vector<QToolBar*> toolbars = m_pPart->toolbars();
@@ -91,11 +81,11 @@ PMShell::PMShell( const QUrl &url )
     setSize();
     setupView();
 
-   m_pStatusBar = statusBar();
-   m_pStatusBar->addWidget ( statusBarLabel, 1 );
-   statusBarLabel->setText(" Status Bar ");
-   //m_pStatusBar->showMessage( " ", c_statusBarInfo, 1 );
-   //m_pStatusBar->showMessage( "" , c_statusBarControlPoints );
+    m_pStatusBar = statusBar();
+    m_pStatusBar->addWidget ( statusBarLabel, 1 );
+    statusBarLabel->setText(" Status Bar ");
+    //m_pStatusBar->showMessage( " ", c_statusBarInfo, 1 );
+    //m_pStatusBar->showMessage( "" , c_statusBarControlPoints );
 
    if( !url.isEmpty() )
    {
@@ -117,14 +107,10 @@ PMShell::PMShell( const QUrl &url )
 PMShell::~PMShell()
 {
     QSettings qset;
+
     qset.setValue( "mainwindow/size", this->size() );
     qset.setValue( "mainwindow/fullscreen", this->isFullScreen() );
     qset.setValue( "mainwindow/state", saveState(0) );
-    delete m_pToolBar;
-    delete m_pToolbarAction_fp;
-    delete m_pToolbarAction_sp;
-    qDebug() << "pmshell desctructor";
-    qDebug() << "pmshell01";
 }
 
 void PMShell::setSize()
@@ -491,22 +477,28 @@ void PMShell::slotShowStatusbar( bool b )
 /***eticre refresh show lib view hidden not_in_tree***/
 void PMShell::slotShowList()
 {
-  if( m_pPathAction->isChecked() )
-      m_pPathAction->setText( tr( "Hide &List" ) );
-  else
-      m_pPathAction->setText( tr( "Show &List" ) );
+    QAction* listAction = mMenuBar->GetAction("Settings", "Show &List");
 
-   m_pPart->refreshView();
+    if ((listAction != nullptr) && (listAction->isChecked() )) {
+        listAction->setText( tr( "Hide &List" ) );
+    } else {
+        listAction->setText( tr( "Show &List" ) );
+    }
+    m_pPart->refreshView();
 }
 
 void PMShell::slotShowPath()
 {
-    if( m_pPathAction->isChecked() )
-        m_pPathAction->setText( tr( "Hide &Path" ) );
-    else
-        m_pPathAction->setText( tr( "Show &Path" ) );
+    QAction* pathAction = mMenuBar->GetAction("Settings", "Show &Path");
 
-   setWindowTitle( m_pPart->url().toDisplayString() );
+    if ((pathAction != nullptr) && (pathAction->isChecked() )) {
+        pathAction->setText( tr( "Hide &Path" ) );
+    } else {
+        pathAction = mMenuBar->GetAction("Settings", "Hide &Path");
+        pathAction->setText( tr( "Show &Path" ) );
+    }
+
+    setWindowTitle( m_pPart->url().toDisplayString() );
 }
 
 void PMShell::slotSettings()
@@ -551,19 +543,20 @@ void PMShell::restoreOptions()
 
 void PMShell::setWindowTitle( const QString& caption )
 {
-   QString tmp;
+    QString tmp = tr ("unknown");
 
-   if( caption.isEmpty() )
-      tmp = tr( "unknown" );
-   else
-   {
-      if( !m_pPathAction->isChecked() )
-         tmp = caption.right( caption.length() - caption.lastIndexOf( '/' ) - 1 );
-      else
-         tmp = caption;
-   }
+    if(! caption.isEmpty() )
+    {
+       QAction* pathAction = mMenuBar->GetAction("Settings", "Hide &Path");
 
-   QMainWindow::setWindowTitle( tmp );//, m_pPart->isModified() );
+       if ((pathAction != nullptr) && (pathAction->isChecked() )) {
+            tmp = caption.right( caption.length() - caption.lastIndexOf( '/' ) - 1 );
+        } else {
+            tmp = caption;
+        }
+    }
+
+    QMainWindow::setWindowTitle( tmp );
 }
 
 void PMShell::statusMsg( const QString& text )
