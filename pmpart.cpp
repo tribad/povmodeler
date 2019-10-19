@@ -235,8 +235,6 @@ PMPart::PMPart( QWidget* parentWidget,
    m_pCutAction = nullptr;
    m_pCopyAction = nullptr;
    m_pPasteAction = nullptr;
-   m_pUndoAction = nullptr;
-   m_pRedoAction = nullptr;
    m_pDeleteAction = nullptr;
    m_pHideAction = nullptr;
    m_pShowAction = nullptr;
@@ -298,12 +296,6 @@ PMPart::~PMPart()
     if (m_pPasteAction != nullptr) {
         delete m_pPasteAction;
     }
-    if (m_pUndoAction != nullptr) {
-        delete m_pUndoAction;
-    }
-    if (m_pRedoAction != nullptr) {
-        delete m_pRedoAction;
-    }
     if (m_pDeleteAction != nullptr) {
         delete m_pDeleteAction;
     }
@@ -316,8 +308,6 @@ PMPart::~PMPart()
     m_pCutAction = nullptr;
     m_pCopyAction = nullptr;
     m_pPasteAction = nullptr;
-    m_pUndoAction = nullptr;
-    m_pRedoAction = nullptr;
     m_pDeleteAction = nullptr;
     m_pHideAction = nullptr;
     m_pShowAction = nullptr;
@@ -371,18 +361,21 @@ QMenu* PMPart::getMenu( QString name )
     return nullptr;
 }
 
-QAction* PMPart::actionCollection( QString name, QMenu* menu=nullptr )
+QAction* PMPart::actionCollection( const QString& name, const QString& text )
 {
-  QAction* a;
-  QString s;
-  s = name;
-  s.remove(0,4);
-  s.prepend(":/smallicon/icons/povicons/small/pm");
-  if(!menu) menu = insertMenu;
-  a = menu->addAction(name);
-  a->setIcon( QIcon( s ) );
-  m_hash_readWriteActions->insert(name,a);
-  return a;
+    QAction* retval = new QAction(name);
+    QString s = name;
+    //
+    //  remove 'new_' prefix setup path for the icon.
+    s.remove(0,4);
+    s.prepend(":/smallicon/icons/povicons/small/pm");
+    //
+    retval->setIcon( QIcon( s ) );
+    retval->setText(text);
+
+    m_hash_readWriteActions->insert(name, retval);
+
+    return retval;
 }
 
 bool PMPart::get_radYN()
@@ -438,16 +431,16 @@ void PMPart::initActions(PMIMenuBar* menuBar)
     editMenu   = menuBar->GetMenu("Edit");
     //
     //  These are sub-menus for insert menu.
-    menuSolidPri = new QMenu;
-    menuFinitePatch = new QMenu;
-    menuInfiniteSolid = new QMenu;
-    menuCsg = new QMenu;
-    menuMaterial = new QMenu;
-    menuInterior = new QMenu;
-    menuTexture = new QMenu;
-    menuPhotons = new QMenu;
-    menuAthmo = new QMenu;
-    menuTrans = new QMenu;
+    menuSolidPri = new QMenu("Finite Solid Primitives");
+    menuFinitePatch = new QMenu("Finite Patch Primitives");
+    menuInfiniteSolid = new QMenu("Infinite Primitives");
+    menuCsg = menuBar->AddMenu("Constructive Solid Geometry", "Insert");
+    menuMaterial = new QMenu("Material");
+    menuInterior = new QMenu("Interior");
+    menuTexture = new QMenu("Texture");
+    menuPhotons = new QMenu("Photons");
+    menuAthmo = new QMenu("Athmospheric Effects");
+    menuTrans = new QMenu("Transformation");
 
     initCopyPasteActions();
     m_onlyCopyPaste = false;
@@ -518,462 +511,382 @@ void PMPart::initActions(PMIMenuBar* menuBar)
    connect( detail, &QActionGroup::triggered, this, &PMPart::slotGlobalDetailLevelChanged );
 
    // new objects
-   if( isReadWrite() )
-   {
-      m_pNewGlobalSettingsAction = actionCollection( "new_globalsettings" );
-      m_pNewGlobalSettingsAction->setIcon( QIcon( ":/smallicon/icons/povicons/small/pmglobalsettings" ) );
-      m_pNewGlobalSettingsAction->setText( tr( "Global Settings" ) );
-      connect(m_pNewGlobalSettingsAction, SIGNAL(triggered(bool)), SLOT(slotNewGlobalSettings()));
-      m_readWriteActions.append( m_pNewGlobalSettingsAction );
-      m_pNewRadiosityAction = actionCollection( "new_radiosity" );
-      //m_pNewRadiosityAction->setIcon( QIcon::fromTheme("pmradiosity") );
-      m_pNewRadiosityAction->setText( tr( "Radiosity" ) );
-      connect(m_pNewRadiosityAction, SIGNAL(triggered(bool)), SLOT( slotNewRadiosity() ));
-      m_readWriteActions.append( m_pNewRadiosityAction );
-      m_pNewGlobalPhotonsAction = actionCollection( "new_globalphotons" );
-      //m_pNewGlobalPhotonsAction->setIcon( QIcon::fromTheme("pmglobalphotons") );
-      m_pNewGlobalPhotonsAction->setText( tr( "Global Photons" ) );
-      connect(m_pNewGlobalPhotonsAction, SIGNAL(triggered(bool)), SLOT( slotNewGlobalPhotons() ));
-      m_readWriteActions.append( m_pNewGlobalPhotonsAction );
-      insertMenu->addSeparator();
+    if( isReadWrite() )
+    {
+        QAction* ac;
 
-      m_pNewDeclareAction = actionCollection( "new_declare" );
-      //m_pNewDeclareAction->setIcon( QIcon::fromTheme("pmdeclare") );
-      m_pNewDeclareAction->setText( tr( "Declaration" ) );
-      connect(m_pNewDeclareAction, SIGNAL(triggered(bool)), SLOT( slotNewDeclare() ));
-      m_pNewDeclareAction = actionCollection( "new_declare_function" );
-      //m_pNewDeclareAction->setIcon( QIcon::fromTheme("pmdeclare-f") );
-      m_pNewDeclareAction->setText( tr( "Declare Function" ) );
-      connect(m_pNewDeclareAction, SIGNAL(triggered(bool)), SLOT( slotNewDeclareFunction() ));
-      m_readWriteActions.append( m_pNewDeclareAction );
-      insertMenu->addSeparator();
+        ac = actionCollection( "new_globalsettings",  "Global Settings");
+        insertMenu->addAction( ac );
+        connect(ac, SIGNAL(triggered(bool)), SLOT(slotNewGlobalSettings()));
+        m_readWriteActions.append( ac );
 
-      m_pNewBoundedByAction = actionCollection( "new_boundedby" );
-      //m_pNewBoundedByAction->setIcon( QIcon::fromTheme("pmboundedby") );
-      m_pNewBoundedByAction->setText( tr( "Bounded By" ) );
-      connect(m_pNewBoundedByAction, SIGNAL(triggered(bool)), SLOT( slotNewBoundedBy() ));
-      m_readWriteActions.append( m_pNewBoundedByAction );
-      m_pNewClippedByAction = actionCollection( "new_clippedby" );
-      //m_pNewClippedByAction->setIcon( QIcon::fromTheme("pmclippedby") );
-      m_pNewClippedByAction->setText( tr( "Clipped By" ) );
-      connect(m_pNewClippedByAction, SIGNAL(triggered(bool)), SLOT( slotNewClippedBy() ));
-      m_readWriteActions.append( m_pNewClippedByAction );
+        ac = actionCollection( "new_radiosity", "Radiosity");
+        insertMenu->addAction( ac );
 
-      insertMenu->addSeparator();
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewRadiosity() ));
+        m_readWriteActions.append( ac );
 
-      m_pNewLightAction = actionCollection( "new_light" );
-      //m_pNewLightAction->setIcon( QIcon::fromTheme("pmlight") );
-      m_pNewLightAction->setText( tr( "Light" ) );
-      connect(m_pNewLightAction, SIGNAL(triggered(bool)), SLOT( slotNewLight() ));
-      m_readWriteActions.append( m_pNewLightAction );
-      m_pNewLightGroupAction = actionCollection( "new_lightgroup" );
-      //m_pNewLightGroupAction->setIcon( QIcon::fromTheme("pmlightgroup") );
-      m_pNewLightGroupAction->setText( tr( "Light Group" ) );
-      connect(m_pNewLightGroupAction, SIGNAL(triggered(bool)), SLOT( slotNewLightGroup() ));
-      m_readWriteActions.append( m_pNewLightGroupAction );
-      m_pNewLooksLikeAction = actionCollection( "new_lookslike" );
-      //m_pNewLooksLikeAction->setIcon( QIcon::fromTheme("pmlookslike") );
-      m_pNewLooksLikeAction->setText( tr( "Looks Like" ) );
-      connect(m_pNewLooksLikeAction, SIGNAL(triggered(bool)), SLOT( slotNewLooksLike() ));
-      m_readWriteActions.append( m_pNewLooksLikeAction );
-      m_pNewProjectedThroughAction = actionCollection( "new_projectedthrough" );
-      //m_pNewProjectedThroughAction->setIcon( QIcon::fromTheme("pmprojectedthrough") );
-      m_pNewProjectedThroughAction->setText( tr( "Projected Through" ) );
-      connect(m_pNewProjectedThroughAction, SIGNAL(triggered(bool)), SLOT( slotNewProjectedThrough() ));
-      m_readWriteActions.append( m_pNewProjectedThroughAction );
-      m_pNewCameraAction = actionCollection( "new_camera" );
-      //m_pNewCameraAction->setIcon( QIcon::fromTheme("pmcamera") );
-      m_pNewCameraAction->setText( tr( "Camera" ) );
-      connect(m_pNewCameraAction, SIGNAL(triggered(bool)), SLOT( slotNewCamera() ));
-      m_readWriteActions.append( m_pNewCameraAction );
-      insertMenu->addSeparator();
+        ac = actionCollection( "new_globalphotons", "Global Photons" );
+        insertMenu->addAction( ac );
 
-      m_pNewCommentAction = actionCollection( "new_comment" );
-      //m_pNewCommentAction->setIcon( QIcon::fromTheme("pmcomment") );
-      m_pNewCommentAction->setText( tr( "Comment" ) );
-      connect(m_pNewCommentAction, SIGNAL(triggered(bool)), SLOT( slotNewComment() ));
-      m_readWriteActions.append( m_pNewCommentAction );
-      m_pNewRawAction = actionCollection( "new_raw" );
-      //m_pNewRawAction->setIcon( QIcon::fromTheme("pmraw") );
-      m_pNewRawAction->setText( tr( "Raw Povray" ) );
-      connect(m_pNewRawAction, SIGNAL(triggered(bool)), SLOT( slotNewRaw() ));
-      m_readWriteActions.append( m_pNewRawAction );
-      insertMenu->addSeparator();
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewGlobalPhotons() ));
+        m_readWriteActions.append( ac );
+        insertMenu->addSeparator();
 
-      menuSolidPri->setTitle( "Finite Solid Primitives" );
-      insertMenu->addMenu( menuSolidPri );
+        ac = actionCollection( "new_declare", "Declaration" );
+        insertMenu->addAction( ac );
 
-      m_pNewBoxAction = actionCollection( "new_box", menuSolidPri );
-      //m_pNewBoxAction->setIcon( QIcon::fromTheme("pmbox") );
-      m_pNewBoxAction->setText( tr( "Box" ) );
-      connect(m_pNewBoxAction, SIGNAL(triggered(bool)), SLOT( slotNewBox() ));
-      m_readWriteActions.append( m_pNewBoxAction );
-      m_pNewSphereAction = actionCollection( "new_sphere", menuSolidPri );
-      //m_pNewSphereAction->setIcon( QIcon::fromTheme("pmsphere") );
-      m_pNewSphereAction->setText( tr( "Sphere" ) );
-        connect(m_pNewSphereAction, SIGNAL(triggered(bool)), SLOT( slotNewSphere() ));
-      m_readWriteActions.append( m_pNewSphereAction );
-      m_pNewCylinderAction = actionCollection( "new_cylinder", menuSolidPri );
-      //m_pNewCylinderAction->setIcon( QIcon::fromTheme("pmcylinder") );
-      m_pNewCylinderAction->setText( tr( "Cylinder" ) );
-      connect(m_pNewCylinderAction, SIGNAL(triggered(bool)), SLOT( slotNewCylinder() ));
-      m_readWriteActions.append( m_pNewCylinderAction );
-      m_pNewConeAction = actionCollection( "new_cone", menuSolidPri );
-      //m_pNewConeAction->setIcon( QIcon::fromTheme("pmcone") );
-      m_pNewConeAction->setText( tr( "Cone" ) );
-      connect(m_pNewConeAction, SIGNAL( triggered( bool ) ), this, SLOT( slotNewCone() ) );
-      m_readWriteActions.append( m_pNewConeAction );
-      m_pNewTorusAction = actionCollection( "new_torus" , menuSolidPri);
-      //m_pNewTorusAction->setIcon( QIcon::fromTheme("pmtorus") );
-      m_pNewTorusAction->setText( tr( "Torus" ) );
-      connect(m_pNewTorusAction, SIGNAL(triggered(bool)), SLOT( slotNewTorus() ));
-      m_readWriteActions.append( m_pNewTorusAction );
-      m_pNewSuperquadricEllipsoidAction = actionCollection( "new_sqe", menuSolidPri );
-      //m_pNewSuperquadricEllipsoidAction->setIcon( QIcon::fromTheme("pmsqe") );
-      m_pNewSuperquadricEllipsoidAction->setText( tr( "Superquadric Ellipsoid" ) );
-      connect(m_pNewSuperquadricEllipsoidAction, SIGNAL(triggered(bool)), SLOT( slotNewSuperquadricEllipsoid() ));
-      m_readWriteActions.append( m_pNewSuperquadricEllipsoidAction );
-      m_pNewHeightFieldAction = actionCollection( "new_heightfield", menuSolidPri );
-      //m_pNewHeightFieldAction->setIcon( QIcon::fromTheme("pmheightfield") );
-      m_pNewHeightFieldAction->setText( tr( "Height Field" ) );
-      connect(m_pNewHeightFieldAction, SIGNAL(triggered(bool)), SLOT( slotNewHeightField() ));
-      m_readWriteActions.append( m_pNewHeightFieldAction );
-      m_pNewTextAction = actionCollection( "new_text", menuSolidPri );
-      //m_pNewTextAction->setIcon( QIcon::fromTheme("pmtext") );
-      m_pNewTextAction->setText( tr( "Text" ) );
-      connect(m_pNewTextAction, SIGNAL(triggered(bool)), SLOT( slotNewText() ));
-      m_pNewJuliaFractalAction = actionCollection( "new_juliafractal", menuSolidPri );
-      //m_pNewJuliaFractalAction->setIcon( QIcon::fromTheme("pmjuliafractal") );
-      m_pNewJuliaFractalAction->setText( tr( "Julia Fractal" ) );
-      connect(m_pNewJuliaFractalAction, SIGNAL(triggered(bool)), SLOT( slotNewJuliaFractal() ));
-      m_readWriteActions.append( m_pNewJuliaFractalAction );
-      m_readWriteActions.append( m_pNewTextAction );
-      m_pNewIsoSurfaceAction = actionCollection( "new_isosurface", menuSolidPri );
-      //m_pNewIsoSurfaceAction->setIcon( QIcon::fromTheme("pmisosurface") );
-      m_pNewIsoSurfaceAction->setText( tr( "Iso Surface" ) );
-      connect(m_pNewIsoSurfaceAction, SIGNAL(triggered(bool)), SLOT( slotNewIsoSurface() ));
-      m_readWriteActions.append( m_pNewIsoSurfaceAction );
-      menuSolidPri->addSeparator();
-      m_pNewBlobAction = actionCollection( "new_blob", menuSolidPri );
-      //m_pNewBlobAction->setIcon( QIcon::fromTheme("pmblob") );
-      m_pNewBlobAction->setText( tr( "Blob" ) );
-      connect(m_pNewBlobAction, SIGNAL(triggered(bool)), SLOT( slotNewBlob() ));
-      m_readWriteActions.append( m_pNewBlobAction );
-      m_pNewBlobSphereAction = actionCollection( "new_blobsphere", menuSolidPri );
-      //m_pNewBlobSphereAction->setIcon( QIcon::fromTheme("pmblobsphere") );
-      m_pNewBlobSphereAction->setText( tr( "Blob Sphere" ) );
-      connect(m_pNewBlobSphereAction, SIGNAL(triggered(bool)), SLOT( slotNewBlobSphere() ));
-      m_readWriteActions.append( m_pNewBlobSphereAction );
-      m_pNewBlobCylinderAction = actionCollection( "new_blobcylinder", menuSolidPri );
-      //m_pNewBlobCylinderAction->setIcon( QIcon::fromTheme("pmblobcylinder") );
-      m_pNewBlobCylinderAction->setText( tr( "Blob Cylinder" ) );
-      connect(m_pNewBlobCylinderAction, SIGNAL(triggered(bool)), SLOT( slotNewBlobCylinder() ));
-      m_readWriteActions.append( m_pNewBlobCylinderAction );
-      menuSolidPri->addSeparator();
-      m_pNewLatheAction = actionCollection( "new_lathe", menuSolidPri );
-      //m_pNewLatheAction->setIcon( QIcon::fromTheme("pmlathe") );
-      m_pNewLatheAction->setText( tr( "Lathe" ) );
-      connect(m_pNewLatheAction, SIGNAL(triggered(bool)), SLOT( slotNewLathe() ));
-      m_readWriteActions.append( m_pNewLatheAction );
-      m_pNewPrismAction = actionCollection( "new_prism", menuSolidPri );
-      //m_pNewPrismAction->setIcon( QIcon::fromTheme("pmprism") );
-      m_pNewPrismAction->setText( tr( "Prism" ) );
-      connect(m_pNewPrismAction, SIGNAL(triggered(bool)), SLOT( slotNewPrism() ));
-      m_readWriteActions.append( m_pNewPrismAction );
-      m_pNewSurfaceOfRevolutionAction = actionCollection( "new_sor", menuSolidPri );
-      //m_pNewSurfaceOfRevolutionAction->setIcon( QIcon::fromTheme("pmsor") );
-      m_pNewSurfaceOfRevolutionAction->setText( tr( "Surface of Revolution" ) );
-      connect(m_pNewSurfaceOfRevolutionAction, SIGNAL(triggered(bool)), SLOT( slotNewSurfaceOfRevolution() ));
-      m_readWriteActions.append( m_pNewSurfaceOfRevolutionAction );
-      m_pNewSphereSweepAction = actionCollection( "new_spheresweep", menuSolidPri );
-      //m_pNewSphereSweepAction->setIcon( QIcon::fromTheme("pmspheresweep") );
-      m_pNewSphereSweepAction->setText( tr( "Sphere Sweep" ) );
-      connect(m_pNewSphereSweepAction, SIGNAL(triggered(bool)), SLOT( slotNewSphereSweep() ));
-      m_readWriteActions.append( m_pNewSphereSweepAction );
-      menuSolidPri->addSeparator();
-      m_pNewObjectLinkAction = actionCollection( "new_objectlink", menuSolidPri );
-      //m_pNewObjectLinkAction->setIcon( QIcon::fromTheme("pmobjectlink") );
-      m_pNewObjectLinkAction->setText( tr( "Object Link" ) );
-      connect(m_pNewObjectLinkAction, SIGNAL(triggered(bool)), SLOT( slotNewObjectLink() ));
-      m_readWriteActions.append( m_pNewObjectLinkAction );
-      //end submenu
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDeclare() ));
 
-      menuFinitePatch->setTitle( "Finite Patch Primitives" );
-      insertMenu->addMenu( menuFinitePatch );
+        ac = actionCollection( "new_declare_function", "Declare Function" );
+        insertMenu->addAction( ac );
 
-      m_pNewDiscAction = actionCollection( "new_disc", menuFinitePatch );
-      //m_pNewDiscAction->setIcon( QIcon::fromTheme("pmdisc") );
-      m_pNewDiscAction->setText( tr( "Disc" ) );
-      connect(m_pNewDiscAction, SIGNAL(triggered(bool)), SLOT( slotNewDisc() ));
-      m_readWriteActions.append( m_pNewDiscAction );
-      m_pNewBicubicPatchAction = actionCollection( "new_bicubicpatch", menuFinitePatch );
-      //m_pNewBicubicPatchAction->setIcon( QIcon::fromTheme("pmbicubicpatch") );
-      m_pNewBicubicPatchAction->setText( tr( "Bicubic Patch" ) );
-      connect(m_pNewBicubicPatchAction, SIGNAL(triggered(bool)), SLOT( slotNewBicubicPatch() ));
-      m_readWriteActions.append( m_pNewBicubicPatchAction );
-      m_pNewTriangleAction = actionCollection( "new_triangle", menuFinitePatch );
-      //m_pNewTriangleAction->setIcon( QIcon::fromTheme("pmtriangle") );
-      m_pNewTriangleAction->setText( tr( "Triangle" ) );
-      connect(m_pNewTriangleAction, SIGNAL(triggered(bool)), SLOT( slotNewTriangle() ));
-      m_readWriteActions.append( m_pNewTriangleAction );
-      m_pNewMeshAction = actionCollection( "new_mesh", menuFinitePatch );
-      //m_pNewMeshAction->setIcon( QIcon::fromTheme("pmmesh") );
-      m_pNewMeshAction->setText( tr( "Mesh" ) );
-      connect(m_pNewMeshAction, SIGNAL(triggered(bool)), SLOT( slotNewMesh() ));
-      m_readWriteActions.append( m_pNewMeshAction );
-      //end submenu
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDeclareFunction() ));
+        m_readWriteActions.append( ac );
+        insertMenu->addSeparator();
 
-      menuInfiniteSolid->setTitle( "Infinite Primitives" );
-      insertMenu->addMenu( menuInfiniteSolid );
+        ac = actionCollection( "new_boundedby", "Bounded By" );
+        insertMenu->addAction( ac );
 
-      m_pNewPlaneAction = actionCollection( "new_plane", menuInfiniteSolid );
-      //m_pNewPlaneAction->setIcon( QIcon::fromTheme("pmplane") );
-      m_pNewPlaneAction->setText( tr( "Plane" ) );
-      connect(m_pNewPlaneAction, SIGNAL(triggered(bool)), SLOT( slotNewPlane() ));
-      m_readWriteActions.append( m_pNewPlaneAction );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBoundedBy() ));
+        m_readWriteActions.append( ac );
 
-      menuCsg->setTitle( "Constructive Solid Geometry" );
-      insertMenu->addMenu( menuCsg );
+        ac = actionCollection( "new_clippedby", "Clipped By" );
+        insertMenu->addAction( ac );
 
-      m_pNewUnionAction = actionCollection( "new_union", menuCsg );
-      //m_pNewUnionAction->setIcon( QIcon::fromTheme("pmunion") );
-      m_pNewUnionAction->setText( tr( "Union" ) );
-      connect(m_pNewUnionAction, SIGNAL(triggered(bool)), SLOT( slotNewUnion() ));
-      m_readWriteActions.append( m_pNewUnionAction );
-      m_pNewIntersectionAction = actionCollection( "new_intersection", menuCsg );
-      //m_pNewIntersectionAction->setIcon( QIcon::fromTheme("pmintersection") );
-      m_pNewIntersectionAction->setText( tr( "Intersection" ) );
-      connect(m_pNewIntersectionAction, SIGNAL(triggered(bool)), SLOT( slotNewIntersection() ));
-      m_readWriteActions.append( m_pNewIntersectionAction );
-      m_pNewDifferenceAction = actionCollection( "new_difference", menuCsg );
-      //m_pNewDifferenceAction->setIcon( QIcon::fromTheme("pmdifference") );
-      m_pNewDifferenceAction->setText( tr( "Difference" ) );
-      connect(m_pNewDifferenceAction, SIGNAL(triggered(bool)), SLOT( slotNewDifference() ));
-      m_readWriteActions.append( m_pNewDifferenceAction );
-      m_pNewMergeAction = actionCollection( "new_merge", menuCsg );
-      //m_pNewMergeAction->setIcon( QIcon::fromTheme("pmmerge") );
-      m_pNewMergeAction->setText( tr( "Merge" ) );
-      connect(m_pNewMergeAction, SIGNAL(triggered(bool)), SLOT( slotNewMerge() ));
-      m_readWriteActions.append( m_pNewMergeAction );
-      //end menu
-      insertMenu->addSeparator();
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewClippedBy() ));
+        m_readWriteActions.append( ac );
 
-      menuMaterial->setTitle( "Material" );
-      insertMenu->addMenu( menuMaterial );
-      m_pNewMaterialAction = actionCollection( "new_material", menuMaterial );
-      //m_pNewMaterialAction->setIcon( QIcon::fromTheme("pmmaterial") );
-      m_pNewMaterialAction->setText( tr( "Material" ) );
-      connect(m_pNewMaterialAction, SIGNAL(triggered(bool)), SLOT( slotNewMaterial() ));
-      m_readWriteActions.append( m_pNewMaterialAction );
+        insertMenu->addSeparator();
 
-      menuInterior->setTitle( "Interior" );
-      insertMenu->addMenu( menuInterior );
+        ac = actionCollection( "new_light", "Light");
+        insertMenu->addAction( ac );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewLight() ));
+        m_readWriteActions.append( ac );
 
-      m_pNewInteriorAction = actionCollection( "new_interior", menuInterior );
-      //m_pNewInteriorAction->setIcon( QIcon::fromTheme("pminterior") );
-      m_pNewInteriorAction->setText( tr( "Interior" ) );
-      connect(m_pNewInteriorAction, SIGNAL(triggered(bool)), SLOT( slotNewInterior() ));
-      m_readWriteActions.append( m_pNewInteriorAction );
-      m_pNewMediaAction = actionCollection( "new_media", menuInterior );
-      //m_pNewMediaAction->setIcon( QIcon::fromTheme("pmmedia") );
-      m_pNewMediaAction->setText( tr( "Media" ) );
-      connect(m_pNewMediaAction, SIGNAL(triggered(bool)), SLOT( slotNewMedia() ));
-      m_readWriteActions.append( m_pNewMediaAction );
-      m_pNewDensityAction = actionCollection( "new_density", menuInterior );
-      //m_pNewDensityAction->setIcon( QIcon::fromTheme("pmdensity") );
-      m_pNewDensityAction->setText( tr( "Density" ) );
-      connect(m_pNewDensityAction, SIGNAL(triggered(bool)), SLOT( slotNewDensity() ));
-      m_readWriteActions.append( m_pNewDensityAction );
-      m_pNewDensityListAction = actionCollection( "new_densitylist", menuInterior );
-      //m_pNewDensityListAction->setIcon( QIcon::fromTheme("pmdensit, menuInteriorylist") );
-      m_pNewDensityListAction->setText( tr( "Density List" ) );
-      connect(m_pNewDensityListAction, SIGNAL(triggered(bool)), SLOT( slotNewDensityList() ));
-      m_readWriteActions.append( m_pNewDensityListAction );
-      m_pNewDensityMapAction = actionCollection( "new_densitymap", menuInterior );
-      //m_pNewDensityMapAction->setIcon( QIcon::fromTheme("pmdensitymap") );
-      m_pNewDensityMapAction->setText( tr( "Density Map" ) );
-      connect(m_pNewDensityMapAction, SIGNAL(triggered(bool)), SLOT( slotNewDensityMap() ));
-      m_readWriteActions.append( m_pNewDensityMapAction );
-
-      menuTexture->setTitle( "Texture" );
-      insertMenu->addMenu( menuTexture );
-
-      m_pNewPatternAction = actionCollection( "new_pattern", menuTexture );
-      //m_pNewPatternAction->setIcon( QIcon::fromTheme("pmpattern") );
-      m_pNewPatternAction->setText( tr( "Pattern" ) );
-      connect(m_pNewPatternAction, SIGNAL(triggered(bool)), SLOT( slotNewPattern() ));
-      m_readWriteActions.append( m_pNewPatternAction );
-      m_pNewBlendMapModifiersAction = actionCollection( "new_blendmapmodifiers", menuTexture );
-      //m_pNewBlendMapModifiersAction->setIcon( QIcon::fromTheme("pmblendmapmodifiers") );
-      m_pNewBlendMapModifiersAction->setText( tr( "Blend Map Modifiers" ) );
-      connect(m_pNewBlendMapModifiersAction, SIGNAL(triggered(bool)), SLOT( slotNewBlendMapModifiers() ));
-      m_readWriteActions.append( m_pNewBlendMapModifiersAction );
-      m_pNewWarpAction = actionCollection( "new_warp", menuTexture );
-      //m_pNewWarpAction->setIcon( QIcon::fromTheme("pmwarp") );
-      m_pNewWarpAction->setText( tr( "Warp" ) );
-      connect(m_pNewWarpAction, SIGNAL(triggered(bool)), SLOT( slotNewWarp() ));
-      m_readWriteActions.append( m_pNewWarpAction );
-
-      menuTexture->addSeparator();
-
-      m_pNewTextureAction = actionCollection( "new_texture", menuTexture );
-      //m_pNewTextureAction->setIcon( QIcon::fromTheme("pmtexture") );
-      m_pNewTextureAction->setText( tr( "Texture" ) );
-      connect(m_pNewTextureAction, SIGNAL(triggered(bool)), SLOT( slotNewTexture() ));
-      m_readWriteActions.append( m_pNewTextureAction );
-      m_pNewInteriorTextureAction = actionCollection( "new_interiortexture", menuTexture );
-      //m_pNewInteriorTextureAction->setIcon( QIcon::fromTheme("pminteriortexture") );
-      m_pNewInteriorTextureAction->setText( tr( "Interior Texture" ) );
-      connect(m_pNewInteriorTextureAction, SIGNAL(triggered(bool)), SLOT( slotNewInteriorTexture() ));
-      m_readWriteActions.append( m_pNewInteriorTextureAction );
-      m_pNewPigmentAction = actionCollection( "new_pigment", menuTexture );
-      //m_pNewPigmentAction->setIcon( QIcon::fromTheme("pmpigment") );
-      m_pNewPigmentAction->setText( tr( "Pigment" ) );
-      connect(m_pNewPigmentAction, SIGNAL(triggered(bool)), SLOT( slotNewPigment() ));
-      m_readWriteActions.append( m_pNewPigmentAction );
-      m_pNewNormalAction = actionCollection( "new_normal", menuTexture );
-      //m_pNewNormalAction->setIcon( QIcon::fromTheme("pmnormal") );
-      m_pNewNormalAction->setText( tr( "Normal" ) );
-      connect(m_pNewNormalAction, SIGNAL(triggered(bool)), SLOT( slotNewNormal() ));
-      m_readWriteActions.append( m_pNewNormalAction );
-      m_pNewSolidColorAction = actionCollection( "new_solidcolor", menuTexture );
-      //m_pNewSolidColorAction->setIcon( QIcon::fromTheme("pmsolidcolor") );
-      m_pNewSolidColorAction->setText( tr( "Solid Color" ) );
-      connect(m_pNewSolidColorAction, SIGNAL(triggered(bool)), SLOT( slotNewSolidColor() ));
-      m_readWriteActions.append( m_pNewSolidColorAction );
-      m_pNewTextureListAction = actionCollection( "new_texturelist", menuTexture );
-      //m_pNewTextureListAction->setIcon( QIcon::fromTheme("pmtexturelist") );
-      m_pNewTextureListAction->setText( tr( "Texture List" ) );
-      connect(m_pNewTextureListAction, SIGNAL(triggered(bool)), SLOT( slotNewTextureList() ));
-      m_readWriteActions.append( m_pNewTextureListAction );
-      m_pNewColorListAction = actionCollection( "new_colorlist", menuTexture );
-      //m_pNewColorListAction->setIcon( QIcon::fromTheme("pmcolorlist") );
-      m_pNewColorListAction->setText( tr( "Color List" ) );
-      connect(m_pNewColorListAction, SIGNAL(triggered(bool)), SLOT( slotNewColorList() ));
-      m_readWriteActions.append( m_pNewColorListAction );
-      m_pNewPigmentListAction = actionCollection( "new_pigmentlist", menuTexture );
-      //m_pNewPigmentListAction->setIcon( QIcon::fromTheme("pmpigmentlist") );
-      m_pNewPigmentListAction->setText( tr( "Pigment List" ) );
-      connect(m_pNewPigmentListAction, SIGNAL(triggered(bool)), SLOT( slotNewPigmentList() ));
-      m_readWriteActions.append( m_pNewPigmentListAction );
-      m_pNewNormalListAction = actionCollection( "new_normallist", menuTexture );
-      //m_pNewNormalListAction->setIcon( QIcon::fromTheme("pmnormallist") );
-      m_pNewNormalListAction->setText( tr( "Normal List" ) );
-      connect(m_pNewNormalListAction, SIGNAL(triggered(bool)), SLOT( slotNewNormalList() ));
-      m_readWriteActions.append( m_pNewNormalListAction );
-      m_pNewTextureMapAction = actionCollection( "new_texturemap", menuTexture );
-      //m_pNewTextureMapAction->setIcon( QIcon::fromTheme("pmtexturemap") );
-      m_pNewTextureMapAction->setText( tr( "Texture Map" ) );
-      connect(m_pNewTextureMapAction, SIGNAL(triggered(bool)), SLOT( slotNewTextureMap() ));
-      m_readWriteActions.append( m_pNewTextureMapAction );
-      m_pNewMaterialMapAction = actionCollection( "new_materialmap", menuTexture );
-      //m_pNewMaterialMapAction->setIcon( QIcon::fromTheme("pmmaterialmap") );
-      m_pNewMaterialMapAction->setText( tr( "Material Map" ) );
-      connect(m_pNewMaterialMapAction, SIGNAL(triggered(bool)), SLOT( slotNewMaterialMap() ));
-      m_readWriteActions.append( m_pNewMaterialMapAction );
-      m_pNewPigmentMapAction = actionCollection( "new_pigmentmap", menuTexture );
-      //m_pNewPigmentMapAction->setIcon( QIcon::fromTheme("pmpigmentmap") );
-      m_pNewPigmentMapAction->setText( tr( "Pigment Map" ) );
-      connect(m_pNewPigmentMapAction, SIGNAL(triggered(bool)), SLOT( slotNewPigmentMap() ));
-      m_readWriteActions.append( m_pNewPigmentMapAction );
-      m_pNewImageMapAction = actionCollection( "new_imagemap", menuTexture );
-      //m_pNewImageMapAction->setIcon( QIcon::fromTheme("pmimagemap") );
-      m_pNewImageMapAction->setText( tr( "Image Map" ) );
-      connect(m_pNewImageMapAction, SIGNAL(triggered(bool)), SLOT( slotNewImageMap() ));
-      m_readWriteActions.append( m_pNewImageMapAction );
-      m_pNewColorMapAction = actionCollection( "new_colormap", menuTexture );
-      //m_pNewColorMapAction->setIcon( QIcon::fromTheme("pmcolormap") );
-      m_pNewColorMapAction->setText( tr( "Color Map" ) );
-      connect(m_pNewColorMapAction, SIGNAL(triggered(bool)), SLOT( slotNewColorMap() ));
-      m_readWriteActions.append( m_pNewColorMapAction );
-      m_pNewNormalMapAction = actionCollection( "new_normalmap", menuTexture );
-      //m_pNewNormalMapAction->setIcon( QIcon::fromTheme("pmnormalmap") );
-      m_pNewNormalMapAction->setText( tr( "Normal Map" ) );
-      connect(m_pNewNormalMapAction, SIGNAL(triggered(bool)), SLOT( slotNewNormalMap() ));
-      m_readWriteActions.append( m_pNewNormalMapAction );
-      m_pNewBumpMapAction = actionCollection( "new_bumpmap", menuTexture );
-      //m_pNewBumpMapAction->setIcon( QIcon::fromTheme("pmbumpmap") );
-      m_pNewBumpMapAction->setText( tr( "Bump Map" ) );
-      connect(m_pNewBumpMapAction, SIGNAL(triggered(bool)), SLOT( slotNewBumpMap() ));
-      m_readWriteActions.append( m_pNewBumpMapAction );
-      m_pNewSlopeAction = actionCollection( "new_slope", menuTexture );
-      //m_pNewSlopeAction->setIcon( QIcon::fromTheme("pmslope") );
-      m_pNewSlopeAction->setText( tr( "Slope" ) );
-      connect(m_pNewSlopeAction, SIGNAL(triggered(bool)), SLOT( slotNewSlope() ));
-      m_readWriteActions.append( m_pNewSlopeAction );
-      m_pNewSlopeMapAction = actionCollection( "new_slopemap", menuTexture );
-      //m_pNewSlopeMapAction->setIcon( QIcon::fromTheme("pmslopemap") );
-      m_pNewSlopeMapAction->setText( tr( "Slope Map" ) );
-      connect(m_pNewSlopeMapAction, SIGNAL(triggered(bool)), SLOT( slotNewSlopeMap() ));
-      m_readWriteActions.append( m_pNewSlopeMapAction );
-      m_pNewFinishAction = actionCollection( "new_finish", menuTexture );
-      //m_pNewFinishAction->setIcon( QIcon::fromTheme("pmfinish") );
-      m_pNewFinishAction->setText( tr( "Finish" ) );
-      connect(m_pNewFinishAction, SIGNAL(triggered(bool)), SLOT( slotNewFinish() ));
-      m_readWriteActions.append( m_pNewFinishAction );
-      menuTexture->addSeparator();
-      m_pNewQuickColorAction = actionCollection( "new_quickcolor", menuTexture );
-      //m_pNewQuickColorAction->setIcon( QIcon::fromTheme("pmquickcolor") );
-      m_pNewQuickColorAction->setText( tr( "QuickColor" ) );
-      connect(m_pNewQuickColorAction, SIGNAL(triggered(bool)), SLOT( slotNewQuickColor() ));
-      m_readWriteActions.append( m_pNewQuickColorAction );
-      menuPhotons->setTitle( "Photons" );
-      insertMenu->addMenu( menuPhotons );
-
-      m_pNewPhotonsAction = actionCollection( "new_photons", menuPhotons );
-      //m_pNewPhotonsAction->setIcon( QIcon::fromTheme("pmphotons") );
-      m_pNewPhotonsAction->setText( tr( "Photons" ) );
-      connect(m_pNewPhotonsAction, SIGNAL(triggered(bool)), SLOT( slotNewPhotons() ));
-      m_readWriteActions.append( m_pNewPhotonsAction );
-
-      menuAthmo->setTitle( "Athmospheric Effects" );
-      insertMenu->addMenu( menuAthmo );
-
-      m_pNewSkySphereAction = actionCollection( "new_skysphere", menuAthmo );
-      //m_pNewSkySphereAction->setIcon( QIcon::fromTheme("pmskysphere") );
-      m_pNewSkySphereAction->setText( tr( "Sky Sphere" ) );
-      connect(m_pNewSkySphereAction, SIGNAL(triggered(bool)), SLOT( slotNewSkySphere() ));
-      m_readWriteActions.append( m_pNewSkySphereAction );
-      m_pNewRainbowAction = actionCollection( "new_rainbow", menuAthmo );
-      //m_pNewRainbowAction->setIcon( QIcon::fromTheme("pmrainbow") );
-      m_pNewRainbowAction->setText( tr( "Rainbow" ) );
-      connect(m_pNewRainbowAction, SIGNAL(triggered(bool)), SLOT( slotNewRainbow() ));
-      m_readWriteActions.append( m_pNewRainbowAction );
-      m_pNewFogAction = actionCollection( "new_fog", menuAthmo );
-      //m_pNewFogAction->setIcon( QIcon::fromTheme("pmfog") );
-      m_pNewFogAction->setText( tr( "Fog" ) );
-      connect(m_pNewFogAction, SIGNAL(triggered(bool)), SLOT( slotNewFog() ));
-      m_readWriteActions.append( m_pNewFogAction );
-      //end menu
-
-      insertMenu->addSeparator();
-      menuTrans->setTitle( "Transformation" );
-      insertMenu->addMenu( menuTrans );
-
-      m_pNewTranslateAction = actionCollection( "new_translate", menuTrans );
-      //m_pNewTranslateAction->setIcon( QIcon::fromTheme("pmtranslate") );
-      m_pNewTranslateAction->setText( tr( "Translate" ) );
-      connect(m_pNewTranslateAction, SIGNAL(triggered(bool)), SLOT( slotNewTranslate() ));
-      m_readWriteActions.append( m_pNewTranslateAction );
-      m_pNewScaleAction = actionCollection( "new_scale", menuTrans );
-      //m_pNewScaleAction->setIcon( QIcon::fromTheme("pmscale") );
-      m_pNewScaleAction->setText( tr( "Scale" ) );
-      connect(m_pNewScaleAction, SIGNAL(triggered(bool)), SLOT( slotNewScale() ));
-      m_readWriteActions.append( m_pNewScaleAction );
-      m_pNewRotateAction = actionCollection( "new_rotate", menuTrans );
-      //m_pNewRotateAction->setIcon( QIcon::fromTheme("pmrotate") );
-      m_pNewRotateAction->setText( tr( "Rotate" ) );
-      connect(m_pNewRotateAction, SIGNAL(triggered(bool)), SLOT( slotNewRotate() ));
-      m_readWriteActions.append( m_pNewRotateAction );
-      m_pNewMatrixAction = actionCollection( "new_povraymatrix", menuTrans );
-      //m_pNewMatrixAction->setIcon( QIcon::fromTheme("pmmatrix") );
-      m_pNewMatrixAction->setText( tr( "Matrix" ) );
-      connect(m_pNewMatrixAction, SIGNAL(triggered(bool)), SLOT( slotNewMatrix() ));
-      m_readWriteActions.append( m_pNewMatrixAction );
+        ac = actionCollection( "new_lightgroup", "Light Group" );
+        insertMenu->addAction( ac );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewLightGroup() ));
+        m_readWriteActions.append( ac );
 
 
+        ac = actionCollection( "new_lookslike", "Looks Like" );
+        insertMenu->addAction( ac );
 
-      // POV-Ray 3.5 objects
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewLooksLike() ));
+        m_readWriteActions.append( ac );
+
+        ac = actionCollection( "new_projectedthrough", "Projected Through" );
+        insertMenu->addAction( ac );
+
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewProjectedThrough() ));
+        m_readWriteActions.append( ac );
+
+        ac = actionCollection( "new_camera", "Camera" );
+        insertMenu->addAction( ac );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewCamera() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addSeparator();
+
+        ac = actionCollection( "new_comment", "Comment" );
+        insertMenu->addAction( ac );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewComment() ));
+        m_readWriteActions.append( ac );
+
+        ac = actionCollection( "new_raw", "Raw Povray" );
+        insertMenu->addAction( ac );
+
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewRaw() ));
+        m_readWriteActions.append( ac );
+        insertMenu->addSeparator();
+        //
+        //  Start submenu Solid
+        insertMenu->addMenu( menuSolidPri );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_box",  "Box"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBox() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_sphere", "Sphere" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSphere() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_cylinder", "Cylinder" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewCylinder() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_cone", "Cone" ));
+        connect(ac, SIGNAL( triggered( bool ) ), this, SLOT( slotNewCone() ) );
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_torus" , "Torus"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTorus() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_sqe", "Superquadric Ellipsoid"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSuperquadricEllipsoid() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_heightfield", "Height Field" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewHeightField() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_text", "Text"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewText() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_juliafractal", "Julia Fractal"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewJuliaFractal() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_isosurface", "Iso Surface"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewIsoSurface() ));
+        m_readWriteActions.append( ac );
+        menuSolidPri->addSeparator();
+
+        menuSolidPri->addAction(ac = actionCollection( "new_blob", "Blob"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBlob() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_blobsphere", "Blob Sphere"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBlobSphere() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_blobcylinder", "Blob Cyclinder"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBlobCylinder() ));
+        m_readWriteActions.append( ac );
+        menuSolidPri->addSeparator();
+
+        menuSolidPri->addAction(ac = actionCollection( "new_lathe", "Lathe"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewLathe() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_prism", "Prism"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPrism() ));
+        m_readWriteActions.append( ac );
+        menuSolidPri->addAction(ac = actionCollection( "new_sor", "Surface of Revolution" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSurfaceOfRevolution() ));
+        m_readWriteActions.append( ac );
+
+        menuSolidPri->addAction(ac = actionCollection( "new_spheresweep", "Sphere Sweep"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSphereSweep() ));
+        m_readWriteActions.append( ac );
+        menuSolidPri->addSeparator();
+
+        menuSolidPri->addAction(ac = actionCollection( "new_objectlink", "Object Link") );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewObjectLink() ));
+        m_readWriteActions.append( ac );
+        //end submenu
+
+        insertMenu->addMenu( menuFinitePatch );
+
+        menuFinitePatch->addAction(ac = actionCollection( "new_disc", "Disc"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDisc() ));
+        m_readWriteActions.append( ac );
+
+        menuFinitePatch->addAction(ac = actionCollection( "new_bicubicpatch", "Bicubic Patch" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBicubicPatch() ));
+        m_readWriteActions.append( ac );
+
+        menuFinitePatch->addAction(ac = actionCollection( "new_triangle", "Triangle"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTriangle() ));
+        m_readWriteActions.append( ac );
+
+        menuFinitePatch->addAction(ac = actionCollection( "new_mesh", "Mesh"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMesh() ));
+        m_readWriteActions.append( ac );
+        //end submenu
+
+        insertMenu->addMenu( menuInfiniteSolid );
+
+        menuInfiniteSolid->addAction(ac = actionCollection( "new_plane", "Plane"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPlane() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addMenu( menuCsg );
+
+        menuCsg->addAction(m_pNewUnionAction = ac = actionCollection( "new_union", "Union"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewUnion() ));
+        m_readWriteActions.append( ac );
+
+        menuCsg->addAction(m_pNewIntersectionAction = ac = actionCollection( "new_intersection", "Intersection"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewIntersection() ));
+        m_readWriteActions.append( ac );
+
+        menuCsg->addAction(m_pNewDifferenceAction = ac = actionCollection( "new_difference", "Difference"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDifference() ));
+        m_readWriteActions.append( ac );
+
+        menuCsg->addAction(m_pNewMergeAction = ac = actionCollection( "new_merge", "Merge"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMerge() ));
+        m_readWriteActions.append( ac );
+        //end menu
+        insertMenu->addSeparator();
+
+        insertMenu->addMenu( menuMaterial );
+        menuMaterial->addAction(ac = actionCollection( "new_material", "Material"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMaterial() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addMenu( menuInterior );
+
+        menuInterior->addAction(ac = actionCollection( "new_interior", "Interior") );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewInterior() ));
+        m_readWriteActions.append( ac );
+
+        menuInterior->addAction(ac = actionCollection( "new_media", "Media" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMedia() ));
+        m_readWriteActions.append( ac );
+
+        menuInterior->addAction(ac = actionCollection( "new_density", "Density" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDensity() ));
+        m_readWriteActions.append( ac );
+
+        menuInterior->addAction(ac = actionCollection( "new_densitylist", "Density List") );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDensityList() ));
+        m_readWriteActions.append( ac );
+
+        menuInterior->addAction(ac = actionCollection( "new_densitymap", "Density Map") );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewDensityMap() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addMenu( menuTexture );
+
+        menuTexture->addAction(ac = actionCollection( "new_pattern", "Pattern" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPattern() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_blendmapmodifiers", "Blend Map Modifiers" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBlendMapModifiers() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_warp",  "Warp" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewWarp() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addSeparator();
+
+        menuTexture->addAction(ac = actionCollection( "new_texture", "Texture" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTexture() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_interiortexture", "Interior Texture" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewInteriorTexture() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_pigment", "Pigment" ));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPigment() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_normal", "Normal" )  );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewNormal() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_solidcolor", "Solid Color" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSolidColor() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_texturelist",  "Texture List" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTextureList() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_colorlist", "Color List" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewColorList() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_pigmentlist", "Pigment List" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPigmentList() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_normallist",  "Normal List" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewNormalList() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_texturemap", "Texture Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTextureMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_materialmap", "Material Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMaterialMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_pigmentmap", "Pigment Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPigmentMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_imagemap", "Image Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewImageMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_colormap",  "Color Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewColorMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_normalmap", "Normal Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewNormalMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_bumpmap", "Bump Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewBumpMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_slope", "Slope" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSlope() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_slopemap", "Slope Map" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSlopeMap() ));
+        m_readWriteActions.append( ac );
+
+        menuTexture->addAction(ac = actionCollection( "new_finish", "Finish" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewFinish() ));
+        m_readWriteActions.append( ac );
+        menuTexture->addSeparator();
+
+        menuTexture->addAction(ac = actionCollection( "new_quickcolor", "QuickColor" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewQuickColor() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addMenu( menuPhotons );
+
+        menuPhotons->addAction(ac = actionCollection( "new_photons", "Photons"));
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewPhotons() ));
+        m_readWriteActions.append( ac );
+
+        insertMenu->addMenu( menuAthmo );
+
+        menuAthmo->addAction(ac = actionCollection( "new_skysphere", "Sky Sphere" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewSkySphere() ));
+        m_readWriteActions.append( ac );
+
+        menuAthmo->addAction(ac = actionCollection( "new_rainbow", "Rainbow" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewRainbow() ));
+        m_readWriteActions.append( ac );
+
+        menuAthmo->addAction(ac = actionCollection( "new_fog", "Fog" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewFog() ));
+        m_readWriteActions.append( ac );
+        insertMenu->addSeparator();
+        //end menu
+
+
+        insertMenu->addMenu( menuTrans );
+
+        menuTrans->addAction(ac = actionCollection( "new_translate", "Translate" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewTranslate() ));
+        m_readWriteActions.append( ac );
+        menuTrans->addAction(ac = actionCollection( "new_scale", "Scale" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewScale() ));
+        m_readWriteActions.append( ac );
+        menuTrans->addAction(ac = actionCollection( "new_rotate", "Rotate" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewRotate() ));
+        m_readWriteActions.append( ac );
+        menuTrans->addAction(ac = actionCollection( "new_povraymatrix", "Matrix" ) );
+        connect(ac, SIGNAL(triggered(bool)), SLOT( slotNewMatrix() ));
+        m_readWriteActions.append( ac );
+
+        // POV-Ray 3.5 objects
 
 
 
@@ -985,113 +898,20 @@ void PMPart::initActions(PMIMenuBar* menuBar)
       m_readWriteActions.append( m_pSearchLibraryObjectAction );
 #endif
 
-      m_pUndoAction = actionCollection( "Undo", editMenu );
-      m_pRedoAction = actionCollection( "Redo", editMenu );
-      m_pUndoAction->setEnabled( false );
-      m_pRedoAction->setEnabled( false );
-      connect( m_pUndoAction, &QAction::triggered, this, &PMPart::slotEditUndo );
-      connect( m_pRedoAction, &QAction::triggered, this, &PMPart::slotEditRedo );
+        editMenu->addAction(m_pUndoAction = ac = actionCollection( "Undo", "Undo" ));
+        ac->setEnabled( false );
+        connect( ac, &QAction::triggered, this, &PMPart::slotEditUndo );
+        editMenu->addAction(m_pRedoAction = ac = actionCollection( "Redo", "Redo" ));
+        ac->setEnabled( false );
+        connect( ac, &QAction::triggered, this, &PMPart::slotEditRedo );
 
-      disableReadWriteActions(false);
+        disableReadWriteActions(false);
    }
    else
    {
-      m_pNewGlobalSettingsAction = nullptr;
-      m_pNewSkySphereAction = nullptr;
-      m_pNewRainbowAction = nullptr;
-      m_pNewFogAction = nullptr;
-
-      m_pNewInteriorAction = nullptr;
-      m_pNewMediaAction = nullptr;
-      m_pNewDensityAction = nullptr;
-      m_pNewMaterialAction = nullptr;
-      m_pNewBoxAction = nullptr;
-      m_pNewSphereAction = nullptr;
-      m_pNewCylinderAction = nullptr;
-      m_pNewConeAction = nullptr;
-      m_pNewTorusAction = nullptr;
-      m_pNewLatheAction = nullptr;
-      m_pNewPrismAction = nullptr;
-      m_pNewSurfaceOfRevolutionAction = nullptr;
-      m_pNewSuperquadricEllipsoidAction = nullptr;
-      m_pNewJuliaFractalAction = nullptr;
-      m_pNewHeightFieldAction = nullptr;
-      m_pNewTextAction = nullptr;
-
-      m_pNewBlobAction = nullptr;
-      m_pNewBlobSphereAction = nullptr;
-      m_pNewBlobCylinderAction = nullptr;
-
-      m_pNewPlaneAction = nullptr;
-      m_pNewPolynomAction = nullptr;
-
-      m_pNewDeclareAction = nullptr;
-      m_pNewObjectLinkAction = nullptr;
-
-      m_pNewDiscAction = nullptr;
-      m_pNewBicubicPatchAction = nullptr;
-      m_pNewTriangleAction = nullptr;
-
-      m_pNewUnionAction = nullptr;
-      m_pNewDifferenceAction = nullptr;
-      m_pNewIntersectionAction = nullptr;
-      m_pNewMergeAction = nullptr;
-
-      m_pNewBoundedByAction = nullptr;
-      m_pNewClippedByAction = nullptr;
-
-      m_pNewLightAction = nullptr;
-      m_pNewLooksLikeAction = nullptr;
-      m_pNewProjectedThroughAction = nullptr;
-
-      m_pNewCameraAction = nullptr;
-
-      m_pNewTextureAction = nullptr;
-      m_pNewPigmentAction = nullptr;
-      m_pNewNormalAction = nullptr;
-      m_pNewSolidColorAction = nullptr;
-      m_pNewFinishAction = nullptr;
-      m_pNewTextureListAction = nullptr;
-      m_pNewColorListAction = nullptr;
-      m_pNewPigmentListAction = nullptr;
-      m_pNewNormalListAction = nullptr;
-      m_pNewDensityListAction = nullptr;
-
-      m_pNewPatternAction = nullptr;
-      m_pNewBlendMapModifiersAction = nullptr;
-      m_pNewTextureMapAction = nullptr;
-      m_pNewMaterialMapAction = nullptr;
-      m_pNewPigmentMapAction = nullptr;
-      m_pNewColorMapAction = nullptr;
-      m_pNewNormalMapAction = nullptr;
-      m_pNewBumpMapAction = nullptr;
-      m_pNewSlopeMapAction = nullptr;
-      m_pNewDensityMapAction = nullptr;
-
-      m_pNewWarpAction = nullptr;
-      m_pNewImageMapAction = nullptr;
-      m_pNewSlopeAction = nullptr;
-
-      m_pNewTranslateAction = nullptr;
-      m_pNewScaleAction = nullptr;
-      m_pNewRotateAction = nullptr;
-      m_pNewMatrixAction = nullptr;
-      m_pNewCommentAction = nullptr;
-      m_pNewRawAction = nullptr;
-
-      m_pNewIsoSurfaceAction = nullptr;
-      m_pNewRadiosityAction = nullptr;
-      m_pNewGlobalPhotonsAction = nullptr;
-      m_pNewPhotonsAction = nullptr;
-      m_pNewLightGroupAction = nullptr;
-      m_pNewInteriorTextureAction = nullptr;
-      m_pNewSphereSweepAction = nullptr;
-      m_pNewMeshAction = nullptr;
 
       // POV-Ray
 
-      m_pUndoAction = nullptr;
-      m_pRedoAction = nullptr;
    }
 }
 

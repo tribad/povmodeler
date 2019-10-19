@@ -818,7 +818,7 @@ private:
    bool m_readWrite;
 
    void disableReadWriteActions( bool b );
-   QAction* actionCollection(QString name , QMenu *menu);
+   QAction* actionCollection(const QString& name , const QString& text);
    /**
     * Updates all "new object" actions
     */
@@ -963,98 +963,23 @@ private:
    QAction* m_pImportAction;
    QAction* m_pExportAction;
 
+   QAction* m_pUndoAction;
+   QAction* m_pRedoAction;
+
    QAction* m_pCutAction;
    QAction* m_pCopyAction;
    QAction* m_pPasteAction;
-   QAction* m_pUndoAction;
-   QAction* m_pRedoAction;
    QAction * m_pDeleteAction;
    QAction * m_pHideAction;//eticre hide obj in tree by attribute
    QAction * m_pShowAction;//eticre show obj in tree by attribute
-
-   QAction* m_pNewGlobalSettingsAction;
-   QAction* m_pNewSkySphereAction;
-   QAction* m_pNewRainbowAction;
-   QAction* m_pNewFogAction;
-   QAction* m_pNewInteriorAction;
-   QAction* m_pNewMediaAction;
-   QAction* m_pNewDensityAction;
-   QAction* m_pNewMaterialAction;
-   QAction* m_pNewBoxAction;
-   QAction* m_pNewSphereAction;
-   QAction* m_pNewCylinderAction;
-   QAction* m_pNewConeAction;
-   QAction* m_pNewTorusAction;
-   QAction* m_pNewLatheAction;
-   QAction* m_pNewPrismAction;
-   QAction* m_pNewSurfaceOfRevolutionAction;
-   QAction* m_pNewSuperquadricEllipsoidAction;
-   QAction* m_pNewJuliaFractalAction;
-   QAction* m_pNewHeightFieldAction;
-   QAction* m_pNewTextAction;
-
-   QAction* m_pNewBlobAction;
-   QAction* m_pNewBlobSphereAction;
-   QAction* m_pNewBlobCylinderAction;
-
-   QAction* m_pNewPlaneAction;
-   QAction* m_pNewPolynomAction;
-
-   QAction* m_pNewDeclareAction;
-   QAction* m_pNewObjectLinkAction;
 
    QAction* m_pNewUnionAction;
    QAction* m_pNewDifferenceAction;
    QAction* m_pNewIntersectionAction;
    QAction* m_pNewMergeAction;
 
-   QAction* m_pNewBoundedByAction;
-   QAction* m_pNewClippedByAction;
-
-   QAction* m_pNewBicubicPatchAction;
-   QAction* m_pNewDiscAction;
-   QAction* m_pNewTriangleAction;
-
-   QAction* m_pNewLightAction;
-   QAction* m_pNewLooksLikeAction;
-   QAction* m_pNewProjectedThroughAction;
-
-   QAction* m_pNewCameraAction;
-
-   QAction* m_pNewTextureAction;
-   QAction* m_pNewPigmentAction;
-   QAction* m_pNewNormalAction;
-   QAction* m_pNewSolidColorAction;
-   QAction* m_pNewTextureListAction;
-   QAction* m_pNewColorListAction;
-   QAction* m_pNewPigmentListAction;
-   QAction* m_pNewNormalListAction;
-   QAction* m_pNewDensityListAction;
-   QAction* m_pNewFinishAction;
-   QAction* m_pNewPatternAction;
-   QAction* m_pNewBlendMapModifiersAction;
-   QAction* m_pNewTextureMapAction;
-   QAction* m_pNewMaterialMapAction;
-   QAction* m_pNewPigmentMapAction;
-   QAction* m_pNewColorMapAction;
-   QAction* m_pNewNormalMapAction;
-   QAction* m_pNewBumpMapAction;
-   QAction* m_pNewSlopeMapAction;
-   QAction* m_pNewDensityMapAction;
-   QAction* m_pNewSlopeAction;
-   QAction* m_pNewWarpAction;
-   QAction* m_pNewImageMapAction;
-   QAction* m_pNewQuickColorAction;
-
-   QAction* m_pNewTranslateAction;
-   QAction* m_pNewScaleAction;
-   QAction* m_pNewRotateAction;
-   QAction* m_pNewMatrixAction;
-
-   QAction* m_pNewCommentAction;
-   QAction* m_pNewRawAction;
-
    // POV-Ray 3.5 objects
+#if 0
    QAction* m_pNewIsoSurfaceAction;
    QAction* m_pNewRadiosityAction;
    QAction* m_pNewGlobalPhotonsAction;
@@ -1063,7 +988,7 @@ private:
    QAction* m_pNewInteriorTextureAction;
    QAction* m_pNewSphereSweepAction;
    QAction* m_pNewMeshAction;
-
+#endif
    QAction* m_pSearchLibraryObjectAction;
 
    QComboBox* m_pRenderComboAction;
