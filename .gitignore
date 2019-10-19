@@ -1,0 +1,16 @@
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+*.a
+lpovmodeler_autogen/
+povmodeler
+povmodeler.cflags
+povmodeler.config
+povmodeler.creator
+povmodeler.creator.user
+povmodeler.cxxflags
+povmodeler.files
+povmodeler.includes
+povmodeler_autogen/
+povmodelerpart_autogen/
