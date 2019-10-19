@@ -29,7 +29,7 @@
 #include <QMenu>
 #include <libpovmodeler_export.h>
 #include <QToolBar>
-//class KHelpMenu;
+#include "pmimenubar.h"
 class QStatusBar;
 class PMViewOptions;
 class PMPart;
@@ -53,10 +53,10 @@ public:
 
    QMenu* getLayouts(){ return layout_viewMenu_submenu; }
 
-   QMenu* get_editMenu(){ return editMenu; }
-   QMenu* get_viewMenu(){ return viewMenu; }
-   QMenu* get_fileMenu(){ return fileMenu; }
-   QMenu* get_insertMenu(){ return insertMenu; }
+   QMenu* get_editMenu()   { return menu_Bar->GetMenu("Edit"); }
+   QMenu* get_viewMenu()   { return menu_Bar->GetMenu("View"); }
+   QMenu* get_fileMenu()   { return menu_Bar->GetMenu("File"); }
+   QMenu* get_insertMenu() { return menu_Bar->GetMenu("Insert"); }
    /**
     * Creates the actions
     */
@@ -196,14 +196,10 @@ private:
 
    QList<QObject*> m_objectsToDelete;
    int m_viewNumber;
-   QMenu* fileMenu;
-   QMenu* editMenu;
-   QMenu* viewMenu;
-   QMenu* insertMenu;
-   QMenu settingsMenu;
+
+   QMenu* settingsMenu;
    QMenu* layout_viewMenu_submenu;
-   QMenu* menu_open_recent;
-   QMenuBar* menu_Bar;
+   PMIMenuBar* menu_Bar;
    QToolBar* m_pToolBar;
    QToolBar* m_pToolbar_sp;
    QToolBar* m_pToolbar_fp;

@@ -47,7 +47,6 @@ PMShell::PMShell( const QUrl &url )
    /***eticre view-hide Declare with name have "_" at first char***/
    show_list = false;
 
-   QString ruleFile = QStandardPaths::locate( QStandardPaths::GenericDataLocation, QString( "povmodeler/povmodelershell.rc" ) );
    QList<QToolBar *> allToolBars = this->findChildren<QToolBar *>();
    foreach(QToolBar *tb, allToolBars) {
        // This does not delete the tool bar.
@@ -66,29 +65,18 @@ PMShell::PMShell( const QUrl &url )
    m_pToolbar_athmo = new QToolBar;
    m_pToolbar_transform = new QToolBar;
 
-   menu_Bar = new QMenuBar;
-   editMenu = new QMenu;
-   viewMenu = new QMenu;
-   fileMenu = new QMenu;
-   insertMenu = new QMenu;
-   menu_open_recent = new QMenu;
-   fileMenu->setTitle("File");
-   editMenu->setTitle(tr("Edit"));
-   viewMenu->setTitle(tr("View"));
-   insertMenu->setTitle(tr("Insert"));
-   settingsMenu.setTitle(tr("Settings"));
-   menu_open_recent->setTitle("Recent File");
-   menu_open_recent->setToolTipsVisible(true);
-   menu_Bar->addMenu(fileMenu);
-   menu_Bar->addMenu(editMenu);
-   menu_Bar->addMenu(viewMenu);
-   menu_Bar->addMenu(insertMenu);
-   menu_Bar->addMenu(&settingsMenu);
+   menu_Bar         = new PMIMenuBar;
+
+   settingsMenu     = menu_Bar->GetMenu("Settings");
+
+   menu_Bar->GetMenu("File/Recent File")->setToolTipsVisible(true);
+
    setMenuBar(menu_Bar);
 
    setupActions();
 
    m_pPart = new PMPart( this, this, true, this );
+
    m_pToolbar_sp->addActions( m_pPart->getMenu( "menuSolidPri" )->actions() );
    m_pToolbar_fp->addActions( m_pPart->getMenu( "menuFinitePatch" )->actions() );
    m_pToolbar_ip->addActions( m_pPart->getMenu( "menuInfiniteSolid" )->actions() );
@@ -166,165 +154,103 @@ void PMShell::setSize()
 
 void PMShell::setupActions()
 {
-    QAction* newFile = new QAction( "New" );
-    fileMenu->addAction(newFile);
-    connect( newFile, &QAction::triggered, this, &PMShell::slotFileNew );
-
-   QAction* open = new QAction( "Open" );
-   connect( open, &QAction::triggered, this, &PMShell::slotFileOpen );
-   fileMenu->addAction(open);
-
-   fileMenu->addMenu( menu_open_recent );
-   connect( menu_open_recent, &QMenu::triggered, this, &PMShell::slotOpenRecent );
-
-   //m_pRecent = KStandardAction::openRecent( this, SLOT( slotOpenRecent( const QUrl& ) ),
-    //                                   actionCollection() );
-   QAction* save = new QAction( "Save" );
-   connect( save, &QAction::triggered, this, &PMShell::slotFileSave );
-   fileMenu->addAction(save);
-
-   QAction* saveAs = new QAction( "Save As" );
-   connect( saveAs, &QAction::triggered, this, &PMShell::slotFileSaveAs );
-   fileMenu->addAction(saveAs);
-
-   QAction* revert = new QAction( "Revert" );
-   connect( revert, &QAction::triggered, this, &PMShell::slotFileRevert );
-   fileMenu->addAction(revert);
-
-   fileMenu->addSeparator();
-
-   QAction* print = new QAction( "Print" );
-   connect( print, &QAction::triggered, this, &PMShell::slotFilePrint );
-
-   fileMenu->addSeparator();
-   fileMenu->addAction(print);
-
-   fileMenu->addSeparator();
-
-   QAction* close = new QAction( "Close" );
-   connect( close, &QAction::triggered, this, &PMShell::slotFileClose );
-   fileMenu->addAction(close);
-
-   QAction* quit = new QAction( "Quit", this );
-   connect( quit, &QAction::triggered, this, &PMShell::shellClose );
-   fileMenu->addAction(quit);
+    connect( menu_Bar->GetAction("File", "New"),     &QAction::triggered, this, &PMShell::slotFileNew );
+    connect( menu_Bar->GetAction("File", "Open"),    &QAction::triggered, this, &PMShell::slotFileOpen );
+    connect( menu_Bar->GetMenu("File/Recent File"),  &QMenu::triggered,   this, &PMShell::slotOpenRecent );
+    connect( menu_Bar->GetAction("File", "Save"),    &QAction::triggered, this, &PMShell::slotFileSave );
+    connect( menu_Bar->GetAction("File", "Save as"), &QAction::triggered, this, &PMShell::slotFileSaveAs );
+    connect( menu_Bar->GetAction("File", "Revert"),  &QAction::triggered, this, &PMShell::slotFileRevert );
+    connect( menu_Bar->GetAction("File", "Print"),   &QAction::triggered, this, &PMShell::slotFilePrint );
+    connect( menu_Bar->GetAction("File", "Close"),   &QAction::triggered, this, &PMShell::slotFileClose );
+    connect( menu_Bar->GetAction("File", "Quit"),    &QAction::triggered, this, &PMShell::shellClose );
 
    /***eticre add showlib***/
-   m_pListAction = settingsMenu.addAction("options_show_lib");
+   m_pListAction = settingsMenu->addAction("options_show_lib");
    m_pListAction->setCheckable( true );
    m_pListAction->setText( tr( "Show &List" ) );
    connect( m_pListAction, SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
    //m_pPathAction->setCheckedState( KGuiItem( tr( "Hide &List" ) ) );
    
-   m_pPathAction = settingsMenu.addAction("options_show_path");
+   m_pPathAction = settingsMenu->addAction("options_show_path");
    m_pPathAction->setCheckable( true );
    m_pPathAction->setText( tr( "Show &Path" ) );
    connect( m_pPathAction, SIGNAL( triggered() ), this, SLOT( slotShowPath() ) );
 
-   m_pStatusbarAction = settingsMenu.addAction("showStatusbar");
+   m_pStatusbarAction = settingsMenu->addAction("showStatusbar");
    m_pStatusbarAction->setCheckable( true );
    connect( m_pStatusbarAction, SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
-   settingsMenu.addAction("");
-   settingsMenu.addSection("Toolbars");
+   settingsMenu->addAction("");
+   settingsMenu->addSection("Toolbars");
 
    m_pToolbarAction_sp = m_pToolbar_sp->toggleViewAction();
    m_pToolbarAction_sp->setText("Solid Primitives");
-   settingsMenu.addAction( m_pToolbarAction_sp );
+   settingsMenu->addAction( m_pToolbarAction_sp );
 
    m_pToolbarAction_fp = m_pToolbar_fp->toggleViewAction();
    m_pToolbarAction_fp->setText( "Finite Patch" );
-   settingsMenu.addAction( m_pToolbarAction_fp );
+   settingsMenu->addAction( m_pToolbarAction_fp );
 
    m_pToolbarAction_ip = m_pToolbar_ip->toggleViewAction();
    m_pToolbarAction_ip->setText( "Infinite Solid" );
-   settingsMenu.addAction( m_pToolbarAction_ip );
+   settingsMenu->addAction( m_pToolbarAction_ip );
 
    m_pToolbarAction_csg = m_pToolbar_csg->toggleViewAction();
    m_pToolbarAction_csg->setText( "CSG" );
-   settingsMenu.addAction( m_pToolbarAction_csg );
+   settingsMenu->addAction( m_pToolbarAction_csg );
 
    m_pToolbarAction_material = m_pToolbar_material->toggleViewAction();
    m_pToolbarAction_material->setText( "Material" );
-   settingsMenu.addAction( m_pToolbarAction_material );
+   settingsMenu->addAction( m_pToolbarAction_material );
 
    m_pToolbarAction_interior = m_pToolbar_interior->toggleViewAction();
    m_pToolbarAction_interior->setText( "Interior" );
-   settingsMenu.addAction( m_pToolbarAction_interior );
+   settingsMenu->addAction( m_pToolbarAction_interior );
 
    m_pToolbarAction_texture = m_pToolbar_texture->toggleViewAction();
    m_pToolbarAction_texture->setText( "Texture" );
-   settingsMenu.addAction( m_pToolbarAction_texture );
+   settingsMenu->addAction( m_pToolbarAction_texture );
 
    m_pToolbarAction_photons = m_pToolbar_photons->toggleViewAction();
    m_pToolbarAction_photons->setText( "Photons" );
-   settingsMenu.addAction( m_pToolbarAction_photons );
+   settingsMenu->addAction( m_pToolbarAction_photons );
 
    m_pToolbarAction_athmo = m_pToolbar_athmo->toggleViewAction();
    m_pToolbarAction_athmo->setText( "Athmospheric" );
-   settingsMenu.addAction( m_pToolbarAction_athmo );
+   settingsMenu->addAction( m_pToolbarAction_athmo );
 
    m_pToolbarAction_transform = m_pToolbar_transform->toggleViewAction();
    m_pToolbarAction_transform->setText( "Transformation" );
-   settingsMenu.addAction( m_pToolbarAction_transform );
+   settingsMenu->addAction( m_pToolbarAction_transform );
 
    m_pToolbarAction_gdl = m_pToolbar_gdl->toggleViewAction();
    m_pToolbarAction_gdl->setText("Global Detail Level");
-   settingsMenu.addAction(m_pToolbarAction_gdl);
+   settingsMenu->addAction(m_pToolbarAction_gdl);
 
-   settingsMenu.addAction("");
-   settingsMenu.addSection("App. Layout");
-   m_pPreferAaction = settingsMenu.addAction("Preferences");
+   settingsMenu->addAction("");
+   settingsMenu->addSection("App. Layout");
+
+   m_pPreferAaction = settingsMenu->addAction("Preferences");
    connect( m_pPreferAaction, SIGNAL( triggered() ), this, SLOT( slotSettings() ) );
 
-   m_pSaveOptions = settingsMenu.addAction("Save Option");
+   m_pSaveOptions = settingsMenu->addAction("Save Option");
    connect( m_pSaveOptions, SIGNAL( triggered() ), this, SLOT( saveOptions() ) );
 
-   m_pNewTreeViewAction = viewMenu->addAction("view_new_treeview");
-   m_pNewTreeViewAction->setText( tr( "New Object Tree" ) );
-   connect( m_pNewTreeViewAction, SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
-
-   m_pNewDialogViewAction = viewMenu->addAction( "view_new_dialogview" );
-   m_pNewDialogViewAction->setText( tr( "New Properties View" ) );
-   connect( m_pNewDialogViewAction, SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
+   connect( menu_Bar->GetAction("View", "New Object Tree"),      SIGNAL( triggered() ), this, SLOT( slotNewTreeView() ) );
+   connect( menu_Bar->GetAction("View", "New Properties View" ), SIGNAL( triggered() ), this, SLOT( slotNewDialogView() ) );
 
 #ifdef KPM_WITH_OBJECT_LIBRARY
-   m_pNewLibraryBrowserAction = viewMenu->addAction( "view_new_librarybrowser" );
-   m_pNewLibraryBrowserAction->setText( tr( "New Library Browser" ) );
-   connect( m_pNewLibraryBrowserAction, SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
+   connect( menu_Bar->GetAction("View", "New Library Browser"), SIGNAL( triggered() ), this, SLOT( slotNewLibraryBrowserView() ) );
 #endif
 
-   viewMenu->addSeparator();
+   connect( menu_Bar->GetAction("View", "New Top View" ), SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
+   connect( menu_Bar->GetAction("View", "New Bottom View" ), SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
+   connect( menu_Bar->GetAction("View", "New Left View" ), SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
+   connect( menu_Bar->GetAction("View", "New Right View" ), SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+   connect( menu_Bar->GetAction("View", "New Front View" ), SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
+   connect( menu_Bar->GetAction("View", "New Back View" ), SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
+   connect( menu_Bar->GetAction("View", "New Camera View"), SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
 
-   m_pNewTopViewAction = viewMenu->addAction( "view_new_topview" );
-   m_pNewTopViewAction->setText( tr( "New Top View" ) );
-   connect( m_pNewTopViewAction, SIGNAL( triggered() ), this, SLOT( slotNewTopView() ) );
-
-   m_pNewBottomViewAction = viewMenu->addAction( "view_new_bottomview" );
-   m_pNewBottomViewAction->setText( tr ( "New Bottom View" ) );
-   connect( m_pNewBottomViewAction, SIGNAL( triggered() ), this, SLOT( slotNewBottomView() ) );
-
-   m_pNewLeftViewAction = viewMenu->addAction( "view_new_leftview" );
-   m_pNewLeftViewAction->setText( tr( "New Left View" ) );
-   connect( m_pNewLeftViewAction, SIGNAL( triggered() ), this, SLOT( slotNewLeftView() ) );
-
-   m_pNewRightViewAction = viewMenu->addAction( "view_new_rightview" );
-   m_pNewRightViewAction->setText( tr( "New Right View" ) );
-   connect( m_pNewRightViewAction, SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-
-   m_pNewFrontViewAction = viewMenu->addAction( "view_new_frontview" );
-   m_pNewFrontViewAction->setText( tr( "New Front View" ) );
-   connect( m_pNewFrontViewAction, SIGNAL( triggered() ), this, SLOT( slotNewRightView() ) );
-
-   m_pNewBackViewAction = viewMenu->addAction( "view_new_backview" );
-   m_pNewBackViewAction->setText( tr( "New Back View" ) );
-   connect( m_pNewBackViewAction, SIGNAL( triggered() ), this, SLOT( slotNewBackView() ) );
-
-   m_pNewCameraViewAction = viewMenu->addAction( "view_new_cameraview" );
-   m_pNewCameraViewAction->setText( tr( "New Camera View" ) );
-   connect( m_pNewCameraViewAction, SIGNAL( triggered() ), this, SLOT( slotNewCameraView() ) );
-
-   viewMenu->addSeparator();
-
+#if 0
    layout_viewMenu_submenu = viewMenu->addMenu( tr( "View Layouts" ) );
 
    connect( layout_viewMenu_submenu, SIGNAL( aboutToShow() ), SLOT( slotViewsMenuAboutToShow() ) );
@@ -335,6 +261,8 @@ void PMShell::setupActions()
    m_pSaveViewLayoutAction = viewMenu->addAction( "save_view_layout" );
    m_pSaveViewLayoutAction->setText( tr( "Save View Layout..." ) );
    connect( m_pSaveViewLayoutAction, SIGNAL( triggered() ), this, SLOT( slotSaveViewLayout() ) );
+#endif
+
 }
 
 void PMShell::setupView()
@@ -546,8 +474,8 @@ void PMShell::restoreRecent()
            a->setToolTip( recent_urls.at(i).toString() );
            recentFileAction.insert( 0, a );
         }
-    menu_open_recent->clear();
-    menu_open_recent->addActions( recentFileAction );
+    menu_Bar->GetMenu("File/Recent File")->clear();
+    menu_Bar->GetMenu("File/Recent File")->addActions( recentFileAction );
 }
 
 void PMShell::slotOpenRecent( QAction* action )

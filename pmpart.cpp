@@ -215,63 +215,89 @@ PMPart::PMPart( QWidget* parentWidget,
 
 PMPart::~PMPart()
 {
-   //deleteContents();
-   //qDebug(PMArea) << "pmpart01";
-   for (int i = 0; i < m_readWriteActions.size(); ++i) {
-        delete m_readWriteActions.at(i);
-   }
-   if(m_hash_readWriteActions) delete m_hash_readWriteActions;
-   delete m_pparent;
-   delete m_pwidget;
-   delete m_pView;
-   m_pView = nullptr;
-   delete m_pCutAction;
-   delete m_pCopyAction;
-   delete m_pPasteAction;
-   delete m_pUndoAction;
-   delete m_pRedoAction;
-   delete m_pDeleteAction;
-   delete m_pHideAction;
-   delete m_pShowAction;
-   m_pCutAction = nullptr;
-   m_pCopyAction = nullptr;
-   m_pPasteAction = nullptr;
-   m_pUndoAction = nullptr;
-   m_pRedoAction = nullptr;
-   m_pDeleteAction = nullptr;
-   m_pHideAction = nullptr;
-   m_pShowAction = nullptr;
-   delete menuSolidPri;
-   delete menuFinitePatch;
-   delete menuInfiniteSolid;
-   delete menuCsg;
-   delete menuMaterial;
-   delete menuInterior;
-   delete menuTexture;
-   delete menuPhotons;
-   delete menuAthmo;
-   delete menuTrans;
-   menuSolidPri = nullptr;
-   menuFinitePatch = nullptr;
-   menuInfiniteSolid = nullptr;
-   menuCsg = nullptr;
-   menuMaterial = nullptr;
-   menuInterior = nullptr;
-   menuTexture = nullptr;
-   menuPhotons = nullptr;
-   menuAthmo = nullptr;
-   menuTrans = nullptr;
-   delete editMenu;
-   editMenu = nullptr;
-   delete menu_gdl;
-   menu_gdl = nullptr;
-   delete menuRenderModes;
-   delete m_pRenderComboAction;
-   if( m_pSymbolTable )
-       delete m_pSymbolTable;
+    //deleteContents();
+    //qDebug(PMArea) << "pmpart01";
+    for (auto actions : m_readWriteActions) {
+        delete actions;
+    }
+    if (m_hash_readWriteActions != nullptr) {
+        delete m_hash_readWriteActions;
+    }
+    //
+    //  Why should we delete our parent?
+    //  Deactivated.
+    //if (m_pparent != nullptr) {
+    //    delete m_pparent;
+    //}
+    //if (m_pwidget != nullptr) {
+    //    delete m_pwidget;
+    //}
+    if (m_pView != nullptr) {
+        delete m_pView;
+    }
+    if (m_pCutAction != nullptr) {
+        delete m_pCutAction;
+    }
+    if (m_pCopyAction != nullptr) {
+        delete m_pCopyAction;
+    }
+    if (m_pPasteAction != nullptr) {
+        delete m_pPasteAction;
+    }
+    if (m_pUndoAction != nullptr) {
+        delete m_pUndoAction;
+    }
+    if (m_pRedoAction != nullptr) {
+        delete m_pRedoAction;
+    }
+    if (m_pDeleteAction != nullptr) {
+        delete m_pDeleteAction;
+    }
+    if (m_pHideAction != nullptr) {
+        delete m_pHideAction;
+    }
+    if (m_pShowAction != nullptr) {
+        delete m_pShowAction;
+    }
+    m_pCutAction = nullptr;
+    m_pCopyAction = nullptr;
+    m_pPasteAction = nullptr;
+    m_pUndoAction = nullptr;
+    m_pRedoAction = nullptr;
+    m_pDeleteAction = nullptr;
+    m_pHideAction = nullptr;
+    m_pShowAction = nullptr;
+    delete menuSolidPri;
+    delete menuFinitePatch;
+    delete menuInfiniteSolid;
+    delete menuCsg;
+    delete menuMaterial;
+    delete menuInterior;
+    delete menuTexture;
+    delete menuPhotons;
+    delete menuAthmo;
+    delete menuTrans;
+    menuSolidPri = nullptr;
+    menuFinitePatch = nullptr;
+    menuInfiniteSolid = nullptr;
+    menuCsg = nullptr;
+    menuMaterial = nullptr;
+    menuInterior = nullptr;
+    menuTexture = nullptr;
+    menuPhotons = nullptr;
+    menuAthmo = nullptr;
+    menuTrans = nullptr;
+    delete editMenu;
+    editMenu = nullptr;
+    delete menu_gdl;
+    menu_gdl = nullptr;
+    delete menuRenderModes;
+    delete m_pRenderComboAction;
+    if( m_pSymbolTable )
+        delete m_pSymbolTable;
 
-   if( m_pPovrayWidget )
-       delete m_pPovrayWidget;
+    if( m_pPovrayWidget )
+        delete m_pPovrayWidget;
 }
 
 QMenu* PMPart::getMenu( QString name )

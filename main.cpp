@@ -26,7 +26,7 @@
 
 int main( int argc, char* argv[] )
 {
-   PMShell* shell = nullptr;
+    PMShell* shell = nullptr;
 
     QApplication app( argc, argv ); // PORTING SCRIPT: move this to before the KAboutData initialization
     QCommandLineParser parser;
@@ -39,20 +39,20 @@ int main( int argc, char* argv[] )
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
 
-   if( parser.positionalArguments().count() > 0 )
-   {
-      for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
-      {
-         shell = new PMShell( parser.positionalArguments().at( i ) );
-         shell->show();
-      }
-   }
-   else
-   {
-      shell = new PMShell;
-      shell->show();
-   }
+    if( parser.positionalArguments().count() > 0 )
+    {
+        for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
+        {
+            shell = new PMShell( parser.positionalArguments().at( i ) );
+            shell->show();
+        }
+    }
+    else
+    {
+        shell = new PMShell;
+        shell->show();
+    }
 
-   parser.clearPositionalArguments();
-   return app.exec();
+    parser.clearPositionalArguments();
+    return app.exec();
 }
