@@ -170,6 +170,7 @@ QDrag *PMLibraryIconView::dragObject()
         return nullptr;
     }
 
+#if 0
    QPoint orig = viewport()->mapFromGlobal( QCursor::pos() );
    PMLibraryIconDrag *drag = new PMLibraryIconDrag( viewport() , "" );//eticre char name null
    //drag->setPixmap( currentItem()->icon().pixmap() );//,
@@ -197,6 +198,7 @@ QDrag *PMLibraryIconView::dragObject()
       }
    }
    return drag;*/
+#endif
    return nullptr;
 }
 

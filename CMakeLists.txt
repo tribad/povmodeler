@@ -51,7 +51,7 @@ configure_file(config-povmodeler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-povm
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
-add_compile_options (-O0 -g)
+add_compile_options (-O0 -g -Wall)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
 add_subdirectory(src)

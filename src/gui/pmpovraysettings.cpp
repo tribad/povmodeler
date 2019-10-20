@@ -246,7 +246,7 @@ void PMPovraySettings::slotAddPath()
 void PMPovraySettings::slotRemovePath()
 {
    m_pLibraryPaths->takeItem( m_selectionIndex );
-   if( ( unsigned ) m_selectionIndex >= m_pLibraryPaths->count() )
+   if( m_selectionIndex >= m_pLibraryPaths->count() )
       m_selectionIndex--;
    m_pLibraryPaths->setCurrentRow( m_selectionIndex );
 }
@@ -272,7 +272,7 @@ void PMPovraySettings::slotPathDown()
    {
       QString text = lbi->text();
       m_pLibraryPaths->takeItem( m_selectionIndex );
-      if( ( unsigned ) m_selectionIndex < m_pLibraryPaths->count() )
+      if( m_selectionIndex < m_pLibraryPaths->count() )
          m_selectionIndex++;
       m_pLibraryPaths->insertItem( m_selectionIndex, text );
       m_pLibraryPaths->setCurrentRow( m_selectionIndex );

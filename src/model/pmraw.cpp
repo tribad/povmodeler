@@ -101,9 +101,9 @@ void PMRaw::serialize( QDomElement& e, QDomDocument& doc ) const
 void PMRaw::readAttributes( const PMXMLHelper& h )
 {
    QDomNode e = h.element().firstChild();
-   if( e.isText() )
-      m_code = e.toText().data();
-      Base::readAttributes( h );
+   if( e.isText() ) m_code = e.toText().data();
+
+   Base::readAttributes( h );
 }
 
 PMDialogEditBase* PMRaw::editWidget( QWidget* parent ) const

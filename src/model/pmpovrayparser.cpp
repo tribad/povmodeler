@@ -2961,11 +2961,10 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
    int i;
    bool stop = false;
 
-   if( !parseToken( PRISM_TOK, "prism" ) )
-      return false;
-   if( !parseToken( '{' ) )
-      return false;
-
+   if( !parseToken( PRISM_TOK, "prism" ) ) return false;
+   if( !parseToken( '{' ) ) return false;
+   //
+   //  Check for usage of minp.
    int minp = 3;
    while( !stop )
    {

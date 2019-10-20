@@ -623,8 +623,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
 {
     if( !manager ) return nullptr;
 
-    if ( this == target )
-        return nullptr;  // docking to itself not possible
+    if ( this == target ) return nullptr;  // docking to itself not possible
 
 	bool succes = true; // tested flag
 
