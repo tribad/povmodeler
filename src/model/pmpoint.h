@@ -24,7 +24,7 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
-#include <GL/gl.h>
+#include <qopengl.h>
 #endif
 
 class PMVector;
