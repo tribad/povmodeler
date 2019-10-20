@@ -216,4 +216,3 @@ void PMPreviewSettings::applySettings()
    PMDialogEditBase::setPreviewFloorColor2( getStyleColor( m_pFloorColor2->styleSheet() ) );
 }
 
-#include "pmpreviewsettings.moc"

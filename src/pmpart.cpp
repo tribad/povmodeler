@@ -3199,5 +3199,3 @@ void PMPart::slotAboutToSave()
 {
 	emit aboutToSave();
 }
-
-#include "pmpart.moc"

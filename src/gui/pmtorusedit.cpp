@@ -106,6 +106,3 @@ bool PMTorusEdit::isDataValid()
    return false;
 }
 
-
-#include "pmtorusedit.moc"
-

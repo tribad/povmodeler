@@ -187,4 +187,3 @@ void PMGridSettings::applySettings()
       emit repaintViews();
 }
 
-#include "pmgridsettings.moc"

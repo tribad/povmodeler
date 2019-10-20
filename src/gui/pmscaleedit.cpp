@@ -71,4 +71,3 @@ bool PMScaleEdit::isDataValid()
       return Base::isDataValid();
    return false;
 }
-#include "pmscaleedit.moc"

@@ -77,4 +77,3 @@ bool PMQuickColorEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmquickcoloredit.moc"

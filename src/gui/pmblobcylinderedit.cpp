@@ -114,6 +114,3 @@ bool PMBlobCylinderEdit::isDataValid()
    return false;
 }
 
-#include  "pmblobcylinderedit.moc"
-
-

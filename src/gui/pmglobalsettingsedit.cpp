@@ -325,4 +325,3 @@ void PMGlobalSettingsEdit::slotRadiosityClicked()
    emit sizeChanged();
 }
 
-#include "pmglobalsettingsedit.moc"

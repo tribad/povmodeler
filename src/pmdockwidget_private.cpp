@@ -376,7 +376,3 @@ void PMDockWidgetPrivate::slotFocusEmbeddedWidget(QWidget* w)
       }
    }
 }
-
-#ifndef NO_INCLUDE_MOCFILES // for Qt-only projects, because tmake doesn't take this name
-#include "pmdockwidget_private.moc"
-#endif

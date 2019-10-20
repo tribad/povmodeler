@@ -79,4 +79,3 @@ bool PMSolidObjectEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmsolidobjectedit.moc"

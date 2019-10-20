@@ -284,4 +284,3 @@ void PMRainbowEdit::slotFalloffAngleClicked()
    emit dataChanged();
 }
 
-#include "pmrainbowedit.moc"

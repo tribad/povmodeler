@@ -62,4 +62,3 @@ void PMClippedByEdit::displayObject( PMObject* o )
       qCritical(  ) << "PMClippedByEdit: Can't display object\n";
 }
 
-#include "pmclippedbyedit.moc"

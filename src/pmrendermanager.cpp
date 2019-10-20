@@ -1645,4 +1645,3 @@ void PMRenderManager::restoreConfig()
    m_highDetailCameraView = qset.value( "HighDetailCameraViews", m_highDetailCameraView ).value<bool>();
 }
 
-#include "pmrendermanager.moc"

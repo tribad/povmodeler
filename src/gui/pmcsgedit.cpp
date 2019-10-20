@@ -118,4 +118,3 @@ void PMCSGEdit::slotTypeSelected( int )
 {
    emit dataChanged();
 }
-#include "pmcsgedit.moc"

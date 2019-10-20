@@ -71,4 +71,3 @@ bool PMRotateEdit::isDataValid()
       return Base::isDataValid();
    return false;
 }
-#include "pmrotateedit.moc"

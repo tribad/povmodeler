@@ -110,4 +110,3 @@ void PMPovrayOutputWidget::resizeEvent( QResizeEvent* ev )
    s_size = ev->size();
 }
 
-#include "pmpovrayoutputwidget.moc"

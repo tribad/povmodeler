@@ -424,4 +424,3 @@ void PMPovrayWidget::showSpeed( double pps )
    m_pProgressLabel->setText( "running, %1 pixels/second" + num );
 }
 
-#include "pmpovraywidget.moc"

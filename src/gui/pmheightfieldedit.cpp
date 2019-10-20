@@ -200,5 +200,3 @@ void PMHeightFieldEdit::slotFileNameClicked()
       emit dataChanged();
    }
 }
-
-#include "pmheightfieldedit.moc"

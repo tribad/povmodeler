@@ -96,4 +96,3 @@ bool PMBlobEdit::isDataValid()
    return false;
 }
 
-#include "pmblobedit.moc"

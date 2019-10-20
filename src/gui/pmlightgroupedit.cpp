@@ -79,4 +79,3 @@ bool PMLightGroupEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmlightgroupedit.moc"

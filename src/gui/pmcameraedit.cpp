@@ -468,4 +468,3 @@ void PMCameraEdit::enableFocalWidgets( bool on )
    emit sizeChanged();
 }
 
-#include "pmcameraedit.moc"

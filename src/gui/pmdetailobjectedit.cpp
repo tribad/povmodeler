@@ -122,4 +122,3 @@ void PMDetailObjectEdit::slotGlobalDetailClicked()
    emit dataChanged();
 }
 
-#include "pmdetailobjectedit.moc"

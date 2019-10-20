@@ -164,4 +164,3 @@ void PMPhotonsEdit::slotTargetClicked()
 	emit dataChanged();
 }
 
-#include "pmphotonsedit.moc"

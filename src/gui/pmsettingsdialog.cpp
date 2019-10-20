@@ -227,5 +227,3 @@ void PMSettingsDialog::slotRepaint()
 {
    m_repaint = true;
 }
-
-#include "pmsettingsdialog.moc"

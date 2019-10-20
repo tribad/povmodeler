@@ -102,5 +102,3 @@ bool PMPovrayMatrixEdit::isDataValid()
 
    return Base::isDataValid();
 }
-
-#include "pmpovraymatrixedit.moc"

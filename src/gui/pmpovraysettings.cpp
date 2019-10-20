@@ -340,4 +340,3 @@ void PMPovraySettings::slotBrowsePovrayDocumentation()
       m_pDocumentationPath->setText( str );
 }
 
-#include "pmpovraysettings.moc"

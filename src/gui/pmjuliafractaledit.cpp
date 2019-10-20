@@ -386,4 +386,3 @@ void PMJuliaFractalEdit::slotFunctionTypeSelected( int index )
    emit dataChanged();
 }
 
-#include "pmjuliafractaledit.moc"

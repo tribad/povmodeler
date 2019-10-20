@@ -75,4 +75,3 @@ void PMInsertErrorDialog::slotUser1()
    m_pDetailsLabel->show();
    m_pDetails->show();
 }
-#include "pminserterrordialog.moc"

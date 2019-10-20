@@ -99,4 +99,3 @@ bool PMSlopeEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmslopeedit.moc"

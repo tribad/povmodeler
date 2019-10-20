@@ -69,4 +69,3 @@ bool PMCommentEdit::isDataValid()
 {
    return Base::isDataValid();
 }
-#include "pmcommentedit.moc"

@@ -963,4 +963,3 @@ void PMSaveViewLayoutDialog::slotNameSelected( const QString& s )
    m_pLayoutName->setText( s );
 }
 
-#include "pmviewlayoutmanager.moc"

@@ -215,4 +215,3 @@ void PMInteriorEdit::slotFadePowerClicked()
    emit dataChanged();
 }
 
-#include "pminterioredit.moc"

@@ -276,4 +276,3 @@ bool PMTriangleEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmtriangleedit.moc"

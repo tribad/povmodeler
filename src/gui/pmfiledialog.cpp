@@ -101,4 +101,3 @@ QString PMFileDialog::getExportFileName( QWidget* parent, PMPart* part,
    //return dlg.selectedFile();
 }
 
-#include "pmfiledialog.moc"

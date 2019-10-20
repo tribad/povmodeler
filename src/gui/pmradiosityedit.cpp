@@ -235,4 +235,3 @@ bool PMRadiosityEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmradiosityedit.moc"

@@ -81,4 +81,3 @@ void PMNamedObjectEdit::slotNameChanged( const QString& )
 {
    emit dataChanged();
 }
-#include "pmnamedobjectedit.moc"

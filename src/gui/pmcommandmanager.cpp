@@ -104,4 +104,3 @@ void PMCommandManager::cmdIDChanged( PMObject* obj, const QString& oldID )
 {
    emit idChanged( obj, oldID );
 }
-#include "pmcommandmanager.moc"

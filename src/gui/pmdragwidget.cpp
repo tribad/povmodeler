@@ -48,4 +48,3 @@ void PMDragWidget::startDrag()
 {
 }
 
-#include "pmdragwidget.moc"

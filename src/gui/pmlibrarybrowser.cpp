@@ -365,4 +365,3 @@ QString PMLibraryBrowserViewFactory::description() const
    return ( "Library View" );
 }
 
-#include "pmlibrarybrowser.moc"

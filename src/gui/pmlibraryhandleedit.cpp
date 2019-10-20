@@ -152,4 +152,3 @@ void PMLibraryHandleEdit::slotOk()
    accept();
 }
 
-#include "pmlibraryhandleedit.moc"

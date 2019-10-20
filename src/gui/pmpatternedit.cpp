@@ -1263,4 +1263,3 @@ void PMPatternEdit::slotTurbulenceClicked()
    emit sizeChanged();
 }
 
-#include "pmpatternedit.moc"

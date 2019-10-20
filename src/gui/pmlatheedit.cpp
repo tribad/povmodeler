@@ -322,4 +322,3 @@ void PMLatheEdit::updatePointButtons()
    m_pRemove->setEnabled( row >= 0 && m_pPoints->size() > 2 );
 }
 
-#include "pmlatheedit.moc"

@@ -120,4 +120,3 @@ void PMNormalEdit::slotBumpSizeClicked()
    emit dataChanged();
 }
 
-#include "pmnormaledit.moc"

@@ -95,4 +95,3 @@ bool PMPaletteValueEdit::isDataValid()
    return ( m_pIndexEdit->isDataValid() && m_pValueEdit->isDataValid() );
 }
 
-#include "pmpalettevalueedit.moc"

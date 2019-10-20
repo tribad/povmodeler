@@ -59,5 +59,3 @@ void PMBoundedByEdit::displayObject( PMObject* o )
    else
       qCritical(  ) << "PMBoundedByEdit: Can't display object\n";
 }
-
-#include "pmboundedbyedit.moc"

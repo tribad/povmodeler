@@ -103,6 +103,3 @@ bool PMBlobSphereEdit::isDataValid()
             return Base::isDataValid();
    return false;
 }
-
-
-#include "pmblobsphereedit.moc"

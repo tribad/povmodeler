@@ -116,4 +116,3 @@ void PMErrorDialog::resizeEvent( QResizeEvent* ev )
 {
    s_size = ev->size();
 }
-#include "pmerrordialog.moc"

@@ -368,4 +368,3 @@ void PMIsoSurfaceEdit::insertFunction()
     }
 }
 
-#include "pmisosurfaceedit.moc"

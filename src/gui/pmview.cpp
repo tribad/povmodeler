@@ -109,17 +109,3 @@ void PMView::restoreConfig()
    m_pMainSplitter->restoreState( qset.value( "MainSplitter", m_pMainSplitter->saveState() ).toByteArray() );
    m_pTreeEditSplitter->restoreState( qset.value( "TreeEditSplitter", m_pTreeEditSplitter->saveState() ).toByteArray() );
 }
-
-/*QString PMView::toStr(QList<int> lst )
-{
-    QString str;
-    for( int i=0; i < lst.size() ; i++ )
-    {
-       str += QString::number( lst[i] );
-       if( i < lst.size()-1 )
-       str += "," ;
-    }
-    return str;
-}*/
-
-#include "pmview.moc"

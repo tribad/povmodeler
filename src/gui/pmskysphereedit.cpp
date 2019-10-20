@@ -41,4 +41,3 @@ void PMSkySphereEdit::displayObject( PMObject* o )
       qCritical(  ) << "PMSkySphereEdit: Can't display object\n";
 }
 
-#include "pmskysphereedit.moc"

@@ -209,4 +209,3 @@ void PMColorSettings::applySettings()
       emit repaintViews();
 }
 
-#include "pmcolorsettings.moc"

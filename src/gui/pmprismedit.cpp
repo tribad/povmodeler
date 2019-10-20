@@ -701,4 +701,3 @@ void PMPrismEdit::updateControlPointSelection()
    }
 }
 
-#include "pmprismedit.moc"

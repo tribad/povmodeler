@@ -534,4 +534,3 @@ void PMObjectSelect::slotProgress( QImage img )
     }
 }
 
-#include "pmobjectselect.moc"

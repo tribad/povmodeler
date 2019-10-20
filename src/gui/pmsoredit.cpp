@@ -267,4 +267,3 @@ void PMSurfaceOfRevolutionEdit::updatePointButtons()
    m_pRemove->setEnabled( row >= 0 && m_pPoints->size() > 4 );
 }
 
-#include "pmsoredit.moc"

@@ -230,4 +230,3 @@ void PMListPatternEdit::slotComboChanged( int c )
    emit dataChanged();
 }
 
-#include "pmlistpatternedit.moc"

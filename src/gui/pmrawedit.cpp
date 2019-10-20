@@ -73,4 +73,3 @@ bool PMRawEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmrawedit.moc"

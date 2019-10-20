@@ -59,4 +59,3 @@ void PMOpenGLSettings::applySettings()
    PMGLView::enableDirectRendering( m_pDirect->isChecked() );
 }
 
-#include "pmopenglsettings.moc"

@@ -160,4 +160,3 @@ bool PMDiscEdit::isDataValid()
    return false;
 }
 
-#include  "pmdiscedit.moc"

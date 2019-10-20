@@ -123,4 +123,3 @@ bool PMConeEdit::isDataValid()
    return false;
 }
 
-#include  "pmconeedit.moc"

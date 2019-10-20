@@ -96,4 +96,3 @@ bool PMSuperquadricEllipsoidEdit::isDataValid()
    return false;
 }
 
-#include "pmsqeedit.moc"

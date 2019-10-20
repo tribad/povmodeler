@@ -458,4 +458,3 @@ bool PMLightEdit::orientEnabled( bool readOnly )
    return false;
 }
 
-#include "pmlightedit.moc"

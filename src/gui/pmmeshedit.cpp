@@ -102,4 +102,3 @@ void PMMeshEdit::slotInsideVectorClicked()
    emit dataChanged();
 }
 
-#include "pmmeshedit.moc"

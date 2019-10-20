@@ -79,4 +79,3 @@ bool PMSolidColorEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmsolidcoloredit.moc"

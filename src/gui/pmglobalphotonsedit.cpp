@@ -333,4 +333,3 @@ void PMGlobalPhotonsEdit::slotAdcBailoutGlobalClicked()
    emit sizeChanged();
 }
 
-#include "pmglobalphotonsedit.moc"

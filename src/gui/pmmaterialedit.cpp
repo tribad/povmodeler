@@ -41,4 +41,3 @@ void PMMaterialEdit::displayObject( PMObject* o )
       qCritical(  ) << "PMMaterialEdit: Can't display object\n";
 }
 
-#include "pmmaterialedit.moc"

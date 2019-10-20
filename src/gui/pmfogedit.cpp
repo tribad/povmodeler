@@ -252,4 +252,3 @@ void PMFogEdit::slotFogTypeChanged( int val )
    emit sizeChanged();
 }
 
-#include "pmfogedit.moc"

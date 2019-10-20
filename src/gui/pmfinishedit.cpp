@@ -526,4 +526,3 @@ void PMFinishEdit::slotRefMetallicClicked()
    emit dataChanged();
 }
 
-#include "pmfinishedit.moc"

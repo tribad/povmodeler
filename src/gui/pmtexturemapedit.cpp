@@ -157,5 +157,3 @@ bool PMTextureMapEdit::isDataValid()
    }
    return Base::isDataValid();
 }
-
-#include "pmtexturemapedit.moc"

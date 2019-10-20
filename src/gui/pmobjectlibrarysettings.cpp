@@ -206,4 +206,3 @@ void PMObjectLibrarySettings::slotObjectLibraryChanged()
    }
 }
 
-#include "pmobjectlibrarysettings.moc"

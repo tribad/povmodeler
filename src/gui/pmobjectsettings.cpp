@@ -565,4 +565,3 @@ void PMObjectSettings::applySettings()
       emit repaintViews();
 }
 
-#include "pmobjectsettings.moc"

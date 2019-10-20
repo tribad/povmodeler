@@ -228,4 +228,3 @@ void PMVectorEdit::setEnabled( bool yes )
       m_edits[i]->setEnabled( yes );
 }
 
-#include "pmvectoredit.moc"

@@ -152,4 +152,3 @@ void PMLinkEdit::slotClearClicked()
    emit dataChanged();
 }
 
-#include "pmlinkedit.moc"

@@ -260,4 +260,3 @@ void PMPolynomEdit::slotOrderChanged( int order )
    displayCoefficients( coefficients(), m_currentOrder, order );
 }
 
-#include "pmpolynomedit.moc"

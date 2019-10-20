@@ -836,4 +836,3 @@ void PMLayoutSettings::slotViewTypeDescriptionChanged()
    }
 }
 
-#include "pmlayoutsettings.moc"

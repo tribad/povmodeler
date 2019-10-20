@@ -257,4 +257,3 @@ void PMBlendMapModifiersEdit::slotWaveFormClicked()
    emit sizeChanged();
 }
 
-#include "pmblendmapmodifiersedit.moc"

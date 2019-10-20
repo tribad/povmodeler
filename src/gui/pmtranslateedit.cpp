@@ -71,4 +71,3 @@ bool PMTranslateEdit::isDataValid()
       return Base::isDataValid();
    return false;
 }
-#include "pmtranslateedit.moc"

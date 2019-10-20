@@ -254,4 +254,3 @@ void PMColorEdit::slotEditChanged()
    emit dataChanged();
 }
 
-#include "pmcoloredit.moc"

@@ -388,4 +388,3 @@ void PMMediaEdit::slotScatteringTypeChanged( int c )
    emit sizeChanged();
 }
 
-#include "pmmediaedit.moc"

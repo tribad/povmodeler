@@ -137,5 +137,3 @@ void PMTextEdit::slotChooseFont()
       emit dataChanged();
    }   
 }
-
-#include "pmtextedit.moc"

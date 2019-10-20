@@ -65,4 +65,3 @@ void PMPigmentEdit::saveContents()
    }
 }
 
-#include "pmpigmentedit.moc"

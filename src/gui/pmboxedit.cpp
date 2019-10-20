@@ -88,4 +88,3 @@ bool PMBoxEdit::isDataValid()
          return Base::isDataValid();
    return false;
 }
-#include "pmboxedit.moc"

@@ -217,4 +217,3 @@ void PMDeclareEdit::slotSelect()
    if( m_pSelectedObject )
       part()->slotObjectChanged( m_pSelectedObject, PMCNewSelection, this );
 }
-#include "pmdeclareedit.moc"

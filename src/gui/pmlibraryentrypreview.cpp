@@ -461,4 +461,3 @@ void PMLibraryEntryPreview::slotChangeSelected()
 }
 
 
-#include "pmlibraryentrypreview.moc"

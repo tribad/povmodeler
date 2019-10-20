@@ -1817,8 +1817,3 @@ void PMDockArea::setMainDockWidget( PMDockWidget* mdw )
 
 
 #endif
-
-
-#ifndef NO_INCLUDE_MOCFILES // for Qt-only projects, because tmake doesn't take this name
-#include "pmdockwidget.moc"
-#endif

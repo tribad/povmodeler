@@ -41,4 +41,3 @@ void PMDensityEdit::displayObject( PMObject* o )
       qCritical(  ) << "PMDensityEdit: Can't display object\n";
 }
 
-#include "pmdensityedit.moc"

@@ -298,4 +298,3 @@ void PMMaterialMapEdit::slotImageFileBrowseClicked()
    }
 }
 
-#include "pmmaterialmapedit.moc"

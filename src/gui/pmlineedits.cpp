@@ -216,4 +216,3 @@ void PMIntEdit::slotEditTextChanged( const QString& /*t*/ )
 {
    emit dataChanged();
 }
-#include "pmlineedits.moc"

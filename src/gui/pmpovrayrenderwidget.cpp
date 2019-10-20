@@ -278,4 +278,3 @@ void PMPovrayRenderWidget::startDrag()
    drag->exec();
 }
 
-#include "pmpovrayrenderwidget.moc"

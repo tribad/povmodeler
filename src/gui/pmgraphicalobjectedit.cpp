@@ -174,4 +174,3 @@ void PMGraphicalObjectEdit::recalculateResultingVisibility()
    m_pResultingVisibility->setText( QString( "(%1)" ).arg( level ) );
 }
 
-#include "pmgraphicalobjectedit.moc"

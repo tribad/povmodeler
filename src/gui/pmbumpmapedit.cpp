@@ -317,4 +317,3 @@ void PMBumpMapEdit::slotImageFileBrowseClicked()
    }
 }
 
-#include "pmbumpmapedit.moc"

@@ -680,4 +680,3 @@ void PMDialogEditBase::slotPreviewImage( QImage img )
   //labelPreviewImage->setPixmap( QPixmap::fromImage( img ) );
 }
 
-#include "pmdialogeditbase.moc"

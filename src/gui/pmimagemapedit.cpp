@@ -609,4 +609,3 @@ void PMImageMapEdit::slotRemoveTransmitEntry()
    }
 }
 
-#include "pmimagemapedit.moc"

@@ -71,4 +71,3 @@ bool PMObjectLinkEdit::isDataValid()
    return Base::isDataValid();
 }
 
-#include "pmobjectlinkedit.moc"

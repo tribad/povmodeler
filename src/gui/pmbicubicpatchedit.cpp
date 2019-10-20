@@ -227,4 +227,3 @@ void PMBicubicPatchEdit::slotUVEnabledClicked()
    emit sizeChanged();
 }
 
-#include "pmbicubicpatchedit.moc"

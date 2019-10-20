@@ -344,5 +344,3 @@ void PMSphereSweepEdit::updatePointButtons()
    m_pAddBelow->setEnabled( row >= 0 );
    m_pRemove->setEnabled( row >= 0 && m_pPoints->size() > 2 );
 }
-
-#include "pmspheresweepedit.moc"

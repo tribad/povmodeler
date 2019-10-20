@@ -69,4 +69,3 @@ void PMTextureBaseEdit::enableLinkEdit( bool enable )
    m_pLinkEdit->setEnabled( enable );
 }
 
-#include "pmtexturebaseedit.moc"

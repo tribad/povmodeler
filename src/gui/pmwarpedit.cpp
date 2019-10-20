@@ -429,5 +429,3 @@ void PMWarpEdit::slotComboChanged( int c )
    emit dataChanged();
    emit sizeChanged();
 }
-
-#include "pmwarpedit.moc"

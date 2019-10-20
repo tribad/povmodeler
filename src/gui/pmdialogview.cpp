@@ -407,4 +407,3 @@ QString PMDialogViewFactory::description() const
    return "Object Properties";
 }
 
-#include "pmdialogview.moc"

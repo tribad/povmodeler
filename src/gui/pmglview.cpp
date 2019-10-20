@@ -1583,4 +1583,3 @@ void PMGLViewOptionsWidget::slotGLViewTypeChanged( int index )
    emit viewTypeDescriptionChanged();
 }
 
-#include "pmglview.moc"

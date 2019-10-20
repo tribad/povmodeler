@@ -104,4 +104,3 @@ void PMLibraryObjectSearch::slotSearchButtonPressed()
    // If it does add to the list
 }
 
-#include "pmlibraryobjectsearch.moc"

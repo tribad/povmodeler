@@ -127,4 +127,3 @@ bool PMPlaneEdit::isDataValid()
    return false;
 }
 
-#include  "pmplaneedit.moc"

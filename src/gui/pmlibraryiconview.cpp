@@ -336,4 +336,3 @@ QString PMLibraryIconViewItem::newPath( const QString oldPath, bool /*subLib*/ )
    */
 }
 
-#include "pmlibraryiconview.moc"

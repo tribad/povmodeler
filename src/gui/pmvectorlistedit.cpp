@@ -349,5 +349,3 @@ bool PMVectorListEdit::eventFilter( QObject* o, QEvent* e )
    }
    return QTableView::eventFilter( o, e );
 }
-
-#include "pmvectorlistedit.moc"

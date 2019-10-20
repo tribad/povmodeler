@@ -41,4 +41,3 @@ void PMInteriorTextureEdit::displayObject( PMObject* o )
       qCritical(  ) << "PMInteriorTextureEdit: Can't display object\n";
 }
 
-#include "pminteriortextureedit.moc"

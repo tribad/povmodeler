@@ -95,5 +95,3 @@ bool PMSphereEdit::isDataValid()
    return false;
 }
 
-
-#include "pmsphereedit.moc"

@@ -646,6 +646,3 @@ void PMRenderModeDialog::slotToggled( bool )
 {
    slotChanged();
 }
-
-#include "pmrendermodesdialog.moc"
-

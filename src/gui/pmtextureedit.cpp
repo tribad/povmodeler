@@ -64,4 +64,4 @@ void PMTextureEdit::saveContents()
    }
 }
 
-#include "pmtextureedit.moc"
+//#include "pmtextureedit.moc"
