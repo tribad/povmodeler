@@ -14,3 +14,4 @@ povmodeler.files
 povmodeler.includes
 povmodeler_autogen/
 povmodelerpart_autogen/
+*.moc
