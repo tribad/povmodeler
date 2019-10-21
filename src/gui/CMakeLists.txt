@@ -15,7 +15,7 @@ add_library(pmgui
     pmcoloredit.cpp              pmdragwidget.cpp         pminterioredit.cpp         pmmaterialedit.cpp         pmphotonsedit.cpp            pmrawedit.cpp             pmtextureedit.cpp
     pmcolorsettings.cpp          pmerrordialog.cpp        pminteriortextureedit.cpp  pmmaterialmapedit.cpp      pmpigmentedit.cpp            pmrendermodesdialog.cpp   pmtexturemapedit.cpp
     pmcommandmanager.cpp         pmfiledialog.cpp         pmisosurfaceedit.cpp       pmmediaedit.cpp            pmplaneedit.cpp              pmrotateedit.cpp          pmtorusedit.cpp
-    pmcommentedit.cpp            pmfinishedit.cpp         pmjuliafractaledit.cpp     pmmeshedit.cpp             pmscaleedit.cpp              pmtranslateedit.cpp
+    pmcommentedit.cpp            pmfinishedit.cpp         pmjuliafractaledit.cpp     pmmeshedit.cpp             pmscaleedit.cpp              pmtranslateedit.cpp       pmrendermanager.cpp
     pmconeedit.cpp               pmfogedit.cpp            pmlatheedit.cpp            pmmessage.cpp              pmpolynomedit.cpp            pmscanner.cpp             pmtreeview.cpp
 
 )
