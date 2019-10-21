@@ -48,6 +48,7 @@ class QWidget;
 class QWidgetAction;
 class QSpinBox;
 
+
 /**
  * The part for povmodeler (povray document)
  */
@@ -93,7 +94,7 @@ public:
 
    QMenu* getEditMenu(){ return editMenu;  }
 
-   QMenu* getMenu( QString name );
+   virtual QMenu* getMenu( QString name );
 
    void setWidget( QWidget* qw ){ m_pwidget = qw; }
    QWidget* widget(){ return m_pwidget; }
@@ -242,11 +243,11 @@ public:
    /**
     * Returns a pointer to the prototype manager
     */
-   PMPrototypeManager* prototypeManager() const { return m_pPrototypeManager; }
+   virtual PMPrototypeManager* prototypeManager()  const { return m_pPrototypeManager; }
    /**
     * Returns a pointer to the insert rules system
     */
-   PMInsertRuleSystem* insertRuleSystem() const { return m_pInsertRuleSystem; }
+   virtual PMInsertRuleSystem* insertRuleSystem() const { return m_pInsertRuleSystem; }
    /**
     * Returns a pointer to the IO formats manager for this part
     */
@@ -269,7 +270,7 @@ public:
 
    //
    //  return the list of Toolbar pointers
-   std::vector<QToolBar*> toolbars() {return mToolBars;}
+   virtual std::vector<QToolBar*> toolbars() {return mToolBars;}
 public slots:
    /**
     * Opens the import file dialog
@@ -1014,6 +1015,5 @@ private:
    QMenu* insertMenu;
    QMenu* editMenu;
 };
-
 
 #endif
