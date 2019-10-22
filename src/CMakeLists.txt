@@ -15,4 +15,5 @@ add_subdirectory(model)
 add_library(pmapp ${dbusadapter}
     main.cpp          pmdockwidget_private.cpp  pmlibrarymanager.cpp  pmoutputdevice.cpp  pmresourcelocator.cpp  pmshell.cpp
     pmdockwidget.cpp  pmiomanager.cpp           pmlibraryobject.cpp   pmpart.cpp          pmserializer.cpp       pmviewlayoutmanager.cpp
+    ipmpartextern.cpp ipmshell.cpp
 )
