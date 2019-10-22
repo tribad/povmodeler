@@ -30,6 +30,8 @@
 #include "libpovmodeler_export.h"
 #include <QToolBar>
 #include "pmimenubar.h"
+#include "ipmshell.h"
+#include "ipmpartextern.h"
 class QStatusBar;
 class PMViewOptions;
 class PMPart;
@@ -37,7 +39,7 @@ class PMPart;
 /**
  * Main view for PovModeler
  */
-class LPOVMODELER_EXPORT PMShell : public PMDockMainWindow
+class LPOVMODELER_EXPORT PMShell : public PMDockMainWindow, public IPMShell
 {
    Q_OBJECT
 
@@ -53,10 +55,13 @@ public:
 
    QMenu* getLayouts(){ return layout_viewMenu_submenu; }
 
-   QMenu* get_editMenu()   { return mMenuBar->GetMenu("Edit"); }
-   QMenu* get_viewMenu()   { return mMenuBar->GetMenu("View"); }
-   QMenu* get_fileMenu()   { return mMenuBar->GetMenu("File"); }
-   QMenu* get_insertMenu() { return mMenuBar->GetMenu("Insert"); }
+   virtual QMenu* get_editMenu()   { return mMenuBar->GetMenu("Edit"); }
+   virtual QMenu* get_viewMenu()   { return mMenuBar->GetMenu("View"); }
+   virtual QMenu* get_fileMenu()   { return mMenuBar->GetMenu("File"); }
+   virtual QMenu* get_insertMenu() { return mMenuBar->GetMenu("Insert"); }
+
+   virtual PMIMenuBar* GetMainWindowMenuBar()  {return mMenuBar;}
+
    /**
     * Creates the actions
     */
@@ -120,15 +125,15 @@ public slots:
 
    void setWindowTitle( const QString& caption = QString() );
    void statusMsg( const QString& text = QString() );
-   void slotControlPointMsg( const QString& msg = QString() );
 
-   void slotModified();
+   virtual void slotControlPointMsg( const QString& msg = QString() );
+
+   void slotModified(bool m);
    void slotDockWidgetClosed();
    void slotDeleteClosedObjects();
    void slotSelectedLayout( QAction* action );
    void slotSaveViewLayout();
    void slotViewsMenuAboutToShow();
-
 protected:
     virtual bool queryClose();
 	virtual void showEvent( QShowEvent* );
@@ -143,7 +148,7 @@ public:
     */
    PMDockWidget* createView( const QString& t, PMViewOptions* c = nullptr,
                              bool initPosition = true );
-
+    virtual void modified(bool m);
 private:
    void closeEvent( QCloseEvent *event );
    void shellClose();
@@ -155,19 +160,22 @@ private:
 
    //KRecentFilesAction* m_pRecent;
 
-   QAction* m_pStatusbarAction;
-   QStatusBar* m_pStatusBar;
-   QLabel* statusBarLabel;
-   PMPart* m_pPart;
-   QUrl m_openRecentURL;
-   QUrl currentUrl;
+   QAction*        m_pStatusbarAction;
+   QStatusBar*     m_pStatusBar;
+   QLabel*         statusBarLabel;
+   PMPart*         m_pPart;
+   QUrl            m_openRecentURL;
+   QUrl            currentUrl;
 
    QList<QObject*> m_objectsToDelete;
-   int m_viewNumber;
+   int             m_viewNumber;
 
-   QMenu* settingsMenu;
-   QMenu* layout_viewMenu_submenu;
-   PMIMenuBar* mMenuBar;
+   QMenu*          settingsMenu;
+   QMenu*          layout_viewMenu_submenu;
+   //
+   //  The new thingies.
+   PMIMenuBar*     mMenuBar;
+   IPMPartExtern*  mPart;
 };
 
 #endif

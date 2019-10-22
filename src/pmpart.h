@@ -20,12 +20,16 @@
 #ifndef PMPART_H
 #define PMPART_H
 
+#include <QUrl>
+#include <QStringList>
+#include <QObject>
+#include <QToolBar>
+
 #include "pmobject.h"
 #include "pmcommandmanager.h"
 #include "pmimenubar.h"
-#include <QUrl>
-#include <QStringList>
-#include <QToolBar>
+#include "ipmshell.h"
+#include "ipmpartextern.h"
 class PMView;
 class PMShell;
 class PMScene;
@@ -52,22 +56,20 @@ class QSpinBox;
 /**
  * The part for povmodeler (povray document)
  */
-class PMPart : public QObject
+class PMPart : public QObject, public IPMPartExtern
 {
-   Q_OBJECT
-public:
-   /**
-    * construtor of PMPart, calls all init functions to create the
-    * application. QActionGroup* detail
-    */
-   PMPart( QWidget* parentWidget,
-           QObject* parent, bool readWrite,
-           PMShell* shell = nullptr , PMIMenuBar* menuBar = nullptr);
+    Q_OBJECT
 
-   /**
-    * construtor of PMPart, calls all init functions to create the
-    * application. It does not create the main widget.
-    */
+public:
+    PMPart(IPMShell *shellIfc);
+    PMPart( QWidget* parentWidget,
+            QObject* parent,
+            bool readWrite,
+            PMShell* shell = nullptr , PMIMenuBar* menuBar = nullptr);
+    /**
+     * construtor of PMPart, calls all init functions to create the
+     * application. It does not create the main widget.
+     */
    PMPart( QWidget* parentWidget,
            QObject* parent, bool readWrite,
            bool onlyCutPaste, PMShell* shell = nullptr , PMIMenuBar* menuBar = nullptr);
@@ -94,7 +96,7 @@ public:
 
    QMenu* getEditMenu(){ return editMenu;  }
 
-   virtual QMenu* getMenu( QString name );
+   virtual QMenu* getMenu( const QString& name );
 
    void setWidget( QWidget* qw ){ m_pwidget = qw; }
    QWidget* widget(){ return m_pwidget; }
@@ -730,8 +732,13 @@ public slots:
 	 * Emits the aboutToSave signal
 	 */
 	void slotAboutToSave();
+    //
+    //  Relay to IPMShell
+    void slotControlPointMsg( const QString& msg = QString() );
+
 
 signals:
+    void testSignal();
    /**
     * Signal that is emitted when an object is changed.
     * Mode is a bit combination of @ref PMChange constants.
@@ -1014,6 +1021,9 @@ private:
    QMenu* viewMenu;
    QMenu* insertMenu;
    QMenu* editMenu;
+   //
+   //  The new things to the end.
+   IPMShell* mShellIfc;
 };
 
 #endif

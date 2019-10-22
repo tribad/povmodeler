@@ -15,14 +15,6 @@
 *                                                                        *
 **************************************************************************/
 
-#include "pmshell.h"
-#include "pmpart.h"
-#include "pmsettingsdialog.h"
-#include "pmdefaults.h"
-#include "pmdockwidget.h"
-#include "pmviewbase.h"
-#include "pmunknownview.h"
-#include "pmviewlayoutmanager.h"
 #include <QAction>
 #include <QStatusBar>
 #include <QFileDialog>
@@ -32,6 +24,16 @@
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QShowEvent>
+
+#include "pmshell.h"
+#include "pmpart.h"
+#include "ipmpartextern.h"
+#include "pmsettingsdialog.h"
+#include "pmdefaults.h"
+#include "pmdockwidget.h"
+#include "pmviewbase.h"
+#include "pmunknownview.h"
+#include "pmviewlayoutmanager.h"
 
 #define KPM_WITH_OBJECT_LIBRARY
 
@@ -67,7 +69,7 @@ PMShell::PMShell( const QUrl &url )
     setupActions();
     //
     //  Create the povmodeler.
-    m_pPart = new PMPart( this, this, true, this , mMenuBar);
+    m_pPart = new PMPart(this, this, true, this, mMenuBar);
     //
     //  Transfer the actions from the menu initialization to the toolbars.
     std::vector<QToolBar*> toolbars = m_pPart->toolbars();
@@ -97,8 +99,6 @@ PMShell::PMShell( const QUrl &url )
 
    QSettings qset;
    restoreState( qset.value("mainwindow/state").toByteArray() );
-
-   connect( m_pPart, SIGNAL( modified() ), SLOT( slotModified() ) );
 
    connect( m_pPart, SIGNAL( controlPointMessage( const QString& ) ),
                        SLOT( slotControlPointMsg( const QString& ) ) );
@@ -607,7 +607,12 @@ void PMShell::showEvent( QShowEvent* ){
    activateDock();
 }
 
-void PMShell::slotModified()
+void PMShell::slotModified(bool m)
+{
+   setWindowTitle( m_pPart->url().toDisplayString() );
+}
+
+void PMShell::modified(bool m)
 {
    setWindowTitle( m_pPart->url().toDisplayString() );
 }

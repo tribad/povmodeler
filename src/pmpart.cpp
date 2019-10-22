@@ -89,12 +89,15 @@
 QTime PMDebugTime;
 #endif
 
-/*mainwidget*/
+PMPart::PMPart(IPMShell* shellIfc) : m_commandManager( this ) {
+
+}
 PMPart::PMPart( QWidget* parentWidget,
                 QObject* parent,
                 bool readwrite,
-                PMShell* shell, PMIMenuBar* menuBar)
-    : m_commandManager( this )
+                PMShell* shell, PMIMenuBar* menuBar
+              )
+      : m_commandManager( this )
 {
     //
     //  These are the povmodeller specific toolbars to create.
@@ -169,7 +172,8 @@ PMPart::PMPart( QWidget* parentWidget,
    m_updateNewObjectActions = false;
    m_pPovrayWidget = nullptr;
    m_pView = nullptr;
-   m_pShell = shell;
+   m_pShell  = shell;
+   mShellIfc = shell;
    m_onlyCopyPaste = true;
    radYN = false;
    ismodified = false;
@@ -203,11 +207,14 @@ PMPart::PMPart( QWidget* parentWidget,
    connect( &m_commandManager, SIGNAL( idChanged( PMObject*, const QString& ) ),
             SLOT( slotIDChanged( PMObject*, const QString& ) ) );
 
+   IPMShell* shellIfc = shell;
+
    QDBusConnection::sessionBus().registerObject("/PMPart", this);
    //new org::kpovmodeler( this );
    // eticre no plugin PMPluginManager::theManager()->registerPart( this );
 
    emit refresh();
+
    slotObjectChanged( m_pScene, PMCNewSelection, this );
 }
 
@@ -269,7 +276,6 @@ PMPart::PMPart( QWidget* parentWidget,
    QDBusConnection::sessionBus().registerObject("/LibraryBrowser", this);
    emit refresh();
 }
-
 
 PMPart::~PMPart()
 {
@@ -343,7 +349,7 @@ PMPart::~PMPart()
         delete m_pPovrayWidget;
 }
 
-QMenu* PMPart::getMenu( QString name )
+QMenu* PMPart::getMenu(const QString& name )
 {
     if( name == "menuRenderModes" ) return  menuRenderModes;
     if( name == "Global Detail Level" ) return  menu_gdl;
@@ -3008,16 +3014,18 @@ void PMPart::setScene( PMScene* scene )
 
 void PMPart::setModified()
 {
-   //setModified();
-   ismodified = true;
-   emit modified();
+    ismodified = true;
+    if (mShellIfc != nullptr) {
+        mShellIfc->modified(ismodified);
+    }
 }
 
 void PMPart::setModified( bool m )
 {
-   //setModified( m );
-   ismodified = m;
-   emit modified();
+    ismodified = m;
+    if (mShellIfc != nullptr) {
+        mShellIfc->modified(ismodified);
+    }
 }
 
 PMCamera* PMPart::firstCamera()
@@ -3198,4 +3206,10 @@ void PMPart::updateControlPoints( PMObject* oldActive )
 void PMPart::slotAboutToSave()
 {
 	emit aboutToSave();
+}
+
+void PMPart::slotControlPointMsg( const QString& msg ) {
+    if (mShellIfc != nullptr) {
+        mShellIfc->slotControlPointMsg(msg);
+    }
 }
