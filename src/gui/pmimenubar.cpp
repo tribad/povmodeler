@@ -35,6 +35,7 @@ PMIMenuBar::PMIMenuBar()
     m->addAction("New Left View");
     m->addAction("New Right View");
     m->addAction("New Front View");
+    m->addAction("New Back View");
     m->addAction("New Camera View");
     m->addSeparator();
 
@@ -44,7 +45,7 @@ PMIMenuBar::PMIMenuBar()
 
     m->addAction("Show &List")->setCheckable( true );
     m->addAction("Show &Path")->setCheckable( true );
-    m->addAction("showStatusbar")->setCheckable( true );
+    m->addAction("Show &Status Bar")->setCheckable( true );
     m->addAction("");
     //
     //  This addition is a marker for the toolbar initialization sequence.
@@ -54,7 +55,7 @@ PMIMenuBar::PMIMenuBar()
     m->addAction("");
     m->addSection("App. Layout");
     m->addAction("Preferences");
-    m->addAction("Save Option");
+    m->addAction("Save Options");
 }
 
 PMIMenuBar::~PMIMenuBar() {
