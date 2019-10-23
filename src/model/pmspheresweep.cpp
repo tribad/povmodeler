@@ -19,7 +19,6 @@
 #include "pmspheresweep.h"
 
 #include "pmxmlhelper.h"
-#include "pmspheresweepedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
@@ -30,9 +29,6 @@
 #include "pmobjectaction.h"
 #include "pmpoint.h"
 #include "pmmatrix.h"
-
-
-#include <QList>
 
 const int defaultNumberOfPoints = 2;
 const PMVector defaultPoint[defaultNumberOfPoints] =

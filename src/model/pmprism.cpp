@@ -15,11 +15,11 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
 
 #include "pmprism.h"
 
 #include "pmxmlhelper.h"
-#include "pmprismedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm2dcontrolpoint.h"
@@ -29,9 +29,6 @@
 #include "pmdefaults.h"
 #include "pmenumproperty.h"
 #include "pmobjectaction.h"
-
-
-#include <QList>
 
 const int defaultNumberOfPoints = 6;
 const PMVector defaultPoint[defaultNumberOfPoints] =

@@ -23,8 +23,9 @@
 
 
 #include "pmvariant.h"
-#include "pmcommand.h"
+//#include "pmcommand.h"
 #include "pmmetaobject.h"
+#include "pmchange.h"
 #include <qstring.h>
 #include <QList>
 

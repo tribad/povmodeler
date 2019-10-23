@@ -15,16 +15,12 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QtXml/qdom.h>
 
 #include "pmrotate.h"
-#include "pmrotateedit.h"
-
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmrotatecontrolpoint.h"
-
-
-#include <QtXml/qdom.h>
 
 const PMVector rotateDefault = PMVector( 0, 0, 0 );
 

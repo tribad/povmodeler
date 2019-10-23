@@ -19,9 +19,6 @@
 #include "pmpigment.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmpigmentedit.h"
-
-
 
 PMDefinePropertyClass( PMPigment, PMPigmentProperty );
 

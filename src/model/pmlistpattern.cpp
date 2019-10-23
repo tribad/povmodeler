@@ -19,12 +19,9 @@
 #include "pmlistpattern.h"
 
 #include "pmxmlhelper.h"
-#include "pmlistpatternedit.h"
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 PMDefinePropertyClass( PMListPattern, PMListPatternProperty );
 PMDefineEnumPropertyClass( PMListPattern, PMListPattern::PMListType,

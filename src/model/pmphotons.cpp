@@ -19,9 +19,6 @@
 #include "pmphotons.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmphotonsedit.h"
-
-
 
 const double spacingMultiDefault = 1.0;
 

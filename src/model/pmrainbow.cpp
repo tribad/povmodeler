@@ -19,10 +19,7 @@
 #include "pmrainbow.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmrainbowedit.h"
 #include "pmvector.h"
-
-
 
 PMMetaObject* PMRainbow::s_pMetaObject = 0;
 PMObject* createNewRainbow( )

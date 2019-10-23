@@ -18,11 +18,8 @@
 #include "pmxmlhelper.h"
 #include "pmvector.h"
 #include "pmwarp.h"
-#include "pmwarpedit.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 const PMVector directionDefault = PMVector( 1.0, 0.0, 0.0 );
 const PMVector offsetDefault = PMVector( 0.0, 0.0, 0.0 );

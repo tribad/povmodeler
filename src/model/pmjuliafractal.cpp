@@ -19,13 +19,10 @@
 #include "pmjuliafractal.h"
 
 #include "pmxmlhelper.h"
-#include "pmjuliafractaledit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmenumproperty.h"
-
-
 
 const PMVector c_defaultJuliaParameter = PMVector( -0.083, 0.0, -0.83, -0.025 );
 const PMVector c_defaultSliceNormal = PMVector( 0.0, 0.0, 0.0, 1.0 );

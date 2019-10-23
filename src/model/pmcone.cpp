@@ -17,19 +17,13 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmcone.h"
 
 #include "pmxmlhelper.h"
-//#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
 #include "pmdistancecontrolpoint.h"
-#include "pmconeedit.h"
-
-
-
 
 const double defaultConeRadius1 = 0.0;
 const double defaultConeRadius2 = 0.5;

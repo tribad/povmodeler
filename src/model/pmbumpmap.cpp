@@ -16,7 +16,6 @@
 **************************************************************************/
 
 
-#include "pmbumpmapedit.h"
 #include "pmbumpmap.h"
 #include "pmpalettevalue.h"
 #include "pmpalettevaluememento.h"
@@ -25,8 +24,6 @@
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 const PMBumpMap::PMBitmapType bitmapTypeDefault = PMBumpMap::BitmapSys;
 const char *const bitmapFileDefault = 0;

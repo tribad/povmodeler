@@ -19,10 +19,7 @@
 #include "pmmedia.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmmediaedit.h"
 #include "pmcolor.h"
-
-
 
 const int methodDefault = 1;
 const int intervalsDefault = 10;

@@ -19,9 +19,6 @@
 #include "pmmaterial.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmmaterialedit.h"
-
-
 
 PMMetaObject* PMMaterial::s_pMetaObject = 0;
 PMObject* createNewMaterial( )

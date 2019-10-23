@@ -15,12 +15,8 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmlightgroup.h"
-
-
 #include "pmxmlhelper.h"
-#include "pmlightgroupedit.h"
 #include "pmmemento.h"
 
 PMDefinePropertyClass( PMLightGroup, PMLightGroupProperty );

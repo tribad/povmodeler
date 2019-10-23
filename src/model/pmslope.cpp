@@ -18,10 +18,7 @@
 #include "pmxmlhelper.h"
 #include "pmvector.h"
 #include "pmslope.h"
-#include "pmslopeedit.h"
 #include "pmmemento.h"
-
-
 
 const double heightDefault = 0;
 const double slopeDefault = 0;

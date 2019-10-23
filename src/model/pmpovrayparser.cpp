@@ -20,7 +20,6 @@
 
 
 
-#include "pmpart.h"
 #include "pmscanner.h"
 #include "pmtokens.h"
 
@@ -28,7 +27,6 @@
 #include "pmallobjects.h"
 #include "pmprototypemanager.h"
 #include "pmxmlhelper.h"
-
 
 PMPovrayParser::PMPovrayParser( QIODevice* dev )
       : PMParser( dev )

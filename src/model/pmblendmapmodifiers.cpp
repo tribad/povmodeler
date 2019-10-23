@@ -18,11 +18,8 @@
 #include "pmblendmapmodifiers.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmblendmapmodifiersedit.h"
 #include "pmvector.h"
 #include "pmenumproperty.h"
-
-
 
 PMDefinePropertyClass( PMBlendMapModifiers, PMBlendMapModifiersProperty );
 PMDefineEnumPropertyClass( PMBlendMapModifiers,

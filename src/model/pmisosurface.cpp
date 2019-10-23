@@ -19,11 +19,8 @@
 #include "pmisosurface.h"
 
 #include "pmxmlhelper.h"
-#include "pmisosurfaceedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
-
-
 
 const PMIsoSurface::ContainedByType c_defaultContainedBy = PMIsoSurface::Box;
 const PMVector c_defaultCorner1 = PMVector( -1, -1, -1 );

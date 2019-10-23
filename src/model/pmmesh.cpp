@@ -17,18 +17,15 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
+#include <QVector>
 
 #include "pmmesh.h"
-
-
 #include "pmxmlhelper.h"
-#include "pmmeshedit.h"
 #include "pmmemento.h"
 #include "pmtriangle.h"
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
-#include <QList>
-#include <QVector>
 
 const PMVector insideVectorDefault = PMVector( 0.0, 0.0, 0.0 );
 

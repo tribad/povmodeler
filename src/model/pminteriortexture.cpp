@@ -19,9 +19,6 @@
 #include "pminteriortexture.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pminteriortextureedit.h"
-
-
 
 PMMetaObject* PMInteriorTexture::s_pMetaObject = 0;
 PMObject* createNewInteriorTexture( )

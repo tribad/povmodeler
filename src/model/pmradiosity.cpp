@@ -19,9 +19,6 @@
 #include "pmradiosity.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmradiosityedit.h"
-
-
 
 const double adcBailoutDefault = 0.01;
 const double brightnessDefault = 1.0;

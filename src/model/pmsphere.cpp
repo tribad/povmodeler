@@ -20,7 +20,6 @@
 #include "pmsphere.h"
 
 #include "pmxmlhelper.h"
-#include "pmsphereedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdistancecontrolpoint.h"

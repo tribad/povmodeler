@@ -21,16 +21,11 @@
 #include "pmdisc.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
-
-
-
-#include "pmdiscedit.h"
 
 const double defaultDiscRadius = 1.0;
 const double defaultDiscHoleRadius = 0.0;

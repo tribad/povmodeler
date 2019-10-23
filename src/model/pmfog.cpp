@@ -18,7 +18,6 @@
 #include "pmfog.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmfogedit.h"
 #include "pmvector.h"
 
 

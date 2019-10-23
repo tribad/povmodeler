@@ -17,11 +17,8 @@
 
 
 #include "pmboundedby.h"
-#include "pmboundedbyedit.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-
-
 
 PMDefinePropertyClass( PMBoundedBy, PMBoundedByProperty );
 

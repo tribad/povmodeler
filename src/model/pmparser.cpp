@@ -22,7 +22,6 @@
 #include <QBuffer>
 
 
-#include "pmpart.h"
 #include "pmdeclare.h"
 #include "pmerrorflags.h"
 #include "pmrecursiveobjectiterator.h"

@@ -18,9 +18,7 @@
 
 #include "pmcsg.h"
 
-
 #include "pmxmlhelper.h"
-#include "pmcsgedit.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
 

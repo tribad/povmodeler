@@ -19,7 +19,6 @@
 #include "pmskysphere.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmskysphereedit.h"
 #include "pmdebug.h"
 
 PMMetaObject* PMSkySphere::s_pMetaObject = 0;

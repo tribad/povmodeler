@@ -18,13 +18,10 @@
 #include "pmblobsphere.h"
 
 #include "pmxmlhelper.h"
-#include "pmblobsphereedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
-
-
 
 PMDefinePropertyClass( PMBlobSphere, PMBlobSphereProperty );
 

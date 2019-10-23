@@ -19,9 +19,6 @@
 #include "pmfinish.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmfinishedit.h"
-
-
 
 const PMColor emissionColorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );
 const PMColor ambientColorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );

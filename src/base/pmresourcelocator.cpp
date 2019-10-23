@@ -16,7 +16,6 @@
 **************************************************************************/
 
 #include "pmresourcelocator.h"
-#include "pmpovrayrenderwidget.h"
 #include "pmdebug.h"
 
 #include <QFileInfo>

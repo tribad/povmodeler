@@ -17,7 +17,6 @@
 
 #include "pminsertrulesystem.h"
 #include "pmprototypemanager.h"
-#include "pmpart.h"
 #include "pmvariant.h"
 #include "pmdebug.h"
 

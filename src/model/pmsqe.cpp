@@ -19,13 +19,10 @@
 #include "pmsqe.h"
 
 #include "pmxmlhelper.h"
-#include "pmsqeedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pmdefaults.h"
 #include "pmmath.h"
-
-
 
 const double c_defaultEastWestExponent = 1.0;
 const double c_defaultNorthSouthExponent = 1.0;

@@ -18,15 +18,11 @@
 
 #include "pmobjectlink.h"
 #include "pmdeclare.h"
-#include "pmpart.h"
 #include "pmsymboltable.h"
-#include "pmobjectlinkedit.h"
 #include "pmparser.h"
 
 #include "pmmemento.h"
 #include "pmxmlhelper.h"
-
-
 
 PMDefinePropertyClass( PMObjectLink, PMObjectLinkProperty );
 

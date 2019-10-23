@@ -19,11 +19,7 @@
 #include "pmraw.h"
 #include "pmxmlhelper.h"
 
-#include "pmrawedit.h"
 #include "pmmemento.h"
-
-
-#include <qtextstream.h>
 
 PMDefinePropertyClass( PMRaw, PMRawProperty );
 

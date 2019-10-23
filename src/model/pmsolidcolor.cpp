@@ -19,10 +19,7 @@
 #include "pmsolidcolor.h"
 
 #include "pmxmlhelper.h"
-#include "pmsolidcoloredit.h"
 #include "pmmemento.h"
-
-
 
 const PMColor colorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );
 const bool srgbDefault = true;

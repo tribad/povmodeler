@@ -19,9 +19,6 @@
 #include "pmtexture.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmtextureedit.h"
-
-
 
 PMDefinePropertyClass( PMTexture, PMTextureProperty );
 

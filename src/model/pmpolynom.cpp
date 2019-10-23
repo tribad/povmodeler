@@ -17,8 +17,6 @@
 
 
 #include "pmpolynom.h"
-#include "pmpolynomedit.h"
-
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 

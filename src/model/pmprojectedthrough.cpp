@@ -19,9 +19,6 @@
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmnamedobjectedit.h"
-
-
 
 PMMetaObject* PMProjectedThrough::s_pMetaObject = nullptr;
 PMObject* createNewProjectedThrough( )

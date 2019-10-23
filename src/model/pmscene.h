@@ -20,8 +20,6 @@
 #ifndef PMSCENE_H
 #define PMSCENE_H
 
-
-
 #include "pmcompositeobject.h"
 #include "pmrendermode.h"
 

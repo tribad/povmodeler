@@ -15,17 +15,13 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmbicubicpatch.h"
 
 #include "pmxmlhelper.h"
-#include "pmbicubicpatchedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmmath.h"
-
-
 
 const double c_defaultPatchSize = 6.0;
 const int c_defaultPatchType = 0;

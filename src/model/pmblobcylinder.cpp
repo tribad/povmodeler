@@ -19,14 +19,10 @@
 #include "pmblobcylinder.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
 #include "pmdistancecontrolpoint.h"
-#include "pmblobcylinderedit.h"
-
-
 
 PMDefinePropertyClass( PMBlobCylinder, PMBlobCylinderProperty );
 

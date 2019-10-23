@@ -19,14 +19,11 @@
 #include "pmheightfield.h"
 
 #include "pmxmlhelper.h"
-#include "pmheightfieldedit.h"
 #include "pmheightfieldroam.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pmenumproperty.h"
 #include "pmdefaults.h"
-
-
 
 const PMHeightField::HeightFieldType c_defaultType = PMHeightField::HFgif;
 const QString c_defaultTypeText = QString( "gif" );

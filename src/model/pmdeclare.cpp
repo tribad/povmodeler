@@ -16,11 +16,9 @@
 **************************************************************************/
 
 #include "pmdeclare.h"
-#include "pmdeclareedit.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmprototypemanager.h"
-#include "pmpart.h"
 
 PMDefinePropertyClass( PMDeclare, PMDeclareProperty );
 

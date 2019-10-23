@@ -19,9 +19,6 @@
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmnamedobjectedit.h"
-
-
 
 PMMetaObject* PMLooksLike::s_pMetaObject = 0;
 PMObject* createNewLooksLike( )

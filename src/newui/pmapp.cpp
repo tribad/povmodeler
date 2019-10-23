@@ -11,6 +11,7 @@
 //
 // Qt includes
 #include <QIODevice>
+#include <QFile>
 //
 //  Local includes.
 #include "pmapp.h"

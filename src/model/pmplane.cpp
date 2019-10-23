@@ -19,15 +19,10 @@
 #include "pmplane.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmplanenormalcontrolpoint.h"
 #include "pmdefaults.h"
-
-
-
-#include "pmplaneedit.h"
 
 const double defaultPlaneDistance = 0;
 const PMVector defaultPlaneNormal = PMVector ( 0.0, 1.0, 0.0 );

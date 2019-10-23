@@ -15,15 +15,11 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QTextStream>
 
 #include "pmcomment.h"
 #include "pmxmlhelper.h"
-
-#include "pmcommentedit.h"
 #include "pmmemento.h"
-
-#include <QTextStream>
-
 
 PMDefinePropertyClass( PMComment, PMCommentProperty );
 

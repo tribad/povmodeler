@@ -15,17 +15,12 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmtriangle.h"
-#include "pmtriangleedit.h"
-
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
-
-
 
 const PMVector point0Default = PMVector( -1.0, 0.0, 0.0 );
 const PMVector point1Default = PMVector( 1.0, 0.0, 0.0 );

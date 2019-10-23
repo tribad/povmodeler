@@ -19,15 +19,12 @@
 #include "pmlight.h"
 
 #include "pmxmlhelper.h"
-#include "pmlightedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmmath.h"
 #include "pmmatrix.h"
 #include "pmenumproperty.h"
-
-
 
 const PMVector locationDefault = PMVector( 0, 0, 0 );
 const PMColor colorDefault = PMColor( 1.0, 1.0, 1.0 );

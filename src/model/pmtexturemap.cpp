@@ -15,17 +15,12 @@
 *                                                                        *
 **************************************************************************/
 
-
-#include "pmtexturemapedit.h"
-#include "pmtexturemap.h"
-
-#include "pmxmlhelper.h"
-#include "pmmapmemento.h"
-
-#include <qtextstream.h>
 #include <QTextStream>
 #include <QList>
 
+#include "pmtexturemap.h"
+#include "pmxmlhelper.h"
+#include "pmmapmemento.h"
 
 class PMValueProperty : public PMPropertyBase
 {

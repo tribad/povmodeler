@@ -16,17 +16,13 @@
 **************************************************************************/
 
 
-#include "pmpatternedit.h"
 #include "pmpattern.h"
 #include "pmparser.h"
 
 #include "pmxmlhelper.h"
-#include "pmlistpatternedit.h"
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 const PMPattern::PMPatternType patternTypeDefault = PMPattern::PatternAgate;
 const double agateTurbulenceDefault = 0.5;

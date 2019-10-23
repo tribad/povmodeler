@@ -19,7 +19,6 @@
 #include "pmbox.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"

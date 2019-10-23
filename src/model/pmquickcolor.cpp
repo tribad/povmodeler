@@ -18,13 +18,11 @@
 **************************************************************************/
 
 
+#include <QLocale>
 #include "pmquickcolor.h"
-
 #include "pmxmlhelper.h"
-#include "pmquickcoloredit.h"
 #include "pmmemento.h"
 
-#include <QLocale>
 
 const PMColor colorDefault = PMColor( 1.0, 1.0, 1.0, 0.0, 0.0 );
 

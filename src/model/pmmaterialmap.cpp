@@ -16,15 +16,12 @@
 **************************************************************************/
 
 
-#include "pmmaterialmapedit.h"
 #include "pmmaterialmap.h"
 
 #include "pmxmlhelper.h"
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 const PMMaterialMap::PMBitmapType bitmapTypeDefault = PMMaterialMap::BitmapSys;
 const char *const bitmapFileDefault = 0;

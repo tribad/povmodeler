@@ -19,7 +19,6 @@
 #include "pmglobalsettings.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmglobalsettingsedit.h"
 #include "pmenumproperty.h"
 
 const double adcBailoutDefault = 1.0 / 255.0;

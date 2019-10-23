@@ -19,14 +19,11 @@
 #include "pmtorus.h"
 
 #include "pmxmlhelper.h"
-#include "pmtorusedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
-
-
 
 /** default param for the Torus */
 const double c_defaultminorRadius = 0.25;

@@ -15,15 +15,11 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmnormal.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmnormaledit.h"
 #include "pmlistpattern.h"
 #include "pmpattern.h"
-
-
 
 const double bumpSizeDefault = 0.0;
 const double accuracyDefault = 0.02;

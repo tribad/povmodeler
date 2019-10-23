@@ -32,7 +32,8 @@
 #include "pmobject.h"
 #include "pmsymboltable.h"
 #include "pmvalue.h"
-#include "pmerrordialog.h"
+//#include "pmerrordialog.h"
+#include "pmmessage.h"
 
 class QTextStream;
 class QIODevice;

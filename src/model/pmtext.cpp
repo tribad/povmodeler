@@ -16,19 +16,16 @@
 **************************************************************************/
 
 
+#include <QTextStream>
+
 #include "pmtext.h"
 
 #include "pmxmlhelper.h"
-#include "pmtextedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pmresourcelocator.h"
 #include "pmtruetypecache.h"
 #include "pmdefaults.h"
-
-
-//Added by qt3to4:
-#include <QTextStream>
 
 const QString c_defaultFont = QString( "" );
 const QString c_defaultText = QString( "" );

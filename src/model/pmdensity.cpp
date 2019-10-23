@@ -19,9 +19,6 @@
 #include "pmdensity.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmdensityedit.h"
-
-
 
 PMMetaObject* PMDensity::s_pMetaObject = 0;
 PMObject* createNewDensity( )

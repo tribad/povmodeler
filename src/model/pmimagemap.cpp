@@ -15,8 +15,8 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
 
-#include "pmimagemapedit.h"
 #include "pmimagemap.h"
 #include "pmpalettevalue.h"
 #include "pmpalettevaluememento.h"
@@ -25,9 +25,6 @@
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
-#include <QList>
 
 const PMImageMap::PMBitmapType bitmapTypeDefault = PMImageMap::BitmapSys;
 const char *const bitmapFileDefault = 0;

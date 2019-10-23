@@ -15,15 +15,11 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmtranslate.h"
-#include "pmtranslateedit.h"
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmtranslatecontrolpoint.h"
-
-
 
 const PMVector moveDefault = PMVector( 0.0, 0.0, 0.0 );
 

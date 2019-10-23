@@ -19,10 +19,7 @@
 #include "pmblob.h"
 
 #include "pmxmlhelper.h"
-#include "pmblobedit.h"
 #include "pmmemento.h"
-
-
 
 const double c_defaultThreshold = 0.5;
 bool c_defaultSturm = false;

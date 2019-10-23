@@ -19,14 +19,11 @@
 #include "pmcamera.h"
 
 #include "pmxmlhelper.h"
-#include "pmcameraedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
 #include "pmenumproperty.h"
-
-
 
 PMDefinePropertyClass( PMCamera, PMCameraProperty );
 PMDefineEnumPropertyClass( PMCamera, PMCamera::CameraType, PMCameraTypeProperty );

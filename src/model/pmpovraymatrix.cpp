@@ -17,12 +17,9 @@
 
 
 #include "pmpovraymatrix.h"
-#include "pmpovraymatrixedit.h"
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-
-
 
 PMDefinePropertyClass( PMPovrayMatrix, PMPovrayMatrixProperty );
 

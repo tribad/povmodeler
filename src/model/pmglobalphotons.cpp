@@ -20,9 +20,6 @@
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-#include "pmglobalphotonsedit.h"
-
-
 
 const double spacingDefault = 0.01;
 const int countDefault = 20000;

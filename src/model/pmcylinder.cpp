@@ -21,16 +21,10 @@
 #include "pmcylinder.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
-
-
-
 #include "pmdistancecontrolpoint.h"
-
-#include "pmcylinderedit.h"
 
 const double defaultCylRadius = 0.5;
 const double defaultHalfCylSize = 0.5;

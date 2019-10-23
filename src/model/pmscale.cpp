@@ -17,13 +17,10 @@
 
 
 #include "pmscale.h"
-#include "pmscaleedit.h"
 #include "pmscalecontrolpoint.h"
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-
-
 
 const PMVector scaleDefault = PMVector( 0, 0, 0 );
 

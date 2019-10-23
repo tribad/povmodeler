@@ -19,9 +19,6 @@
 #include "pminterior.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pminterioredit.h"
-
-
 
 const double iorDefault = 1.0;
 const double causticsDefault = 0.0;

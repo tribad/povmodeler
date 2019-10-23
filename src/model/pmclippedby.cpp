@@ -17,11 +17,8 @@
 
 
 #include "pmclippedby.h"
-#include "pmclippedbyedit.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-
-
 
 PMDefinePropertyClass( PMClippedBy, PMClippedByProperty );
 
