@@ -20,6 +20,7 @@
 #ifndef PMOBJECT_H
 #define PMOBJECT_H
 
+class QTreeWidgetItem;
 
 #include "pmmatrix.h"
 #include "pmcontrolpoint.h"
@@ -44,8 +45,6 @@ class PMInsertRuleSystem;
 class PMObject;
 typedef QList<PMObject*> PMObjectList;
 
-using PMTreeViewItem = void;
-
 /**
  * Base class for all povray objects
  *
@@ -67,8 +66,8 @@ public:
    /**
     * point to connect obj and treview item
     */
-   PMTreeViewItem* getTreeItem() {  if ( pmt_item ) return pmt_item; else return nullptr; }
-   void setTreeItem( PMTreeViewItem* itm ) { pmt_item = itm; }
+   QTreeWidgetItem* getTreeItem() {  if ( pmt_item ) return pmt_item; else return nullptr; }
+   void setTreeItem( QTreeWidgetItem* itm ) { pmt_item = itm; }
    /**
     * set Preview image
     */
@@ -501,7 +500,7 @@ private:
    /**
     * Pointer to treewidgetitem
     */
-   PMTreeViewItem* pmt_item;
+   QTreeWidgetItem* pmt_item;
    /**
     * Pointer to the parent object. 0 if the object has no parent.
     */
