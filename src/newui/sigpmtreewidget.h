@@ -19,6 +19,7 @@ class SigPMTreeWidget : public QTreeWidget
 public:
     explicit SigPMTreeWidget(QWidget *parent = nullptr);
     //explicit SigPMTreeWidget(IPMViewMenu* ifc, QObject *parent = nullptr);
+    virtual QSize sizeHint() const;
 };
 
 #endif // SIGPMTREEWIDGET_H

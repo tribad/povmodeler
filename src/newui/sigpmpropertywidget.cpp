@@ -1,20 +1,19 @@
 // **************************************************************************
 //
-// Modul-Name        : sigpmtreewidget.cpp
+// Modul-Name        :
 // Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
-// Creation-Date     : 23.10.2019
+// Creation-Date     :
 //
 //  Copyrights by Hans-Juergen Lange. All rights reserved.
 //
 // **************************************************************************
 
-#include "sigpmtreewidget.h"
+#include "sigpmpropertywidget.h"
 
-SigPMTreeWidget::SigPMTreeWidget(QWidget *parent) : QTreeWidget(parent)
+SigPMPropertyWidget::SigPMPropertyWidget(QWidget *parent) : QWidget(parent)
 {
 
 }
-
-QSize SigPMTreeWidget::sizeHint() const {
+QSize SigPMPropertyWidget::sizeHint() const {
     return QSize(300,300);
 }

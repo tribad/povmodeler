@@ -10,5 +10,5 @@ add_library(pmnewui pmmainwindow.ui
     main.cpp
     pmapp.cpp
     ipmviewmenu.cpp
-    sigpmviewmenu.cpp sigpmtreewidget.cpp
+    sigpmviewmenu.cpp sigpmtreewidget.cpp sigpmpropertywidget.cpp
 )

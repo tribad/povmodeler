@@ -35,7 +35,6 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
 
     mMainWindow.show();
-
     PMObjectList list;
     QIODevice* dev = new QFile( "test.kpm" );
     bool success = true;

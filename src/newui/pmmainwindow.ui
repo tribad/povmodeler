@@ -20,13 +20,17 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>661</width>
-      <height>601</height>
+      <x>80</x>
+      <y>60</y>
+      <width>539</width>
+      <height>569</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="glGrid"/>
+    <layout class="QGridLayout" name="glGrid">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -126,53 +130,35 @@
    </attribute>
   </widget>
   <widget class="QDockWidget" name="treeDockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <widget class="SigPMTreeWidget" name="treeWidget">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>171</width>
-       <height>291</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>50</horstretch>
-       <verstretch>50</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
-     </property>
-     <property name="autoExpandDelay">
-      <number>0</number>
-     </property>
-     <property name="columnCount">
-      <number>1</number>
-     </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
+   <widget class="SigPMTreeWidget" name="dockWidgetContents">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
    </widget>
   </widget>
   <widget class="QDockWidget" name="propertyDockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_2"/>
+   <widget class="SigPMPropertyWidget" name="dockWidgetContents_2"/>
   </widget>
   <widget class="QToolBar" name="toolbarCSG">
    <property name="windowTitle">
@@ -494,8 +480,15 @@
  <customwidgets>
   <customwidget>
    <class>SigPMTreeWidget</class>
-   <extends>QTreeWidget</extends>
+   <extends>QWidget</extends>
    <header>sigpmtreewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SigPMPropertyWidget</class>
+   <extends>QWidget</extends>
+   <header>sigpmpropertywidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
