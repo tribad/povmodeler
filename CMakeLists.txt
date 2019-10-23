@@ -58,7 +58,7 @@ include_directories(src ${CMAKE_SOURCE_DIR})
 add_subdirectory(src)
 
 add_executable(povmodeler add-png-icons.qrc)
-target_link_libraries(povmodeler Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype -Wl,--start-group pmapp pmgui pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype -Wl,--start-group pmapp pmnewui -Wl,--end-group)
 
 ########### install files ###############
 

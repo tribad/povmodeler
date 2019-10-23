@@ -20,16 +20,12 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QLocale>
-#include "pmshell.h"
-#include "pmrendermanager.h"
 #include "version.h"
 
 #include "pmapp.h"
 
 int main( int argc, char* argv[] )
 {
-    PMShell* shell = nullptr;
-
     QApplication app( argc, argv ); // PORTING SCRIPT: move this to before the KAboutData initialization
     QCommandLineParser parser;
     parser.addVersionOption();

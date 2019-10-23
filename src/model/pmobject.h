@@ -25,7 +25,7 @@
 #include "pmcontrolpoint.h"
 #include "pmmetaobject.h"
 #include "pmdebug.h"
-#include "pmtreeviewitem.h"
+//#include "pmtreeviewitem.h"
 #include <QtXml/qdom.h>
 #include <QImage>
 
@@ -40,6 +40,8 @@ class PMPart;
 
 class PMObject;
 typedef QList<PMObject*> PMObjectList;
+
+using PMTreeViewItem = void;
 
 /**
  * Base class for all povray objects
