@@ -42,7 +42,7 @@ public:
    /**
     * Creates a default povray camera
     */
-   PMCamera( PMPart* part );
+   PMCamera( );
    /**
     * Copy constructor
     */
@@ -65,10 +65,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /**
-    * Returns a new @ref PMCameraEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmcamera" ); }
 

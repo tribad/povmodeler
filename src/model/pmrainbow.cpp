@@ -25,9 +25,9 @@
 
 
 PMMetaObject* PMRainbow::s_pMetaObject = 0;
-PMObject* createNewRainbow( PMPart* part )
+PMObject* createNewRainbow( )
 {
-   return new PMRainbow( part );
+   return new PMRainbow( );
 }
 
 const PMVector directionDefault = PMVector( 0.0, 0.0, 0.0 );
@@ -41,8 +41,8 @@ const double falloffAngleDefault = 0.0;
 
 PMDefinePropertyClass( PMRainbow, PMRainbowProperty );
 
-PMRainbow::PMRainbow( PMPart* part )
-      : Base( part )
+PMRainbow::PMRainbow( )
+      : Base( )
 {
    m_direction = directionDefault;
    m_angle = angleDefault;
@@ -345,11 +345,6 @@ void PMRainbow::enableFalloffAngle( bool c )
                                                          m_enableFalloffAngle );
       m_enableFalloffAngle = c;
    }
-}
-
-PMDialogEditBase* PMRainbow::editWidget( QWidget* parent ) const
-{
-   return new PMRainbowEdit( parent );
 }
 
 void PMRainbow::restoreMemento( PMMemento* s )

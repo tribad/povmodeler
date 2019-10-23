@@ -20,8 +20,6 @@
 #ifndef PMCOMPOBJECT_H
 #define PMCOMPOBJECT_H
 
-
-
 #include "pmobject.h"
 
 /**
@@ -31,12 +29,12 @@
  */
 class PMCompositeObject : public PMObject
 {
-   typedef PMObject Base;
+   using Base = PMObject;
 public:
    /**
     * Creates an empty PMCompositeObject
     */
-   PMCompositeObject( PMPart* part );
+   PMCompositeObject( );
    /**
     * Copy constructor
     */

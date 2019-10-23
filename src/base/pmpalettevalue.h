@@ -20,9 +20,7 @@
 #ifndef PMPALETTEVALUE_H
 #define PMPALETTEVALUE_H
 
-
-
-#include "pmnamedobject.h"
+#include <QDomElement>
 
 /**
  * Class for pallete values used for filter and transmit in image maps.

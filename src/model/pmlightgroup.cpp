@@ -26,13 +26,13 @@
 PMDefinePropertyClass( PMLightGroup, PMLightGroupProperty );
 
 PMMetaObject* PMLightGroup::s_pMetaObject = 0;
-PMObject* createNewLightGroup( PMPart* part )
+PMObject* createNewLightGroup( )
 {
-   return new PMLightGroup( part );
+   return new PMLightGroup( );
 }
 
-PMLightGroup::PMLightGroup( PMPart* part )
-      : Base( part )
+PMLightGroup::PMLightGroup( )
+      : Base( )
 {
    m_globalLights = false;
 }
@@ -101,11 +101,6 @@ void PMLightGroup::setGlobalLights( bool gl )
          m_pMemento->addData( s_pMetaObject, PMGlobalLightsID, m_globalLights );
       m_globalLights = gl;
    }
-}
-
-PMDialogEditBase* PMLightGroup::editWidget( QWidget* parent ) const
-{
-   return new PMLightGroupEdit( parent );
 }
 
 void PMLightGroup::restoreMemento( PMMemento* s )

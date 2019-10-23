@@ -26,7 +26,6 @@
 #include <QList>
 #include <QStringList>
 #include <QtXml/QDomElement>
-#include "pmradiosity.h"
 #include <QObject>
 
 /**

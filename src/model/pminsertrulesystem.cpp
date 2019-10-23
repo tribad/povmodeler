@@ -42,23 +42,23 @@ PMRuleCategory* newCategory( QDomElement& e,
    return 0;
 }
 
-PMPrototypeManager* PMRuleClass::s_pPrototypeManager = 0;
+const PMPrototypeManager* PMRuleClass::s_pPrototypeManager = 0;
 
 PMRuleClass::PMRuleClass( QDomElement& e )
       : PMRuleCategory()
 {
-   m_pPrototypeManager = s_pPrototypeManager;
-   m_className = e.attribute( "name" );
+
+    m_className = e.attribute( "name" );
    if( m_className.isEmpty() )
       qCritical(  ) << "RuleSystem: Invalid class name" << endl;
-   if( !m_pPrototypeManager->existsClass( m_className ) && m_className != "Declib" && m_className != "Not_in_tree" )
+   if( !s_pPrototypeManager->existsClass( m_className ) && m_className != "Declib" && m_className != "Not_in_tree" )
       qCritical(  ) << "RuleSystem: Unknown class: "
                         << m_className << endl;
 }
 
 bool PMRuleClass::matches( const QString& className )
 {
-   return m_pPrototypeManager->isA( className, m_className );
+   return s_pPrototypeManager->isA( className, m_className );
 }
 
 PMRuleGroup::PMRuleGroup( QDomElement& e,
@@ -807,9 +807,10 @@ PMRuleTargetClass::~PMRuleTargetClass()
       delete m_rules.takeFirst();
 }
 
-PMInsertRuleSystem::PMInsertRuleSystem( PMPart* part )
+PMInsertRuleSystem::PMInsertRuleSystem( const PMPrototypeManager* aProto )
 {
-   m_pPart = part;
+    PMRuleClass::s_pPrototypeManager = aProto;
+    loadRules("baseinsertrules.xml");
 }
 
 PMInsertRuleSystem::~PMInsertRuleSystem()
@@ -822,10 +823,10 @@ PMInsertRuleSystem::~PMInsertRuleSystem()
 
 void PMInsertRuleSystem::loadRules( const QString& fileName )
 {
-   PMRuleClass::s_pPrototypeManager = m_pPart->prototypeManager();
-   if( m_loadedFiles.indexOf( fileName ) >= 0 )
-      return;
-   m_loadedFiles.push_back( fileName );
+    if( m_loadedFiles.indexOf( fileName ) >= 0 ) {
+        return;
+    }
+    m_loadedFiles.push_back( fileName );
 
 
    QString ruleFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString( "povmodeler/" + fileName ) );
@@ -893,14 +894,12 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
       }
    }
    file.close();
-
-   PMRuleClass::s_pPrototypeManager = 0;
 }
 
 bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                     const QString& className,
                                     const PMObject* after,
-                                    const PMObjectList* objectsBetween )
+                                    const PMObjectList* objectsBetween ) const
 {
    bool possible = false;
 
@@ -962,14 +961,14 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
 bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                     const PMObject* object,
                                     const PMObject* after,
-                                    const PMObjectList* objectsBetween )
+                                    const PMObjectList* objectsBetween ) const
 {
    return canInsert( parentObject, object->type(), after, objectsBetween );
 }
 
 int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                    const PMObjectList& list,
-                                   const PMObject* after )
+                                   const PMObject* after ) const
 {
    QStringList classes;
    foreach( PMObject* it, list )
@@ -979,7 +978,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
 
 int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                    const QStringList& list,
-                                   const PMObject* after )
+                                   const PMObject* after ) const
 {
    if( list.size() == 1 )
    {

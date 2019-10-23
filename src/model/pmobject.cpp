@@ -18,49 +18,82 @@
 
 #include "pmobject.h"
 #include "pmcontrolpoint.h"
-#include "pmdialogeditbase.h"
+//#include "pmdialogeditbase.h"
 #include "pmmemento.h"
 #include "pmprototypemanager.h"
 #include "pminsertrulesystem.h"
-#include "pmpart.h"
+//#include "pmpart.h"
 
 PMDefinePropertyClass( PMObject, PMObjectProperty );
 
 PMMetaObject* PMObject::s_pMetaObject = nullptr;
-
-PMObject::PMObject( PMPart* part )
+//
+//  The default constructor.
+PMObject::PMObject( )
 {
-   m_pParent = nullptr;
-   m_selected = false;
-   m_pPrevSibling = nullptr;
-   m_pNextSibling = nullptr;
-   m_pMemento = nullptr;
-   m_readOnly = false;
-   m_pPart = part;
+   m_pParent           = nullptr;
+   m_selected          = false;
+   m_pPrevSibling      = nullptr;
+   m_pNextSibling      = nullptr;
+   m_pMemento          = nullptr;
+   m_readOnly          = false;
    not_visible_in_tree = false;
-   map_image_preview = 0;
-   pmt_item = nullptr;
-
-   if( !m_pPart )
-      qCritical() << "PMObject::PMObject: The part may not be null" << endl;
+   map_image_preview   = 0;
+   pmt_item            = nullptr;
 }
-
+//
+//  The copy constructor.
 PMObject::PMObject( const PMObject& o )
 {
-   m_pParent = nullptr;
-   m_selected = false;
-   m_pPrevSibling = nullptr;
-   m_pNextSibling = nullptr;
-   m_pMemento = nullptr;
-   m_readOnly = false;
-   m_pPart = o.m_pPart;
+   m_pParent           = nullptr;
+   m_selected          = false;
+   m_pPrevSibling      = nullptr;
+   m_pNextSibling      = nullptr;
+   m_pMemento          = nullptr;
+   m_readOnly          = false;
    not_visible_in_tree = false;
-   map_image_preview = 0;
-   pmt_item = nullptr;
+   map_image_preview   = 0;
+   pmt_item            = nullptr;
 }
 
 PMObject::~PMObject()
 {
+}
+//
+//  The prototypeManager is only needed here in the PMObjects.
+const PMPrototypeManager* PMObject::prototypeManager() {
+    static PMPrototypeManager mProtoTypeManager;
+
+    return &mProtoTypeManager;
+}
+//
+//  Same with the insertRuleSystem. Is specific to povray objects.
+const PMInsertRuleSystem* PMObject::insertRuleSystem() {
+    static PMInsertRuleSystem mInsertRuleSystem(prototypeManager());
+
+    return &mInsertRuleSystem;
+}
+//
+//  Here we have some former pure virtuals implementation. This is to make the renewal of
+//  the software somehow more comfortable.
+//
+//  The base class "deep" copy is the copy constructor.
+PMObject* PMObject::copy() const {
+    PMObject* retval = new PMObject(*this);
+
+    return retval;
+}
+
+QString PMObject::description() const {
+    return "unspecific object base";
+}
+
+void PMObject::serialize( QDomElement& e, QDomDocument& doc ) const {
+
+}
+
+QString PMObject::pixmap() const {
+    return "unspecific pixmap";
 }
 
 PMMetaObject* PMObject::metaObject() const
@@ -78,7 +111,7 @@ PMMetaObject* PMObject::metaObject() const
 
 PMObject* PMObject::newObject() const
 {
-   return metaObject()->newObject( m_pPart );
+   return metaObject()->newObject();
 }
 
 bool PMObject::insertChildAfter( PMObject*, PMObject* )
@@ -149,12 +182,6 @@ bool PMObject::takeChild( uint )
    return false;
 }
 
-PMDialogEditBase* PMObject::editWidget( QWidget* parent ) const
-{
-   return new PMDialogEditBase( parent );
-//   return 0;
-}
-
 void PMObject::createMemento()
 {
    if( m_pMemento )
@@ -173,7 +200,6 @@ void PMObject::restoreMemento( PMMemento* /* s */ )
 {
    // nothing to be done at the moment
 }
-
 PMMatrix PMObject::transformedWith() const
 {
    PMMatrix result = PMMatrix::identity();
@@ -254,9 +280,7 @@ void PMObject::setTreeVisibility( bool nn )
 
 bool PMObject::isA( const QString& className ) const
 {
-   if( !m_pPart )
-      return false;
-   return m_pPart->prototypeManager()->isA( metaObject(), className );
+   return prototypeManager()->isA( metaObject(), className );
 }
 
 QString PMObject::type() const
@@ -267,29 +291,21 @@ QString PMObject::type() const
 bool PMObject::canInsert( const QString& className, const PMObject* after,
                           const PMObjectList* objectsBetween ) const
 {
-   if( !m_pPart )
-      return false;
-	return m_pPart->insertRuleSystem()->canInsert( this, className, after, objectsBetween );
+   return insertRuleSystem()->canInsert( this, className, after, objectsBetween );
 }
 
 bool PMObject::canInsert( const PMObject* o, const PMObject* after,
                           const PMObjectList* objectsBetween ) const
 {
-   if( !m_pPart )
-      return false;
-	return m_pPart->insertRuleSystem()->canInsert( this, o, after, objectsBetween );
+    return insertRuleSystem()->canInsert( this, o, after, objectsBetween );
 }
 
 int PMObject::canInsert( const PMObjectList& list, const PMObject* after ) const
 {
-   if( !m_pPart )
-      return false;
-   return m_pPart->insertRuleSystem()->canInsert( this, list, after );
+   return insertRuleSystem()->canInsert( this, list, after );
 }
 
 int PMObject::canInsert( const QStringList& classes, const PMObject* after ) const
 {
-   if( !m_pPart )
-      return false;
-   return m_pPart->insertRuleSystem()->canInsert( this, classes, after );
+   return insertRuleSystem()->canInsert( this, classes, after );
 }

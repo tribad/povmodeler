@@ -36,7 +36,7 @@ public:
    /**
     * Creates a move < 0, 0, 0 >
     */
-   PMTranslate( PMPart* part );
+   PMTranslate( );
    /**
     * Copy constructor
     */
@@ -60,10 +60,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-   /**
-    * Returns a new @ref PMTranslateEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmtranslate" ); }
 

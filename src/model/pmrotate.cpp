@@ -31,13 +31,13 @@ const PMVector rotateDefault = PMVector( 0, 0, 0 );
 PMDefinePropertyClass( PMRotate, PMRotateProperty );
 
 PMMetaObject* PMRotate::s_pMetaObject = nullptr;
-PMObject* createNewRotate( PMPart* part )
+PMObject* createNewRotate( )
 {
-   return new PMRotate( part );
+   return new PMRotate( );
 }
 
-PMRotate::PMRotate( PMPart* part )
-      : Base( part )
+PMRotate::PMRotate( )
+      : Base( )
 {
 }
 
@@ -100,11 +100,6 @@ void PMRotate::setRotation( const PMVector& p )
       m_rotate = p;
       m_rotate.resize( 3 );
    }
-}
-
-PMDialogEditBase* PMRotate::editWidget( QWidget* parent ) const
-{
-   return new PMRotateEdit( parent );
 }
 
 void PMRotate::restoreMemento( PMMemento* s )

@@ -32,8 +32,8 @@ PMDefinePropertyClass( PMGraphicalObject, PMGraphicalObjectProperty );
 
 PMMetaObject* PMGraphicalObject::s_pMetaObject = nullptr;
 
-PMGraphicalObject::PMGraphicalObject( PMPart* part )
-      : Base( part )
+PMGraphicalObject::PMGraphicalObject( )
+      : Base( )
 {
    m_noShadow = c_defaultNoShadow;
    m_noImage = c_defaultNoImage;

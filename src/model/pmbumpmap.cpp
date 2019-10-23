@@ -49,13 +49,13 @@ PMDefineEnumPropertyClass( PMBumpMap, PMBumpMap::PMMapType,
                            PMMapTypeProperty );
 
 PMMetaObject* PMBumpMap::s_pMetaObject = 0;
-PMObject* createNewBumpMap( PMPart* part )
+PMObject* createNewBumpMap( )
 {
-   return new PMBumpMap( part );
+   return new PMBumpMap( );
 }
 
-PMBumpMap::PMBumpMap( PMPart* part )
-      : Base( part )
+PMBumpMap::PMBumpMap( )
+      : Base( )
 {
    m_bitmapType = bitmapTypeDefault;
    m_bitmapFile = bitmapFileDefault;
@@ -334,11 +334,6 @@ void PMBumpMap::setBumpSize( double c )
          m_pMemento->addData( s_pMetaObject, PMBumpSizeID, m_bumpSize );
       m_bumpSize = c;
    }
-}
-
-PMDialogEditBase* PMBumpMap::editWidget( QWidget* parent ) const
-{
-   return new PMBumpMapEdit( parent );
 }
 
 void PMBumpMap::restoreMemento( PMMemento* s )

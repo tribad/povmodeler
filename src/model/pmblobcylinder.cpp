@@ -31,9 +31,9 @@
 PMDefinePropertyClass( PMBlobCylinder, PMBlobCylinderProperty );
 
 PMMetaObject* PMBlobCylinder::s_pMetaObject = nullptr;
-PMObject* createNewBlobCylinder( PMPart* part )
+PMObject* createNewBlobCylinder( )
 {
-   return new PMBlobCylinder( part );
+   return new PMBlobCylinder( );
 }
 
 const double c_defaultRadius = 0.5;
@@ -48,8 +48,8 @@ int PMBlobCylinder::s_uStep = c_defaultBlobCylinderUSteps;
 int PMBlobCylinder::s_parameterKey = 0;
 
 
-PMBlobCylinder::PMBlobCylinder( PMPart* part )
-      : Base( part )
+PMBlobCylinder::PMBlobCylinder( )
+      : Base( )
 {
    m_end1 = c_defaultEnd1;
    m_end2 = c_defaultEnd2;
@@ -158,11 +158,6 @@ void PMBlobCylinder::setStrength( double s )
          m_pMemento->addData( s_pMetaObject, PMStrengthID, m_strength );
       m_strength = s;
    }
-}
-
-PMDialogEditBase* PMBlobCylinder::editWidget( QWidget* parent ) const
-{
-   return new PMBlobCylinderEdit( parent );
 }
 
 void PMBlobCylinder::restoreMemento( PMMemento* s )

@@ -27,19 +27,19 @@
 PMDefineEnumPropertyClass( PMCSG, PMCSG::PMCSGType, PMCSGTypeProperty );
 
 PMMetaObject* PMCSG::s_pMetaObject = 0;
-PMObject* createNewCSG( PMPart* part )
+PMObject* createNewCSG( )
 {
-   return new PMCSG( part );
+   return new PMCSG( );
 }
 
-PMCSG::PMCSG( PMPart* part )
-      : Base( part )
+PMCSG::PMCSG( )
+      : Base( )
 {
    m_type = CSGUnion;
 }
 
 PMCSG::PMCSG( PMPart* part, const PMCSGType t )
-      : Base( part )
+      : Base( )
 {
    m_type = t;
 }
@@ -167,11 +167,6 @@ void PMCSG::setCSGType( const PMCSGType t )
       }
       m_type = t;
    }
-}
-
-PMDialogEditBase* PMCSG::editWidget( QWidget* parent ) const
-{
-   return new PMCSGEdit( parent );
 }
 
 void PMCSG::restoreMemento( PMMemento* s )

@@ -45,13 +45,13 @@ int PMDisc::s_parameterKey = 0;
 PMDefinePropertyClass( PMDisc, PMDiscProperty );
 
 PMMetaObject* PMDisc::s_pMetaObject = nullptr;
-PMObject* createNewDisc( PMPart* part )
+PMObject* createNewDisc( )
 {
-   return new PMDisc( part );
+   return new PMDisc( );
 }
 
-PMDisc::PMDisc( PMPart* part )
-      : Base( part )
+PMDisc::PMDisc( )
+      : Base( )
 {
    m_center = defaultDiscCenter;
    m_normal = defaultDiscNormal;
@@ -174,11 +174,6 @@ void PMDisc::setHoleRadius( double hradius )
 
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMDisc::editWidget( QWidget* parent ) const
-{
-   return new PMDiscEdit( parent );
 }
 
 void PMDisc::restoreMemento( PMMemento* s )

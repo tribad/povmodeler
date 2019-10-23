@@ -38,13 +38,13 @@ const PMVector upDefault = PMVector( 0.0, 1.0, 0.0 );
 PMDefinePropertyClass( PMFog, PMFogProperty );
 
 PMMetaObject* PMFog::s_pMetaObject = 0;
-PMObject* createNewFog( PMPart* part )
+PMObject* createNewFog( )
 {
-   return new PMFog( part );
+   return new PMFog( );
 }
 
-PMFog::PMFog( PMPart* part )
-      : Base( part )
+PMFog::PMFog( )
+      : Base( )
 {
    m_fogType = fogTypeDefault;
    m_distance = distanceDefault;
@@ -282,11 +282,6 @@ void PMFog::setUp( const PMVector& c )
          m_pMemento->addData( s_pMetaObject, PMUpID, m_up );
       m_up = c;
    }
-}
-
-PMDialogEditBase* PMFog::editWidget( QWidget* parent ) const
-{
-   return new PMFogEdit( parent );
 }
 
 void PMFog::restoreMemento( PMMemento* s )

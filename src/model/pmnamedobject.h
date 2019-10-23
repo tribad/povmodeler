@@ -30,12 +30,12 @@
 
 class PMNamedObject : public PMCompositeObject
 {
-   typedef PMCompositeObject Base;
+   using Base = PMCompositeObject;
 public:
    /**
     * Creates an empty PMNamedObject
     */
-   PMNamedObject( PMPart* part );
+   PMNamedObject( );
    /**
     * Copy constructor
     */

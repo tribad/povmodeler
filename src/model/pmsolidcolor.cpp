@@ -30,13 +30,13 @@ const bool srgbDefault = true;
 PMDefinePropertyClass( PMSolidColor, PMSolidColorProperty );
 
 PMMetaObject* PMSolidColor::s_pMetaObject = nullptr;
-PMObject* createNewSolidColor( PMPart* part )
+PMObject* createNewSolidColor( )
 {
-   return new PMSolidColor( part );
+   return new PMSolidColor( );
 }
 
-PMSolidColor::PMSolidColor( PMPart* part )
-      : Base( part )
+PMSolidColor::PMSolidColor( )
+      : Base( )
 {
    m_color = colorDefault;
    m_color.setSrgb( srgbDefault );
@@ -102,11 +102,6 @@ void PMSolidColor::setColor( const PMColor& c )
          m_pMemento->addData( s_pMetaObject, PMColorID, m_color );
       m_color = c;
    }
-}
-
-PMDialogEditBase* PMSolidColor::editWidget( QWidget* parent ) const
-{
-   return new PMSolidColorEdit( parent );
 }
 
 void PMSolidColor::restoreMemento( PMMemento* s )

@@ -27,13 +27,13 @@
 PMDefinePropertyClass( PMPovrayMatrix, PMPovrayMatrixProperty );
 
 PMMetaObject* PMPovrayMatrix::s_pMetaObject = 0;
-PMObject* createNewPovrayMatrix( PMPart* part )
+PMObject* createNewPovrayMatrix( )
 {
-   return new PMPovrayMatrix( part );
+   return new PMPovrayMatrix(  );
 }
 
-PMPovrayMatrix::PMPovrayMatrix( PMPart* part )
-      : Base( part )
+PMPovrayMatrix::PMPovrayMatrix( )
+      : Base(  )
 {
    m_values = PMVector( 12 );
    m_values[0] = 1.0;
@@ -106,11 +106,6 @@ void PMPovrayMatrix::setValues( const PMVector& v )
       m_values = v;
       m_values.resize( 12 );
    }
-}
-
-PMDialogEditBase* PMPovrayMatrix::editWidget( QWidget* parent ) const
-{
-   return new PMPovrayMatrixEdit( parent );
 }
 
 void PMPovrayMatrix::restoreMemento( PMMemento* s )

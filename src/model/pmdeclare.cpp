@@ -25,13 +25,13 @@
 PMDefinePropertyClass( PMDeclare, PMDeclareProperty );
 
 PMMetaObject* PMDeclare::s_pMetaObject;
-PMObject* createNewDeclare( PMPart* part )
+PMObject* createNewDeclare( )
 {
-   return new PMDeclare( part );
+   return new PMDeclare( );
 }
 
-PMDeclare::PMDeclare( PMPart* part )
-      : Base( part )
+PMDeclare::PMDeclare( )
+      : Base( )
 {
    m_pDeclareType = nullptr;
    not_visible_in_tree = 0;
@@ -78,13 +78,12 @@ PMDeclare::~PMDeclare()
 
 QString PMDeclare::description() const
 {
-   PMPart* pPart = part();
    QString d = ( "declaration" );
 
-   if( m_pDeclareType && pPart )
+   if( m_pDeclareType )
    {
       const QList<PMDeclareDescription>& descriptions
-         = pPart->prototypeManager()->declarationTypes();
+         = prototypeManager()->declarationTypes();
       QList<PMDeclareDescription>::const_iterator it;
       bool found = false;
       for( it = descriptions.begin(); it != descriptions.end() && !found; ++it )
@@ -101,13 +100,12 @@ QString PMDeclare::description() const
 
 QString PMDeclare::pixmap() const
 {
-   PMPart* pPart = part();
    //QString d = "pmdeclare";
 
    if ( is_a_function )
        return "pmdeclare-f";
 
-   if( m_pDeclareType && pPart )
+   if( m_pDeclareType )
        return this->firstChild()->pixmap();
    /*{
       const QList<PMDeclareDescription>& descriptions
@@ -149,11 +147,6 @@ void PMDeclare::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMDeclare::editWidget( QWidget* parent ) const
-{
-   return new PMDeclareEdit( parent );
-}
-
 void PMDeclare::setID( const QString& newID )
 {
    if( newID != m_id )
@@ -192,17 +185,13 @@ void PMDeclare::setDeclareType( PMMetaObject* t )
 
 void PMDeclare::updateDeclareType()
 {
-   PMPart* pPart = part();
-   if( !pPart )
-      return;
-
    PMMetaObject* type = 0;
    PMObject* o = firstChild();
-   PMPrototypeManager* m = pPart->prototypeManager();
+
    if( o )
    {
       if( o->isA( "GraphicalObject" ) )
-         type = m->metaObject( "GraphicalObject" );
+         type = prototypeManager()->metaObject( "GraphicalObject" );
       else
          type = o->metaObject();
    }

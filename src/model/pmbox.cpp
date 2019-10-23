@@ -34,13 +34,13 @@ PMDefinePropertyClass( PMBox, PMBoxProperty );
 
 PMViewStructure* PMBox::s_pDefaultViewStructure = nullptr;
 PMMetaObject* PMBox::s_pMetaObject = nullptr;
-PMObject* createNewBox( PMPart* part )
+PMObject* createNewBox( )
 {
-   return new PMBox( part );
+   return new PMBox( );
 }
 
-PMBox::PMBox( PMPart* part )
-      : Base( part )
+PMBox::PMBox( )
+      : Base( )
 {
    m_corner1 = corner1Default;
    m_corner2 = corner2Default;
@@ -112,11 +112,6 @@ void PMBox::setCorner2( const PMVector& p )
       m_corner2.resize( 3 );
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMBox::editWidget( QWidget* parent ) const
-{
-   return new PMBoxEdit( parent );
 }
 
 void PMBox::restoreMemento( PMMemento* s )

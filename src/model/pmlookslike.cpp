@@ -24,13 +24,13 @@
 
 
 PMMetaObject* PMLooksLike::s_pMetaObject = 0;
-PMObject* createNewLooksLike( PMPart* part )
+PMObject* createNewLooksLike( )
 {
-   return new PMLooksLike( part );
+   return new PMLooksLike( );
 }
 
-PMLooksLike::PMLooksLike( PMPart* part )
-      : Base( part )
+PMLooksLike::PMLooksLike( )
+      : Base( )
 {
 }
 
@@ -78,11 +78,6 @@ void PMLooksLike::serialize( QDomElement& e, QDomDocument& doc ) const
 void PMLooksLike::readAttributes( const PMXMLHelper& h )
 {
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMLooksLike::editWidget( QWidget* parent ) const
-{
-   return new PMNamedObjectEdit( parent );
 }
 
 void PMLooksLike::restoreMemento( PMMemento* s )

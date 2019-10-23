@@ -19,8 +19,6 @@
 #ifndef PMRESOURCELOCATOR_H
 #define PMRESOURCELOCATOR_H
 
-
-
 #include <qstring.h>
 #include <QCache>
 
@@ -54,7 +52,6 @@ private:
     */
    QString lookUp( const QString& file );
    static PMResourceLocator* s_pInstance;
-   //static K3StaticDeleter<PMResourceLocator> s_staticDeleter;
 
    QCache< QString, QString > m_cache;
 };

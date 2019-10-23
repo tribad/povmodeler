@@ -25,8 +25,8 @@ PMDefinePropertyClass( PMSolidObject, PMSolidObjectProperty );
 
 PMMetaObject* PMSolidObject::s_pMetaObject = 0;
 
-PMSolidObject::PMSolidObject( PMPart* part )
-      : Base( part )
+PMSolidObject::PMSolidObject( )
+      : Base( )
 {
    m_inverse = false;
    m_hollow = PMUnspecified;

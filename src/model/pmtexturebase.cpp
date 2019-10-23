@@ -32,8 +32,8 @@ PMDefinePropertyClass( PMTextureBase, PMTextureBaseProperty );
 
 PMMetaObject* PMTextureBase::s_pMetaObject = nullptr;
 
-PMTextureBase::PMTextureBase( PMPart* part )
-      : Base( part )
+PMTextureBase::PMTextureBase( )
+      : Base( )
 {
    m_pLinkedObject = nullptr;
 }

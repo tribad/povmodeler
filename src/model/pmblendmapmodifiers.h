@@ -42,7 +42,7 @@ public:
    /**
     * Creates an PMBlendMapModifiers
     */
-   PMBlendMapModifiers( PMPart* part );
+   PMBlendMapModifiers( );
    /**
     * Deletes the object
     */
@@ -64,10 +64,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /**
-    * Returns a new @ref PMBlendMapModifiersEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmblendmapmodifiers" ); }
 

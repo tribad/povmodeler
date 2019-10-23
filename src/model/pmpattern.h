@@ -55,7 +55,7 @@ public:
    /**
     * Creates a PMPattern
     */
-   PMPattern( PMPart* part );
+   PMPattern( );
    /**
     * Copy constructor
     */
@@ -81,12 +81,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMPatternEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
-
    /**
     * Gets the pattern type
     */

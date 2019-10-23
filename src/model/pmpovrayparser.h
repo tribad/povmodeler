@@ -115,11 +115,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMPovrayParser( PMPart* part, QIODevice* device );
+   PMPovrayParser( QIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMPovrayParser( PMPart* part, const QByteArray& array );
+   PMPovrayParser( const QByteArray& array );
    /**
     * Deletes the parser
     */

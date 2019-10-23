@@ -21,6 +21,9 @@
 //
 //  Signal handler
 #include "sigpmviewmenu.h"
+//
+//  povray model includes
+#include "pmobject.h"
 
 class PMApp : public QObject, public IPMViewMenu
 {
@@ -34,7 +37,7 @@ public slots:
 private:  //  Methods
     //
     // View Menu mixins
-    virtual void togglePropertyVisibility(bool changed);
+    virtual void togglePropertyViewVisibility(bool changed);
     virtual void toggleGlViewVisibility(GLView view, bool changed);
     //
     // GLView mixins

@@ -21,7 +21,7 @@
 #include "pmcone.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
+//#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
@@ -46,13 +46,13 @@ int PMCone::s_parameterKey = 0;
 PMDefinePropertyClass( PMCone, PMConeProperty );
 
 PMMetaObject* PMCone::s_pMetaObject = nullptr;
-PMObject* createNewCone( PMPart* part )
+PMObject* createNewCone( )
 {
-   return new PMCone( part );
+   return new PMCone( );
 }
 
-PMCone::PMCone( PMPart* part )
-      :Base( part )
+PMCone::PMCone( )
+      :Base( )
 {
    m_end1 = defaultEnd1;
    m_end2 = defaultEnd2;
@@ -174,11 +174,6 @@ void PMCone::setOpen( bool op )
          m_pMemento->addData( s_pMetaObject, PMOpenID, m_open );
       m_open = op;
    }
-}
-
-PMDialogEditBase* PMCone::editWidget( QWidget * parent ) const
-{
-    return new PMConeEdit( parent );
 }
 
 void PMCone::restoreMemento( PMMemento * s )

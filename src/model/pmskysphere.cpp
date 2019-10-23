@@ -23,13 +23,13 @@
 #include "pmdebug.h"
 
 PMMetaObject* PMSkySphere::s_pMetaObject = 0;
-PMObject* createNewSkySphere( PMPart* part )
+PMObject* createNewSkySphere( )
 {
-   return new PMSkySphere( part );
+   return new PMSkySphere( );
 }
 
-PMSkySphere::PMSkySphere( PMPart* part )
-      : Base( part )
+PMSkySphere::PMSkySphere( )
+      : Base( )
 {
 }
 
@@ -66,9 +66,3 @@ QString PMSkySphere::description() const
 {
    return ( "skysphere" );
 }
-
-PMDialogEditBase* PMSkySphere::editWidget( QWidget* parent ) const
-{
-   return new PMSkySphereEdit( parent );
-}
-

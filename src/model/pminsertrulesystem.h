@@ -60,7 +60,7 @@ public:
     * Workaround to tell a created instance which
     * prototype manager to use.
     */
-   static PMPrototypeManager* s_pPrototypeManager;
+   static const PMPrototypeManager* s_pPrototypeManager;
    /**
     * Reads the data from the QDomElement.
     */
@@ -69,7 +69,6 @@ public:
    virtual bool matches( const QString& className );
 private:
    QString m_className;
-   PMPrototypeManager* m_pPrototypeManager;
 };
 
 /**
@@ -592,7 +591,7 @@ public:
    /**
     * Constructor
     */
-   PMInsertRuleSystem( PMPart* part );
+   PMInsertRuleSystem( const PMPrototypeManager* aProto);
    /**
     * Destructor
     */
@@ -615,7 +614,7 @@ public:
     * have to be treated as if they are inserted after the object after.
     */
    bool canInsert( const PMObject* parentObject, const QString& className,
-                   const PMObject* after, const PMObjectList* objectsBetween = 0 );
+                   const PMObject* after, const PMObjectList* objectsBetween = 0 ) const;
 
    /**
     * Returns true if the object can be inserted as child
@@ -627,23 +626,18 @@ public:
     * Same as canInsert( parentObject, object->class(), after, objectsBetween )
     */
    bool canInsert( const PMObject* parentObject, const PMObject* object,
-                   const PMObject* after, const PMObjectList* objectsBetween = 0 );
+                   const PMObject* after, const PMObjectList* objectsBetween = 0 ) const;
 
    /**
     * Returns the number of objects that can be inserted at that position
     */
    int canInsert( const PMObject* parentObject, const PMObjectList& list,
-                  const PMObject* after );
+                  const PMObject* after ) const;
    /**
     * Returns the number of objects that can be inserted at that position
     */
    int canInsert( const PMObject* parentObject, const QStringList& listOfClasses,
-                  const PMObject* after );
-   /**
-    * Returns a pointer to the part
-    */
-   PMPart* part() const { return m_pPart; }
-
+                  const PMObject* after ) const;
 private:
    /**
     * List of all rules.
@@ -662,7 +656,6 @@ private:
     * List of already loaded files
     */
    QStringList m_loadedFiles;
-   PMPart* m_pPart;
 };
 
 #endif

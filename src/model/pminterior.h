@@ -35,7 +35,7 @@ public:
    /**
     * Creates an PMInterior
     */
-   PMInterior( PMPart* part );
+   PMInterior( );
    /**
     * Copy constructor
     */
@@ -59,11 +59,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMInteriorEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pminterior" ); }
 

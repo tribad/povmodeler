@@ -30,13 +30,13 @@ const PMVector moveDefault = PMVector( 0.0, 0.0, 0.0 );
 PMDefinePropertyClass( PMTranslate, PMTranslateProperty );
 
 PMMetaObject* PMTranslate::s_pMetaObject = nullptr;
-PMObject* createNewTranslate( PMPart* part )
+PMObject* createNewTranslate( )
 {
-   return new PMTranslate( part );
+   return new PMTranslate( );
 }
 
-PMTranslate::PMTranslate( PMPart* part )
-      : Base( part )
+PMTranslate::PMTranslate( )
+      : Base( )
 {
 }
 
@@ -99,11 +99,6 @@ void PMTranslate::setTranslation( const PMVector& p )
       m_move = p;
       m_move.resize( 3 );
    }
-}
-
-PMDialogEditBase* PMTranslate::editWidget( QWidget* parent ) const
-{
-   return new PMTranslateEdit( parent );
 }
 
 void PMTranslate::restoreMemento( PMMemento* s )

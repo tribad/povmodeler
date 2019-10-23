@@ -114,13 +114,13 @@ private:
 };
 
 PMMetaObject* PMBicubicPatch::s_pMetaObject = nullptr;
-PMObject* createNewBicubicPatch( PMPart* part )
+PMObject* createNewBicubicPatch(  )
 {
-   return new PMBicubicPatch( part );
+   return new PMBicubicPatch( );
 }
 
-PMBicubicPatch::PMBicubicPatch( PMPart* part )
-      : Base( part )
+PMBicubicPatch::PMBicubicPatch(  )
+      : Base( )
 {
    int x, z;
    double o = -c_defaultPatchSize / 2.0, s = c_defaultPatchSize / 3.0;
@@ -363,11 +363,6 @@ PMVector PMBicubicPatch::uvVector( int i ) const
    else
       qCritical(  ) << "Wrong index in PMBicubicPatch::uvVector\n";
    return PMVector( 0.0, 0.0 );
-}
-
-PMDialogEditBase* PMBicubicPatch::editWidget( QWidget* parent ) const
-{
-   return new PMBicubicPatchEdit( parent );
 }
 
 void PMBicubicPatch::restoreMemento( PMMemento* s )

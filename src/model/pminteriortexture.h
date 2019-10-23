@@ -34,7 +34,7 @@ public:
    /**
     * Creates an PMInteriorTexture
     */
-   PMInteriorTexture( PMPart* part );
+   PMInteriorTexture( );
    /**
     * Copy constructor
     */
@@ -53,14 +53,8 @@ public:
    virtual PMMetaObject* metaObject() const;
    /** */
    virtual void cleanUp() const;
-
-   /**
-    * Returns a new @ref PMTextureEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pminteriortexture" ); }
-
 private:
    static PMMetaObject* s_pMetaObject;
 };

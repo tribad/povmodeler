@@ -45,13 +45,13 @@ PMDefineEnumPropertyClass( PMMaterialMap, PMMaterialMap::PMMapType,
                            PMMapTypeProperty );
 
 PMMetaObject* PMMaterialMap::s_pMetaObject = 0;
-PMObject* createNewMaterialMap( PMPart* part )
+PMObject* createNewMaterialMap( )
 {
-   return new PMMaterialMap( part );
+   return new PMMaterialMap( );
 }
 
-PMMaterialMap::PMMaterialMap( PMPart* part )
-      : Base( part )
+PMMaterialMap::PMMaterialMap( )
+      : Base( )
 {
    m_bitmapType = bitmapTypeDefault;
    m_bitmapFile = bitmapFileDefault;
@@ -294,11 +294,6 @@ void PMMaterialMap::enableOnce( bool c )
          m_pMemento->addData( s_pMetaObject, PMOnceID, m_once );
       m_once = c;
    }
-}
-
-PMDialogEditBase* PMMaterialMap::editWidget( QWidget* parent ) const
-{
-   return new PMMaterialMapEdit( parent );
 }
 
 void PMMaterialMap::restoreMemento( PMMemento* s )

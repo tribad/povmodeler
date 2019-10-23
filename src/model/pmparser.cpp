@@ -32,18 +32,16 @@ unsigned int PMParser::s_maxErrors = 30;
 unsigned int PMParser::s_maxWarnings = 50;
 
 
-PMParser::PMParser( PMPart* part, QIODevice* dev )
+PMParser::PMParser( QIODevice* dev )
 {
-   m_pPart = part;
    m_pDevice = dev;
    m_bDeviceCreated = false;
    
    init();
 }
 
-PMParser::PMParser( PMPart* part, const QByteArray& array )
+PMParser::PMParser( const QByteArray& array )
 {
-   m_pPart = part;
    QBuffer* buffer = new QBuffer();
    buffer->setData( array.data() );
    buffer->open( QIODevice::ReadOnly );
@@ -310,7 +308,7 @@ void PMParser::checkID( PMDeclare* decl )
    if(decl->id().startsWith('_'))
        decl->setTreeVisibility(true);
 
-   PMSymbolTable* st = m_pPart->symbolTable();
+   PMSymbolTable* st = symbolTable();
    PMSymbol* s = m_pLocalST.findSymbol( decl->id() );
    if( !s )
       s = st->findSymbol( decl->id() );
@@ -342,7 +340,7 @@ void PMParser::checkID( PMDeclare* decl )
 
 void PMParser::checkID( const QString& id, const PMValue& v )
 {
-   PMSymbolTable* st = m_pPart->symbolTable();
+   PMSymbolTable* st = symbolTable();
    PMSymbol* s = m_pLocalST.findSymbol( id );
    
    if( s )
@@ -378,7 +376,7 @@ void PMParser::checkID( const QString& id, const PMValue& v )
 
 PMDeclare* PMParser::checkLink( const QString& id )
 {
-   PMSymbolTable* t = m_pPart->symbolTable();
+   PMSymbolTable* t = symbolTable();
    bool ok = false;
 
    // is object declared?
@@ -434,7 +432,13 @@ PMSymbol* PMParser::getSymbol( const QString& id ) const
 {
    PMSymbol* s = m_pLocalST.findSymbol( id );
    if( !s )
-      s = m_pPart->symbolTable()->findSymbol( id );
+      s = symbolTable()->findSymbol( id );
    return s;
 }
 
+
+PMSymbolTable* PMParser::symbolTable() const {
+    static PMSymbolTable mSymbolTable;
+
+    return &mSymbolTable;
+}

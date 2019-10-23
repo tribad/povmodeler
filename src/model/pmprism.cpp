@@ -54,9 +54,9 @@ const double defaultHeight2 = 1.0;
 int PMPrism::s_sSteps = c_defaultPrismSSteps;
 int PMPrism::s_parameterKey = 0;
 PMMetaObject* PMPrism::s_pMetaObject = 0;
-PMObject* createNewPrism( PMPart* part )
+PMObject* createNewPrism( )
 {
-   return new PMPrism( part );
+   return new PMPrism( );
 }
 
 PMDefinePropertyClass( PMPrism, PMPrismProperty );
@@ -146,8 +146,8 @@ private:
    int m_index[2];
 };
 
-PMPrism::PMPrism( PMPart* part )
-      : Base( part )
+PMPrism::PMPrism( )
+      : Base( )
 {
    int i;
    QList<PMVector> p;
@@ -385,11 +385,6 @@ void PMPrism::setPoints( const QList< QList<PMVector> >& points )
       setViewStructureChanged();
       m_points = points;
    }
-}
-
-PMDialogEditBase* PMPrism::editWidget( QWidget* parent ) const
-{
-   return new PMPrismEdit( parent );
 }
 
 void PMPrism::createMemento()

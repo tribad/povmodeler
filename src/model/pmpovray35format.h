@@ -44,13 +44,13 @@ public:
    /** */
    virtual int services() const { return AllServices; }
    /** */
-   virtual PMParser* newParser( PMPart*, QIODevice* ) const;
+   virtual PMParser* newParser( QIODevice* ) const;
    /** */
-   virtual PMParser* newParser( PMPart*, const QByteArray& ) const;
+   virtual PMParser* newParser( const QByteArray& ) const;
    /** */
    virtual PMSerializer* newSerializer( QIODevice* );
    /** */
-   virtual PMRenderer* newRenderer( PMPart* ) const;
+   virtual PMRenderer* newRenderer( ) const;
    /** */
    virtual QString mimeType() const;
    /** */

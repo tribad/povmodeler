@@ -46,13 +46,13 @@ int PMHeightField::s_parameterKey = 0;
 PMViewStructure* PMHeightField::s_pDefaultViewStructure = 0;
 PMMetaObject* PMHeightField::s_pMetaObject = 0;
 
-PMObject* createNewHeightField( PMPart* part )
+PMObject* createNewHeightField( )
 {
-   return new PMHeightField( part );
+   return new PMHeightField( );
 }
 
-PMHeightField::PMHeightField( PMPart* part )
-      : Base( part )
+PMHeightField::PMHeightField( )
+      : Base( )
 {
    m_hfType = c_defaultType;
    m_fileName = c_defaultFileName;
@@ -198,11 +198,6 @@ void PMHeightField::setWaterLevel( double wl )
       m_waterLevel = wl;
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMHeightField::editWidget( QWidget* parent ) const
-{
-   return new PMHeightFieldEdit( parent );
 }
 
 void PMHeightField::restoreMemento( PMMemento* s )

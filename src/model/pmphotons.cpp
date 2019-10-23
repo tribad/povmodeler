@@ -28,12 +28,12 @@ const double spacingMultiDefault = 1.0;
 PMDefinePropertyClass( PMPhotons, PMPhotonsProperty );
 
 PMMetaObject* PMPhotons::s_pMetaObject = 0;
-PMObject* createNewPhotons( PMPart* part )
+PMObject* createNewPhotons( )
 {
-   return new PMPhotons( part );
+   return new PMPhotons( );
 }
 
-PMPhotons::PMPhotons( PMPart* part ) : Base( part )
+PMPhotons::PMPhotons( ) : Base( )
 {
    m_target = true;
    m_spacingMulti = spacingMultiDefault;
@@ -190,11 +190,6 @@ void PMPhotons::setAreaLight( bool al )
          m_pMemento->addData( s_pMetaObject, PMAreaLightID, m_areaLight );
       m_areaLight = al;
    }
-}
-
-PMDialogEditBase* PMPhotons::editWidget( QWidget* parent ) const
-{
-   return new PMPhotonsEdit( parent );
 }
 
 void PMPhotons::restoreMemento( PMMemento* s )

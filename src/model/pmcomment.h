@@ -30,16 +30,16 @@
 
 class PMComment : public PMObject
 {
-   typedef PMObject Base;
+   using Base = PMObject;
 public:
    /**
     * Creates an enpty comment
     */
-   PMComment( PMPart* part );
+   PMComment( );
    /**
     * Creates a comment with text t
     */
-   PMComment( PMPart* part, const QString& t );
+   PMComment( const QString& t );
    /**
     * Copy constructor
     */
@@ -74,8 +74,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /** */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmcomment" ); }
    /** */

@@ -38,13 +38,13 @@ int PMSuperquadricEllipsoid::s_parameterKey = 0;
 PMDefinePropertyClass( PMSuperquadricEllipsoid, PMSuperquadricEllipsoidProperty );
 
 PMMetaObject* PMSuperquadricEllipsoid::s_pMetaObject = 0;
-PMObject* createNewSuperquadricEllipsoid( PMPart* part )
+PMObject* createNewSuperquadricEllipsoid( )
 {
-   return new PMSuperquadricEllipsoid( part );
+   return new PMSuperquadricEllipsoid( );
 }
 
-PMSuperquadricEllipsoid::PMSuperquadricEllipsoid( PMPart* part )
-      : Base( part )
+PMSuperquadricEllipsoid::PMSuperquadricEllipsoid( )
+      : Base( )
 {
    m_eastWestExponent = c_defaultEastWestExponent;
    m_northSouthExponent = c_defaultNorthSouthExponent;
@@ -131,11 +131,6 @@ void PMSuperquadricEllipsoid::setNorthSouthExponent( double n )
       m_northSouthExponent = n;
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( QWidget* parent ) const
-{
-   return new PMSuperquadricEllipsoidEdit( parent );
 }
 
 void PMSuperquadricEllipsoid::restoreMemento( PMMemento* s )

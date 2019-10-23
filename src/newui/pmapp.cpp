@@ -11,6 +11,7 @@
 //
 //  Local includes.
 #include "pmapp.h"
+#include "pmprototypemanager.h"
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
 {
@@ -33,7 +34,7 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
 }
 
 
-void PMApp::togglePropertyVisibility(bool changed) {
+void PMApp::togglePropertyViewVisibility(bool changed) {
 }
 
 void PMApp::toggleGlViewVisibility(GLView view, bool changed) {

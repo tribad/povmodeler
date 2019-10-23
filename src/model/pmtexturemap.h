@@ -38,7 +38,7 @@ public:
    /**
     * Creates a PMTextureMapBase
     */
-   PMTextureMapBase( PMPart* part );
+   PMTextureMapBase( );
    /**
     * Copy constructor
     */
@@ -71,12 +71,6 @@ public:
     * Returns the map object type
     */
    virtual QString mapType() const = 0;
-
-   /**
-    * Returns a new @ref PMTextureMapEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
-
    /** */
    virtual void createMemento();
    /** */
@@ -134,7 +128,7 @@ public:
    /**
     * Creates a texture map
     */
-   PMTextureMap( PMPart* part );
+   PMTextureMap( );
    /**
     * Copy constructor
     */
@@ -174,7 +168,7 @@ public:
    /**
     * Creates a pigment map
     */
-   PMPigmentMap( PMPart* part );
+   PMPigmentMap( );
    /**
     * Copy constructor
     */
@@ -214,7 +208,7 @@ public:
    /**
     * Creates a color map
     */
-   PMColorMap( PMPart* part );
+   PMColorMap( );
    /**
     * Copy constructor
     */
@@ -255,7 +249,7 @@ public:
    /**
     * Creates a normal map
     */
-   PMNormalMap( PMPart* part );
+   PMNormalMap( );
    /**
     * Copy constructor
     */
@@ -295,7 +289,7 @@ public:
    /**
     * Creates a slope map
     */
-   PMSlopeMap( PMPart* part );
+   PMSlopeMap( );
    /**
     * Copy constructor
     */
@@ -335,7 +329,7 @@ public:
    /**
     * Creates a density map
     */
-   PMDensityMap( PMPart* part );
+   PMDensityMap( );
    /**
     * Copy constructor
     */

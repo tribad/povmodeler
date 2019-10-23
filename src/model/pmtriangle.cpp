@@ -149,14 +149,14 @@ private:
 };
 
 PMMetaObject* PMTriangle::s_pMetaObject = 0;
-PMObject* createNewTriangle( PMPart* part )
+PMObject* createNewTriangle( )
 {
-   return new PMTriangle( part );
+   return new PMTriangle( );
 }
 PMViewStructure* PMTriangle::s_pDefaultViewStructure = 0;
 
-PMTriangle::PMTriangle( PMPart* part )
-      : Base( part )
+PMTriangle::PMTriangle( )
+      : Base( )
 {
    m_point[0] = point0Default;
    m_point[1] = point1Default;
@@ -343,11 +343,6 @@ void PMTriangle::enableUV( bool yes )
          m_pMemento->addData( s_pMetaObject, PMUVEnabledID, m_uvEnabled );
       m_uvEnabled = yes;
    }
-}
-
-PMDialogEditBase* PMTriangle::editWidget( QWidget* parent ) const
-{
-   return new PMTriangleEdit( parent );
 }
 
 void PMTriangle::restoreMemento( PMMemento* s )

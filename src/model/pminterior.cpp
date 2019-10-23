@@ -33,13 +33,13 @@ const double fadePowerDefault = 0.0;
 PMDefinePropertyClass( PMInterior, PMInteriorProperty );
 
 PMMetaObject* PMInterior::s_pMetaObject = nullptr;
-PMObject* createNewInterior( PMPart* part )
+PMObject* createNewInterior( )
 {
-   return new PMInterior( part );
+   return new PMInterior( );
 }
 
-PMInterior::PMInterior( PMPart* part )
-      : Base( part )
+PMInterior::PMInterior( )
+      : Base( )
 {
    m_ior = iorDefault;
    m_caustics = causticsDefault;
@@ -279,11 +279,6 @@ void PMInterior::enableFadePower( bool c )
                                                           m_enableFadePower );
       m_enableFadePower = c;
    }
-}
-
-PMDialogEditBase* PMInterior::editWidget( QWidget* parent ) const
-{
-   return new PMInteriorEdit( parent );
 }
 
 void PMInterior::restoreMemento( PMMemento* s )

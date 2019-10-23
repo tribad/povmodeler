@@ -76,13 +76,13 @@ PMDefineEnumPropertyClass( PMPattern, PMPattern::PMNoiseType,
                            PMNoiseProperty );
 
 PMMetaObject* PMPattern::s_pMetaObject = 0;
-PMObject* createNewPattern( PMPart* part )
+PMObject* createNewPattern( )
 {
-   return new PMPattern( part );
+   return new PMPattern( );
 }
 
-PMPattern::PMPattern( PMPart* part )
-      : Base( part )
+PMPattern::PMPattern( )
+      : Base( )
 {
    //eticre try ppattern
    m_pLinkedObject = 0;
@@ -1068,11 +1068,6 @@ void PMPattern::setDepth( const double c )
          m_pMemento->addData( s_pMetaObject, PMDepthID, m_depth );
       m_depth = c;
    }
-}
-
-PMDialogEditBase* PMPattern::editWidget( QWidget* parent ) const
-{
-   return new PMPatternEdit( parent );
 }
 
 void PMPattern::restoreMemento( PMMemento* s )

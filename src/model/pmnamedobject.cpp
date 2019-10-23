@@ -24,8 +24,8 @@ PMDefinePropertyClass( PMNamedObject, PMNamedObjectProperty );
 
 PMMetaObject* PMNamedObject::s_pMetaObject = nullptr;
 
-PMNamedObject::PMNamedObject( PMPart* part )
-      : Base( part )
+PMNamedObject::PMNamedObject( )
+      : Base( )
 {
 }
 

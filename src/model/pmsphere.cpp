@@ -42,13 +42,13 @@ int PMSphere::s_parameterKey = 0;
 PMDefinePropertyClass( PMSphere, PMSphereProperty );
 
 PMMetaObject* PMSphere::s_pMetaObject = 0;
-PMObject* createNewSphere( PMPart* part )
+PMObject* createNewSphere( )
 {
-   return new PMSphere( part );
+   return new PMSphere( );
 }
 
-PMSphere::PMSphere( PMPart* part )
-      : Base( part )
+PMSphere::PMSphere( )
+      : Base(  )
 {
    m_radius = c_defaultRadius;
    m_centre = c_defaultCentre;
@@ -97,11 +97,6 @@ void PMSphere::readAttributes( const PMXMLHelper& h )
    m_centre = h.vectorAttribute( "centre", c_defaultCentre );
    m_radius = h.doubleAttribute( "radius", c_defaultRadius );
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMSphere::editWidget( QWidget* parent ) const
-{
-	return new PMSphereEdit( parent );
 }
 
 void PMSphere::restoreMemento( PMMemento* s )

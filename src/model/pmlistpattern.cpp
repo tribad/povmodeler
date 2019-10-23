@@ -36,33 +36,33 @@ const double depthDefault = 0;
 
 PMMetaObject* PMListPattern::s_pMetaObject = nullptr;
 PMMetaObject* PMColorList::s_pMetaObject = nullptr;
-PMObject* createNewColorList( PMPart* part )
+PMObject* createNewColorList( )
 {
-   return new PMColorList( part );
+   return new PMColorList( );
 }
 PMMetaObject* PMDensityList::s_pMetaObject = nullptr;
-PMObject* createNewDensityList( PMPart* part )
+PMObject* createNewDensityList( )
 {
-   return new PMDensityList( part );
+   return new PMDensityList( );
 }
 PMMetaObject* PMNormalList::s_pMetaObject = nullptr;
-PMObject* createNewNormalList( PMPart* part )
+PMObject* createNewNormalList( )
 {
-   return new PMNormalList( part );
+   return new PMNormalList( );
 }
 PMMetaObject* PMPigmentList::s_pMetaObject = nullptr;
-PMObject* createNewPigmentList( PMPart* part )
+PMObject* createNewPigmentList( )
 {
-   return new PMPigmentList( part );
+   return new PMPigmentList( );
 }
 PMMetaObject* PMTextureList::s_pMetaObject = nullptr;
-PMObject* createNewTextureList( PMPart* part )
+PMObject* createNewTextureList( )
 {
-   return new PMTextureList( part );
+   return new PMTextureList( );
 }
 
-PMListPattern::PMListPattern( PMPart* part )
-      : Base( part )
+PMListPattern::PMListPattern( )
+      : Base( )
 {
    m_listType = ListPatternChecker;
    m_brickSize = brickSizeDefault;
@@ -178,11 +178,6 @@ void PMListPattern::setMortar( double n )
    }
 }
 
-PMDialogEditBase* PMListPattern::editWidget( QWidget* parent ) const
-{
-   return new PMListPatternEdit( parent );
-}
-
 void PMListPattern::restoreMemento( PMMemento* s )
 {
 	const QList<PMMementoData*>& changes = s->changes();
@@ -214,8 +209,8 @@ void PMListPattern::restoreMemento( PMMemento* s )
 }
 
 
-PMTextureList::PMTextureList( PMPart* part )
-      : Base( part )
+PMTextureList::PMTextureList( )
+      : Base( )
 {
 }
 
@@ -253,8 +248,8 @@ QString PMTextureList::description() const
    return ( "texture list" );
 }
 
-PMPigmentList::PMPigmentList( PMPart* part )
-      : Base( part )
+PMPigmentList::PMPigmentList( )
+      : Base( )
 {
 }
 
@@ -292,8 +287,8 @@ QString PMPigmentList::description() const
    return ( "pigment list" );
 }
 
-PMColorList::PMColorList( PMPart* part )
-      : Base( part )
+PMColorList::PMColorList( )
+      : Base( )
 {
 }
 
@@ -331,8 +326,8 @@ QString PMColorList::description() const
    return ( "color list" );
 }
 
-PMDensityList::PMDensityList( PMPart* part )
-      : Base( part )
+PMDensityList::PMDensityList( )
+      : Base( )
 {
 }
 
@@ -372,8 +367,8 @@ QString PMDensityList::description() const
 
 PMDefinePropertyClass( PMNormalList, PMNormalListProperty );
 
-PMNormalList::PMNormalList( PMPart* part )
-      : Base( part )
+PMNormalList::PMNormalList( )
+      : Base( )
 {
    m_depth = depthDefault;
 }
@@ -461,9 +456,3 @@ void PMNormalList::readAttributes( const PMXMLHelper& h )
    m_depth = h.doubleAttribute( "depth", depthDefault );
    Base::readAttributes( h );
 }
-
-PMDialogEditBase* PMNormalList::editWidget( QWidget* parent ) const
-{
-   return new PMListPatternEdit( parent );
-}
-

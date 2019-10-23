@@ -38,6 +38,9 @@ class PMDeclare;
 class PMObjectAction;
 class PMPart;
 
+class PMPrototypeManager;
+class PMInsertRuleSystem;
+
 class PMObject;
 typedef QList<PMObject*> PMObjectList;
 
@@ -55,7 +58,12 @@ class PMObject
 {
    friend class PMCompositeObject;
 public:
-
+    //
+    //  This is the getter for the static prototypeMmanager
+   static const PMPrototypeManager* prototypeManager() ;
+   //
+   //  This is the getter for the static insertRuleSystem
+   static const PMInsertRuleSystem* insertRuleSystem() ;
    /**
     * point to connect obj and treview item
     */
@@ -82,7 +90,7 @@ public:
    /**
     * Creates an empty PMObject without parent.
     */
-   PMObject( PMPart* part );
+   PMObject();
    /**
     * Copy constructor. All object pointers (parent, siblings) are set to 0!
     */
@@ -99,7 +107,7 @@ public:
    /**
     * Returns a deep copy of the object
     */
-   virtual PMObject* copy() const = 0;
+   virtual PMObject* copy() const ;
 
    /**
     * Returns the meta object for the class
@@ -124,7 +132,7 @@ public:
     * Returns the class name of the object (povray name).
     * This is the name that is showed in dialogs and menus.
     */
-   virtual QString description() const = 0;
+   virtual QString description() const;
    /**
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south wall", "floor" ...)
@@ -143,11 +151,12 @@ public:
     * Returns a pointer to the parent object.
     */
    PMObject* parent() const { return m_pParent; }
+#if 0
    /**
     * Returns a pointer to the corresponding part
     */
    PMPart* part() const { return m_pPart; }
-
+#endif
    /**
     * Returns true if an object with type className can be inserted
     * as child after the object after.
@@ -373,7 +382,7 @@ public:
    /**
     * Adds the objects attributes and child objects to the element
     */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const = 0;
+   virtual void serialize( QDomElement& e, QDomDocument& doc ) const ;
    /**
     * Reads the attributes from the QDomElement
     */
@@ -425,19 +434,11 @@ public:
     * be read only, too
     */
    void setReadOnly( bool yes = true ) { m_readOnly = yes; }
-
-   /**
-    * Creates a new edit widget that can display this object and
-    * returns a pointer to it.
-    *
-    * The widget will be created as a child of parent.
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap() const = 0;
+   virtual QString pixmap() const ;
    /**
     * Returns a pointer to the @ref PMDeclare object, that is linked to
     * that object, or 0, if this object contains no link
@@ -525,10 +526,6 @@ private:
     * The meta object
     */
    static PMMetaObject* s_pMetaObject;
-   /**
-    * The corresponding part
-    */
-   PMPart* m_pPart;
    /**
     * Preview image
     */

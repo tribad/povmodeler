@@ -36,7 +36,7 @@ public:
    /**
     * Creates a PMSolidColor
     */
-   PMSolidColor( PMPart* part );
+   PMSolidColor( );
    /**
     * Copy constructor
     */
@@ -60,11 +60,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMSolidColorEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the color
     */

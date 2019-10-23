@@ -38,7 +38,7 @@ public:
    /**
     * Creates an empty PMScene
     */
-   PMScene( PMPart* part );
+   PMScene( );
    /**
     * Copy constructor
     */

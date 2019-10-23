@@ -46,13 +46,13 @@ PMDefineEnumPropertyClass( PMJuliaFractal, PMJuliaFractal::FunctionType,
                            PMFunctionTypeProperty );
 
 PMMetaObject* PMJuliaFractal::s_pMetaObject = 0;
-PMObject* createNewJuliaFractal( PMPart* part )
+PMObject* createNewJuliaFractal( )
 {
-   return new PMJuliaFractal( part );
+   return new PMJuliaFractal( );
 }
 
-PMJuliaFractal::PMJuliaFractal( PMPart* part )
-      : Base( part )
+PMJuliaFractal::PMJuliaFractal( )
+      : Base( )
 {
    m_juliaParameter = c_defaultJuliaParameter;
    m_algebraType = c_defaultAlgebraType;
@@ -270,11 +270,6 @@ void PMJuliaFractal::setExponent( const PMVector& e )
       m_exponent = e;
       m_exponent.resize( 2 );
    }
-}
-
-PMDialogEditBase* PMJuliaFractal::editWidget( QWidget* parent ) const
-{
-   return new PMJuliaFractalEdit( parent );
 }
 
 void PMJuliaFractal::restoreMemento( PMMemento* s )

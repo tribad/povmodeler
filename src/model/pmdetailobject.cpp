@@ -31,7 +31,7 @@ PMMetaObject* PMDetailObject::s_pMetaObject = nullptr;
 
 PMDefinePropertyClass( PMDetailObject, PMDetailObjectProperty );
 
-PMDetailObject::PMDetailObject( PMPart *part ) : Base( part )
+PMDetailObject::PMDetailObject( ) : Base( )
 {
    m_globalDetail = c_defaulGlobalDetail;
    m_localDetailLevel = c_defaultLocalDetailLevel;

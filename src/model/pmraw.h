@@ -34,7 +34,7 @@ public:
    /**
     * Creates an empty raw povray object
     */
-   PMRaw( PMPart* part );
+   PMRaw( );
    /**
     * Copy constructor
     */
@@ -42,7 +42,7 @@ public:
    /**
     * Creates a raw povray object with text t
     */
-   PMRaw( PMPart* part, const QString& t );
+   PMRaw( const QString& t );
    /**
     * Deletes the raw povray object
     */
@@ -70,9 +70,6 @@ public:
    virtual PMMetaObject* metaObject() const;
    /** */
    virtual void cleanUp() const;
-
-   /** */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmraw" ); }
    /** */

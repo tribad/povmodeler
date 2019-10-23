@@ -28,20 +28,20 @@
 PMDefinePropertyClass( PMComment, PMCommentProperty );
 
 PMMetaObject* PMComment::s_pMetaObject = 0;
-PMObject* createNewComment( PMPart* part )
+PMObject* createNewComment( )
 {
-   return new PMComment( part );
+   return new PMComment( );
 }
 
 const int c_maxDescriptionLength = 25;
 
-PMComment::PMComment( PMPart* part )
-      : Base( part )
+PMComment::PMComment( )
+      : Base( )
 {
 }
 
-PMComment::PMComment( PMPart* part, const QString& t )
-   : Base( part )
+PMComment::PMComment(  const QString& t )
+   : Base( )
 {
    m_text = t;
 }
@@ -141,11 +141,6 @@ void PMComment::readAttributes( const PMXMLHelper& h )
    QDomNode e = h.element().firstChild();
    if( e.isText() )
       m_text = e.toText().data();
-}
-
-PMDialogEditBase* PMComment::editWidget( QWidget* parent ) const
-{
-   return new PMCommentEdit( parent );
 }
 
 void PMComment::restoreMemento( PMMemento* s )

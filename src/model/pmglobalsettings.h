@@ -31,14 +31,14 @@
 
 class PMGlobalSettings : public PMCompositeObject
 {
-   typedef PMCompositeObject Base;
+   using Base = PMCompositeObject;
 public:
    enum PMNoiseType { Original = 0, RangeCorrected = 1, Perlin = 2 };
 
    /**
     * Creates a PMGlobalSettings
     */
-   PMGlobalSettings( PMPart* part );
+   PMGlobalSettings( );
    /**
     * Copy constructor
     */
@@ -62,11 +62,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMGlobalSettingsEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

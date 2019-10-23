@@ -77,6 +77,9 @@ QString PMResourceLocator::lookUp( const QString& file )
    }
    else
    {
+       //  Needs to be checked how to get the povray library path.
+       //  But for sure not from the GUI.
+#if 0
       QStringList plist = PMPovrayRenderWidget::povrayLibraryPaths();
       QStringList::ConstIterator it = plist.constBegin();
       for( ; ( it != plist.constEnd() ) && !found; ++it )
@@ -89,6 +92,7 @@ QString PMResourceLocator::lookUp( const QString& file )
             fullPath = info.absoluteFilePath();
          }
       }
+#endif
    }
 
    if( found )

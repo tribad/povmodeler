@@ -26,13 +26,13 @@
 PMDefinePropertyClass( PMBoundedBy, PMBoundedByProperty );
 
 PMMetaObject* PMBoundedBy::s_pMetaObject = 0;
-PMObject* createNewBoundedBy( PMPart* part )
+PMObject* createNewBoundedBy( )
 {
-   return new PMBoundedBy( part );
+   return new PMBoundedBy( );
 }
 
-PMBoundedBy::PMBoundedBy( PMPart* part )
-      : Base( part )
+PMBoundedBy::PMBoundedBy( )
+      : Base( )
 {
 }
 
@@ -89,11 +89,6 @@ void PMBoundedBy::readAttributes( const PMXMLHelper& h )
 {
    // no extra data at the moment
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMBoundedBy::editWidget( QWidget* parent ) const
-{
-   return new PMBoundedByEdit( parent );
 }
 
 void PMBoundedBy::childRemoved( PMObject* o )

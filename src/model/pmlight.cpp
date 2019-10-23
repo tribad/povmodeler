@@ -59,13 +59,13 @@ PMDefineEnumPropertyClass( PMLight, PMLight::PMLightType, PMTypeProperty );
 PMDefineEnumPropertyClass( PMLight, PMLight::PMAreaType, PMAreaProperty );
 
 PMMetaObject* PMLight::s_pMetaObject = 0;
-PMObject* createNewLight( PMPart* part )
+PMObject* createNewLight( )
 {
-   return new PMLight( part );
+   return new PMLight( );
 }
 
-PMLight::PMLight( PMPart* part )
-      : Base( part )
+PMLight::PMLight( )
+      : Base( )
 {
    m_location = locationDefault;
    m_color = colorDefault;
@@ -566,11 +566,6 @@ void PMLight::setMediaAttenuation( bool y )
          m_pMemento->addData( s_pMetaObject, PMAttenuationID, m_bMediaAttenuation );
       m_bMediaAttenuation = y;
    }
-}
-
-PMDialogEditBase* PMLight::editWidget( QWidget* parent ) const
-{
-   return new PMLightEdit( parent );
 }
 
 void PMLight::restoreMemento( PMMemento* s )

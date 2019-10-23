@@ -19,96 +19,95 @@
 #include "pmprototypemanager.h"
 #include "pmallobjects.h"
 
-PMPrototypeManager::PMPrototypeManager( PMPart* part )
+PMPrototypeManager::PMPrototypeManager( )
 {
-   m_pPart = part;
-   addPrototype( new PMScene( part ) );
-   addPrototype( new PMGlobalSettings( part ) );
-   addPrototype( new PMBox( part ) );
-   addPrototype( new PMSphere( part ) );
-   addPrototype( new PMCylinder( part ) );
-   addPrototype( new PMCone( part ) );
-   addPrototype( new PMTorus( part ) );
-   addPrototype( new PMLathe( part ) );
-   addPrototype( new PMPrism( part ) );
+   addPrototype( new PMScene( ) );
+   addPrototype( new PMGlobalSettings(  ) );
+   addPrototype( new PMBox( ) );
+   addPrototype( new PMSphere( ) );
+   addPrototype( new PMCylinder(  ) );
+   addPrototype( new PMCone( ) );
+   addPrototype( new PMTorus( ) );
+   addPrototype( new PMLathe( ) );
+   addPrototype( new PMPrism( ) );
 
-   addPrototype( new PMSurfaceOfRevolution( part ) );
-   addPrototype( new PMSuperquadricEllipsoid( part ) );
-   addPrototype( new PMHeightField( part ) );
-   addPrototype( new PMText( part ) );
-   addPrototype( new PMJuliaFractal( part ) );
+   addPrototype( new PMSurfaceOfRevolution( ) );
+   addPrototype( new PMSuperquadricEllipsoid( ) );
+   addPrototype( new PMHeightField( ) );
+   addPrototype( new PMText( ) );
+   addPrototype( new PMJuliaFractal( ) );
 
-   addPrototype( new PMBlob( part ) );
-   addPrototype( new PMBlobSphere( part ) );
-   addPrototype( new PMBlobCylinder( part ) );
+   addPrototype( new PMBlob( ) );
+   addPrototype( new PMBlobSphere( ) );
+   addPrototype( new PMBlobCylinder( ) );
 
-   addPrototype( new PMPlane( part ) );
-   addPrototype( new PMPolynom( part ) );
+   addPrototype( new PMPlane( ) );
+   addPrototype( new PMPolynom( ) );
 
-   addPrototype( new PMCSG( part ) );
-   //addPrototype( new PMDeclib( part ) );
-   addPrototype( new PMDeclare( part ) );
-   addPrototype( new PMObjectLink( part ) );
+   addPrototype( new PMCSG( ) );
+   //addPrototype( new PMDeclib( ) );
+   addPrototype( new PMDeclare( ) );
+   addPrototype( new PMObjectLink( ) );
 
-   addPrototype( new PMDisc( part ) );
-   addPrototype( new PMBicubicPatch( part ) );
-   addPrototype( new PMTriangle( part ) );
+   addPrototype( new PMDisc( ) );
+   addPrototype( new PMBicubicPatch( ) );
+   addPrototype( new PMTriangle( ) );
 
-   addPrototype( new PMBoundedBy( part ) );
-   addPrototype( new PMClippedBy( part ) );
+   addPrototype( new PMBoundedBy( ) );
+   addPrototype( new PMClippedBy( ) );
 
-   addPrototype( new PMTranslate( part ) );
-   addPrototype( new PMScale( part ) );
-   addPrototype( new PMRotate( part ) );
-   addPrototype( new PMPovrayMatrix( part ) );
-   addPrototype( new PMComment( part ) );
-   addPrototype( new PMRaw( part ) );
-   addPrototype( new PMCamera( part ) );
-   addPrototype( new PMLight( part ) );
-   addPrototype( new PMLooksLike( part ) );
-   addPrototype( new PMProjectedThrough( part ) );
+   addPrototype( new PMTranslate( ) );
+   addPrototype( new PMScale( ) );
+   addPrototype( new PMRotate( ) );
+   addPrototype( new PMPovrayMatrix( ) );
+   addPrototype( new PMComment( ) );
+   addPrototype( new PMRaw( ) );
+   addPrototype( new PMCamera( ) );
+   addPrototype( new PMLight( ) );
+   addPrototype( new PMLooksLike( ) );
+   addPrototype( new PMProjectedThrough( ) );
 
-   addPrototype( new PMTexture( part ) );
-   addPrototype( new PMPigment( part ) );
-   addPrototype( new PMSolidColor( part ) );
-   addPrototype( new PMNormal( part ) );
-   addPrototype( new PMFinish( part ) );
-   addPrototype( new PMPattern( part ) );
-   addPrototype( new PMBlendMapModifiers( part ) );
-   addPrototype( new PMImageMap( part ) );
-   addPrototype( new PMTextureMap( part ) );
-   addPrototype( new PMColorMap( part ) );
-   addPrototype( new PMPigmentMap( part ) );
-   addPrototype( new PMNormalMap( part ) );
-   addPrototype( new PMSlopeMap( part ) );
-   addPrototype( new PMDensityMap( part ) );
-   addPrototype( new PMMaterialMap( part ) );
-   addPrototype( new PMBumpMap( part ) );
-   addPrototype( new PMTextureList( part ) );
-   addPrototype( new PMColorList( part ) );
-   addPrototype( new PMPigmentList( part ) );
-   addPrototype( new PMNormalList( part ) );
-   addPrototype( new PMDensityList( part ) );
-   addPrototype( new PMWarp( part ) );
-   addPrototype( new PMQuickColor( part ) );
-   addPrototype( new PMSlope( part ) );
-   addPrototype( new PMSkySphere( part ) );
-   addPrototype( new PMRainbow( part ) );
-   addPrototype( new PMFog( part ) );
-   addPrototype( new PMInterior( part ) );
-   addPrototype( new PMMedia( part ) );
-   addPrototype( new PMMaterial( part ) );
-   addPrototype( new PMDensity( part ) );
+   addPrototype( new PMTexture( ) );
+   addPrototype( new PMPigment( ) );
+   addPrototype( new PMSolidColor( ) );
+   addPrototype( new PMNormal( ) );
+   addPrototype( new PMFinish( ) );
+   addPrototype( new PMPattern( ) );
+   addPrototype( new PMBlendMapModifiers( ) );
+   addPrototype( new PMImageMap( ) );
+   addPrototype( new PMTextureMap( ) );
+   addPrototype( new PMColorMap( ) );
+   addPrototype( new PMPigmentMap( ) );
+   addPrototype( new PMNormalMap( ) );
+   addPrototype( new PMSlopeMap( ) );
+   addPrototype( new PMDensityMap( ) );
+   addPrototype( new PMMaterialMap( ) );
+   addPrototype( new PMBumpMap( ) );
+   addPrototype( new PMTextureList( ) );
+   addPrototype( new PMColorList( ) );
+   addPrototype( new PMPigmentList( ) );
+   addPrototype( new PMNormalList( ) );
+   addPrototype( new PMDensityList( ) );
+   addPrototype( new PMWarp( ) );
+   addPrototype( new PMQuickColor( ) );
+   addPrototype( new PMSlope( ) );
+   addPrototype( new PMSkySphere( ) );
+   addPrototype( new PMRainbow( ) );
+   addPrototype( new PMFog( ) );
+   addPrototype( new PMInterior( ) );
+   addPrototype( new PMMedia( ) );
+   addPrototype( new PMMaterial( ) );
+   addPrototype( new PMDensity( ) );
 
    // POV-Ray 3.5 objects
-   addPrototype( new PMIsoSurface( part ) );
-   addPrototype( new PMRadiosity( part ) );
-   addPrototype( new PMGlobalPhotons( part ) );
-   addPrototype( new PMPhotons( part ) );
-   addPrototype( new PMLightGroup( part ) );
-   addPrototype( new PMInteriorTexture( part ) );
-   addPrototype( new PMSphereSweep( part ) );
-   addPrototype( new PMMesh( part ) );
+   addPrototype( new PMIsoSurface( ) );
+   addPrototype( new PMRadiosity( ) );
+   addPrototype( new PMGlobalPhotons( ) );
+   addPrototype( new PMPhotons( ) );
+   addPrototype( new PMLightGroup( ) );
+   addPrototype( new PMInteriorTexture( ) );
+   addPrototype( new PMSphereSweep( ) );
+   addPrototype( new PMMesh( ) );
 
    addDeclarationType( "GraphicalObject", ( "object declaration" ), "pmobjectdeclare" );
    addDeclarationType( "Light", ( "object declaration" ), "pmobjectdeclare" );
@@ -204,7 +203,7 @@ PMObject* PMPrototypeManager::newObject( const QString& name ) const
 	QMap<QString, PMMetaObject*>::const_iterator it = m_metaDict.find( name );
    if( it == m_metaDict.end() )
       return nullptr;
-   return it.value()->newObject( m_pPart );
+   return it.value()->newObject( );
 }
 
 PMMetaObject* PMPrototypeManager::metaObject( const QString& name ) const
@@ -223,7 +222,7 @@ bool PMPrototypeManager::isA( const QString& className,
    return isA( metaObject( className ), baseClass );
 }
 
-bool PMPrototypeManager::isA( PMMetaObject* c,
+bool PMPrototypeManager::isA( const PMMetaObject* c,
                               const QString& baseClass ) const
 {
    PMMetaObject* bc = metaObject( baseClass );

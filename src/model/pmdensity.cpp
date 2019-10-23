@@ -24,13 +24,13 @@
 
 
 PMMetaObject* PMDensity::s_pMetaObject = 0;
-PMObject* createNewDensity( PMPart* part )
+PMObject* createNewDensity( )
 {
-   return new PMDensity( part );
+   return new PMDensity( );
 }
 
-PMDensity::PMDensity( PMPart* part )
-      : Base( part )
+PMDensity::PMDensity( )
+      : Base( )
 {
 }
 
@@ -67,10 +67,3 @@ QString PMDensity::description() const
 {
    return ( "density" );
 }
-
-
-PMDialogEditBase* PMDensity::editWidget( QWidget* parent ) const
-{
-   return new PMDensityEdit( parent );
-}
-

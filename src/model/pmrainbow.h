@@ -34,7 +34,7 @@ public:
    /**
     * Creates an PMRainbow
     */
-   PMRainbow( PMPart* part );
+   PMRainbow( );
    /**
     * Copy constructor
     */
@@ -58,14 +58,8 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMRainbowEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmrainbow" ); }
-
    /** */
    virtual void restoreMemento( PMMemento* s );
 

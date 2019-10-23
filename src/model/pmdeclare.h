@@ -34,7 +34,7 @@ public:
    /**
     * Constructor
     */
-   PMDeclare( PMPart* part );
+   PMDeclare( );
    /**
     * Copy constructor
     */
@@ -63,11 +63,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMDeclareEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the id of the declare
     */

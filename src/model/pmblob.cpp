@@ -31,13 +31,13 @@ bool c_defaultHierarchy = false;
 PMDefinePropertyClass( PMBlob, PMBlobProperty );
 
 PMMetaObject* PMBlob::s_pMetaObject = nullptr;
-PMObject* createNewBlob( PMPart* part )
+PMObject* createNewBlob( )
 {
-   return new PMBlob( part );
+   return new PMBlob( );
 }
 
-PMBlob::PMBlob( PMPart* part )
-      : Base( part )
+PMBlob::PMBlob( )
+      : Base( )
 {
    m_threshold = c_defaultThreshold;
    m_sturm = c_defaultSturm;
@@ -139,10 +139,6 @@ void PMBlob::setHierarchy( bool h )
    }
 }
 
-PMDialogEditBase* PMBlob::editWidget( QWidget* parent ) const
-{
-   return new PMBlobEdit( parent );
-}
 
 void PMBlob::restoreMemento( PMMemento* s )
 {

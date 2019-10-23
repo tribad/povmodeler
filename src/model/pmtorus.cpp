@@ -43,13 +43,13 @@ int PMTorus::s_parameterKey = 0;
 PMDefinePropertyClass( PMTorus, PMTorusProperty );
 
 PMMetaObject* PMTorus::s_pMetaObject = 0;
-PMObject* createNewTorus( PMPart* part )
+PMObject* createNewTorus( )
 {
-   return new PMTorus( part );
+   return new PMTorus( );
 }
 
-PMTorus::PMTorus( PMPart* part )
-      : Base( part )
+PMTorus::PMTorus( )
+      : Base( )
 {
    m_minorRadius = c_defaultminorRadius;
    m_majorRadius = c_defaultmajorRadius;
@@ -108,12 +108,6 @@ void PMTorus::readAttributes( const PMXMLHelper& h )
    m_sturm = h.boolAttribute( "sturm", c_defaultsturm );
 
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMTorus::editWidget( QWidget* parent ) const
-{
-
- return new PMTorusEdit( parent );
 }
 
 void PMTorus::restoreMemento( PMMemento* s )

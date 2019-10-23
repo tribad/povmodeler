@@ -33,12 +33,12 @@
  */
 class PMGraphicalObject : public PMDetailObject
 {
-   typedef PMDetailObject Base;
+   using Base = PMDetailObject;
 public:
    /**
     * Creates an empty PMGraphicalObject
     */
-   PMGraphicalObject( PMPart* part );
+   PMGraphicalObject(  );
    /**
     * Copy constructor
     */

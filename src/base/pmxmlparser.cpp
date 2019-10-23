@@ -19,7 +19,6 @@
 
 #include <qbuffer.h>
 
-
 #include "pmpart.h"
 #include "pmscene.h"
 #include "pmxmlhelper.h"

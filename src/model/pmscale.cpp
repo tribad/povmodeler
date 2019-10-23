@@ -30,13 +30,13 @@ const PMVector scaleDefault = PMVector( 0, 0, 0 );
 PMDefinePropertyClass( PMScale, PMScaleProperty );
 
 PMMetaObject* PMScale::s_pMetaObject = 0;
-PMObject* createNewScale( PMPart* part )
+PMObject* createNewScale( )
 {
-   return new PMScale( part );
+   return new PMScale( );
 }
 
-PMScale::PMScale( PMPart* part )
-      : Base( part )
+PMScale::PMScale( )
+      : Base( )
 {
    m_scale = PMVector( 1.0, 1.0, 1.0 );
 }
@@ -100,11 +100,6 @@ void PMScale::setScale( const PMVector& p )
       m_scale = p;
       m_scale.resize( 3 );
    }
-}
-
-PMDialogEditBase* PMScale::editWidget( QWidget* parent ) const
-{
-   return new PMScaleEdit( parent );
 }
 
 void PMScale::restoreMemento( PMMemento* s )

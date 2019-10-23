@@ -46,13 +46,13 @@ PMDefinePropertyClass( PMIsoSurface, PMIsoSurfaceProperty );
 
 PMViewStructure* PMIsoSurface::s_pDefaultViewStructure = 0;
 PMMetaObject* PMIsoSurface::s_pMetaObject = 0;
-PMObject* createNewIsoSurface( PMPart* part )
+PMObject* createNewIsoSurface( )
 {
-   return new PMIsoSurface( part );
+   return new PMIsoSurface( );
 }
 
-PMIsoSurface::PMIsoSurface( PMPart* part )
-      : Base( part )
+PMIsoSurface::PMIsoSurface( )
+      : Base( )
 {
    m_containedBy = c_defaultContainedBy;
    m_corner1 = c_defaultCorner1;
@@ -331,11 +331,6 @@ void PMIsoSurface::setAllIntersections( bool yes )
          m_pMemento->addData( s_pMetaObject, AllIntersectionsID, m_bAllIntersections );
       m_bAllIntersections = yes;
    }
-}
-
-PMDialogEditBase* PMIsoSurface::editWidget( QWidget* parent ) const
-{
-   return new PMIsoSurfaceEdit( parent );
 }
 
 void PMIsoSurface::restoreMemento( PMMemento* s )

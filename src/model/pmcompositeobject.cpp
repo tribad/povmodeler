@@ -25,8 +25,8 @@
 
 PMMetaObject* PMCompositeObject::s_pMetaObject = nullptr;
 
-PMCompositeObject::PMCompositeObject( PMPart* part )
-      : Base( part )
+PMCompositeObject::PMCompositeObject( )
+      : Base( )
 {
    m_pFirstChild = nullptr;
    m_pLastChild = nullptr;

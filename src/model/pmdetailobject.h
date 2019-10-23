@@ -25,12 +25,12 @@
 
 class PMDetailObject : public PMNamedObject
 {
-   typedef PMNamedObject Base;
+   using Base = PMNamedObject;
 public:
    /**
     * Creates an empty PMDetailObject
     */
-   PMDetailObject( PMPart* part );
+   PMDetailObject( );
    /**
     * Copy constrctor
     */

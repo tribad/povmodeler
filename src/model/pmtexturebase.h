@@ -37,7 +37,7 @@ public:
    /**
     * Creates an PMTextureBase
     */
-   PMTextureBase( PMPart* part );
+   PMTextureBase( );
    /**
     * Copy constructor
     */

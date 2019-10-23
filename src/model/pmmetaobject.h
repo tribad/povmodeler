@@ -336,7 +336,7 @@ private: \
 // no semicolon, put a semicolon after the macro!
 
 
-typedef PMObject* ( *PMObjectFactoryMethod ) ( PMPart* );
+typedef PMObject* ( *PMObjectFactoryMethod ) ( );
 
 /**
  * Meta information object for the @ref PMObject class.
@@ -374,7 +374,7 @@ public:
    /**
     * Returns a new object instance
     */
-   PMObject* newObject( PMPart* part ) const;
+   PMObject* newObject( ) const;
    /**
     * Returns true if the class is an abstract class
     * (if no factory method was set in the constructor)

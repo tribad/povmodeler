@@ -16,6 +16,8 @@
 //  This is a container to hold all povmodeler specific support classes needed
 //  in the model tree. Its a replacement for the former PMPart class. But this is
 //  smaller and should help remove direct dependencies to the UI elements.
+//
+//  The second is, that i
 class PMModel : public QObject
 {
     Q_OBJECT
@@ -25,6 +27,8 @@ public:
 signals:
 
 public slots:
+public: //  attributes
+
 private:  //  attributes
 
 };

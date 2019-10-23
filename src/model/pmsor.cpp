@@ -47,9 +47,9 @@ int PMSurfaceOfRevolution::s_rSteps = c_defaultSurfaceOfRevolutionRSteps;
 int PMSurfaceOfRevolution::s_sSteps = c_defaultSurfaceOfRevolutionSSteps;
 int PMSurfaceOfRevolution::s_parameterKey = 0;
 PMMetaObject* PMSurfaceOfRevolution::s_pMetaObject = nullptr;
-PMObject* createNewSurfaceOfRevolution( PMPart* part )
+PMObject* createNewSurfaceOfRevolution( )
 {
-   return new PMSurfaceOfRevolution( part );
+   return new PMSurfaceOfRevolution( );
 }
 
 PMDefinePropertyClass( PMSurfaceOfRevolution, PMSurfaceOfRevolutionProperty );
@@ -112,8 +112,8 @@ private:
    int m_index;
 };
 
-PMSurfaceOfRevolution::PMSurfaceOfRevolution( PMPart* part )
-      : Base( part )
+PMSurfaceOfRevolution::PMSurfaceOfRevolution( )
+      : Base( )
 {
    int i;
 
@@ -251,11 +251,6 @@ void PMSurfaceOfRevolution::setPoints( const QList<PMVector>& points )
       setViewStructureChanged();
       m_points = points;
    }
-}
-
-PMDialogEditBase* PMSurfaceOfRevolution::editWidget( QWidget* parent ) const
-{
-   return new PMSurfaceOfRevolutionEdit( parent );
 }
 
 void PMSurfaceOfRevolution::createMemento()

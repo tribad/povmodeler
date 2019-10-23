@@ -24,13 +24,13 @@
 
 const int c_defaultVisibilityLevel = 10;
 PMMetaObject* PMScene::s_pMetaObject = nullptr;
-PMObject* createNewScene( PMPart* part )
+PMObject* createNewScene( )
 {
-   return new PMScene( part );
+   return new PMScene( );
 }
 
-PMScene::PMScene( PMPart* part )
-      : Base( part )
+PMScene::PMScene( )
+      : Base( )
 {
    m_visibilityLevel = c_defaultVisibilityLevel;
 	m_activeMode = -1;
