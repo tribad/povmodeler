@@ -10,32 +10,26 @@
 #ifndef IPMVIEWMENU_H
 #define IPMVIEWMENU_H
 //
-//  Qt additional header
-#include <QObject>
+//  Only to have a clou what gl-view has been toggled.
+enum class GLView {
+    Top,
+    Bottom,
+    Left,
+    Right,
+    Back,
+    Front,
+    Camera,
+    Undefined
+};
 //
-//  Mix-In classes
-#include "mpmviewmenu.h"
-
-class IPMViewMenu : public QObject
+//  Interface to the class that does the processing.
+class IPMViewMenu
 {
-    Q_OBJECT
 public:
-    explicit IPMViewMenu(QObject *parent = nullptr);
-    explicit IPMViewMenu(MPMViewMenu* mix, QObject *parent = nullptr);
-
-signals:
-
-public slots:
-    void slotProperty(bool checked);
-    void slotTop(bool checked);
-    void slotBottom(bool checked);
-    void slotLeft(bool checked);
-    void slotRight(bool checked);
-    void slotBack(bool checked);
-    void slotFront(bool checked);
-    void slotCamera(bool checked);
-private:
-    MPMViewMenu* mMixIn;
+    IPMViewMenu();
+    virtual ~IPMViewMenu() {}
+    virtual void togglePropertyViewVisibility(bool changed) = 0;
+    virtual void toggleGlViewVisibility(GLView view, bool changed) = 0;
 };
 
 #endif // IPMVIEWMENU_H

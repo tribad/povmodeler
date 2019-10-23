@@ -3,7 +3,7 @@ find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
 
 include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5DBus_INCLUDE_DIRS}  ${Qt5Xml_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS})
 
-include_directories(newui model base gui)
+include_directories(newui base model gui)
 
 qt5_add_dbus_interface(dbusadapter org.povmodeler.xml povmodeleradaptor)
 

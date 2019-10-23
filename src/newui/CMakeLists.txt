@@ -6,5 +6,5 @@ include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5DBus_INCLUDE_DIRS}  ${Qt5Xml_IN
 add_compile_options(-fPIC)
 
 add_library(pmnewui
-    pmapp.cpp                 pmmainwindow.ui           ipmviewmenu.cpp     mpmviewmenu.cpp
+    pmapp.cpp                 pmmainwindow.ui           ipmviewmenu.cpp     sigpmviewmenu.cpp
 )

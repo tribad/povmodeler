@@ -17,17 +17,17 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     mPMMainWindow.setupUi(&mMainWindow);
     //
     //  Create the interfaces.
-    mIPMViewMenu = new IPMViewMenu((MPMViewMenu*)this);
+    mSigPMViewMenu = new SigPMViewMenu((IPMViewMenu*)this);
     //
     //  Do the connections
-    connect(mPMMainWindow.actionProperty, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotProperty(bool)));
-    connect(mPMMainWindow.actionTop, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotTop(bool)));
-    connect(mPMMainWindow.actionBottom, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotBottom(bool)));
-    connect(mPMMainWindow.actionLeft, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotLeft(bool)));
-    connect(mPMMainWindow.actionRight, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotRight(bool)));
-    connect(mPMMainWindow.actionBack, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotBack(bool)));
-    connect(mPMMainWindow.actionFront, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotFront(bool)));
-    connect(mPMMainWindow.actionCamera, SIGNAL(triggered(bool)), mIPMViewMenu, SLOT(slotCamera(bool)));
+    connect(mPMMainWindow.actionProperty, SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotProperty(bool)));
+    connect(mPMMainWindow.actionTop,      SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotTop(bool)));
+    connect(mPMMainWindow.actionBottom,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotBottom(bool)));
+    connect(mPMMainWindow.actionLeft,     SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotLeft(bool)));
+    connect(mPMMainWindow.actionRight,    SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotRight(bool)));
+    connect(mPMMainWindow.actionBack,     SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotBack(bool)));
+    connect(mPMMainWindow.actionFront,    SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotFront(bool)));
+    connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
 
     mMainWindow.show();
 }
@@ -36,7 +36,7 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
 void PMApp::togglePropertyVisibility(bool changed) {
 }
 
-void PMApp::toggleGlView(GLView view, bool changed) {
+void PMApp::toggleGlViewVisibility(GLView view, bool changed) {
 }
 
 void PMApp::setGlViewChecked(GLView view, bool checked) {
