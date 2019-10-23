@@ -5,6 +5,7 @@ project(pov-qt5)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
 set(OpenGL_GL_PREFERENCE GLVND)
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")

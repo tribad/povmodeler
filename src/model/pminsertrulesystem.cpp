@@ -834,9 +834,10 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
       ruleFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString( "./" + fileName ) );
       if( ruleFile.isEmpty() )
       {
-         qCritical(  ) << "Rule file 'povmodeler/" << fileName
-                           << "' not found." << endl;
-         return;
+          ruleFile = "./baseinsertrules.xml";
+
+          qWarning(  ) << "Rule file 'povmodeler/" << fileName
+                           << "' not found. Trying last resort in cwd." << endl;
       }
    }
 

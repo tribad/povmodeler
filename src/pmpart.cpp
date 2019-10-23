@@ -84,7 +84,6 @@
 #include <QAction>
 #include <QWidgetAction>
 //#include <QtGui/private/qzipreader_p.h>
-
 #ifdef PMEnableSimpleProfiling
 QTime PMDebugTime;
 #endif

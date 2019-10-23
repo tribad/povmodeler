@@ -10,3 +10,12 @@ But for the start I need something that creates a debug version and that I do un
 So I focused on the splitting the code into several functional units to get a better view into the architecture.
 
 Dont know how long it needs to come along with a good working system. But the first step is always the hardest.
+
+## Installation
+
+As I tried to compile the povmodeler on an OpenSUSE I found that it needs
+
+freeglut
+freetype2
+
+besides some development headers for Qt5. But it compiled but had a problem within my VM installation with the OpenGL viewport creation.
