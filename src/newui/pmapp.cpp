@@ -9,9 +9,12 @@
 // **************************************************************************
 //
 //
+// Qt includes
+#include <QIODevice>
+//
 //  Local includes.
 #include "pmapp.h"
-#include "pmprototypemanager.h"
+#include "pmxmlparser.h"
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
 {
@@ -31,6 +34,30 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
 
     mMainWindow.show();
+
+    PMObjectList list;
+    QIODevice* dev = new QFile( "test.kpm" );
+    bool success = true;
+
+
+    if( dev && dev->open( QIODevice::ReadOnly ) )
+    {
+        PMXMLParser parser( dev );
+        parser.parse( &list, nullptr, nullptr );//step1
+
+        PMObject* obj = list.first();
+        if( obj )
+        {
+            if( obj->type() == "Scene" ) {
+                mScene = obj;
+            } else {
+                success = false;
+            }
+        } else {
+            success = false;
+        }
+    }
+
 }
 
 

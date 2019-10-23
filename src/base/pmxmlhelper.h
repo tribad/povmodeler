@@ -41,7 +41,7 @@ public:
    /**
     * Creates a PMXMLHelper for the QDomElement& e
     */
-   PMXMLHelper( const QDomElement& e, PMPart* p, PMParser* par,
+   PMXMLHelper( const QDomElement& e, PMParser* par,
                 int majorDocumentFormat, int minorDocumentFormat );
    /**
     * Returns the QDomElement
@@ -89,11 +89,6 @@ public:
     * is no child element with tag name "extra_data"
     */
    QDomElement extraData() const;
-       
-   /**
-    * Returns a pointer to the part
-    */
-   PMPart* part() const { return m_pPart; }
    /**
     * Returns a pointer to the parser
     */
@@ -109,7 +104,6 @@ public:
    
 private:
    QDomElement m_e;
-   PMPart* m_pPart;
    PMParser* m_pParser;
    int m_major;
    int m_minor;

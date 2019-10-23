@@ -28,14 +28,14 @@
 #include "pmobject.h"
 #include "pmdeclare.h"
 
-PMXMLParser::PMXMLParser( PMPart* part, QIODevice* dev )
-      : PMParser( part, dev )
+PMXMLParser::PMXMLParser( QIODevice* dev )
+      : PMParser( dev )
 {
    init();
 }
 
-PMXMLParser::PMXMLParser( PMPart* part, const QByteArray& array )
-      : PMParser( part, array )
+PMXMLParser::PMXMLParser( const QByteArray& array )
+      : PMParser( array )
 {
    init();
 }
@@ -109,10 +109,9 @@ void PMXMLParser::topParse()
       }
       else if( e.tagName() == "scene" )
       {
-         PMScene* scene = new PMScene( m_pPart );
+         PMScene* scene = new PMScene(  );
          insertChild( scene, nullptr );
-         PMXMLHelper hlp( e, m_pPart, this,
-                          m_majorDocumentFormat, m_minorDocumentFormat );
+         PMXMLHelper hlp( e, this, m_majorDocumentFormat, m_minorDocumentFormat );
          scene->readAttributes( hlp );
          parseChildObjects( e, scene );
       }
@@ -135,12 +134,10 @@ void PMXMLParser::parseChildObjects( QDomElement& e, PMObject* parent )
       if( c.isElement() )
       {
          QDomElement ce = c.toElement();
-         PMPrototypeManager* m = m_pPart->prototypeManager();
-         obj = m->newObject( m->className( ce.tagName() ) );//create new object from .kpm file
+         obj = PMObject::prototypeManager()->newObject( PMObject::prototypeManager()->className( ce.tagName() ) );//create new object from .kpm file
          if( obj )
          {
-            PMXMLHelper hlp( ce, m_pPart, this,
-                             m_majorDocumentFormat, m_minorDocumentFormat );
+            PMXMLHelper hlp( ce, this, m_majorDocumentFormat, m_minorDocumentFormat );
             obj->readAttributes( hlp );// openfile call parse .kpm single obj function
             if( insertChild( obj, parent ) )
             {
@@ -179,7 +176,7 @@ void PMXMLParser::quickParse( QStringList& list )
             if( c.isElement() )
             {
                QDomElement ce = c.toElement();
-               QString type = m_pPart->prototypeManager()->className( ce.tagName() );
+               QString type = PMObject::prototypeManager()->className( ce.tagName() );
                if( !type.isNull() )
                   list.append( type );
             }

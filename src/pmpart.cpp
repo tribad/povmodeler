@@ -1110,10 +1110,10 @@ void PMPart::restoreConfig()
 
 bool PMPart::openFileQt( QUrl url )
 {
-   this->setUrl( url );
-   QIODevice* dev = new QFile( url.path() );
-   bool success = true;
-   PMObjectList list;
+    this->setUrl( url );
+    QIODevice* dev = new QFile( url.path() );
+    bool success = true;
+    PMObjectList list;
 
    deleteContents();
 

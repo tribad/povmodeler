@@ -47,6 +47,8 @@ private:  //  Attributes
     QMainWindow     mMainWindow;
     Ui_MainWindow   mPMMainWindow;
     SigPMViewMenu*  mSigPMViewMenu;
+
+    PMObject*       mScene;
 };
 
 #endif // PMAPP_H

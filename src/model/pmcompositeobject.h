@@ -62,11 +62,6 @@ public:
     * or null if the index is out of range.
     */
    virtual PMObject* childAt( uint index ) const;
-
-
-
-
-
    /**
     * Returns true if the object contains the child object o
     */
@@ -76,7 +71,6 @@ public:
     * Returns the index of the object or -1 if not found
     */
    virtual int findChild( PMObject* o );
-
    /**
     * Inserts the object as child at index i.
     * If i is -1, the object is appended.
