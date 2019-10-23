@@ -4,10 +4,11 @@
 Working on a branch I extracted the model tree classes in a way that makes them complete independent from the GUI.
 This does not mean that there are no Qt-classes involved, but nothing that has to do with the user interaction.
 
-I did load a test model, a very small one, and it seems everything available. The same is with the base classes I sorted out into its own 
-directory. They are independent from the gui or model now.
+I did load a test model, a very small one, and it seems everything available. 
 
-On the other hand this means, that the branch has no working gui at the moment. But now it can be started with that.
+The same I did with the base classes that I alrady moved into its own directory. They are independent from the gui or model now.
+
+Doing so much changes to the core functions means that the branch has no working gui at the moment. But now it can be started with that.
 
 ## Start 
 
