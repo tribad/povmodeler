@@ -23,7 +23,14 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     mPMMainWindow.setupUi(&mMainWindow);
     //
     //  Create the interfaces.
+    mSigPMFileMenu = new SigPMFileMenu((IPMFileMenu*)this);
     mSigPMViewMenu = new SigPMViewMenu((IPMViewMenu*)this);
+    //
+    //  Do the connections to the file menu.
+    connect(mPMMainWindow.actionNew, SIGNAL(triggered()), mSigPMFileMenu, SLOT(slotNew()));
+    connect(mPMMainWindow.actionOpen, SIGNAL(triggered()), mSigPMFileMenu, SLOT(slotLoad()));
+    connect(mPMMainWindow.actionSave, SIGNAL(triggered()), mSigPMFileMenu, SLOT(slotSave()));
+    connect(mPMMainWindow.actionQuit, SIGNAL(triggered()), mSigPMFileMenu, SLOT(slotExit()));
     //
     //  Do the connections to the view menu.
     connect(mPMMainWindow.actionProperty, SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotProperty(bool)));
@@ -36,8 +43,7 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
     //
     //  Do some more initialization
-    QString theme = QIcon::themeName();
-
+    mActiveModel = nullptr;
 
     mMainWindow.show();
 }
@@ -56,13 +62,39 @@ void PMApp::setGlViewChecked(GLView view, bool checked) {
     }
 }
 //
+// File menu signal processing methods.
+void PMApp::doNew() {
+
+}
+void PMApp::doLoad() {
+
+}
+void PMApp::doSave() {
+
+}
+void PMApp::doClose() {
+
+}
+void PMApp::doExit() {
+    for (auto model : mModels) {
+        //
+        //  Ask for saving for each modified model.
+        if (model->isModified()) {
+
+        }
+    }
+    mMainWindow.close();
+}
+//
 //  Initialization
 bool PMApp::Load(const QString& aPath) {
     bool retval = true;
     //
     //  We may throw an exception if the load fails and then return false.
     //  But for now we expect everything is ok.
-    mModels.push_back(new PMModel(aPath));
+    //
+    //  Setting the active model to the new loaded one in a hurry.
+    mModels.push_back(mActiveModel = new PMModel(aPath));
     return retval;
 }
 

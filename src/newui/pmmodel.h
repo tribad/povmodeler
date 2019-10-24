@@ -33,6 +33,7 @@ public:
     //
     //  Some basic methods
     bool Load(const QString& aPath);
+    bool Store(const QString& aPath);
     //
     //  Getters.
     bool isModified() {return mModified;}
@@ -43,6 +44,7 @@ public slots:
 public: //  attributes
 
 private:  //  attributes
+    QString  mPath;
     bool     mModified;
     PMScene* mScene;
 };
