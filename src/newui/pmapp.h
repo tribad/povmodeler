@@ -23,7 +23,7 @@
 #include "sigpmviewmenu.h"
 //
 //  povray model includes
-#include "pmobject.h"
+#include "pmmodel.h"
 
 class PMApp : public QObject, public IPMViewMenu
 {
@@ -45,11 +45,16 @@ private:  //  Methods
     virtual void setGlViewChecked(GLView view, bool checked);
 public:   //  Attributes
 private:  //  Attributes
-    QMainWindow     mMainWindow;
-    Ui_MainWindow   mPMMainWindow;
-    SigPMViewMenu*  mSigPMViewMenu;
-
-    PMObject*       mScene;
+    //
+    //  Main window
+    QMainWindow           mMainWindow;
+    Ui_MainWindow         mPMMainWindow;
+    //
+    //  Local signal handler
+    SigPMViewMenu*        mSigPMViewMenu;
+    //
+    //  Application data.
+    std::vector<PMModel*> mModels;
 };
 
 #endif // PMAPP_H

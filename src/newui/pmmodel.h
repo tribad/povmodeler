@@ -13,16 +13,22 @@
 //  Include Qt specifcs
 #include <QObject>
 //
-//  This is a container to hold all povmodeler specific support classes needed
-//  in the model tree. Its a replacement for the former PMPart class. But this is
-//  smaller and should help remove direct dependencies to the UI elements.
+//  PM forwards
+class PMScene;
 //
-//  The second is, that i
+//  The class defintion
 class PMModel : public QObject
 {
     Q_OBJECT
 public:
     explicit PMModel(QObject *parent = nullptr);
+    explicit PMModel(const QString& aPath,QObject *parent = nullptr);
+    //
+    //  Some basic methods
+    bool Load(const QString& aPath);
+    //
+    //  Getters.
+    bool isModified() {return mModified;}
 
 signals:
 
@@ -30,7 +36,8 @@ public slots:
 public: //  attributes
 
 private:  //  attributes
-
+    bool     mModified;
+    PMScene* mScene;
 };
 
 #endif // PMMODEL_H

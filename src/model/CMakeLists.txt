@@ -14,7 +14,7 @@ find_package(Qt5Core REQUIRED)
 ##
 add_library(pmmodel
 
-    pmobject.cpp pmmodel.cpp pmprototypemanager.cpp pmmetaobject.cpp pminsertrulesystem.cpp pmxmlparser.cpp
+    pmobject.cpp pmprototypemanager.cpp pmmetaobject.cpp pminsertrulesystem.cpp pmxmlparser.cpp
     pmcompositeobject.cpp pmnamedobject.cpp pmgraphicalobject.cpp pmdetailobject.cpp pmsolidobject.cpp
     pmglobalsettings.cpp
     pmbox.cpp pmsphere.cpp pmcylinder.cpp

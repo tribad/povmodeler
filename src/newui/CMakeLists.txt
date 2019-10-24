@@ -8,7 +8,7 @@ add_compile_options(-fPIC)
 
 add_library(pmnewui pmmainwindow.ui
     main.cpp
-    pmapp.cpp
+    pmapp.cpp pmmodel.cpp
     ipmviewmenu.cpp
     sigpmviewmenu.cpp sigpmtreewidget.cpp sigpmpropertywidget.cpp
 )

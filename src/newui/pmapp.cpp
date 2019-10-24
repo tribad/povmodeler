@@ -15,7 +15,6 @@
 //
 //  Local includes.
 #include "pmapp.h"
-#include "pmxmlparser.h"
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
 {
@@ -56,29 +55,14 @@ void PMApp::setGlViewChecked(GLView view, bool checked) {
 
     }
 }
-
+//
+//  Initialization
 bool PMApp::Load(const QString& aPath) {
-    PMObjectList list;
-    QIODevice* dev = new QFile( aPath );
-    bool success = true;
-
-
-    if( dev && dev->open( QIODevice::ReadOnly ) )
-    {
-        PMXMLParser parser( dev );
-        parser.parse( &list, nullptr, nullptr );//step1
-
-        PMObject* obj = list.first();
-        if( obj )
-        {
-            if( obj->type() == "Scene" ) {
-                mScene = obj;
-            } else {
-                success = false;
-            }
-        } else {
-            success = false;
-        }
-    }
-    return success;
+    bool retval = true;
+    //
+    //  We may throw an exception if the load fails and then return false.
+    //  But for now we expect everything is ok.
+    mModels.push_back(new PMModel(aPath));
+    return retval;
 }
+

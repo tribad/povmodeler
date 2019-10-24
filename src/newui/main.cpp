@@ -48,8 +48,6 @@ int main( int argc, char* argv[] )
         for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
         {
             appclass.Load(parser.positionalArguments().at(i));
-            //
-            //  We break here because support of multiple documents is not available yet.
         }
     }
     else
