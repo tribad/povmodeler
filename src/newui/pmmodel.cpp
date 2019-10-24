@@ -76,3 +76,9 @@ bool PMModel::Store(const QString& aPath) {
 
     return retval;
 }
+//
+//  This will fill the model with some default elements.
+//  Important point is, that the modified flag shall stay false (unmodified)
+void PMModel::FillWithDefault() {
+    mModified = false;
+}

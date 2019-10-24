@@ -10,6 +10,9 @@
 #ifndef PMAPP_H
 #define PMAPP_H
 //
+//  System header
+#include <set>
+//
 //  Qt additional header
 #include <QObject>
 #include <QMainWindow>
@@ -65,7 +68,9 @@ private:  //  Attributes
     //
     //  Application data.
     PMModel*              mActiveModel;
-    std::vector<PMModel*> mModels;
+    //
+    //  Using a set here makes it easier to remove a model by its pointer.
+    std::set<PMModel*>    mModels;
 };
 
 #endif // PMAPP_H

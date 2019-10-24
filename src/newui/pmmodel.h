@@ -34,6 +34,7 @@ public:
     //  Some basic methods
     bool Load(const QString& aPath);
     bool Store(const QString& aPath);
+    void FillWithDefault();
     //
     //  Getters.
     bool isModified() {return mModified;}

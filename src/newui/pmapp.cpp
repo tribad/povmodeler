@@ -64,7 +64,10 @@ void PMApp::setGlViewChecked(GLView view, bool checked) {
 //
 // File menu signal processing methods.
 void PMApp::doNew() {
-
+    mModels.insert(mActiveModel = new PMModel());
+    //
+    //  Do fill the model with some default elements.
+    mActiveModel->Load("__default.kpm");
 }
 void PMApp::doLoad() {
 
@@ -73,9 +76,36 @@ void PMApp::doSave() {
 
 }
 void PMApp::doClose() {
+    //
+    //  Check if any model is available.
+    if (mActiveModel != nullptr) {
+        //
+        //  Ask for saving for each modified model.
+        if (mActiveModel->isModified()) {
 
+        }
+        //
+        //  Removing the active model from the list of models.
+        mModels.erase(mActiveModel);
+        //
+        //  The destructor shall do the cleanup.
+        delete mActiveModel;
+        //
+        //  Now take the first in the set. If we have none left
+        //  clear the mActiveModel pointer
+        if (mModels.begin() != mModels.end()) {
+            mActiveModel = *mModels.begin();
+        } else {
+            mActiveModel = nullptr;
+        }
+    }
 }
+//
+//  We are not doing the cleanup in the destructor as it does not allow us
+//  intervention if someone decides different in the dialogs presented.
 void PMApp::doExit() {
+    bool do_exit = true;
+
     for (auto model : mModels) {
         //
         //  Ask for saving for each modified model.
@@ -83,7 +113,12 @@ void PMApp::doExit() {
 
         }
     }
-    mMainWindow.close();
+    //
+    //  Maybe some decides different while closing the models. Then do_exit
+    //  shall be false.
+    if (do_exit == true) {
+        mMainWindow.close();
+    }
 }
 //
 //  Initialization
@@ -94,7 +129,7 @@ bool PMApp::Load(const QString& aPath) {
     //  But for now we expect everything is ok.
     //
     //  Setting the active model to the new loaded one in a hurry.
-    mModels.push_back(mActiveModel = new PMModel(aPath));
+    mModels.insert(mActiveModel = new PMModel(aPath));
     return retval;
 }
 
