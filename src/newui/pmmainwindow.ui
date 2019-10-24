@@ -259,6 +259,23 @@
     <property name="title">
      <string>Settings</string>
     </property>
+    <widget class="QMenu" name="menuToolbars">
+     <property name="title">
+      <string>Toolbars</string>
+     </property>
+     <addaction name="actionSolid_Primitves"/>
+     <addaction name="actionFinite_Patch"/>
+     <addaction name="actionInfinite_Primitives"/>
+     <addaction name="actionCSG_Operations_2"/>
+     <addaction name="actionMaterial_3"/>
+     <addaction name="actionInterior_3"/>
+     <addaction name="actionTexture_3"/>
+     <addaction name="actionPhotons_3"/>
+     <addaction name="actionAthmospheric_2"/>
+     <addaction name="actionTransformation_2"/>
+    </widget>
+    <addaction name="separator"/>
+    <addaction name="menuToolbars"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="layoutDirection">
@@ -1498,6 +1515,116 @@
     <string>Very High</string>
    </property>
   </action>
+  <action name="actionSolid_Primitves">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Solid Primitves</string>
+   </property>
+  </action>
+  <action name="actionFinite_Patch">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Finite Patch</string>
+   </property>
+  </action>
+  <action name="actionInfinite_Primitives">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Infinite Primitives</string>
+   </property>
+  </action>
+  <action name="actionCSG_Operations_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>CSG Operations</string>
+   </property>
+  </action>
+  <action name="actionMaterial_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Material</string>
+   </property>
+  </action>
+  <action name="actionInterior_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Interior</string>
+   </property>
+  </action>
+  <action name="actionTexture_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Texture</string>
+   </property>
+  </action>
+  <action name="actionPhotons_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Photons</string>
+   </property>
+  </action>
+  <action name="actionAthmospheric_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Athmospheric</string>
+   </property>
+  </action>
+  <action name="actionTransformation_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Transformation</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -1578,6 +1705,166 @@
     <hint type="destinationlabel">
      <x>-1</x>
      <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSolid_Primitves</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarSolidPrimitives</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>304</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionFinite_Patch</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarFinitePatch</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1028</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionInfinite_Primitives</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarInfiniteSolid</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>24</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCSG_Operations_2</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarCSG</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>683</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMaterial_3</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarMaterial</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>73</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionInterior_3</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarInterior</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionTexture_3</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarTexture</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>797</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPhotons_3</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarPhotons</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAthmospheric_2</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarAthmospheric</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionTransformation_2</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolbarTransformation</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>831</x>
+     <y>82</y>
     </hint>
    </hints>
   </connection>
