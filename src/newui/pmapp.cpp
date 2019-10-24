@@ -67,6 +67,11 @@ void PMApp::doNew() {
     mModels.insert(mActiveModel = new PMModel());
     //
     //  Do fill the model with some default elements.
+    //  We could do this in the constructor, but this way it is visible that
+    //  other ways of creating an initial model are possible.
+    //
+    //  We are not checking the pointer here as the constructor throws an
+    //  out-of-memory exception anyway if no memory is available for the new object.
     mActiveModel->Load("__default.kpm");
 }
 void PMApp::doLoad() {
