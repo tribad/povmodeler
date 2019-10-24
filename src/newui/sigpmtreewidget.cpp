@@ -10,7 +10,7 @@
 
 #include "sigpmtreewidget.h"
 
-SigPMTreeWidget::SigPMTreeWidget(QWidget *parent) : QTreeWidget(parent)
+SigPMTreeWidget::SigPMTreeWidget(QWidget *parent) : QTreeView(parent)
 {
 
 }

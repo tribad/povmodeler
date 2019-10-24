@@ -16,6 +16,9 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="glGridWidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">

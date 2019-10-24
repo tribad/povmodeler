@@ -19,12 +19,14 @@
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
 {
+    //
+    //  Using the qt-designer makes things a bit easier.
     mPMMainWindow.setupUi(&mMainWindow);
     //
     //  Create the interfaces.
     mSigPMViewMenu = new SigPMViewMenu((IPMViewMenu*)this);
     //
-    //  Do the connections
+    //  Do the connections to the view menu.
     connect(mPMMainWindow.actionProperty, SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotProperty(bool)));
     connect(mPMMainWindow.actionTop,      SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotTop(bool)));
     connect(mPMMainWindow.actionBottom,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotBottom(bool)));
@@ -33,8 +35,27 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionBack,     SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotBack(bool)));
     connect(mPMMainWindow.actionFront,    SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotFront(bool)));
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
+    //
+    //  Do some more initialization
 
     mMainWindow.show();
+}
+//
+//  View Menu signal processing methods
+void PMApp::togglePropertyViewVisibility(bool changed) {
+}
+
+void PMApp::toggleGlViewVisibility(GLView view, bool changed) {
+}
+//
+//
+void PMApp::setGlViewChecked(GLView view, bool checked) {
+    if (view != GLView::Undefined) {
+
+    }
+}
+
+bool PMApp::Load(const QString& aPath) {
     PMObjectList list;
     QIODevice* dev = new QFile( "test.kpm" );
     bool success = true;
@@ -57,18 +78,5 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
             success = false;
         }
     }
-
-}
-
-
-void PMApp::togglePropertyViewVisibility(bool changed) {
-}
-
-void PMApp::toggleGlViewVisibility(GLView view, bool changed) {
-}
-
-void PMApp::setGlViewChecked(GLView view, bool checked) {
-    if (view != GLView::Undefined) {
-
-    }
+    return success;
 }

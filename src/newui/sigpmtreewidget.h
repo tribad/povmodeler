@@ -13,7 +13,7 @@
 // Qt includes
 #include <QTreeWidget>
 
-class SigPMTreeWidget : public QTreeWidget
+class SigPMTreeWidget : public QTreeView
 {
     Q_OBJECT
 public:
