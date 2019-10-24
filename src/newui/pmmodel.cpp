@@ -4,7 +4,7 @@
 #include "pmmodel.h"
 #include "pmxmlparser.h"
 
-PMModel::PMModel(QObject *parent) : QObject(parent)
+PMModel::PMModel(QObject *parent) : QAbstractItemModel(parent)
 {
     mModified = false;
     mScene    = nullptr;
@@ -40,3 +40,29 @@ bool PMModel::Load(const QString& aPath) {
     }
     return success;
 }
+//
+//  Implementation of the pure virtuals from QAbstractItemModel
+QModelIndex PMModel::index(int row, int column, const QModelIndex &parent) const {
+    QModelIndex retval;
+    return retval;
+}
+QModelIndex PMModel::parent(const QModelIndex &index) const {
+    QModelIndex retval;
+
+    return retval;
+}
+int PMModel::rowCount(const QModelIndex &parent) const {
+    int retval = 0;
+    return retval;
+}
+int PMModel::columnCount(const QModelIndex &parent) const {
+    int retval = 0;
+
+    return retval;
+}
+QVariant PMModel::data(const QModelIndex &index, int role) const {
+    QVariant retval;
+
+    return retval;
+}
+

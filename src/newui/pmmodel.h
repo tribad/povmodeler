@@ -11,18 +11,25 @@
 #define PMMODEL_H
 //
 //  Include Qt specifcs
-#include <QObject>
+#include <QAbstractItemModel>
 //
 //  PM forwards
 class PMScene;
 //
 //  The class defintion
-class PMModel : public QObject
+class PMModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
     explicit PMModel(QObject *parent = nullptr);
     explicit PMModel(const QString& aPath,QObject *parent = nullptr);
+    //
+    //  Some implementations for pure virtuals from QAbstractItemModel
+    virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
+    virtual QModelIndex parent(const QModelIndex &index) const;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     //
     //  Some basic methods
     bool Load(const QString& aPath);
