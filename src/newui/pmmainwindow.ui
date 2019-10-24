@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>858</width>
+    <width>1152</width>
     <height>750</height>
    </rect>
   </property>
@@ -41,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>858</width>
+     <width>1152</width>
      <height>24</height>
     </rect>
    </property>
@@ -69,13 +69,26 @@
     </property>
     <addaction name="actionCut"/>
     <addaction name="actionCopy"/>
-    <addaction name="actionPast"/>
+    <addaction name="actionPaste"/>
     <addaction name="actionDelete"/>
+    <addaction name="separator"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>View</string>
     </property>
+    <widget class="QMenu" name="menuGlobal_Detail_Level">
+     <property name="title">
+      <string>Global Detail Level</string>
+     </property>
+     <addaction name="actionVery_Low"/>
+     <addaction name="actionLow"/>
+     <addaction name="actionMedium"/>
+     <addaction name="actionHigh"/>
+     <addaction name="actionVery_High"/>
+    </widget>
     <addaction name="actionTree_View"/>
     <addaction name="actionProperty"/>
     <addaction name="separator"/>
@@ -92,12 +105,155 @@
     <addaction name="actionRender_Window"/>
     <addaction name="separator"/>
     <addaction name="actionVisibility_Level"/>
-    <addaction name="actionGlobal_Detail_Level"/>
+    <addaction name="menuGlobal_Detail_Level"/>
    </widget>
    <widget class="QMenu" name="menuInsert">
     <property name="title">
      <string>Insert</string>
     </property>
+    <widget class="QMenu" name="menuSolid_Primitives">
+     <property name="title">
+      <string>Solid Primitives</string>
+     </property>
+     <addaction name="actionBox"/>
+     <addaction name="actionSphere"/>
+     <addaction name="actionCylinder"/>
+     <addaction name="actionCone"/>
+     <addaction name="actionTorus"/>
+     <addaction name="actionEllipsoid"/>
+     <addaction name="actionHeight_Field"/>
+     <addaction name="actionText"/>
+     <addaction name="actionJulia_Fractal"/>
+     <addaction name="actionIso_Surface"/>
+     <addaction name="actionBlob"/>
+     <addaction name="actionBlob_Sphere"/>
+     <addaction name="actionBlob_Cylinder"/>
+     <addaction name="actionLathe"/>
+     <addaction name="actionPrism"/>
+     <addaction name="actionSurface_Of_Revolution"/>
+     <addaction name="actionSphere_Sweep"/>
+     <addaction name="actionObject_Link"/>
+    </widget>
+    <widget class="QMenu" name="menuFinite_Patch">
+     <property name="title">
+      <string>Finite Patch</string>
+     </property>
+     <addaction name="actionDisc"/>
+     <addaction name="actionBicubic_Patch"/>
+     <addaction name="actionTriangle"/>
+     <addaction name="actionMesh"/>
+    </widget>
+    <widget class="QMenu" name="menuInifinite_Solid">
+     <property name="title">
+      <string>Inifinite Solid</string>
+     </property>
+     <addaction name="actionPlane"/>
+    </widget>
+    <widget class="QMenu" name="menuCSG_Operations">
+     <property name="title">
+      <string>CSG Operations</string>
+     </property>
+     <addaction name="actionUnion"/>
+     <addaction name="actionDifference"/>
+     <addaction name="actionMerge"/>
+     <addaction name="actionIntersection"/>
+    </widget>
+    <widget class="QMenu" name="menuMaterial">
+     <property name="title">
+      <string>Material</string>
+     </property>
+     <addaction name="actionMaterial_2"/>
+    </widget>
+    <widget class="QMenu" name="menuInterior">
+     <property name="title">
+      <string>Interior</string>
+     </property>
+     <addaction name="actionInterior_2"/>
+     <addaction name="actionMedia"/>
+     <addaction name="actionDensity"/>
+     <addaction name="actionDensity_List"/>
+     <addaction name="actionDensity_Map"/>
+    </widget>
+    <widget class="QMenu" name="menuTexture">
+     <property name="title">
+      <string>Texture</string>
+     </property>
+     <addaction name="actionPattern"/>
+     <addaction name="actionBlend_Map_Modifiers"/>
+     <addaction name="actionWarp"/>
+     <addaction name="actionTexture_2"/>
+     <addaction name="actionInterior_Texture"/>
+     <addaction name="actionPigment"/>
+     <addaction name="actionNormal"/>
+     <addaction name="actionSolid_Color"/>
+     <addaction name="actionTexture_List"/>
+     <addaction name="actionColor_ist"/>
+     <addaction name="actionPigment_List"/>
+     <addaction name="actionNormal_List"/>
+     <addaction name="actionTexture_Map"/>
+     <addaction name="actionMaterial_Map"/>
+     <addaction name="actionPigment_Map"/>
+     <addaction name="actionImange_Map"/>
+     <addaction name="actionColor_Map"/>
+     <addaction name="actionNormal_Map"/>
+     <addaction name="actionBump_Map"/>
+     <addaction name="actionSlope"/>
+     <addaction name="actionSlope_Map"/>
+     <addaction name="actionFinish"/>
+     <addaction name="actionQuick_Color"/>
+    </widget>
+    <widget class="QMenu" name="menuPhotons">
+     <property name="title">
+      <string>Photons</string>
+     </property>
+     <addaction name="actionPhotons_2"/>
+    </widget>
+    <widget class="QMenu" name="menuAthmospheric">
+     <property name="title">
+      <string>Athmospheric</string>
+     </property>
+     <addaction name="actionSky_Sphere"/>
+     <addaction name="actionRainbow"/>
+     <addaction name="actionFog"/>
+    </widget>
+    <widget class="QMenu" name="menuTransformation">
+     <property name="title">
+      <string>Transformation</string>
+     </property>
+     <addaction name="actionTranslation"/>
+     <addaction name="actionScale"/>
+     <addaction name="actionRotate"/>
+     <addaction name="actionMatrix"/>
+    </widget>
+    <addaction name="actionGlobal_Settings"/>
+    <addaction name="actionRadiosity"/>
+    <addaction name="actionGlobal_Photons"/>
+    <addaction name="separator"/>
+    <addaction name="actionDeclarations"/>
+    <addaction name="actionDeclare_Function"/>
+    <addaction name="separator"/>
+    <addaction name="actionBounded_By"/>
+    <addaction name="actionClipped_By"/>
+    <addaction name="separator"/>
+    <addaction name="actionLight"/>
+    <addaction name="actionLight_Group"/>
+    <addaction name="actionLooks_Like"/>
+    <addaction name="actionProjected_Through"/>
+    <addaction name="actionCameraInsert"/>
+    <addaction name="separator"/>
+    <addaction name="actionComment"/>
+    <addaction name="actionRaw_Povray"/>
+    <addaction name="separator"/>
+    <addaction name="menuSolid_Primitives"/>
+    <addaction name="menuFinite_Patch"/>
+    <addaction name="menuInifinite_Solid"/>
+    <addaction name="menuCSG_Operations"/>
+    <addaction name="menuMaterial"/>
+    <addaction name="menuInterior"/>
+    <addaction name="menuTexture"/>
+    <addaction name="menuPhotons"/>
+    <addaction name="menuAthmospheric"/>
+    <addaction name="menuTransformation"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -131,6 +287,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionSave_as"/>
+   <addaction name="actionPrint"/>
   </widget>
   <widget class="QDockWidget" name="treeDockWidget">
    <property name="sizePolicy">
@@ -164,6 +325,9 @@
    <widget class="SigPMPropertyWidget" name="dockWidgetContents_2"/>
   </widget>
   <widget class="QToolBar" name="toolbarCSG">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -173,6 +337,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionUnion"/>
+   <addaction name="actionDifference"/>
+   <addaction name="actionMerge"/>
+   <addaction name="actionIntersection"/>
   </widget>
   <widget class="QToolBar" name="toolbarSolidPrimitives">
    <property name="windowTitle">
@@ -182,8 +350,26 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="actionBox"/>
+   <addaction name="actionSphere"/>
+   <addaction name="actionCylinder"/>
+   <addaction name="actionCone"/>
+   <addaction name="actionTorus"/>
+   <addaction name="actionEllipsoid"/>
+   <addaction name="actionHeight_Field"/>
+   <addaction name="actionText"/>
+   <addaction name="actionJulia_Fractal"/>
+   <addaction name="actionIso_Surface"/>
+   <addaction name="actionBlob"/>
+   <addaction name="actionBlob_Sphere"/>
+   <addaction name="actionBlob_Cylinder"/>
+   <addaction name="actionLathe"/>
+   <addaction name="actionPrism"/>
+   <addaction name="actionSurface_Of_Revolution"/>
+   <addaction name="actionSphere_Sweep"/>
+   <addaction name="actionObject_Link"/>
   </widget>
   <widget class="QToolBar" name="toolbarFinitePatch">
    <property name="windowTitle">
@@ -195,6 +381,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionDisc"/>
+   <addaction name="actionBicubic_Patch"/>
+   <addaction name="actionTriangle"/>
+   <addaction name="actionMesh"/>
   </widget>
   <widget class="QToolBar" name="toolbarInfiniteSolid">
    <property name="windowTitle">
@@ -204,8 +394,9 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="actionPlane"/>
   </widget>
   <widget class="QToolBar" name="toolbarMaterial">
    <property name="windowTitle">
@@ -217,6 +408,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionMaterial_2"/>
   </widget>
   <widget class="QToolBar" name="toolbarInterior">
    <property name="windowTitle">
@@ -228,6 +420,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionInterior_2"/>
+   <addaction name="actionMedia"/>
+   <addaction name="actionDensity"/>
+   <addaction name="actionDensity_List"/>
+   <addaction name="actionDensity_Map"/>
   </widget>
   <widget class="QToolBar" name="toolbarTexture">
    <property name="windowTitle">
@@ -239,6 +436,29 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionPattern"/>
+   <addaction name="actionBlend_Map_Modifiers"/>
+   <addaction name="actionWarp"/>
+   <addaction name="actionTexture_2"/>
+   <addaction name="actionInterior_Texture"/>
+   <addaction name="actionPigment"/>
+   <addaction name="actionNormal"/>
+   <addaction name="actionSolid_Color"/>
+   <addaction name="actionTexture_List"/>
+   <addaction name="actionColor_ist"/>
+   <addaction name="actionPigment_List"/>
+   <addaction name="actionNormal_List"/>
+   <addaction name="actionTexture_Map"/>
+   <addaction name="actionMaterial_Map"/>
+   <addaction name="actionPigment_Map"/>
+   <addaction name="actionImange_Map"/>
+   <addaction name="actionColor_Map"/>
+   <addaction name="actionNormal_Map"/>
+   <addaction name="actionBump_Map"/>
+   <addaction name="actionSlope"/>
+   <addaction name="actionSlope_Map"/>
+   <addaction name="actionFinish"/>
+   <addaction name="actionQuick_Color"/>
   </widget>
   <widget class="QToolBar" name="toolbarPhotons">
    <property name="windowTitle">
@@ -250,6 +470,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionPhotons_2"/>
   </widget>
   <widget class="QToolBar" name="toolbarAthmospheric">
    <property name="windowTitle">
@@ -261,6 +482,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionSky_Sphere"/>
+   <addaction name="actionRainbow"/>
+   <addaction name="actionFog"/>
   </widget>
   <widget class="QToolBar" name="toolbarTransformation">
    <property name="windowTitle">
@@ -272,6 +496,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionTranslation"/>
+   <addaction name="actionScale"/>
+   <addaction name="actionRotate"/>
+   <addaction name="actionMatrix"/>
   </widget>
   <widget class="QToolBar" name="toolbarGlobalDetailLevel">
    <property name="windowTitle">
@@ -281,35 +509,58 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="actionVery_Low"/>
+   <addaction name="actionLow"/>
+   <addaction name="actionMedium"/>
+   <addaction name="actionHigh"/>
+   <addaction name="actionVery_High"/>
   </widget>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="help-about"/>
+   </property>
    <property name="text">
     <string>About ....</string>
    </property>
   </action>
   <action name="actionNew">
+   <property name="icon">
+    <iconset theme="document-new"/>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
   </action>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>Open</string>
    </property>
   </action>
   <action name="actionOpen_Recent">
+   <property name="icon">
+    <iconset theme="document-open-recent"/>
+   </property>
    <property name="text">
     <string>Open Recent ...</string>
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset theme="document-save"/>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
   </action>
   <action name="actionSave_as">
+   <property name="icon">
+    <iconset theme="document-save-as"/>
+   </property>
    <property name="text">
     <string>Save as ...</string>
    </property>
@@ -325,41 +576,65 @@
    </property>
   </action>
   <action name="actionRevert">
+   <property name="icon">
+    <iconset theme="document-revert"/>
+   </property>
    <property name="text">
     <string>Revert</string>
    </property>
   </action>
   <action name="actionPrint">
+   <property name="icon">
+    <iconset theme="document-print"/>
+   </property>
    <property name="text">
     <string>Print</string>
    </property>
   </action>
   <action name="actionClose">
+   <property name="icon">
+    <iconset theme="window-close"/>
+   </property>
    <property name="text">
     <string>Close</string>
    </property>
   </action>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>
   </action>
   <action name="actionCut">
+   <property name="icon">
+    <iconset theme="edit-cut"/>
+   </property>
    <property name="text">
     <string>Cut</string>
    </property>
   </action>
   <action name="actionCopy">
+   <property name="icon">
+    <iconset theme="edit-copy"/>
+   </property>
    <property name="text">
     <string>Copy</string>
    </property>
   </action>
-  <action name="actionPast">
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset theme="edit-paste"/>
+   </property>
    <property name="text">
     <string>Paste</string>
    </property>
   </action>
   <action name="actionDelete">
+   <property name="icon">
+    <iconset theme="edit-delete"/>
+   </property>
    <property name="text">
     <string>Delete</string>
    </property>
@@ -372,7 +647,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Tree View</string>
+    <string>Browser</string>
    </property>
   </action>
   <action name="actionProperty">
@@ -474,9 +749,753 @@
     <string>Visibility Level</string>
    </property>
   </action>
-  <action name="actionGlobal_Detail_Level">
+  <action name="actionGlobal_Settings">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmglobalsettings.png</normaloff>:/smallicon/icons/povicons/small/pmglobalsettings.png</iconset>
+   </property>
    <property name="text">
-    <string>Global Detail Level</string>
+    <string>Global Settings</string>
+   </property>
+  </action>
+  <action name="actionRadiosity">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmradiosity.png</normaloff>:/smallicon/icons/povicons/small/pmradiosity.png</iconset>
+   </property>
+   <property name="text">
+    <string>Radiosity</string>
+   </property>
+  </action>
+  <action name="actionGlobal_Photons">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmglobalphotons.png</normaloff>:/smallicon/icons/povicons/small/pmglobalphotons.png</iconset>
+   </property>
+   <property name="text">
+    <string>Global Photons</string>
+   </property>
+  </action>
+  <action name="actionDeclarations">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdeclare.png</normaloff>:/smallicon/icons/povicons/small/pmdeclare.png</iconset>
+   </property>
+   <property name="text">
+    <string>Declarations</string>
+   </property>
+  </action>
+  <action name="actionDeclare_Function">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdeclare-f.png</normaloff>:/smallicon/icons/povicons/small/pmdeclare-f.png</iconset>
+   </property>
+   <property name="text">
+    <string>Declare Function</string>
+   </property>
+  </action>
+  <action name="actionBounded_By">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmboundedby.png</normaloff>:/smallicon/icons/povicons/small/pmboundedby.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bounded By</string>
+   </property>
+  </action>
+  <action name="actionClipped_By">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmclippedby.png</normaloff>:/smallicon/icons/povicons/small/pmclippedby.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clipped By</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmlight.png</normaloff>:/smallicon/icons/povicons/small/pmlight.png</iconset>
+   </property>
+   <property name="text">
+    <string>Light</string>
+   </property>
+  </action>
+  <action name="actionLight_Group">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmlightgroup.png</normaloff>:/smallicon/icons/povicons/small/pmlightgroup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Light Group</string>
+   </property>
+  </action>
+  <action name="actionLooks_Like">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmlookslike.png</normaloff>:/smallicon/icons/povicons/small/pmlookslike.png</iconset>
+   </property>
+   <property name="text">
+    <string>Looks Like</string>
+   </property>
+  </action>
+  <action name="actionProjected_Through">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmprojectedthrough.png</normaloff>:/smallicon/icons/povicons/small/pmprojectedthrough.png</iconset>
+   </property>
+   <property name="text">
+    <string>Projected Through</string>
+   </property>
+  </action>
+  <action name="actionCameraInsert">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcamera.png</normaloff>:/smallicon/icons/povicons/small/pmcamera.png</iconset>
+   </property>
+   <property name="text">
+    <string>Camera</string>
+   </property>
+  </action>
+  <action name="actionComment">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcomment.png</normaloff>:/smallicon/icons/povicons/small/pmcomment.png</iconset>
+   </property>
+   <property name="text">
+    <string>Comment</string>
+   </property>
+  </action>
+  <action name="actionRaw_Povray">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmraw.png</normaloff>:/smallicon/icons/povicons/small/pmraw.png</iconset>
+   </property>
+   <property name="text">
+    <string>Raw Povray</string>
+   </property>
+  </action>
+  <action name="actionBox">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmbox.png</normaloff>:/smallicon/icons/povicons/small/pmbox.png</iconset>
+   </property>
+   <property name="text">
+    <string>Box</string>
+   </property>
+  </action>
+  <action name="actionSphere">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmsphere.png</normaloff>:/smallicon/icons/povicons/small/pmsphere.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sphere</string>
+   </property>
+  </action>
+  <action name="actionCylinder">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcylinder.png</normaloff>:/smallicon/icons/povicons/small/pmcylinder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cylinder</string>
+   </property>
+  </action>
+  <action name="actionCone">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcone.png</normaloff>:/smallicon/icons/povicons/small/pmcone.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cone</string>
+   </property>
+  </action>
+  <action name="actionTorus">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtorus.png</normaloff>:/smallicon/icons/povicons/small/pmtorus.png</iconset>
+   </property>
+   <property name="text">
+    <string>Torus</string>
+   </property>
+  </action>
+  <action name="actionEllipsoid">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmsqe.png</normaloff>:/smallicon/icons/povicons/small/pmsqe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ellipsoid</string>
+   </property>
+  </action>
+  <action name="actionHeight_Field">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmheightfield.png</normaloff>:/smallicon/icons/povicons/small/pmheightfield.png</iconset>
+   </property>
+   <property name="text">
+    <string>Height Field</string>
+   </property>
+  </action>
+  <action name="actionText">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtext.png</normaloff>:/smallicon/icons/povicons/small/pmtext.png</iconset>
+   </property>
+   <property name="text">
+    <string>Text</string>
+   </property>
+  </action>
+  <action name="actionJulia_Fractal">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmjuliafractal.png</normaloff>:/smallicon/icons/povicons/small/pmjuliafractal.png</iconset>
+   </property>
+   <property name="text">
+    <string>Julia Fractal</string>
+   </property>
+  </action>
+  <action name="actionIso_Surface">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmisosurface.png</normaloff>:/smallicon/icons/povicons/small/pmisosurface.png</iconset>
+   </property>
+   <property name="text">
+    <string>Iso Surface</string>
+   </property>
+  </action>
+  <action name="actionBlob">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmblob.png</normaloff>:/smallicon/icons/povicons/small/pmblob.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blob</string>
+   </property>
+  </action>
+  <action name="actionBlob_Sphere">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmblobsphere.png</normaloff>:/smallicon/icons/povicons/small/pmblobsphere.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blob Sphere</string>
+   </property>
+  </action>
+  <action name="actionBlob_Cylinder">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmblobcylinder.png</normaloff>:/smallicon/icons/povicons/small/pmblobcylinder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blob Cylinder</string>
+   </property>
+  </action>
+  <action name="actionLathe">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmlathe.png</normaloff>:/smallicon/icons/povicons/small/pmlathe.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lathe</string>
+   </property>
+  </action>
+  <action name="actionPrism">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmprism.png</normaloff>:/smallicon/icons/povicons/small/pmprism.png</iconset>
+   </property>
+   <property name="text">
+    <string>Prism</string>
+   </property>
+  </action>
+  <action name="actionSurface_Of_Revolution">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmsor.png</normaloff>:/smallicon/icons/povicons/small/pmsor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Surface Of Revolution</string>
+   </property>
+  </action>
+  <action name="actionSphere_Sweep">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmspheresweep.png</normaloff>:/smallicon/icons/povicons/small/pmspheresweep.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sphere Sweep</string>
+   </property>
+  </action>
+  <action name="actionObject_Link">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmobjectlink.png</normaloff>:/smallicon/icons/povicons/small/pmobjectlink.png</iconset>
+   </property>
+   <property name="text">
+    <string>Object Link</string>
+   </property>
+  </action>
+  <action name="actionDisc">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdisc.png</normaloff>:/smallicon/icons/povicons/small/pmdisc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Disc</string>
+   </property>
+  </action>
+  <action name="actionBicubic_Patch">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmbicubicpatch.png</normaloff>:/smallicon/icons/povicons/small/pmbicubicpatch.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bicubic Patch</string>
+   </property>
+  </action>
+  <action name="actionTriangle">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtriangle.png</normaloff>:/smallicon/icons/povicons/small/pmtriangle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Triangle</string>
+   </property>
+  </action>
+  <action name="actionMesh">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmesh.png</normaloff>:/smallicon/icons/povicons/small/pmmesh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mesh</string>
+   </property>
+  </action>
+  <action name="actionPlane">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmplane.png</normaloff>:/smallicon/icons/povicons/small/pmplane.png</iconset>
+   </property>
+   <property name="text">
+    <string>Plane</string>
+   </property>
+  </action>
+  <action name="actionUnion">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmunion.png</normaloff>:/smallicon/icons/povicons/small/pmunion.png</iconset>
+   </property>
+   <property name="text">
+    <string>Union</string>
+   </property>
+  </action>
+  <action name="actionDifference">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdifference.png</normaloff>:/smallicon/icons/povicons/small/pmdifference.png</iconset>
+   </property>
+   <property name="text">
+    <string>Difference</string>
+   </property>
+  </action>
+  <action name="actionMerge">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmerge.png</normaloff>:/smallicon/icons/povicons/small/pmmerge.png</iconset>
+   </property>
+   <property name="text">
+    <string>Merge</string>
+   </property>
+  </action>
+  <action name="actionIntersection">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmintersection.png</normaloff>:/smallicon/icons/povicons/small/pmintersection.png</iconset>
+   </property>
+   <property name="text">
+    <string>Intersection</string>
+   </property>
+  </action>
+  <action name="actionMaterial_2">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmaterial.png</normaloff>:/smallicon/icons/povicons/small/pmmaterial.png</iconset>
+   </property>
+   <property name="text">
+    <string>Material</string>
+   </property>
+  </action>
+  <action name="actionInterior_2">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pminterior.png</normaloff>:/smallicon/icons/povicons/small/pminterior.png</iconset>
+   </property>
+   <property name="text">
+    <string>Interior</string>
+   </property>
+  </action>
+  <action name="actionMedia">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmedia.png</normaloff>:/smallicon/icons/povicons/small/pmmedia.png</iconset>
+   </property>
+   <property name="text">
+    <string>Media</string>
+   </property>
+  </action>
+  <action name="actionDensity">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdensity.png</normaloff>:/smallicon/icons/povicons/small/pmdensity.png</iconset>
+   </property>
+   <property name="text">
+    <string>Density</string>
+   </property>
+  </action>
+  <action name="actionDensity_List">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdensitylist.png</normaloff>:/smallicon/icons/povicons/small/pmdensitylist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Density List</string>
+   </property>
+  </action>
+  <action name="actionDensity_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmdensitymap.png</normaloff>:/smallicon/icons/povicons/small/pmdensitymap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Density Map</string>
+   </property>
+  </action>
+  <action name="actionPattern">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmpattern.png</normaloff>:/smallicon/icons/povicons/small/pmpattern.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pattern</string>
+   </property>
+  </action>
+  <action name="actionBlend_Map_Modifiers">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmblendmapmodifiers.png</normaloff>:/smallicon/icons/povicons/small/pmblendmapmodifiers.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blend Map Modifiers</string>
+   </property>
+  </action>
+  <action name="actionWarp">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmwarp.png</normaloff>:/smallicon/icons/povicons/small/pmwarp.png</iconset>
+   </property>
+   <property name="text">
+    <string>Warp</string>
+   </property>
+  </action>
+  <action name="actionTexture_2">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtexture.png</normaloff>:/smallicon/icons/povicons/small/pmtexture.png</iconset>
+   </property>
+   <property name="text">
+    <string>Texture</string>
+   </property>
+  </action>
+  <action name="actionInterior_Texture">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pminteriortexture.png</normaloff>:/smallicon/icons/povicons/small/pminteriortexture.png</iconset>
+   </property>
+   <property name="text">
+    <string>Interior Texture</string>
+   </property>
+  </action>
+  <action name="actionPigment">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmpigment.png</normaloff>:/smallicon/icons/povicons/small/pmpigment.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pigment</string>
+   </property>
+  </action>
+  <action name="actionNormal">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmnormal.png</normaloff>:/smallicon/icons/povicons/small/pmnormal.png</iconset>
+   </property>
+   <property name="text">
+    <string>Normal</string>
+   </property>
+  </action>
+  <action name="actionSolid_Color">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmsolidcolor.png</normaloff>:/smallicon/icons/povicons/small/pmsolidcolor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Solid Color</string>
+   </property>
+  </action>
+  <action name="actionTexture_List">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtexturelist.png</normaloff>:/smallicon/icons/povicons/small/pmtexturelist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Texture List</string>
+   </property>
+  </action>
+  <action name="actionColor_ist">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcolorlist.png</normaloff>:/smallicon/icons/povicons/small/pmcolorlist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Color ist</string>
+   </property>
+  </action>
+  <action name="actionPigment_List">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmpigmentlist.png</normaloff>:/smallicon/icons/povicons/small/pmpigmentlist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pigment List</string>
+   </property>
+  </action>
+  <action name="actionNormal_List">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmnormallist.png</normaloff>:/smallicon/icons/povicons/small/pmnormallist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Normal List</string>
+   </property>
+  </action>
+  <action name="actionTexture_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtexturemap.png</normaloff>:/smallicon/icons/povicons/small/pmtexturemap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Texture Map</string>
+   </property>
+  </action>
+  <action name="actionMaterial_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmaterialmap.png</normaloff>:/smallicon/icons/povicons/small/pmmaterialmap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Material Map</string>
+   </property>
+  </action>
+  <action name="actionPigment_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmpigmentmap.png</normaloff>:/smallicon/icons/povicons/small/pmpigmentmap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pigment Map</string>
+   </property>
+  </action>
+  <action name="actionImange_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmimagemap.png</normaloff>:/smallicon/icons/povicons/small/pmimagemap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Imange Map</string>
+   </property>
+  </action>
+  <action name="actionColor_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmcolormap.png</normaloff>:/smallicon/icons/povicons/small/pmcolormap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Color Map</string>
+   </property>
+  </action>
+  <action name="actionNormal_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmnormalmap.png</normaloff>:/smallicon/icons/povicons/small/pmnormalmap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Normal Map</string>
+   </property>
+  </action>
+  <action name="actionBump_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmbumpmap.png</normaloff>:/smallicon/icons/povicons/small/pmbumpmap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bump Map</string>
+   </property>
+  </action>
+  <action name="actionSlope">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmslope.png</normaloff>:/smallicon/icons/povicons/small/pmslope.png</iconset>
+   </property>
+   <property name="text">
+    <string>Slope</string>
+   </property>
+  </action>
+  <action name="actionSlope_Map">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmslopemap.png</normaloff>:/smallicon/icons/povicons/small/pmslopemap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Slope Map</string>
+   </property>
+  </action>
+  <action name="actionFinish">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmfinish.png</normaloff>:/smallicon/icons/povicons/small/pmfinish.png</iconset>
+   </property>
+   <property name="text">
+    <string>Finitsh</string>
+   </property>
+  </action>
+  <action name="actionQuick_Color">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmquickcolor.png</normaloff>:/smallicon/icons/povicons/small/pmquickcolor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quick Color</string>
+   </property>
+  </action>
+  <action name="actionPhotons_2">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmphotons.png</normaloff>:/smallicon/icons/povicons/small/pmphotons.png</iconset>
+   </property>
+   <property name="text">
+    <string>Photons</string>
+   </property>
+  </action>
+  <action name="actionSky_Sphere">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmskysphere.png</normaloff>:/smallicon/icons/povicons/small/pmskysphere.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sky Sphere</string>
+   </property>
+  </action>
+  <action name="actionRainbow">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmrainbow.png</normaloff>:/smallicon/icons/povicons/small/pmrainbow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rainbow</string>
+   </property>
+  </action>
+  <action name="actionFog">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmfog.png</normaloff>:/smallicon/icons/povicons/small/pmfog.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fog</string>
+   </property>
+  </action>
+  <action name="actionTranslation">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmtranslate.png</normaloff>:/smallicon/icons/povicons/small/pmtranslate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Translation</string>
+   </property>
+  </action>
+  <action name="actionScale">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmscale.png</normaloff>:/smallicon/icons/povicons/small/pmscale.png</iconset>
+   </property>
+   <property name="text">
+    <string>Scale</string>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmrotate.png</normaloff>:/smallicon/icons/povicons/small/pmrotate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+  </action>
+  <action name="actionMatrix">
+   <property name="icon">
+    <iconset resource="../../add-png-icons.qrc">
+     <normaloff>:/smallicon/icons/povicons/small/pmmatrix.png</normaloff>:/smallicon/icons/povicons/small/pmmatrix.png</iconset>
+   </property>
+   <property name="text">
+    <string>Matrix</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="edit-undo"/>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="edit-redo"/>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionVery_Low">
+   <property name="text">
+    <string>Very Low</string>
+   </property>
+  </action>
+  <action name="actionLow">
+   <property name="text">
+    <string>Low</string>
+   </property>
+  </action>
+  <action name="actionMedium">
+   <property name="text">
+    <string>Medium</string>
+   </property>
+  </action>
+  <action name="actionHigh">
+   <property name="text">
+    <string>High</string>
+   </property>
+  </action>
+  <action name="actionVery_High">
+   <property name="text">
+    <string>Very High</string>
    </property>
   </action>
  </widget>
@@ -494,7 +1513,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../add-png-icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionProperty</sender>

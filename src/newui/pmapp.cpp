@@ -37,6 +37,8 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
     //
     //  Do some more initialization
+    QString theme = QIcon::themeName();
+
 
     mMainWindow.show();
 }
@@ -57,7 +59,7 @@ void PMApp::setGlViewChecked(GLView view, bool checked) {
 
 bool PMApp::Load(const QString& aPath) {
     PMObjectList list;
-    QIODevice* dev = new QFile( "test.kpm" );
+    QIODevice* dev = new QFile( aPath );
     bool success = true;
 
 
