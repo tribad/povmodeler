@@ -1,4 +1,5 @@
 #include <QFile>
+#include <QIcon>
 
 #include "pmscene.h"
 #include "pmmodel.h"
@@ -89,19 +90,20 @@ int PMModel::columnCount(const QModelIndex &parent) const {
 
 QVariant PMModel::data(const QModelIndex &index, int role) const {
     QVariant retval;
+    PMObject* item = static_cast<PMObject*>(index.internalPointer());
 
-    if (role == Qt::DisplayRole) {
-        PMObject* item = static_cast<PMObject*>(index.internalPointer());
-
-        if (item != nullptr) {
-            if (!item->name().isEmpty()) {
-                retval = item->name();
-            } else {
-                retval = item->className();
-            }
+    if (item != nullptr) {
+        if (role == Qt::DisplayRole) {
+                if (!item->name().isEmpty()) {
+                    retval = item->name();
+                } else {
+                    retval = item->className();
+                }
+        } else if (role == Qt::DecorationRole) {
+            QString iconpath = ":/smallicon/icons/povicons/small/pm" + item->className();
+            retval = QIcon( iconpath.toLower());
         }
     }
-
     return retval;
 }
 //
