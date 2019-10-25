@@ -100,8 +100,7 @@ QVariant PMModel::data(const QModelIndex &index, int role) const {
                     retval = item->className();
                 }
         } else if (role == Qt::DecorationRole) {
-            QString iconpath = ":/smallicon/icons/povicons/small/pm" + item->className();
-            retval = QIcon( iconpath.toLower());
+            retval = QIcon( ":/smallicon/icons/povicons/small/pm" + item->className().toLower());
         }
     }
     return retval;
