@@ -150,12 +150,6 @@ public:
     * Returns a pointer to the parent object.
     */
    PMObject* parent() const { return m_pParent; }
-#if 0
-   /**
-    * Returns a pointer to the corresponding part
-    */
-   PMPart* part() const { return m_pPart; }
-#endif
    /**
     * Returns true if an object with type className can be inserted
     * as child after the object after.
