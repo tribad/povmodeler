@@ -38,7 +38,7 @@ public:
     //
     //  Getters.
     bool isModified() {return mModified;}
-
+    QString GetItemType(const QModelIndex& index);
 signals:
 
 public slots:

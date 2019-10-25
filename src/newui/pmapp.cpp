@@ -15,6 +15,7 @@
 //
 //  Local includes.
 #include "pmapp.h"
+#include "widgets/pmfactory.h"
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
 {
@@ -42,6 +43,9 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionFront,    SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotFront(bool)));
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
     //
+    //  Do connections to the tree widget
+    connect(mPMMainWindow.dockWidgetContents, SIGNAL(clicked(const QModelIndex&)), this, SLOT(selectedInTree(const QModelIndex&)) );
+    //
     //  Do some more initialization
     //  Gui stuff first
     mPMMainWindow.treeDockWidget->setWindowTitle("Browser");
@@ -50,6 +54,28 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     mActiveModel = nullptr;
 
     mMainWindow.show();
+}
+//
+//  Direct Slots
+void PMApp::selectedInTree(const QModelIndex &index) {
+    //
+    // Security check of active model.
+    if (mActiveModel != nullptr) {
+        QString itemtype = mActiveModel->GetItemType(index);
+
+        if (!itemtype.isEmpty()) {
+            QWidget* propertyWidget = widget::PMFactory::Create(itemtype);
+
+            if (propertyWidget != nullptr) {
+                propertyWidget->setParent(mPMMainWindow.propertyDockWidget);
+                mPMMainWindow.propertyDockWidget->setWidget(propertyWidget);
+                propertyWidget->show();
+            } else {
+                mPMMainWindow.propertyDockWidget->setWidget(nullptr);
+            }
+        }
+    }
+
 }
 //
 //  View Menu signal processing methods

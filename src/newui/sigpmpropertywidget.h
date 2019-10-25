@@ -1,8 +1,8 @@
 // **************************************************************************
 //
-// Modul-Name        :
+// Modul-Name        : sigpmpropertywidget.h
 // Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
-// Creation-Date     :
+// Creation-Date     : 23.10.2019
 //
 //  Copyrights by Hans-Juergen Lange. All rights reserved.
 //

@@ -1,3 +1,12 @@
+// **************************************************************************
+//
+// Modul-Name        : pmmodel.cpp
+// Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
+// Creation-Date     : 23.10.2019
+//
+//  Copyrights by Hans-Juergen Lange. All rights reserved.
+//
+// **************************************************************************
 #include <QFile>
 #include <QIcon>
 
@@ -145,4 +154,14 @@ bool PMModel::Store(const QString& aPath) {
 //  Important point is, that the modified flag shall stay false (unmodified)
 void PMModel::FillWithDefault() {
     mModified = false;
+}
+
+QString PMModel::GetItemType(const QModelIndex &index) {
+    QString retval;
+    PMObject* item = static_cast<PMObject*>(index.internalPointer());
+
+    if (item != nullptr) {
+        retval = item->className();
+    }
+    return retval;
 }

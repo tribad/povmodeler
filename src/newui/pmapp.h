@@ -42,6 +42,9 @@ public:
 signals:
 
 public slots:
+    //
+    //  Tree widget interface
+    void selectedInTree(const QModelIndex& index);
 private:  //  Methods
     //
     // View menu interface
@@ -57,6 +60,7 @@ private:  //  Methods
     virtual void doSave();
     virtual void doClose();
     virtual void doExit();
+
 public:   //  Attributes
 private:  //  Attributes
     //

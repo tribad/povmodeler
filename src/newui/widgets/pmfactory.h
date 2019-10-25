@@ -1,19 +1,27 @@
 // **************************************************************************
 //
-// Modul-Name        : sigpmpropertywidget.cpp
+// Modul-Name        : pmfactory.h
 // Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
-// Creation-Date     : 23.10.2019
+// Creation-Date     : 25.10.2019
 //
 //  Copyrights by Hans-Juergen Lange. All rights reserved.
 //
 // **************************************************************************
 
-#include "sigpmpropertywidget.h"
+#ifndef PMFACTORY_H
+#define PMFACTORY_H
 
-SigPMPropertyWidget::SigPMPropertyWidget(QWidget *parent) : QWidget(parent)
+#include <QWidget>
+
+namespace widget {
+
+class PMFactory
 {
+public:
+    PMFactory();
+    ~PMFactory() {}
+    static QWidget* Create(const QString& aWidgetName);
+};
 
 }
-QSize SigPMPropertyWidget::sizeHint() const {
-    return QSize(300,300);
-}
+#endif // PMFACTORY_H
