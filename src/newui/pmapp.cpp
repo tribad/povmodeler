@@ -43,7 +43,10 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     connect(mPMMainWindow.actionCamera,   SIGNAL(triggered(bool)), mSigPMViewMenu, SLOT(slotCamera(bool)));
     //
     //  Do some more initialization
+    //  Gui stuff first
     mPMMainWindow.treeDockWidget->setWindowTitle("Browser");
+    //
+    // others.
     mActiveModel = nullptr;
 
     mMainWindow.show();

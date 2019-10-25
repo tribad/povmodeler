@@ -536,7 +536,8 @@
   </widget>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>About ....</string>
@@ -544,7 +545,8 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset theme="document-new"/>
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -552,7 +554,8 @@
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -560,7 +563,8 @@
   </action>
   <action name="actionOpen_Recent">
    <property name="icon">
-    <iconset theme="document-open-recent"/>
+    <iconset theme="document-open-recent">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Open Recent ...</string>
@@ -568,7 +572,8 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset theme="document-save"/>
+    <iconset theme="document-save">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -576,7 +581,8 @@
   </action>
   <action name="actionSave_as">
    <property name="icon">
-    <iconset theme="document-save-as"/>
+    <iconset theme="document-save-as">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save as ...</string>
@@ -594,7 +600,8 @@
   </action>
   <action name="actionRevert">
    <property name="icon">
-    <iconset theme="document-revert"/>
+    <iconset theme="document-revert">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Revert</string>
@@ -602,7 +609,8 @@
   </action>
   <action name="actionPrint">
    <property name="icon">
-    <iconset theme="document-print"/>
+    <iconset theme="document-print">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Print</string>
@@ -610,7 +618,8 @@
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset theme="window-close"/>
+    <iconset theme="window-close">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Close</string>
@@ -618,7 +627,8 @@
   </action>
   <action name="actionQuit">
    <property name="icon">
-    <iconset theme="application-exit"/>
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -626,7 +636,8 @@
   </action>
   <action name="actionCut">
    <property name="icon">
-    <iconset theme="edit-cut"/>
+    <iconset theme="edit-cut">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -634,7 +645,8 @@
   </action>
   <action name="actionCopy">
    <property name="icon">
-    <iconset theme="edit-copy"/>
+    <iconset theme="edit-copy">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -642,7 +654,8 @@
   </action>
   <action name="actionPaste">
    <property name="icon">
-    <iconset theme="edit-paste"/>
+    <iconset theme="edit-paste">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -650,7 +663,8 @@
   </action>
   <action name="actionDelete">
    <property name="icon">
-    <iconset theme="edit-delete"/>
+    <iconset theme="edit-delete">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -769,7 +783,7 @@
   <action name="actionGlobal_Settings">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmglobalsettings.png</normaloff>:/smallicon/icons/povicons/small/pmglobalsettings.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmglobalsettings.png</normaloff>:/bigicon/icons/povicons/big/pmglobalsettings.png</iconset>
    </property>
    <property name="text">
     <string>Global Settings</string>
@@ -778,7 +792,7 @@
   <action name="actionRadiosity">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmradiosity.png</normaloff>:/smallicon/icons/povicons/small/pmradiosity.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmradiosity.png</normaloff>:/bigicon/icons/povicons/big/pmradiosity.png</iconset>
    </property>
    <property name="text">
     <string>Radiosity</string>
@@ -787,7 +801,7 @@
   <action name="actionGlobal_Photons">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmglobalphotons.png</normaloff>:/smallicon/icons/povicons/small/pmglobalphotons.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmglobalphotons.png</normaloff>:/bigicon/icons/povicons/big/pmglobalphotons.png</iconset>
    </property>
    <property name="text">
     <string>Global Photons</string>
@@ -796,7 +810,7 @@
   <action name="actionDeclarations">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdeclare.png</normaloff>:/smallicon/icons/povicons/small/pmdeclare.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdeclare.png</normaloff>:/bigicon/icons/povicons/big/pmdeclare.png</iconset>
    </property>
    <property name="text">
     <string>Declarations</string>
@@ -805,7 +819,7 @@
   <action name="actionDeclare_Function">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdeclare-f.png</normaloff>:/smallicon/icons/povicons/small/pmdeclare-f.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdeclare-f.png</normaloff>:/bigicon/icons/povicons/big/pmdeclare-f.png</iconset>
    </property>
    <property name="text">
     <string>Declare Function</string>
@@ -814,7 +828,7 @@
   <action name="actionBounded_By">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmboundedby.png</normaloff>:/smallicon/icons/povicons/small/pmboundedby.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmboundedby.png</normaloff>:/bigicon/icons/povicons/big/pmboundedby.png</iconset>
    </property>
    <property name="text">
     <string>Bounded By</string>
@@ -823,7 +837,7 @@
   <action name="actionClipped_By">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmclippedby.png</normaloff>:/smallicon/icons/povicons/small/pmclippedby.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmclippedby.png</normaloff>:/bigicon/icons/povicons/big/pmclippedby.png</iconset>
    </property>
    <property name="text">
     <string>Clipped By</string>
@@ -832,7 +846,7 @@
   <action name="actionLight">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmlight.png</normaloff>:/smallicon/icons/povicons/small/pmlight.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmlight.png</normaloff>:/bigicon/icons/povicons/big/pmlight.png</iconset>
    </property>
    <property name="text">
     <string>Light</string>
@@ -841,7 +855,7 @@
   <action name="actionLight_Group">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmlightgroup.png</normaloff>:/smallicon/icons/povicons/small/pmlightgroup.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmlightgroup.png</normaloff>:/bigicon/icons/povicons/big/pmlightgroup.png</iconset>
    </property>
    <property name="text">
     <string>Light Group</string>
@@ -850,7 +864,7 @@
   <action name="actionLooks_Like">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmlookslike.png</normaloff>:/smallicon/icons/povicons/small/pmlookslike.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmlookslike.png</normaloff>:/bigicon/icons/povicons/big/pmlookslike.png</iconset>
    </property>
    <property name="text">
     <string>Looks Like</string>
@@ -859,7 +873,7 @@
   <action name="actionProjected_Through">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmprojectedthrough.png</normaloff>:/smallicon/icons/povicons/small/pmprojectedthrough.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmprojectedthrough.png</normaloff>:/bigicon/icons/povicons/big/pmprojectedthrough.png</iconset>
    </property>
    <property name="text">
     <string>Projected Through</string>
@@ -868,7 +882,7 @@
   <action name="actionCameraInsert">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcamera.png</normaloff>:/smallicon/icons/povicons/small/pmcamera.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcamera.png</normaloff>:/bigicon/icons/povicons/big/pmcamera.png</iconset>
    </property>
    <property name="text">
     <string>Camera</string>
@@ -877,7 +891,7 @@
   <action name="actionComment">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcomment.png</normaloff>:/smallicon/icons/povicons/small/pmcomment.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcomment.png</normaloff>:/bigicon/icons/povicons/big/pmcomment.png</iconset>
    </property>
    <property name="text">
     <string>Comment</string>
@@ -886,7 +900,7 @@
   <action name="actionRaw_Povray">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmraw.png</normaloff>:/smallicon/icons/povicons/small/pmraw.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmraw.png</normaloff>:/bigicon/icons/povicons/big/pmraw.png</iconset>
    </property>
    <property name="text">
     <string>Raw Povray</string>
@@ -895,7 +909,7 @@
   <action name="actionBox">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmbox.png</normaloff>:/smallicon/icons/povicons/small/pmbox.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmbox.png</normaloff>:/bigicon/icons/povicons/big/pmbox.png</iconset>
    </property>
    <property name="text">
     <string>Box</string>
@@ -904,7 +918,7 @@
   <action name="actionSphere">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmsphere.png</normaloff>:/smallicon/icons/povicons/small/pmsphere.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmsphere.png</normaloff>:/bigicon/icons/povicons/big/pmsphere.png</iconset>
    </property>
    <property name="text">
     <string>Sphere</string>
@@ -913,7 +927,7 @@
   <action name="actionCylinder">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcylinder.png</normaloff>:/smallicon/icons/povicons/small/pmcylinder.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcylinder.png</normaloff>:/bigicon/icons/povicons/big/pmcylinder.png</iconset>
    </property>
    <property name="text">
     <string>Cylinder</string>
@@ -922,7 +936,7 @@
   <action name="actionCone">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcone.png</normaloff>:/smallicon/icons/povicons/small/pmcone.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcone.png</normaloff>:/bigicon/icons/povicons/big/pmcone.png</iconset>
    </property>
    <property name="text">
     <string>Cone</string>
@@ -931,7 +945,7 @@
   <action name="actionTorus">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtorus.png</normaloff>:/smallicon/icons/povicons/small/pmtorus.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtorus.png</normaloff>:/bigicon/icons/povicons/big/pmtorus.png</iconset>
    </property>
    <property name="text">
     <string>Torus</string>
@@ -940,7 +954,7 @@
   <action name="actionEllipsoid">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmsqe.png</normaloff>:/smallicon/icons/povicons/small/pmsqe.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmsqe.png</normaloff>:/bigicon/icons/povicons/big/pmsqe.png</iconset>
    </property>
    <property name="text">
     <string>Ellipsoid</string>
@@ -949,7 +963,7 @@
   <action name="actionHeight_Field">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmheightfield.png</normaloff>:/smallicon/icons/povicons/small/pmheightfield.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmheightfield.png</normaloff>:/bigicon/icons/povicons/big/pmheightfield.png</iconset>
    </property>
    <property name="text">
     <string>Height Field</string>
@@ -958,7 +972,7 @@
   <action name="actionText">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtext.png</normaloff>:/smallicon/icons/povicons/small/pmtext.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtext.png</normaloff>:/bigicon/icons/povicons/big/pmtext.png</iconset>
    </property>
    <property name="text">
     <string>Text</string>
@@ -967,7 +981,7 @@
   <action name="actionJulia_Fractal">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmjuliafractal.png</normaloff>:/smallicon/icons/povicons/small/pmjuliafractal.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmjuliafractal.png</normaloff>:/bigicon/icons/povicons/big/pmjuliafractal.png</iconset>
    </property>
    <property name="text">
     <string>Julia Fractal</string>
@@ -976,7 +990,7 @@
   <action name="actionIso_Surface">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmisosurface.png</normaloff>:/smallicon/icons/povicons/small/pmisosurface.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmisosurface.png</normaloff>:/bigicon/icons/povicons/big/pmisosurface.png</iconset>
    </property>
    <property name="text">
     <string>Iso Surface</string>
@@ -985,7 +999,7 @@
   <action name="actionBlob">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmblob.png</normaloff>:/smallicon/icons/povicons/small/pmblob.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmblob.png</normaloff>:/bigicon/icons/povicons/big/pmblob.png</iconset>
    </property>
    <property name="text">
     <string>Blob</string>
@@ -994,7 +1008,7 @@
   <action name="actionBlob_Sphere">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmblobsphere.png</normaloff>:/smallicon/icons/povicons/small/pmblobsphere.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmblobsphere.png</normaloff>:/bigicon/icons/povicons/big/pmblobsphere.png</iconset>
    </property>
    <property name="text">
     <string>Blob Sphere</string>
@@ -1003,7 +1017,7 @@
   <action name="actionBlob_Cylinder">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmblobcylinder.png</normaloff>:/smallicon/icons/povicons/small/pmblobcylinder.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmblobcylinder.png</normaloff>:/bigicon/icons/povicons/big/pmblobcylinder.png</iconset>
    </property>
    <property name="text">
     <string>Blob Cylinder</string>
@@ -1012,7 +1026,7 @@
   <action name="actionLathe">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmlathe.png</normaloff>:/smallicon/icons/povicons/small/pmlathe.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmlathe.png</normaloff>:/bigicon/icons/povicons/big/pmlathe.png</iconset>
    </property>
    <property name="text">
     <string>Lathe</string>
@@ -1021,7 +1035,7 @@
   <action name="actionPrism">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmprism.png</normaloff>:/smallicon/icons/povicons/small/pmprism.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmprism.png</normaloff>:/bigicon/icons/povicons/big/pmprism.png</iconset>
    </property>
    <property name="text">
     <string>Prism</string>
@@ -1030,7 +1044,7 @@
   <action name="actionSurface_Of_Revolution">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmsor.png</normaloff>:/smallicon/icons/povicons/small/pmsor.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmsor.png</normaloff>:/bigicon/icons/povicons/big/pmsor.png</iconset>
    </property>
    <property name="text">
     <string>Surface Of Revolution</string>
@@ -1039,7 +1053,7 @@
   <action name="actionSphere_Sweep">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmspheresweep.png</normaloff>:/smallicon/icons/povicons/small/pmspheresweep.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmspheresweep.png</normaloff>:/bigicon/icons/povicons/big/pmspheresweep.png</iconset>
    </property>
    <property name="text">
     <string>Sphere Sweep</string>
@@ -1048,7 +1062,7 @@
   <action name="actionObject_Link">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmobjectlink.png</normaloff>:/smallicon/icons/povicons/small/pmobjectlink.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmobjectlink.png</normaloff>:/bigicon/icons/povicons/big/pmobjectlink.png</iconset>
    </property>
    <property name="text">
     <string>Object Link</string>
@@ -1057,7 +1071,7 @@
   <action name="actionDisc">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdisc.png</normaloff>:/smallicon/icons/povicons/small/pmdisc.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdisc.png</normaloff>:/bigicon/icons/povicons/big/pmdisc.png</iconset>
    </property>
    <property name="text">
     <string>Disc</string>
@@ -1066,7 +1080,7 @@
   <action name="actionBicubic_Patch">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmbicubicpatch.png</normaloff>:/smallicon/icons/povicons/small/pmbicubicpatch.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmbicubicpatch.png</normaloff>:/bigicon/icons/povicons/big/pmbicubicpatch.png</iconset>
    </property>
    <property name="text">
     <string>Bicubic Patch</string>
@@ -1075,7 +1089,7 @@
   <action name="actionTriangle">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtriangle.png</normaloff>:/smallicon/icons/povicons/small/pmtriangle.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtriangle.png</normaloff>:/bigicon/icons/povicons/big/pmtriangle.png</iconset>
    </property>
    <property name="text">
     <string>Triangle</string>
@@ -1084,7 +1098,7 @@
   <action name="actionMesh">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmesh.png</normaloff>:/smallicon/icons/povicons/small/pmmesh.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmesh.png</normaloff>:/bigicon/icons/povicons/big/pmmesh.png</iconset>
    </property>
    <property name="text">
     <string>Mesh</string>
@@ -1093,7 +1107,7 @@
   <action name="actionPlane">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmplane.png</normaloff>:/smallicon/icons/povicons/small/pmplane.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmplane.png</normaloff>:/bigicon/icons/povicons/big/pmplane.png</iconset>
    </property>
    <property name="text">
     <string>Plane</string>
@@ -1102,7 +1116,7 @@
   <action name="actionUnion">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmunion.png</normaloff>:/smallicon/icons/povicons/small/pmunion.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmunion.png</normaloff>:/bigicon/icons/povicons/big/pmunion.png</iconset>
    </property>
    <property name="text">
     <string>Union</string>
@@ -1111,7 +1125,7 @@
   <action name="actionDifference">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdifference.png</normaloff>:/smallicon/icons/povicons/small/pmdifference.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdifference.png</normaloff>:/bigicon/icons/povicons/big/pmdifference.png</iconset>
    </property>
    <property name="text">
     <string>Difference</string>
@@ -1120,7 +1134,7 @@
   <action name="actionMerge">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmerge.png</normaloff>:/smallicon/icons/povicons/small/pmmerge.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmerge.png</normaloff>:/bigicon/icons/povicons/big/pmmerge.png</iconset>
    </property>
    <property name="text">
     <string>Merge</string>
@@ -1129,7 +1143,7 @@
   <action name="actionIntersection">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmintersection.png</normaloff>:/smallicon/icons/povicons/small/pmintersection.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmintersection.png</normaloff>:/bigicon/icons/povicons/big/pmintersection.png</iconset>
    </property>
    <property name="text">
     <string>Intersection</string>
@@ -1138,7 +1152,7 @@
   <action name="actionMaterial_2">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmaterial.png</normaloff>:/smallicon/icons/povicons/small/pmmaterial.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmaterial.png</normaloff>:/bigicon/icons/povicons/big/pmmaterial.png</iconset>
    </property>
    <property name="text">
     <string>Material</string>
@@ -1147,7 +1161,7 @@
   <action name="actionInterior_2">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pminterior.png</normaloff>:/smallicon/icons/povicons/small/pminterior.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pminterior.png</normaloff>:/bigicon/icons/povicons/big/pminterior.png</iconset>
    </property>
    <property name="text">
     <string>Interior</string>
@@ -1156,7 +1170,7 @@
   <action name="actionMedia">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmedia.png</normaloff>:/smallicon/icons/povicons/small/pmmedia.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmedia.png</normaloff>:/bigicon/icons/povicons/big/pmmedia.png</iconset>
    </property>
    <property name="text">
     <string>Media</string>
@@ -1165,7 +1179,7 @@
   <action name="actionDensity">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdensity.png</normaloff>:/smallicon/icons/povicons/small/pmdensity.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdensity.png</normaloff>:/bigicon/icons/povicons/big/pmdensity.png</iconset>
    </property>
    <property name="text">
     <string>Density</string>
@@ -1174,7 +1188,7 @@
   <action name="actionDensity_List">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdensitylist.png</normaloff>:/smallicon/icons/povicons/small/pmdensitylist.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdensitylist.png</normaloff>:/bigicon/icons/povicons/big/pmdensitylist.png</iconset>
    </property>
    <property name="text">
     <string>Density List</string>
@@ -1183,7 +1197,7 @@
   <action name="actionDensity_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmdensitymap.png</normaloff>:/smallicon/icons/povicons/small/pmdensitymap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmdensitymap.png</normaloff>:/bigicon/icons/povicons/big/pmdensitymap.png</iconset>
    </property>
    <property name="text">
     <string>Density Map</string>
@@ -1192,7 +1206,7 @@
   <action name="actionPattern">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmpattern.png</normaloff>:/smallicon/icons/povicons/small/pmpattern.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmpattern.png</normaloff>:/bigicon/icons/povicons/big/pmpattern.png</iconset>
    </property>
    <property name="text">
     <string>Pattern</string>
@@ -1201,7 +1215,7 @@
   <action name="actionBlend_Map_Modifiers">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmblendmapmodifiers.png</normaloff>:/smallicon/icons/povicons/small/pmblendmapmodifiers.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmblendmapmodifiers.png</normaloff>:/bigicon/icons/povicons/big/pmblendmapmodifiers.png</iconset>
    </property>
    <property name="text">
     <string>Blend Map Modifiers</string>
@@ -1210,7 +1224,7 @@
   <action name="actionWarp">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmwarp.png</normaloff>:/smallicon/icons/povicons/small/pmwarp.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmwarp.png</normaloff>:/bigicon/icons/povicons/big/pmwarp.png</iconset>
    </property>
    <property name="text">
     <string>Warp</string>
@@ -1219,7 +1233,7 @@
   <action name="actionTexture_2">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtexture.png</normaloff>:/smallicon/icons/povicons/small/pmtexture.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtexture.png</normaloff>:/bigicon/icons/povicons/big/pmtexture.png</iconset>
    </property>
    <property name="text">
     <string>Texture</string>
@@ -1228,7 +1242,7 @@
   <action name="actionInterior_Texture">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pminteriortexture.png</normaloff>:/smallicon/icons/povicons/small/pminteriortexture.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pminteriortexture.png</normaloff>:/bigicon/icons/povicons/big/pminteriortexture.png</iconset>
    </property>
    <property name="text">
     <string>Interior Texture</string>
@@ -1237,7 +1251,7 @@
   <action name="actionPigment">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmpigment.png</normaloff>:/smallicon/icons/povicons/small/pmpigment.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmpigment.png</normaloff>:/bigicon/icons/povicons/big/pmpigment.png</iconset>
    </property>
    <property name="text">
     <string>Pigment</string>
@@ -1246,7 +1260,7 @@
   <action name="actionNormal">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmnormal.png</normaloff>:/smallicon/icons/povicons/small/pmnormal.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmnormal.png</normaloff>:/bigicon/icons/povicons/big/pmnormal.png</iconset>
    </property>
    <property name="text">
     <string>Normal</string>
@@ -1255,7 +1269,7 @@
   <action name="actionSolid_Color">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmsolidcolor.png</normaloff>:/smallicon/icons/povicons/small/pmsolidcolor.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmsolidcolor.png</normaloff>:/bigicon/icons/povicons/big/pmsolidcolor.png</iconset>
    </property>
    <property name="text">
     <string>Solid Color</string>
@@ -1264,7 +1278,7 @@
   <action name="actionTexture_List">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtexturelist.png</normaloff>:/smallicon/icons/povicons/small/pmtexturelist.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtexturelist.png</normaloff>:/bigicon/icons/povicons/big/pmtexturelist.png</iconset>
    </property>
    <property name="text">
     <string>Texture List</string>
@@ -1273,7 +1287,7 @@
   <action name="actionColor_ist">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcolorlist.png</normaloff>:/smallicon/icons/povicons/small/pmcolorlist.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcolorlist.png</normaloff>:/bigicon/icons/povicons/big/pmcolorlist.png</iconset>
    </property>
    <property name="text">
     <string>Color ist</string>
@@ -1282,7 +1296,7 @@
   <action name="actionPigment_List">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmpigmentlist.png</normaloff>:/smallicon/icons/povicons/small/pmpigmentlist.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmpigmentlist.png</normaloff>:/bigicon/icons/povicons/big/pmpigmentlist.png</iconset>
    </property>
    <property name="text">
     <string>Pigment List</string>
@@ -1291,7 +1305,7 @@
   <action name="actionNormal_List">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmnormallist.png</normaloff>:/smallicon/icons/povicons/small/pmnormallist.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmnormallist.png</normaloff>:/bigicon/icons/povicons/big/pmnormallist.png</iconset>
    </property>
    <property name="text">
     <string>Normal List</string>
@@ -1300,7 +1314,7 @@
   <action name="actionTexture_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtexturemap.png</normaloff>:/smallicon/icons/povicons/small/pmtexturemap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtexturemap.png</normaloff>:/bigicon/icons/povicons/big/pmtexturemap.png</iconset>
    </property>
    <property name="text">
     <string>Texture Map</string>
@@ -1309,7 +1323,7 @@
   <action name="actionMaterial_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmaterialmap.png</normaloff>:/smallicon/icons/povicons/small/pmmaterialmap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmaterialmap.png</normaloff>:/bigicon/icons/povicons/big/pmmaterialmap.png</iconset>
    </property>
    <property name="text">
     <string>Material Map</string>
@@ -1318,7 +1332,7 @@
   <action name="actionPigment_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmpigmentmap.png</normaloff>:/smallicon/icons/povicons/small/pmpigmentmap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmpigmentmap.png</normaloff>:/bigicon/icons/povicons/big/pmpigmentmap.png</iconset>
    </property>
    <property name="text">
     <string>Pigment Map</string>
@@ -1327,7 +1341,7 @@
   <action name="actionImange_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmimagemap.png</normaloff>:/smallicon/icons/povicons/small/pmimagemap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmimagemap.png</normaloff>:/bigicon/icons/povicons/big/pmimagemap.png</iconset>
    </property>
    <property name="text">
     <string>Imange Map</string>
@@ -1336,7 +1350,7 @@
   <action name="actionColor_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmcolormap.png</normaloff>:/smallicon/icons/povicons/small/pmcolormap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmcolormap.png</normaloff>:/bigicon/icons/povicons/big/pmcolormap.png</iconset>
    </property>
    <property name="text">
     <string>Color Map</string>
@@ -1345,7 +1359,7 @@
   <action name="actionNormal_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmnormalmap.png</normaloff>:/smallicon/icons/povicons/small/pmnormalmap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmnormalmap.png</normaloff>:/bigicon/icons/povicons/big/pmnormalmap.png</iconset>
    </property>
    <property name="text">
     <string>Normal Map</string>
@@ -1354,7 +1368,7 @@
   <action name="actionBump_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmbumpmap.png</normaloff>:/smallicon/icons/povicons/small/pmbumpmap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmbumpmap.png</normaloff>:/bigicon/icons/povicons/big/pmbumpmap.png</iconset>
    </property>
    <property name="text">
     <string>Bump Map</string>
@@ -1363,7 +1377,7 @@
   <action name="actionSlope">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmslope.png</normaloff>:/smallicon/icons/povicons/small/pmslope.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmslope.png</normaloff>:/bigicon/icons/povicons/big/pmslope.png</iconset>
    </property>
    <property name="text">
     <string>Slope</string>
@@ -1372,7 +1386,7 @@
   <action name="actionSlope_Map">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmslopemap.png</normaloff>:/smallicon/icons/povicons/small/pmslopemap.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmslopemap.png</normaloff>:/bigicon/icons/povicons/big/pmslopemap.png</iconset>
    </property>
    <property name="text">
     <string>Slope Map</string>
@@ -1381,7 +1395,7 @@
   <action name="actionFinish">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmfinish.png</normaloff>:/smallicon/icons/povicons/small/pmfinish.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmfinish.png</normaloff>:/bigicon/icons/povicons/big/pmfinish.png</iconset>
    </property>
    <property name="text">
     <string>Finitsh</string>
@@ -1390,7 +1404,7 @@
   <action name="actionQuick_Color">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmquickcolor.png</normaloff>:/smallicon/icons/povicons/small/pmquickcolor.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmquickcolor.png</normaloff>:/bigicon/icons/povicons/big/pmquickcolor.png</iconset>
    </property>
    <property name="text">
     <string>Quick Color</string>
@@ -1399,7 +1413,7 @@
   <action name="actionPhotons_2">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmphotons.png</normaloff>:/smallicon/icons/povicons/small/pmphotons.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmphotons.png</normaloff>:/bigicon/icons/povicons/big/pmphotons.png</iconset>
    </property>
    <property name="text">
     <string>Photons</string>
@@ -1408,7 +1422,7 @@
   <action name="actionSky_Sphere">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmskysphere.png</normaloff>:/smallicon/icons/povicons/small/pmskysphere.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmskysphere.png</normaloff>:/bigicon/icons/povicons/big/pmskysphere.png</iconset>
    </property>
    <property name="text">
     <string>Sky Sphere</string>
@@ -1417,7 +1431,7 @@
   <action name="actionRainbow">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmrainbow.png</normaloff>:/smallicon/icons/povicons/small/pmrainbow.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmrainbow.png</normaloff>:/bigicon/icons/povicons/big/pmrainbow.png</iconset>
    </property>
    <property name="text">
     <string>Rainbow</string>
@@ -1426,7 +1440,7 @@
   <action name="actionFog">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmfog.png</normaloff>:/smallicon/icons/povicons/small/pmfog.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmfog.png</normaloff>:/bigicon/icons/povicons/big/pmfog.png</iconset>
    </property>
    <property name="text">
     <string>Fog</string>
@@ -1435,7 +1449,7 @@
   <action name="actionTranslation">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmtranslate.png</normaloff>:/smallicon/icons/povicons/small/pmtranslate.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmtranslate.png</normaloff>:/bigicon/icons/povicons/big/pmtranslate.png</iconset>
    </property>
    <property name="text">
     <string>Translation</string>
@@ -1444,7 +1458,7 @@
   <action name="actionScale">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmscale.png</normaloff>:/smallicon/icons/povicons/small/pmscale.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmscale.png</normaloff>:/bigicon/icons/povicons/big/pmscale.png</iconset>
    </property>
    <property name="text">
     <string>Scale</string>
@@ -1453,7 +1467,7 @@
   <action name="actionRotate">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmrotate.png</normaloff>:/smallicon/icons/povicons/small/pmrotate.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmrotate.png</normaloff>:/bigicon/icons/povicons/big/pmrotate.png</iconset>
    </property>
    <property name="text">
     <string>Rotate</string>
@@ -1462,7 +1476,7 @@
   <action name="actionMatrix">
    <property name="icon">
     <iconset resource="../../add-png-icons.qrc">
-     <normaloff>:/smallicon/icons/povicons/small/pmmatrix.png</normaloff>:/smallicon/icons/povicons/small/pmmatrix.png</iconset>
+     <normaloff>:/bigicon/icons/povicons/big/pmmatrix.png</normaloff>:/bigicon/icons/povicons/big/pmmatrix.png</iconset>
    </property>
    <property name="text">
     <string>Matrix</string>
@@ -1473,7 +1487,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="edit-undo"/>
+    <iconset theme="edit-undo">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Undo</string>
@@ -1484,7 +1499,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="edit-redo"/>
+    <iconset theme="edit-redo">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
