@@ -12,6 +12,9 @@
 
 SigPMTreeWidget::SigPMTreeWidget(QWidget *parent) : QTreeView(parent)
 {
+    //
+    // We do not want it.
+    setHeaderHidden(true);
 
 }
 
