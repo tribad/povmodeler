@@ -37,6 +37,8 @@ public:
     explicit PMApp(QObject *parent = nullptr);
     virtual ~PMApp() {}
     bool Load(const QString& aPath);
+
+    void EmptyInit();
 signals:
 
 public slots:

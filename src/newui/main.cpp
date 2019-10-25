@@ -52,6 +52,9 @@ int main( int argc, char* argv[] )
     }
     else
     {
+        //
+        //  Fill it with an initial default.
+        appclass.EmptyInit();
     }
 
     return app.exec();

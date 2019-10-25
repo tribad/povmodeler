@@ -140,4 +140,11 @@ bool PMApp::Load(const QString& aPath) {
     mModels.insert(mActiveModel = new PMModel(aPath));
     return retval;
 }
+//
+//  This is a public version of the doNew() private signal processing method.
+//  Its because to keep signal processing seperate from simple interfacing to other
+//  classes. Here only to the main module.
+void PMApp::EmptyInit() {
+    doNew();
+}
 
