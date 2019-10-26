@@ -27,6 +27,8 @@ PMMetaObject* PMNamedObject::s_pMetaObject = nullptr;
 PMNamedObject::PMNamedObject( )
       : Base( )
 {
+    mProperty.insert({{"name", ""}});
+
 }
 
 PMNamedObject::PMNamedObject( const PMNamedObject& o )

@@ -117,6 +117,9 @@ public:
 
    /** */
    virtual void restoreMemento( PMMemento* s );
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
+
 private:
    /**
     * IDs for @ref PMMementoData

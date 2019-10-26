@@ -28,11 +28,11 @@ PMMetaObject* PMCompositeObject::s_pMetaObject = nullptr;
 PMCompositeObject::PMCompositeObject( )
       : Base( )
 {
-   m_pFirstChild = nullptr;
-   m_pLastChild = nullptr;
-   m_selectedChildren = 0;
+   m_pFirstChild           = nullptr;
+   m_pLastChild            = nullptr;
+   m_selectedChildren      = 0;
    m_bViewStructureChanged = true;
-   m_pViewStructure = nullptr;
+   m_pViewStructure        = nullptr;
 }
 
 PMCompositeObject::PMCompositeObject( const PMCompositeObject& c )

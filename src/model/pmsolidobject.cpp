@@ -30,6 +30,8 @@ PMSolidObject::PMSolidObject( )
 {
    m_inverse = false;
    m_hollow = PMUnspecified;
+   mProperty.insert({{"inverse", false},
+                     {"hollow", PMUnspecified}});
 }
 
 PMSolidObject::PMSolidObject( const PMSolidObject& s )
@@ -137,4 +139,35 @@ void PMSolidObject::restoreMemento( PMMemento* s )
       }
    }
    Base::restoreMemento( s );
+}
+
+
+PMVariant PMSolidObject::GetProperty(const QString &aName) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "inverse") {
+        retval = inverse();
+    } else if (l_name == "hollow") {
+        retval = hollow();
+    } else {
+        retval = Base::GetProperty(aName);
+    }
+    return retval;
+}
+
+PMVariant PMSolidObject::SetProperty(const QString &aName, const PMVariant& aValue) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "inverse") {
+        retval = inverse();
+        setInverse(aValue.boolData());
+    } else if (l_name == "hollow") {
+        retval = hollow();
+        setHollow(aValue.threeStateData());
+    } else {
+        retval = Base::SetProperty(aName, aValue);
+    }
+    return retval;
 }

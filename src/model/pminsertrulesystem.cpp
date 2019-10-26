@@ -206,7 +206,7 @@ PMRuleProperty::PMRuleProperty( QDomElement& e )
    if( m_property.isNull() )
       qCritical(  ) << "RuleSystem: Invalid property name" << endl;
 }
-
+#if 1
 PMVariant PMRuleProperty::evaluate( const PMObject* o )
 {
    PMVariant v = o->property( m_property );
@@ -215,7 +215,7 @@ PMVariant PMRuleProperty::evaluate( const PMObject* o )
                         << m_property << endl;
    return v;
 }
-
+#endif
 
 PMRuleConstant::PMRuleConstant( QDomElement& e )
       : PMRuleValue()

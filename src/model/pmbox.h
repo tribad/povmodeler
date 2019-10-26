@@ -92,7 +92,10 @@ public:
    virtual void controlPointsChanged( PMControlPointList& list );
    /** */
    virtual void cleanUp() const;
-
+    //
+    //  Get a property by its name
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
 protected:
    /** */
    virtual bool isDefault();

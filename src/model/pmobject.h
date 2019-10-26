@@ -131,12 +131,15 @@ public:
     * Returns the class name of the object (povray name).
     * This is the name that is showed in dialogs and menus.
     */
-   virtual QString description() const;
+   virtual QString description() const {return mDescription;}
+   virtual void setDescription(const QString& aDescription) {mDescription = aDescription;}
    /**
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south wall", "floor" ...)
     */
-   virtual QString name() const { return QString(); }
+   virtual QString name() const { return mName; }
+
+   virtual void setName(const QString& aName) {mName = aName;}
    /**
     * Returns true if the object can have a name
     */
@@ -394,7 +397,6 @@ public:
     * Returns a property
     */
    PMVariant property( const QString& ) const;
-
    /**
     * Returns true if the object is selected
     */
@@ -479,6 +481,8 @@ public:
     * Set the pointer to 0 after deleting an object!
     */
    virtual void cleanUp() const;
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
 
 protected:
    /**
@@ -491,6 +495,8 @@ protected:
     */
    PMMemento* m_pMemento;
 private:
+   QString mName;
+   QString mDescription;
    /**
     * Pointer to treewidgetitem
     */
@@ -523,6 +529,15 @@ private:
     * Preview image
     */
    QImage m_preview;
+protected:
+   //
+   //  To come around the mass of properties and the huge work to create
+   //  all the getters and setter I try to create a more abstract way of storage.
+   //
+   //  The PMObject holds all properties. They are going to be filled by the constructors.
+   //  As these pass on there properties with the default values appropriate.
+   std::map<std::string, PMVariant> mProperty;
+
 };
 
 #endif

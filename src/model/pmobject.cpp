@@ -40,6 +40,8 @@ PMObject::PMObject( )
    not_visible_in_tree = false;
    map_image_preview   = 0;
    pmt_item            = nullptr;
+   mProperty.insert({{"description", ""}});
+
 }
 //
 //  The copy constructor.
@@ -54,6 +56,9 @@ PMObject::PMObject( const PMObject& o )
    not_visible_in_tree = false;
    map_image_preview   = 0;
    pmt_item            = nullptr;
+   //
+   //  The most easy way to copy all properties of an object.
+   mProperty           = o.mProperty;
 }
 
 PMObject::~PMObject()
@@ -82,10 +87,6 @@ PMObject* PMObject::copy() const {
     PMObject* retval = new PMObject(*this);
 
     return retval;
-}
-
-QString PMObject::description() const {
-    return "unspecific object base";
 }
 
 void PMObject::serialize( QDomElement& e, QDomDocument& doc ) const {
@@ -308,4 +309,39 @@ int PMObject::canInsert( const PMObjectList& list, const PMObject* after ) const
 int PMObject::canInsert( const QStringList& classes, const PMObject* after ) const
 {
    return insertRuleSystem()->canInsert( this, classes, after );
+}
+
+PMVariant PMObject::GetProperty(const QString &aName) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "name") {
+        retval = name();
+    } else if (l_name == "description") {
+        retval = description();
+    } else if (l_name == "classname") {
+        retval = className();
+    } else {
+
+    }
+    return retval;
+}
+
+PMVariant PMObject::SetProperty(const QString &aName, const PMVariant &aValue) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "name") {
+        retval = name();
+        setName(aValue.asString());
+    } else if (l_name == "description") {
+        retval = description();
+        setDescription(aValue.asString());
+    } else if (l_name == "classname") {
+        retval = className();
+    } else {
+
+    }
+    return retval;
+
 }

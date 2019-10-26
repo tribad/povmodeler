@@ -43,6 +43,9 @@ PMBox::PMBox( )
 {
    m_corner1 = corner1Default;
    m_corner2 = corner2Default;
+
+   mProperty.insert({{"corner1", PMVariant(PMVector(1.0, 1.0, 1.0))},
+                     {"corner2", PMVariant(PMVector(-1.0, -1.0, -1.0))}});
 }
 
 PMBox::PMBox( const PMBox& b )
@@ -266,4 +269,34 @@ void PMBox::cleanUp() const
       s_pMetaObject = nullptr;
    }
    Base::cleanUp();
+}
+
+PMVariant PMBox::GetProperty(const QString &aName) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "corner1") {
+        retval = corner1();
+    } else if (l_name == "corner2") {
+        retval = corner2();
+    } else {
+        retval = Base::GetProperty(aName);
+    }
+    return retval;
+}
+
+PMVariant PMBox::SetProperty(const QString &aName, const PMVariant& aValue) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "corner1") {
+        retval = corner1();
+        setCorner1(aValue.vectorData());
+    } else if (l_name == "corner2") {
+        retval = corner2();
+        setCorner2(aValue.vectorData());
+    } else {
+        retval = Base::SetProperty(aName, aValue);
+    }
+    return retval;
 }
