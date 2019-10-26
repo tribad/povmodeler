@@ -20,21 +20,15 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="glGridWidget">
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>539</width>
-      <height>569</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="glGrid">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMinimumSize</enum>
-     </property>
-    </layout>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="glGrid">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -335,6 +329,9 @@
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
+   </property>
+   <property name="windowTitle">
+    <string>Properties</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>

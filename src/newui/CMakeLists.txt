@@ -13,5 +13,5 @@ add_library(pmnewui
     ipmviewmenu.cpp ipmfilemenu.cpp
     sigpmviewmenu.cpp sigpmtreewidget.cpp sigpmpropertywidget.cpp sigpmfilemenu.cpp
 
-    widgets/pmfactory.cpp widgets/pmvectortable.cpp
+    widgets/pmfactory.cpp widgets/pmeditbase.cpp widgets/pmvectortable.cpp widgets/pmboxedit.cpp
 )

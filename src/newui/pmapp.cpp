@@ -64,11 +64,12 @@ void PMApp::selectedInTree(const QModelIndex &index) {
         QString itemtype = mActiveModel->GetItemType(index);
 
         if (!itemtype.isEmpty()) {
-            QWidget* propertyWidget = widget::PMFactory::Create(itemtype);
+            widget::PMEditBase* propertyWidget = widget::PMFactory::Create(itemtype);
 
             if (propertyWidget != nullptr) {
                 propertyWidget->setParent(mPMMainWindow.propertyDockWidget);
                 mPMMainWindow.propertyDockWidget->setWidget(propertyWidget);
+                propertyWidget->SetupData(static_cast<PMObject*>(index.internalPointer()));
                 propertyWidget->show();
             } else {
                 mPMMainWindow.propertyDockWidget->setWidget(nullptr);

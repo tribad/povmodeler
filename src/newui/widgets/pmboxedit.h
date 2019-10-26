@@ -1,6 +1,6 @@
 // **************************************************************************
 //
-// Modul-Name        : pmvectortable.h
+// Modul-Name        : pmboxedit.h
 // Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
 // Creation-Date     : 25.10.2019
 //
@@ -8,24 +8,27 @@
 //
 // **************************************************************************
 
-#ifndef PMVECTORTABLE_H
-#define PMVECTORTABLE_H
+#ifndef PMBOXEDIT_H
+#define PMBOXEDIT_H
 
-#include <QTableWidget>
-#include "pmvariant.h"
+#include <QWidget>
+#include "pmeditbase.h"
+#include "pmobject.h"
 
 namespace widget {
 
-class PMVectorTable : public QTableWidget
+class PMBoxEdit : public PMEditBase
 {
     Q_OBJECT
 public:
-    explicit PMVectorTable(QWidget* parent);
-    void SetFontSize(int size);
-    void Set(int row, const PMVariant& aValue);
+    PMBoxEdit(QWidget *parent = nullptr);
+    virtual void SetupData(PMObject* aObject);
+signals:
+
+public slots:
+
+private:
 };
-
-
 }
 
-#endif // PMVECTORTABLE_H
+#endif // PMBOXEDIT_H

@@ -9,21 +9,18 @@
 // **************************************************************************
 
 #include "pmfactory.h"
-#include "ui_boxedit.h"
-
-Ui::BoxEdit boxedit;
+#include "pmboxedit.h"
 
 widget::PMFactory::PMFactory()
 {
 
 }
 
-QWidget* widget::PMFactory::Create(const QString &aWidgetName) {
-    QWidget* retval = nullptr;
+widget::PMEditBase* widget::PMFactory::Create(const QString &aWidgetName) {
+    widget::PMEditBase* retval = nullptr;
 
     if (aWidgetName == "Box") {
-        retval = new QWidget;
-        boxedit.setupUi(retval);
+        retval = new widget::PMBoxEdit();
     }
     return retval;
 }

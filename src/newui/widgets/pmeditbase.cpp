@@ -1,29 +1,17 @@
 // **************************************************************************
 //
-// Modul-Name        : pmfactory.h
+// Modul-Name        : pmeditbase.cpp
 // Author            : Hans-Juergen Lange <hjl@simulated-universe.de>
-// Creation-Date     : 25.10.2019
+// Creation-Date     : 26.10.2019
 //
 //  Copyrights by Hans-Juergen Lange. All rights reserved.
 //
 // **************************************************************************
 
-#ifndef PMFACTORY_H
-#define PMFACTORY_H
-
-#include <QWidget>
-
 #include "pmeditbase.h"
 
-namespace widget {
 
-class PMFactory
+widget::PMEditBase::PMEditBase(QWidget *parent) : QWidget(parent)
 {
-public:
-    PMFactory();
-    ~PMFactory() {}
-    static widget::PMEditBase* Create(const QString& aWidgetName);
-};
 
 }
-#endif // PMFACTORY_H
