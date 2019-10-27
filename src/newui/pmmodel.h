@@ -38,6 +38,7 @@ public:
     //
     //  Getters.
     bool isModified() {return mModified;}
+    bool isEmpty()    {return mScene == nullptr;}
     QString GetItemType(const QModelIndex& index);
 signals:
 

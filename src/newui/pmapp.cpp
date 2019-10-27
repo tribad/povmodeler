@@ -12,6 +12,7 @@
 // Qt includes
 #include <QIODevice>
 #include <QFile>
+#include <QFileDialog>
 //
 //  Local includes.
 #include "pmapp.h"
@@ -112,18 +113,34 @@ void PMApp::doNew() {
     mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
 }
 void PMApp::doLoad() {
+    //
+    //  Get the last visited from the settings.
+    //  If not set already we take the users home directory.
+    QString last_visited = PMSettings::instance().value(LAST_DIRECTORY_VISITED, QDir::homePath()).toString();
 
+    QString to_open = QFileDialog::getOpenFileName(nullptr, "Open File", last_visited, "POV modeler (*.kpm)");
+    //
+    //  If the user selected a file we do open it.
+    //  This also updates the recent file list.
+    if (!to_open.isEmpty()) {
+        Load(to_open);
+        //
+        //  Convenient way to get the directory where the file resides.
+        QFileInfo now_visited(to_open);
+
+        PMSettings::instance().setValue(LAST_DIRECTORY_VISITED, now_visited.absolutePath());
+
+    }
 }
 
 void PMApp::doLoadRecent(QAction *recentAction) {
     if (recentAction != nullptr) {
         //
-        //  If the load succeeded the recent file goes up to the top.
-        //  If it failes it needs to be removed from the recent list.
-        if (Load(recentAction->text())) {
-            mRecentFiles.SetFile(recentAction->text());
-        } else {
+        //  If the load failed we remove the file name from the recent files list.
+        //  On sucessfull load it is all done in the Load() method.
+        if (!Load(recentAction->text())) {
             mRecentFiles.Remove(recentAction->text());
+            updateRecentFilesMenu();
         }
     }
 }
@@ -199,6 +216,7 @@ void PMApp::setupRecentFileMenu() {
             break;
         }
     }
+    connect(&mRecentFilesMenu, SIGNAL(triggered(QAction*)), this, SLOT(doLoadRecent(QAction*)));
 }
 //
 //  Update the recentfile menu.
@@ -214,18 +232,32 @@ void PMApp::updateRecentFilesMenu() {
             mRecentFilesMenu.addAction(f);
         }
     }
-    connect(&mRecentFilesMenu, SIGNAL(triggered(QAction*)), this, SLOT(doLoadRecent(QAction*)));
 }
 //
 //  Initialization
 bool PMApp::Load(const QString& aPath) {
-    bool retval = true;
+    bool retval = false;
     //
     //  We may throw an exception if the load fails and then return false.
-    //  But for now we expect everything is ok.
-    //
-    //  Setting the active model to the new loaded one in a hurry.
-    mModels.insert(mActiveModel = new PMModel(aPath));
+    //  But for now we check the pointer to the scene within the model
+    //  with the isEmpty() method on the model.
+    PMModel* new_model = new PMModel(aPath);
+
+    if (!new_model->isEmpty()) {
+        //
+        //  Setting the active model to the new loaded one in a hurry.
+        mModels.insert(mActiveModel = new_model);
+        //
+        //  Attach the model to the tree view
+        mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
+        //
+        //  Put the file to the recent file list and update the menu.
+        mRecentFiles.SetFile(aPath);
+        updateRecentFilesMenu();
+
+        retval = true;
+    }
+
     return retval;
 }
 //

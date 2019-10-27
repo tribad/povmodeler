@@ -39,6 +39,7 @@ void PMRecentFileList::SetFile(const QString &aPath) {
         if (*fi == aPath) {
             break;
         }
+        ++fi;
     }
     //
     //  Got a new path for the filelist.

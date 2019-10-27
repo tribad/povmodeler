@@ -19,6 +19,9 @@
 #define RECENTFILE_GROUP      "recentfiles"
 #define RECENTFILE_FILE_MAX   RECENTFILE_GROUP"/max"
 #define RECENTFILE_KEY_PREFIX RECENTFILE_GROUP"/file"
+//
+//  File Selection dialogs.
+#define LAST_DIRECTORY_VISITED "lastdirvisited"
 
 class PMSettings : public QSettings
 {
