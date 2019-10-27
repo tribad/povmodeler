@@ -9,7 +9,7 @@ add_compile_options(-fPIC)
 add_library(pmnewui
     pmmainwindow.ui widgets/boxedit.ui
     main.cpp
-    pmapp.cpp pmmodel.cpp pmsettings.cpp
+    pmapp.cpp pmmodel.cpp pmsettings.cpp pmrecentfilelist.cpp
     ipmviewmenu.cpp ipmfilemenu.cpp
     sigpmviewmenu.cpp sigpmtreewidget.cpp sigpmpropertywidget.cpp sigpmfilemenu.cpp
 

@@ -14,7 +14,10 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
-
+/**
+ *
+ * Did some changes for the newui <hjl@simulated-universe.de>
+ */
 #include <QSettings>
 #include <QApplication>
 #include <QCommandLineParser>
@@ -34,13 +37,15 @@ int main( int argc, char* argv[] )
     parser.process( app ); // PORTING SCRIPT: move this to after any parser.addOption
     parser.addPositionalArgument( QLatin1String( "[file]" ), "File to open" );
     parser.addOption( QCommandLineOption( QStringList() << QLatin1String( "no-dri" ),  "Disables direct rendering" ) );
-
+    //
+    //  One primary user of this is the QSettings instance.
+    //  It will be created on first usage and use this values from the QCoreApplication.
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
     QCoreApplication::setOrganizationDomain("povmodeler.de");
-
+    //
+    //  This initializes the main window.
     PMApp appclass;
-
     //
     //  Each parameter left is a file name to be opened.
     if( parser.positionalArguments().count() > 0 )
@@ -58,6 +63,7 @@ int main( int argc, char* argv[] )
         //  Fill it with an initial default.
         appclass.EmptyInit();
     }
-
+    //
+    //  Exec the application.
     return app.exec();
 }
