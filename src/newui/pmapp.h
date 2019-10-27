@@ -39,8 +39,9 @@ class PMApp : public QObject, public IPMViewMenu, IPMFileMenu
 public:
     explicit PMApp(QObject *parent = nullptr);
     virtual ~PMApp() {}
+    //
+    //  External interface. Mostly to the main.cpp
     bool Load(const QString& aPath);
-
     void EmptyInit();
 signals:
 
@@ -48,6 +49,9 @@ public slots:
     //
     //  Tree widget interface
     void selectedInTree(const QModelIndex& index);
+    //
+    //  Recentfile sub-menu
+    void doLoadRecent(QAction* recentAction);
 private:  //  Methods
     //
     // View menu interface
@@ -57,19 +61,26 @@ private:  //  Methods
     // GLView interface
     virtual void setGlViewChecked(GLView view, bool checked);
     //
-    //
+    // File Menu interface.
     virtual void doNew();
     virtual void doLoad();
     virtual void doSave();
     virtual void doClose();
     virtual void doExit();
+    //
+    //  File menu internal handling.
+    virtual void setupRecentFileMenu();
+    virtual void updateRecentFilesMenu();
 
 public:   //  Attributes
 private:  //  Attributes
     //
-    //  Main window
+    //  Main window and all dynamics
     QMainWindow           mMainWindow;
     Ui_MainWindow         mPMMainWindow;
+    //
+    //  Recent files submenu
+    QMenu                 mRecentFilesMenu;
     //
     //  Local signal handler
     SigPMViewMenu*        mSigPMViewMenu;

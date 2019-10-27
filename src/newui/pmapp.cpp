@@ -50,10 +50,12 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     //  Do some more initialization
     //  Gui stuff first
     mPMMainWindow.treeDockWidget->setWindowTitle("Browser");
+    setupRecentFileMenu();
     //
     // others.
     mActiveModel = nullptr;
     mRecentFiles.Load();
+    updateRecentFilesMenu();
     mMainWindow.show();
 }
 //
@@ -112,6 +114,19 @@ void PMApp::doNew() {
 void PMApp::doLoad() {
 
 }
+
+void PMApp::doLoadRecent(QAction *recentAction) {
+    if (recentAction != nullptr) {
+        //
+        //  If the load succeeded the recent file goes up to the top.
+        //  If it failes it needs to be removed from the recent list.
+        if (Load(recentAction->text())) {
+            mRecentFiles.SetFile(recentAction->text());
+        } else {
+            mRecentFiles.Remove(recentAction->text());
+        }
+    }
+}
 void PMApp::doSave() {
 
 }
@@ -159,6 +174,47 @@ void PMApp::doExit() {
     if (do_exit == true) {
         mMainWindow.close();
     }
+}
+//
+//  setup the recent file menu into the right position within the file menu.
+//  This would be direct beneath the open action.
+void PMApp::setupRecentFileMenu() {
+    QList<QAction*> actions    =  mPMMainWindow.menuFile->actions();
+    //
+    //  We are searching the original action setup in the designer as placeholder.
+    for (auto before = actions.begin(); before != actions.end(); ++before) {
+        if ((*before)->text() == "Open Recent ...") {
+            if (before != actions.end()) {
+                //
+                //  Copying the text and icon from the original action.
+                //  This way we can change the search to something that is less bound
+                //  to the action->text()
+                mRecentFilesMenu.menuAction()->setText( (*before)->text());
+                mRecentFilesMenu.menuAction()->setIcon( (*before)->icon() );
+                //
+                //  Replace the action.
+                mPMMainWindow.menuFile->insertMenu(*before, &mRecentFilesMenu);
+                mPMMainWindow.menuFile->removeAction(*before);
+            }
+            break;
+        }
+    }
+}
+//
+//  Update the recentfile menu.
+void PMApp::updateRecentFilesMenu() {
+    std::list<QString> fl = mRecentFiles.GetFiles();
+    //
+    //  Hopefully removing all memory used by actions as well.
+    mRecentFilesMenu.clear();
+    //
+    //  File the actions
+    for (auto f : fl) {
+        if (!f.isEmpty()) {
+            mRecentFilesMenu.addAction(f);
+        }
+    }
+    connect(&mRecentFilesMenu, SIGNAL(triggered(QAction*)), this, SLOT(doLoadRecent(QAction*)));
 }
 //
 //  Initialization

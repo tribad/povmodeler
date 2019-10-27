@@ -27,7 +27,7 @@ void PMRecentFileList::SetMaxFiles(unsigned int aMaxFiles) {
 
         mFiles.pop_back();
     }
-    PMSettings::instance().setValue(RECENTFILE_FILE_MAX, QString::number(mMaxFiles));
+    UpdateSettings();
 }
 
 void PMRecentFileList::SetFile(const QString &aPath) {
@@ -58,6 +58,29 @@ void PMRecentFileList::SetFile(const QString &aPath) {
         mFiles.erase(fi);
         mFiles.push_front(aPath);
     }
+    UpdateSettings();
+}
+
+void PMRecentFileList::Remove(const QString &aPath) {
+    //
+    //  Check for existance of the file in list.
+    std::list<QString>::iterator fi = mFiles.begin();
+
+    while (fi != mFiles.end()) {
+        if (*fi == aPath) {
+            break;
+        }
+    }
+    //
+    //  Found it and do the erase.
+    if (fi != mFiles.end()) {
+        mFiles.erase(fi);
+    }
+    UpdateSettings();
+}
+
+void PMRecentFileList::UpdateSettings() {
+    PMSettings::instance().setValue(RECENTFILE_FILE_MAX, QString::number(mMaxFiles));
     //
     //  Update the settings Position starts with 1
     unsigned int filepos = 1;
