@@ -250,7 +250,7 @@ bool PMApp::Load(const QString& aPath) {
         //
         //  Attach the model to the tree view
         mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
-        mPMMainWindow.dockWidgetContents->expandAll();
+        mPMMainWindow.dockWidgetContents->expand(mActiveModel->GetRootIndex());
         //
         //  Put the file to the recent file list and update the menu.
         mRecentFiles.SetFile(aPath);

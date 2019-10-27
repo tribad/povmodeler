@@ -40,6 +40,7 @@ public:
     bool isModified() {return mModified;}
     bool isEmpty()    {return mScene == nullptr;}
     QString GetItemType(const QModelIndex& index);
+    QModelIndex GetRootIndex();
 signals:
 
 public slots:

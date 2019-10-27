@@ -165,3 +165,10 @@ QString PMModel::GetItemType(const QModelIndex &index) {
     }
     return retval;
 }
+
+QModelIndex PMModel::GetRootIndex() {
+    QModelIndex retval = createIndex(0, 0, static_cast<void*>(mScene));
+
+    return retval;
+}
+
