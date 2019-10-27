@@ -17,7 +17,8 @@ class PMSettings : public QSettings
 {
 public:
     PMSettings();
-    static PMSettings mSettings;
+    PMSettings& settings();
+private:
 };
 
 #endif // PMSETTINGS_H

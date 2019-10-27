@@ -37,6 +37,7 @@ int main( int argc, char* argv[] )
 
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
+    QCoreApplication::setOrganizationDomain("povmodeler.de");
 
     PMApp appclass;
 

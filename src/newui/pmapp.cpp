@@ -15,6 +15,7 @@
 //
 //  Local includes.
 #include "pmapp.h"
+#include "pmsettings.h"
 #include "widgets/pmfactory.h"
 
 PMApp::PMApp(QObject *parent) : QObject(parent)
