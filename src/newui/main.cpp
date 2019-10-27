@@ -15,7 +15,7 @@
 *                                                                        *
 **************************************************************************/
 
-
+#include <QSettings>
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
@@ -23,6 +23,7 @@
 #include "version.h"
 
 #include "pmapp.h"
+
 
 int main( int argc, char* argv[] )
 {
