@@ -6,7 +6,7 @@ This may be not the way project trees are handled, but it makes me somewhat nerv
 It is still in the beginning. But I learned much things about the old code.
 
 For now I initialize the model tree, can load model files and have a recent files list.
-I have a plan how to organize the needed property edit widgets that are needed for all model classes, thats a huge mass of code anyway.
+I have a plan how to organize the needed property edit widgets. They are needed for all model classes, and thats a huge mass of code. This needs planing for not to fail here.
 
 Anyway that I believe that the original model code can be reduced easily by more than 50% I let it stay as it is because it works.
 Changing the model code as well will only be done if something will not work anymore, e.g. for new features. But for new features there will be a long way to go.
