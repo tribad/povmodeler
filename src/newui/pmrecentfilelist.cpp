@@ -23,10 +23,11 @@ void PMRecentFileList::SetMaxFiles(unsigned int aMaxFiles) {
     while (mFiles.size() > mMaxFiles) {
         //
         //  Remove key from settings and then the file from the list.
-        PMSettings::instance().remove(recentfile_key_prefix + QString::number(mFiles.size()));
+        PMSettings::instance().remove(RECENTFILE_KEY_PREFIX + QString::number(mFiles.size()));
 
         mFiles.pop_back();
     }
+    PMSettings::instance().setValue(RECENTFILE_FILE_MAX, QString::number(mMaxFiles));
 }
 
 void PMRecentFileList::SetFile(const QString &aPath) {
@@ -62,6 +63,16 @@ void PMRecentFileList::SetFile(const QString &aPath) {
     unsigned int filepos = 1;
 
     for (auto f : mFiles) {
-        PMSettings::instance().setValue(recentfile_key_prefix + QString::number(filepos++), f);
+        PMSettings::instance().setValue(RECENTFILE_KEY_PREFIX + QString::number(filepos++), f);
+    }
+}
+//
+//  We do have only a load method as writing the state to the settings is done
+//  on changes to the list.
+void PMRecentFileList::Load() {
+    mMaxFiles = PMSettings::instance().value(RECENTFILE_FILE_MAX, 5).toUInt();
+
+    for (unsigned int filecount = 0; filecount < mMaxFiles; ++filecount) {
+        mFiles.push_back(PMSettings::instance().value(RECENTFILE_KEY_PREFIX + QString::number(filecount+1)).toString());
     }
 }

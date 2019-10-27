@@ -53,7 +53,7 @@ PMApp::PMApp(QObject *parent) : QObject(parent)
     //
     // others.
     mActiveModel = nullptr;
-
+    mRecentFiles.Load();
     mMainWindow.show();
 }
 //

@@ -27,6 +27,9 @@
 #include "sigpmviewmenu.h"
 #include "sigpmfilemenu.h"
 //
+//  Other member includes
+#include "pmrecentfilelist.h"
+//
 //  povray model includes
 #include "pmmodel.h"
 
@@ -73,6 +76,7 @@ private:  //  Attributes
     SigPMFileMenu*        mSigPMFileMenu;
     //
     //  Application data.
+    PMRecentFileList      mRecentFiles;
     PMModel*              mActiveModel;
     //
     //  Using a set here makes it easier to remove a model by its pointer.

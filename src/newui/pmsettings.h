@@ -14,8 +14,11 @@
 #include <QSettings>
 //
 //  Some keys, groups and other to be used within the settings.
-const char* recentfile_group      = "recentfiles";
-const char* recentfile_key_prefix = "recentfiles/file";
+//
+//  Recentfiles List.
+#define RECENTFILE_GROUP      "recentfiles"
+#define RECENTFILE_FILE_MAX   RECENTFILE_GROUP"/max"
+#define RECENTFILE_KEY_PREFIX RECENTFILE_GROUP"/file"
 
 class PMSettings : public QSettings
 {

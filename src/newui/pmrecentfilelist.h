@@ -21,6 +21,7 @@ public:
     unsigned int        GetMaxFiles() {return mMaxFiles;}
     void                SetFile(const QString& aPath);
     std::list<QString>& GetFiles() {return mFiles;}
+    void                Load();
 private:
     unsigned int       mMaxFiles;
     std::list<QString> mFiles;
