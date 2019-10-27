@@ -111,7 +111,7 @@ void PMApp::doNew() {
     //
     //  Attach the model to the tree view
     mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
-    mPMMainWindow.dockWidgetContents->expandAll();
+    mPMMainWindow.dockWidgetContents->expand(mActiveModel->GetRootIndex());
 }
 void PMApp::doLoad() {
     //
