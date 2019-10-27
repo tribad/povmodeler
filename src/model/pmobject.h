@@ -20,12 +20,13 @@
 #ifndef PMOBJECT_H
 #define PMOBJECT_H
 
+class QTreeWidgetItem;
 
 #include "pmmatrix.h"
 #include "pmcontrolpoint.h"
 #include "pmmetaobject.h"
 #include "pmdebug.h"
-#include "pmtreeviewitem.h"
+//#include "pmtreeviewitem.h"
 #include <QtXml/qdom.h>
 #include <QImage>
 
@@ -37,6 +38,9 @@ class PMXMLHelper;
 class PMDeclare;
 class PMObjectAction;
 class PMPart;
+
+class PMPrototypeManager;
+class PMInsertRuleSystem;
 
 class PMObject;
 typedef QList<PMObject*> PMObjectList;
@@ -53,12 +57,17 @@ class PMObject
 {
    friend class PMCompositeObject;
 public:
-
+    //
+    //  This is the getter for the static prototypeMmanager
+   static const PMPrototypeManager* prototypeManager() ;
+   //
+   //  This is the getter for the static insertRuleSystem
+   static const PMInsertRuleSystem* insertRuleSystem() ;
    /**
     * point to connect obj and treview item
     */
-   PMTreeViewItem* getTreeItem() {  if ( pmt_item ) return pmt_item; else return nullptr; }
-   void setTreeItem( PMTreeViewItem* itm ) { pmt_item = itm; }
+   QTreeWidgetItem* getTreeItem() {  if ( pmt_item ) return pmt_item; else return nullptr; }
+   void setTreeItem( QTreeWidgetItem* itm ) { pmt_item = itm; }
    /**
     * set Preview image
     */
@@ -80,7 +89,7 @@ public:
    /**
     * Creates an empty PMObject without parent.
     */
-   PMObject( PMPart* part );
+   PMObject();
    /**
     * Copy constructor. All object pointers (parent, siblings) are set to 0!
     */
@@ -97,7 +106,7 @@ public:
    /**
     * Returns a deep copy of the object
     */
-   virtual PMObject* copy() const = 0;
+   virtual PMObject* copy() const ;
 
    /**
     * Returns the meta object for the class
@@ -122,12 +131,15 @@ public:
     * Returns the class name of the object (povray name).
     * This is the name that is showed in dialogs and menus.
     */
-   virtual QString description() const = 0;
+   virtual QString description() const {return mDescription;}
+   virtual void setDescription(const QString& aDescription) {mDescription = aDescription;}
    /**
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south wall", "floor" ...)
     */
-   virtual QString name() const { return QString(); }
+   virtual QString name() const { return mName; }
+
+   virtual void setName(const QString& aName) {mName = aName;}
    /**
     * Returns true if the object can have a name
     */
@@ -141,11 +153,6 @@ public:
     * Returns a pointer to the parent object.
     */
    PMObject* parent() const { return m_pParent; }
-   /**
-    * Returns a pointer to the corresponding part
-    */
-   PMPart* part() const { return m_pPart; }
-
    /**
     * Returns true if an object with type className can be inserted
     * as child after the object after.
@@ -371,7 +378,7 @@ public:
    /**
     * Adds the objects attributes and child objects to the element
     */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const = 0;
+   virtual void serialize( QDomElement& e, QDomDocument& doc ) const ;
    /**
     * Reads the attributes from the QDomElement
     */
@@ -390,7 +397,6 @@ public:
     * Returns a property
     */
    PMVariant property( const QString& ) const;
-
    /**
     * Returns true if the object is selected
     */
@@ -423,19 +429,11 @@ public:
     * be read only, too
     */
    void setReadOnly( bool yes = true ) { m_readOnly = yes; }
-
-   /**
-    * Creates a new edit widget that can display this object and
-    * returns a pointer to it.
-    *
-    * The widget will be created as a child of parent.
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap() const = 0;
+   virtual QString pixmap() const ;
    /**
     * Returns a pointer to the @ref PMDeclare object, that is linked to
     * that object, or 0, if this object contains no link
@@ -483,6 +481,8 @@ public:
     * Set the pointer to 0 after deleting an object!
     */
    virtual void cleanUp() const;
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
 
 protected:
    /**
@@ -495,10 +495,12 @@ protected:
     */
    PMMemento* m_pMemento;
 private:
+   QString mName;
+   QString mDescription;
    /**
     * Pointer to treewidgetitem
     */
-   PMTreeViewItem* pmt_item;
+   QTreeWidgetItem* pmt_item;
    /**
     * Pointer to the parent object. 0 if the object has no parent.
     */
@@ -524,13 +526,18 @@ private:
     */
    static PMMetaObject* s_pMetaObject;
    /**
-    * The corresponding part
-    */
-   PMPart* m_pPart;
-   /**
     * Preview image
     */
    QImage m_preview;
+protected:
+   //
+   //  To come around the mass of properties and the huge work to create
+   //  all the getters and setter I try to create a more abstract way of storage.
+   //
+   //  The PMObject holds all properties. They are going to be filled by the constructors.
+   //  As these pass on there properties with the default values appropriate.
+   std::map<std::string, PMVariant> mProperty;
+
 };
 
 #endif

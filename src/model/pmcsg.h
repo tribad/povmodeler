@@ -39,7 +39,7 @@ public:
    /**
     * Creates an empty PMCSG union
     */
-   PMCSG( PMPart* part );
+   PMCSG( );
    /**
     * Creates an empty PMCSG object with type t
     */
@@ -68,11 +68,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMCSGEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

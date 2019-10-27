@@ -32,7 +32,8 @@
 #include "pmobject.h"
 #include "pmsymboltable.h"
 #include "pmvalue.h"
-#include "pmerrordialog.h"
+//#include "pmerrordialog.h"
+#include "pmmessage.h"
 
 class QTextStream;
 class QIODevice;
@@ -52,11 +53,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMParser( PMPart* part, QIODevice* device );
+   PMParser( QIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMParser( PMPart* part, const QByteArray& array );
+   PMParser( const QByteArray& array );
    /**
     * Deletes the parser
     */
@@ -210,12 +211,10 @@ protected:
     * Overwrite this function in a specific parser.
     */
    virtual void topParse() = 0;
-   
+   //
+   //  static symbol table as the global one.
+   PMSymbolTable* symbolTable() const;
 protected:
-   /**
-    * Pointer to the part
-    */
-   PMPart* m_pPart;
    /**
     * parent object where the parsed top level objects
     * will be inserted _later_ (not from the parser) as children
@@ -283,6 +282,7 @@ private:
     */
    QHash<QString, bool> m_okDeclares;
    PMObject* m_pNextCheckDeclare;
+
    /**
     * Symbol table used during parsing. The symbol table of the part
     * will not be changed.

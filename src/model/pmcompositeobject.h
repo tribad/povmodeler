@@ -20,8 +20,6 @@
 #ifndef PMCOMPOBJECT_H
 #define PMCOMPOBJECT_H
 
-
-
 #include "pmobject.h"
 
 /**
@@ -31,12 +29,12 @@
  */
 class PMCompositeObject : public PMObject
 {
-   typedef PMObject Base;
+   using Base = PMObject;
 public:
    /**
     * Creates an empty PMCompositeObject
     */
-   PMCompositeObject( PMPart* part );
+   PMCompositeObject( );
    /**
     * Copy constructor
     */
@@ -64,11 +62,6 @@ public:
     * or null if the index is out of range.
     */
    virtual PMObject* childAt( uint index ) const;
-
-
-
-
-
    /**
     * Returns true if the object contains the child object o
     */
@@ -78,7 +71,6 @@ public:
     * Returns the index of the object or -1 if not found
     */
    virtual int findChild( PMObject* o );
-
    /**
     * Inserts the object as child at index i.
     * If i is -1, the object is appended.

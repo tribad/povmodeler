@@ -30,12 +30,12 @@
  */
 class PMSolidObject : public PMGraphicalObject
 {
-   typedef PMGraphicalObject Base;
+   using Base = PMGraphicalObject;
 public:
    /**
     * Creates an empty PMSolidObject
     */
-   PMSolidObject( PMPart* part );
+   PMSolidObject( );
    /**
     * Copy constructor
     */
@@ -76,6 +76,10 @@ public:
 
    /** */
    virtual void restoreMemento( PMMemento* s );
+
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
+
 private:
    /**
     * IDs for @ref PMMementoData

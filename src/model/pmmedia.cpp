@@ -19,10 +19,7 @@
 #include "pmmedia.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmmediaedit.h"
 #include "pmcolor.h"
-
-
 
 const int methodDefault = 1;
 const int intervalsDefault = 10;
@@ -42,13 +39,13 @@ const double scatteringExtinctionDefault = 1.0;
 
 PMDefinePropertyClass( PMMedia, PMMediaProperty );
 PMMetaObject* PMMedia::s_pMetaObject = 0;
-PMObject* createNewMedia( PMPart* part )
+PMObject* createNewMedia( )
 {
-   return new PMMedia( part );
+   return new PMMedia( );
 }
 
-PMMedia::PMMedia( PMPart* part )
-      : Base( part )
+PMMedia::PMMedia( )
+      : Base( )
 {
    m_method = methodDefault;
    m_intervals = intervalsDefault;
@@ -397,11 +394,6 @@ void PMMedia::enableScattering( bool c )
          m_pMemento->addData( s_pMetaObject, PMEnableScatteringID, m_enableScattering );
       m_enableScattering = c;
    }
-}
-
-PMDialogEditBase* PMMedia::editWidget( QWidget* parent ) const
-{
-   return new PMMediaEdit( parent );
 }
 
 void PMMedia::restoreMemento( PMMemento* s )

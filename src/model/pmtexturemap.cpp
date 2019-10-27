@@ -15,17 +15,12 @@
 *                                                                        *
 **************************************************************************/
 
-
-#include "pmtexturemapedit.h"
-#include "pmtexturemap.h"
-
-#include "pmxmlhelper.h"
-#include "pmmapmemento.h"
-
-#include <qtextstream.h>
 #include <QTextStream>
 #include <QList>
 
+#include "pmtexturemap.h"
+#include "pmxmlhelper.h"
+#include "pmmapmemento.h"
 
 class PMValueProperty : public PMPropertyBase
 {
@@ -82,8 +77,8 @@ private:
 
 PMMetaObject* PMTextureMapBase::s_pMetaObject = 0;
 
-PMTextureMapBase::PMTextureMapBase( PMPart* part )
-      : Base( part )
+PMTextureMapBase::PMTextureMapBase( )
+      : Base( )
 {
 }
 
@@ -156,11 +151,6 @@ void PMTextureMapBase::cleanUp() const
       s_pMetaObject = 0;
    }
    Base::cleanUp();
-}
-
-PMDialogEditBase* PMTextureMapBase::editWidget( QWidget* parent ) const
-{
-   return new PMTextureMapEdit( parent );
 }
 
 void PMTextureMapBase::restoreMemento( PMMemento* s )
@@ -323,13 +313,13 @@ PMObject* PMTextureMapBase::nextMapEntry( PMObject* o )
 
 
 PMMetaObject* PMTextureMap::s_pMetaObject = 0;
-PMObject* createNewTextureMap( PMPart* part )
+PMObject* createNewTextureMap( )
 {
-   return new PMTextureMap( part );
+   return new PMTextureMap( );
 }
 
-PMTextureMap::PMTextureMap( PMPart* part )
-      : Base( part )
+PMTextureMap::PMTextureMap( )
+      : Base( )
 {
 }
 
@@ -369,13 +359,13 @@ QString PMTextureMap::description() const
 
 
 PMMetaObject* PMPigmentMap::s_pMetaObject = 0;
-PMObject* createNewPigmentMap( PMPart* part )
+PMObject* createNewPigmentMap( )
 {
-   return new PMPigmentMap( part );
+   return new PMPigmentMap( );
 }
 
-PMPigmentMap::PMPigmentMap( PMPart* part )
-      : Base( part )
+PMPigmentMap::PMPigmentMap( )
+      : Base( )
 {
 }
 
@@ -415,13 +405,13 @@ QString PMPigmentMap::description() const
 
 
 PMMetaObject* PMColorMap::s_pMetaObject = 0;
-PMObject* createNewColorMap( PMPart* part )
+PMObject* createNewColorMap( )
 {
-   return new PMColorMap( part );
+   return new PMColorMap( );
 }
 
-PMColorMap::PMColorMap( PMPart* part )
-      : Base( part )
+PMColorMap::PMColorMap( )
+      : Base( )
 {
 }
 
@@ -461,13 +451,13 @@ QString PMColorMap::description() const
 
 
 PMMetaObject* PMNormalMap::s_pMetaObject = 0;
-PMObject* createNewNormalMap( PMPart* part )
+PMObject* createNewNormalMap( )
 {
-   return new PMNormalMap( part );
+   return new PMNormalMap( );
 }
 
-PMNormalMap::PMNormalMap( PMPart* part )
-      : Base( part )
+PMNormalMap::PMNormalMap( )
+      : Base( )
 {
 }
 
@@ -507,13 +497,13 @@ QString PMNormalMap::description() const
 
 
 PMMetaObject* PMSlopeMap::s_pMetaObject = 0;
-PMObject* createNewSlopeMap( PMPart* part )
+PMObject* createNewSlopeMap( )
 {
-   return new PMSlopeMap( part );
+   return new PMSlopeMap( );
 }
 
-PMSlopeMap::PMSlopeMap( PMPart* part )
-      : Base( part )
+PMSlopeMap::PMSlopeMap( )
+      : Base( )
 {
 }
 
@@ -553,13 +543,13 @@ QString PMSlopeMap::description() const
 
 
 PMMetaObject* PMDensityMap::s_pMetaObject = 0;
-PMObject* createNewDensityMap( PMPart* part )
+PMObject* createNewDensityMap( )
 {
-   return new PMDensityMap( part );
+   return new PMDensityMap( );
 }
 
-PMDensityMap::PMDensityMap( PMPart* part )
-      : Base( part )
+PMDensityMap::PMDensityMap( )
+      : Base( )
 {
 }
 

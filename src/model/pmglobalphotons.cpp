@@ -20,9 +20,6 @@
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-#include "pmglobalphotonsedit.h"
-
-
 
 const double spacingDefault = 0.01;
 const int countDefault = 20000;
@@ -45,12 +42,12 @@ PMDefinePropertyClass( PMGlobalPhotons, PMGlobalPhotonsProperty );
 PMDefineEnumPropertyClass( PMGlobalPhotons, PMGlobalPhotons::PMNumberType, PMNumberProperty );
 
 PMMetaObject* PMGlobalPhotons::s_pMetaObject = 0;
-PMObject* createNewGlobalPhotons( PMPart* part )
+PMObject* createNewGlobalPhotons( )
 {
-   return new PMGlobalPhotons( part );
+   return new PMGlobalPhotons( );
 }
 
-PMGlobalPhotons::PMGlobalPhotons( PMPart* part ) : Base( part )
+PMGlobalPhotons::PMGlobalPhotons( ) : Base( )
 {
    m_numberType = Spacing;
    m_spacing = spacingDefault;
@@ -435,11 +432,6 @@ void PMGlobalPhotons::setRadiusMediaMulti( double rmm )
          m_pMemento->addData( s_pMetaObject, PMRadiusGatherID, m_radiusMediaMulti );
       m_radiusMediaMulti = rmm;
    }
-}
-
-PMDialogEditBase* PMGlobalPhotons::editWidget( QWidget* parent ) const
-{
-   return new PMGlobalPhotonsEdit( parent );
 }
 
 void PMGlobalPhotons::restoreMemento( PMMemento* s )

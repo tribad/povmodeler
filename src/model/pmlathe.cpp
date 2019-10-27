@@ -15,11 +15,10 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
 
 #include "pmlathe.h"
-
 #include "pmxmlhelper.h"
-#include "pmlatheedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm2dcontrolpoint.h"
@@ -28,9 +27,6 @@
 #include "pmdefaults.h"
 #include "pmenumproperty.h"
 #include "pmobjectaction.h"
-
-
-#include <QList>
 
 const int defaultNumberOfPoints = 4;
 const PMVector defaultPoint[defaultNumberOfPoints] =
@@ -48,9 +44,9 @@ PMDefinePropertyClass( PMLathe, PMLatheProperty );
 PMDefineEnumPropertyClass( PMLathe, PMLathe::SplineType, PMSplineTypeProperty );
 
 PMMetaObject* PMLathe::s_pMetaObject = 0;
-PMObject* createNewLathe( PMPart* part )
+PMObject* createNewLathe( )
 {
-   return new PMLathe( part );
+   return new PMLathe( );
 }
 
 class PMPointProperty : public PMPropertyBase
@@ -116,8 +112,8 @@ int PMLathe::s_rSteps = c_defaultLatheRSteps;
 int PMLathe::s_sSteps = c_defaultLatheSSteps;
 int PMLathe::s_parameterKey = 0;
 
-PMLathe::PMLathe( PMPart* part )
-      : Base( part )
+PMLathe::PMLathe( )
+      : Base( )
 {
    int i;
 
@@ -259,11 +255,6 @@ void PMLathe::setPoints( const QList<PMVector>& points )
       setViewStructureChanged();
       m_points = points;
    }
-}
-
-PMDialogEditBase* PMLathe::editWidget( QWidget* parent ) const
-{
-   return new PMLatheEdit( parent );
 }
 
 void PMLathe::createMemento()

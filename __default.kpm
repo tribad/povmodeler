@@ -1,0 +1,23 @@
+<!DOCTYPE POVMODELER>
+<scene visibility_level="10" majorFormat="1" minorFormat="0">
+ <extra_data>
+  <rendermode height="480" subsection="0" alpha="0" width="640" quality="9" aa_jitter_amount="1" start_column="1" sampling_method="0" end_column="640" aa_jitter="0" aa_threshold="0.3" radiosity="0" aa_depth="2" start_row="1" description="Default" end_row="480" antialiasing="0"/>
+ </extra_data>
+ <raw name="VERSION">#version 3.7;</raw>
+ <globalsettings minimum_reuse="0.015" ambient_light="1 1 1 0 0 0" count="35" error_bound="1.8" brightness="1" assumed_gamma="1" irid_wavelength="0.25 0.18 0.14 0 0 0" number_of_waves="10" adc_bailout="0.00392156862745098" nearest_count="5" gray_threshold="0" recursion_limit="2" max_intersections="0" max_trace_level="0" noise_generator="range_corrected" distance_maximum="0" hf_gray_16="0" radiosity="0" low_error_factor="0.5"/>
+ <box local_detail_level="1" corner_b="0.5 0.5 0.5" visibility_level="0" no_shadow="0" no_reflection="0" global_detail="1" export="1" inverse="0" name="" no_image="0" double_illuminate="0" corner_a="-0.5 -0.5 -0.5" relative_visibility="1">
+  <pigment name="" uv_mapping="0">
+   <solidcolor color="0.3 1 0.3 0 0 0"/>
+  </pigment>
+  <scale value="1 1 1"/>
+  <rotate value="0 0 0"/>
+  <translate value="0 0.5 0"/>
+ </box>
+ <torus local_detail_level="1" sturm="0" visibility_level="0" no_shadow="0" no_reflection="0" global_detail="1" minor_radius="0.25" export="1" inverse="0" name="" no_image="0" double_illuminate="0" major_radius="0.5" relative_visibility="1">
+  <scale value="1 1 1"/>
+  <rotate value="0 0 0"/>
+  <translate value="0 0 0"/>
+ </torus>
+ <light media_interaction="1" area_light="0" parallel="0" media_attenuation="1" fading="0" name="" location="4 5 -5" color="1 1 1 0 0 0" lighttype="point"/>
+ <camera angle="45" confidence="0.9" up="0 1 0" focal_blur="0" location="5 5 -5" sky="0 1 0" aperture="0.4" camera_type="perspective" cylinder_type="1" right="1.33333 0 0" angle_enabled="0" export="1" name="" look_at="0 0 0" direction="0 0 1" variance="0.008" blur_samples="10" focal_point="0 0 0"/>
+</scene>

@@ -18,26 +18,22 @@
 
 #include "pmobjectlink.h"
 #include "pmdeclare.h"
-#include "pmpart.h"
 #include "pmsymboltable.h"
-#include "pmobjectlinkedit.h"
 #include "pmparser.h"
 
 #include "pmmemento.h"
 #include "pmxmlhelper.h"
 
-
-
 PMDefinePropertyClass( PMObjectLink, PMObjectLinkProperty );
 
 PMMetaObject* PMObjectLink::s_pMetaObject = 0;
-PMObject* createNewObjectLink( PMPart* part )
+PMObject* createNewObjectLink( )
 {
-   return new PMObjectLink( part );
+   return new PMObjectLink( );
 }
 
-PMObjectLink::PMObjectLink( PMPart* part )
-      : Base( part )
+PMObjectLink::PMObjectLink( )
+      : Base( )
 {
    m_pLinkedObject = 0;
 }
@@ -164,11 +160,6 @@ void PMObjectLink::readAttributes( const PMXMLHelper& h )
       }
    }
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMObjectLink::editWidget( QWidget* parent ) const
-{
-   return new PMObjectLinkEdit( parent );
 }
 
 void PMObjectLink::restoreMemento( PMMemento* s )

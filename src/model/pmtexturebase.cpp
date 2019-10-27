@@ -18,11 +18,8 @@
 
 #include "pmtexturebase.h"
 #include "pmdeclare.h"
-#include "pmpart.h"
 #include "pmsymboltable.h"
-#include "pmtexturebaseedit.h"
 #include "pmparser.h"
-
 #include "pmmemento.h"
 #include "pmxmlhelper.h"
 
@@ -32,8 +29,8 @@ PMDefinePropertyClass( PMTextureBase, PMTextureBaseProperty );
 
 PMMetaObject* PMTextureBase::s_pMetaObject = nullptr;
 
-PMTextureBase::PMTextureBase( PMPart* part )
-      : Base( part )
+PMTextureBase::PMTextureBase( )
+      : Base( )
 {
    m_pLinkedObject = nullptr;
 }

@@ -15,15 +15,11 @@
 *                                                                        *
 **************************************************************************/
 
-
 #include "pmnormal.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmnormaledit.h"
 #include "pmlistpattern.h"
 #include "pmpattern.h"
-
-
 
 const double bumpSizeDefault = 0.0;
 const double accuracyDefault = 0.02;
@@ -31,13 +27,13 @@ const double accuracyDefault = 0.02;
 PMDefinePropertyClass( PMNormal, PMNormProperty );
 
 PMMetaObject* PMNormal::s_pMetaObject = nullptr;
-PMObject* createNewNormal( PMPart* part )
+PMObject* createNewNormal( )
 {
-   return new PMNormal( part );
+   return new PMNormal( );
 }
 
-PMNormal::PMNormal( PMPart* part )
-      : Base( part )
+PMNormal::PMNormal( )
+      : Base( )
 {
    m_enableBumpSize = false;
    m_bumpSize = bumpSizeDefault;
@@ -107,11 +103,6 @@ void PMNormal::readAttributes( const PMXMLHelper& h )
    m_bumpSize = h.doubleAttribute( "bump_size", bumpSizeDefault );
    m_accuracy = h.doubleAttribute( "accuracy", accuracyDefault );
    m_uvMapping = h.boolAttribute( "uv_mapping", false );
-}
-
-PMDialogEditBase* PMNormal::editWidget( QWidget* parent ) const
-{
-   return new PMNormalEdit( parent );
 }
 
 void PMNormal::enableBumpSize( bool c )

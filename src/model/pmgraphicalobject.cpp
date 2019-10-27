@@ -32,28 +32,37 @@ PMDefinePropertyClass( PMGraphicalObject, PMGraphicalObjectProperty );
 
 PMMetaObject* PMGraphicalObject::s_pMetaObject = nullptr;
 
-PMGraphicalObject::PMGraphicalObject( PMPart* part )
-      : Base( part )
+PMGraphicalObject::PMGraphicalObject( )
+      : Base( )
 {
-   m_noShadow = c_defaultNoShadow;
-   m_noImage = c_defaultNoImage;
-   m_noReflection = c_defaultNoReflection;
-   m_doubleIlluminate = c_defaultDoubleIlluminate;
-   m_visibilityLevel = c_defaultVisibilityLevel;
+   m_noShadow           = c_defaultNoShadow;
+   m_noImage            = c_defaultNoImage;
+   m_noReflection       = c_defaultNoReflection;
+   m_doubleIlluminate   = c_defaultDoubleIlluminate;
+   m_visibilityLevel    = c_defaultVisibilityLevel;
    m_relativeVisibility = c_defaultRelativeVisibility;
-   m_export = c_defaultExport;
+   m_export             = c_defaultExport;
+
+   mProperty.insert({{"noshadow", c_defaultNoShadow},
+                     {"noimage", c_defaultNoImage},
+                     {"noreflection", c_defaultNoReflection},
+                     {"doubleilluminate", c_defaultDoubleIlluminate},
+                     {"visibilitylevel", c_defaultVisibilityLevel},
+                     {"relativevisibility", c_defaultRelativeVisibility},
+                     {"export", c_defaultExport}
+                    });
 }
 
 PMGraphicalObject::PMGraphicalObject( const PMGraphicalObject& o )
       : Base( o )
 {
-   m_noShadow = o.m_noShadow;
-   m_noImage = o.m_noImage;
-   m_noReflection = o.m_noReflection;
-   m_doubleIlluminate = o.m_doubleIlluminate;
-   m_visibilityLevel = o.m_visibilityLevel;
+   m_noShadow           = o.m_noShadow;
+   m_noImage            = o.m_noImage;
+   m_noReflection       = o.m_noReflection;
+   m_doubleIlluminate   = o.m_doubleIlluminate;
+   m_visibilityLevel    = o.m_visibilityLevel;
    m_relativeVisibility = o.m_relativeVisibility;
-   m_export = o.m_export;
+   m_export             = o.m_export;
 }
 
 PMGraphicalObject::~PMGraphicalObject()
@@ -245,4 +254,60 @@ void PMGraphicalObject::restoreMemento( PMMemento* s )
       }
    }
    Base::restoreMemento( s );
+}
+
+
+PMVariant PMGraphicalObject::GetProperty(const QString &aName) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "noshadow") {
+        retval = noShadow();
+    } else if (l_name == "noimage") {
+        retval = noImage();
+    } else if (l_name == "noreflection") {
+        retval = noReflection();
+    } else if (l_name == "doubleilluminate") {
+        retval = doubleIlluminate();
+    } else if (l_name == "visibilitylevel") {
+        retval = visibilityLevel();
+    } else if (l_name == "relativevisibility") {
+        retval = isVisibilityLevelRelative();
+    } else if (l_name == "export") {
+        retval = exportPovray();
+    } else {
+
+    }
+    return retval;
+}
+
+PMVariant PMGraphicalObject::SetProperty(const QString &aName, const PMVariant& aValue) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "noshadow") {
+        retval = noShadow();
+        setNoShadow(aValue.boolData());
+    } else if (l_name == "noimage") {
+        retval = noImage();
+        setNoImage(aValue.boolData());
+    } else if (l_name == "noreflection") {
+        retval = noReflection();
+        setNoReflection(aValue.boolData());
+    } else if (l_name == "doubleilluminate") {
+        retval = doubleIlluminate();
+        setDoubleIlluminate(aValue.boolData());
+    } else if (l_name == "visibilitylevel") {
+        retval = visibilityLevel();
+        setVisibilityLevel(aValue.intData());
+    } else if (l_name == "relativevisibility") {
+        retval = isVisibilityLevelRelative();
+        setVisibilityLevelRelative(aValue.boolData());
+    } else if (l_name == "export") {
+        retval = exportPovray();
+        setExportPovray(aValue.boolData());
+    } else {
+
+    }
+    return retval;
 }

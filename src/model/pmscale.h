@@ -37,7 +37,7 @@ public:
    /**
     * Creates a scale < 0, 0, 0 >
     */
-   PMScale( PMPart* part );
+   PMScale( );
    /**
     * Copy constructor
     */
@@ -61,14 +61,8 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMScaleEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmscale" ); }
-
    /**
     * Returns the scale
     */

@@ -20,14 +20,12 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QLocale>
-#include "pmshell.h"
-#include "pmrendermanager.h"
 #include "version.h"
+
+#include "pmapp.h"
 
 int main( int argc, char* argv[] )
 {
-    PMShell* shell = nullptr;
-
     QApplication app( argc, argv ); // PORTING SCRIPT: move this to before the KAboutData initialization
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -39,8 +37,11 @@ int main( int argc, char* argv[] )
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
 
+#if 0
     if( parser.positionalArguments().count() > 0 )
     {
+        //
+        //  Each parameter left is a file name to be opened.
         for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
         {
             shell = new PMShell( parser.positionalArguments().at( i ) );
@@ -52,7 +53,8 @@ int main( int argc, char* argv[] )
         shell = new PMShell;
         shell->show();
     }
+#endif
+    PMApp appclass;
 
-    parser.clearPositionalArguments();
     return app.exec();
 }

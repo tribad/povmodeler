@@ -36,7 +36,7 @@ public:
    /**
     * Creates an empty PMPolynom
     */
-   PMPolynom( PMPart* part );
+   PMPolynom( );
    /**
     * Copy constructor
     */
@@ -62,10 +62,6 @@ public:
    virtual void readAttributes( const PMXMLHelper& h );
    /** */
    virtual QString pixmap() const { return QString( "pmpolynom" ); }
-   /**
-    * Returns a new @ref PMPolynomEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual void restoreMemento( PMMemento* s );
 

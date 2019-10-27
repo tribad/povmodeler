@@ -19,15 +19,10 @@
 #include "pmplane.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmplanenormalcontrolpoint.h"
 #include "pmdefaults.h"
-
-
-
-#include "pmplaneedit.h"
 
 const double defaultPlaneDistance = 0;
 const PMVector defaultPlaneNormal = PMVector ( 0.0, 1.0, 0.0 );
@@ -40,13 +35,13 @@ int PMPlane::s_parameterKey = 0;
 PMDefinePropertyClass( PMPlane, PMPlaneProperty );
 
 PMMetaObject* PMPlane::s_pMetaObject = 0;
-PMObject* createNewPlane( PMPart* part )
+PMObject* createNewPlane( )
 {
-   return new PMPlane( part );
+   return new PMPlane( );
 }
 
-PMPlane::PMPlane( PMPart* part )
-      : Base( part )
+PMPlane::PMPlane( )
+      : Base( )
 {
    m_normal = defaultPlaneNormal;
    m_distance = defaultPlaneDistance;
@@ -124,11 +119,6 @@ void PMPlane::setDistance( double distance )
 
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMPlane::editWidget( QWidget* parent ) const
-{
-   return new PMPlaneEdit( parent );
 }
 
 void PMPlane::restoreMemento( PMMemento* s )

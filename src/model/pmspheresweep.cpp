@@ -19,7 +19,6 @@
 #include "pmspheresweep.h"
 
 #include "pmxmlhelper.h"
-#include "pmspheresweepedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
@@ -30,9 +29,6 @@
 #include "pmobjectaction.h"
 #include "pmpoint.h"
 #include "pmmatrix.h"
-
-
-#include <QList>
 
 const int defaultNumberOfPoints = 2;
 const PMVector defaultPoint[defaultNumberOfPoints] =
@@ -52,9 +48,9 @@ PMDefinePropertyClass( PMSphereSweep, PMSphereSweepProperty );
 PMDefineEnumPropertyClass( PMSphereSweep, PMSphereSweep::SplineType, PMSplineTypeProperty );
 
 PMMetaObject* PMSphereSweep::s_pMetaObject = nullptr;
-PMObject* createNewSphereSweep( PMPart* part )
+PMObject* createNewSphereSweep( )
 {
-   return new PMSphereSweep( part );
+   return new PMSphereSweep( );
 }
 
 int PMSphereSweep::s_rSteps = c_defaultSphereSweepRSteps;
@@ -127,8 +123,8 @@ private:
 };
 
 
-PMSphereSweep::PMSphereSweep( PMPart* part )
-      : Base( part )
+PMSphereSweep::PMSphereSweep( )
+      : Base( )
 {
    int i;
 
@@ -302,11 +298,6 @@ void PMSphereSweep::setRadii( const QList<double>& radii )
       setViewStructureChanged();
       m_radii = radii;
    }
-}
-
-PMDialogEditBase* PMSphereSweep::editWidget( QWidget* parent ) const
-{
-   return new PMSphereSweepEdit( parent );
 }
 
 void PMSphereSweep::createMemento()

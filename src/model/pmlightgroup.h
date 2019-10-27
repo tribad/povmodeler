@@ -35,7 +35,7 @@ public:
    /**
     * Creates an empty PMLightGroup object
     */
-   PMLightGroup( PMPart* part );
+   PMLightGroup( );
    /**
     * Copy constructor
     */
@@ -60,11 +60,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMLightGroupEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

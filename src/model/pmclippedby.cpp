@@ -17,22 +17,19 @@
 
 
 #include "pmclippedby.h"
-#include "pmclippedbyedit.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-
-
 
 PMDefinePropertyClass( PMClippedBy, PMClippedByProperty );
 
 PMMetaObject* PMClippedBy::s_pMetaObject = 0;
-PMObject* createNewClippedBy( PMPart* part )
+PMObject* createNewClippedBy( )
 {
-   return new PMClippedBy( part );
+   return new PMClippedBy( );
 }
 
-PMClippedBy::PMClippedBy( PMPart* part )
-      : Base( part )
+PMClippedBy::PMClippedBy( )
+      : Base( )
 {
 }
 
@@ -89,11 +86,6 @@ void PMClippedBy::readAttributes( const PMXMLHelper& h )
 {
    // no extra data at the moment
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMClippedBy::editWidget( QWidget* parent ) const
-{
-   return new PMClippedByEdit( parent );
 }
 
 void PMClippedBy::childRemoved( PMObject* o )

@@ -34,7 +34,7 @@ public:
    /**
     * Creates an PMMaterial
     */
-   PMMaterial( PMPart* part );
+   PMMaterial( );
    /**
     * Copy constructor
     */
@@ -53,11 +53,6 @@ public:
    virtual PMMetaObject* metaObject() const;
    /** */
    virtual void cleanUp() const;
-
-   /**
-    * Returns a new @ref PMMaterialEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmmaterial" ); }
 

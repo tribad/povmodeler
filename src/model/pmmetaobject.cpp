@@ -87,10 +87,10 @@ void PMMetaObject::addProperty( PMPropertyBase* p )
    m_propertiesDict.insert( p->name(), p );
 }
 
-PMObject* PMMetaObject::newObject( PMPart* part ) const
+PMObject* PMMetaObject::newObject( ) const
 {
    if( m_factory )
-      return m_factory( part );
+      return m_factory( );
    return nullptr;
 }
 

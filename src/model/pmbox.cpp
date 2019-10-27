@@ -19,7 +19,6 @@
 #include "pmbox.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
@@ -34,16 +33,19 @@ PMDefinePropertyClass( PMBox, PMBoxProperty );
 
 PMViewStructure* PMBox::s_pDefaultViewStructure = nullptr;
 PMMetaObject* PMBox::s_pMetaObject = nullptr;
-PMObject* createNewBox( PMPart* part )
+PMObject* createNewBox( )
 {
-   return new PMBox( part );
+   return new PMBox( );
 }
 
-PMBox::PMBox( PMPart* part )
-      : Base( part )
+PMBox::PMBox( )
+      : Base( )
 {
    m_corner1 = corner1Default;
    m_corner2 = corner2Default;
+
+   mProperty.insert({{"corner1", PMVariant(PMVector(1.0, 1.0, 1.0))},
+                     {"corner2", PMVariant(PMVector(-1.0, -1.0, -1.0))}});
 }
 
 PMBox::PMBox( const PMBox& b )
@@ -112,11 +114,6 @@ void PMBox::setCorner2( const PMVector& p )
       m_corner2.resize( 3 );
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMBox::editWidget( QWidget* parent ) const
-{
-   return new PMBoxEdit( parent );
 }
 
 void PMBox::restoreMemento( PMMemento* s )
@@ -272,4 +269,34 @@ void PMBox::cleanUp() const
       s_pMetaObject = nullptr;
    }
    Base::cleanUp();
+}
+
+PMVariant PMBox::GetProperty(const QString &aName) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "corner1") {
+        retval = corner1();
+    } else if (l_name == "corner2") {
+        retval = corner2();
+    } else {
+        retval = Base::GetProperty(aName);
+    }
+    return retval;
+}
+
+PMVariant PMBox::SetProperty(const QString &aName, const PMVariant& aValue) {
+    PMVariant retval;
+    QString l_name = aName.toLower();
+
+    if (l_name == "corner1") {
+        retval = corner1();
+        setCorner1(aValue.vectorData());
+    } else if (l_name == "corner2") {
+        retval = corner2();
+        setCorner2(aValue.vectorData());
+    } else {
+        retval = Base::SetProperty(aName, aValue);
+    }
+    return retval;
 }

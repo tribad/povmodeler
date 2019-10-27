@@ -74,7 +74,7 @@ public:
    /**
     * Creates a prototype manager for the part.
     */
-   PMPrototypeManager( PMPart* part );
+   PMPrototypeManager( );
    /**
     * Deletes the prototype manager
     */
@@ -126,22 +126,16 @@ public:
     * Returns true if the second class is a base class for
     * the first class
     */
-   bool isA( PMMetaObject* c, const QString& baseClassName ) const;
+   bool isA( const PMMetaObject* c, const QString& baseClassName ) const;
    /**
     * Returns the real class if only the lower case version is know.
     * Used by the xml parser
     */
    QString className( const QString& lowercase ) const;
-   /**
-    * Returns a pointer to the part
-    */
-   PMPart* part() const { return m_pPart; }
-
 private:
    QList<PMMetaObject*> m_prototypes;
 	QMap<QString, PMMetaObject*> m_metaDict;
    QMap<QString, QString> m_lowerCaseDict;
    QList<PMDeclareDescription> m_declareDescriptions;
-   PMPart* m_pPart;
 };
 #endif

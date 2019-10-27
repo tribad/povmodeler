@@ -19,18 +19,15 @@
 
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmnamedobjectedit.h"
-
-
 
 PMMetaObject* PMProjectedThrough::s_pMetaObject = nullptr;
-PMObject* createNewProjectedThrough( PMPart* part )
+PMObject* createNewProjectedThrough( )
 {
-   return new PMProjectedThrough( part );
+   return new PMProjectedThrough( );
 }
 
-PMProjectedThrough::PMProjectedThrough( PMPart* part )
-      : Base( part )
+PMProjectedThrough::PMProjectedThrough( )
+      : Base( )
 {
 }
 
@@ -78,11 +75,6 @@ void PMProjectedThrough::serialize( QDomElement& e, QDomDocument& doc ) const
 void PMProjectedThrough::readAttributes( const PMXMLHelper& h )
 {
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMProjectedThrough::editWidget( QWidget* parent ) const
-{
-   return new PMNamedObjectEdit( parent );
 }
 
 void PMProjectedThrough::restoreMemento( PMMemento* s )

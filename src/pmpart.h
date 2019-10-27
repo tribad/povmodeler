@@ -26,7 +26,7 @@
 #include <QToolBar>
 
 #include "pmobject.h"
-#include "pmcommandmanager.h"
+//#include "pmcommandmanager.h"
 #include "pmimenubar.h"
 #include "ipmshell.h"
 #include "ipmpartextern.h"

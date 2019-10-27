@@ -24,8 +24,7 @@
 class QIODevice;
 
 #include "pmobject.h"
-#include "pmerrordialog.h"
-
+#include "pmmessage.h"
 /**
  * Class to serialize an object or a list of objects.
  *

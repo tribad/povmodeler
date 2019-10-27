@@ -33,13 +33,13 @@
  */
 class PMSphere : public PMSolidObject
 {
-   typedef PMSolidObject Base;
+   using Base = PMSolidObject;
 
 public:
    /**
     * Create an empty Sphere
     */
-   PMSphere( PMPart* part );
+   PMSphere( );
    /**
     * Copy constructor
     */
@@ -61,10 +61,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-   /**
-    * Returns a new @ref PMSphereEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

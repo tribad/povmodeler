@@ -34,12 +34,12 @@
 
 class PMCylinder : public PMSolidObject
 {
-   typedef PMSolidObject Base;
+   using Base = PMSolidObject;
 public:
    /**
     * Creates a cylinder
     */
-   PMCylinder( PMPart* part );
+   PMCylinder( );
    /**
     * Copy constructor
     */
@@ -62,10 +62,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-   /**
-    * Returns a new @ref PMCylinderEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view and dialog view
     */

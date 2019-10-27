@@ -18,11 +18,8 @@
 #include "pmblendmapmodifiers.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmblendmapmodifiersedit.h"
 #include "pmvector.h"
 #include "pmenumproperty.h"
-
-
 
 PMDefinePropertyClass( PMBlendMapModifiers, PMBlendMapModifiersProperty );
 PMDefineEnumPropertyClass( PMBlendMapModifiers,
@@ -30,9 +27,9 @@ PMDefineEnumPropertyClass( PMBlendMapModifiers,
                            PMWaveFormProperty );
 
 PMMetaObject* PMBlendMapModifiers::s_pMetaObject = 0;
-PMObject* createBlendMapModifiers( PMPart* part )
+PMObject* createBlendMapModifiers( )
 {
-   return new PMBlendMapModifiers( part );
+   return new PMBlendMapModifiers( );
 }
 
 const double frequencyDefault = 1.0;
@@ -41,8 +38,8 @@ const PMBlendMapModifiers::PMWaveFormType waveFormTypeDefault = PMBlendMapModifi
 const double waveFormExponentDefault = 1.0;
 
 
-PMBlendMapModifiers::PMBlendMapModifiers( PMPart* part )
-      : Base( part )
+PMBlendMapModifiers::PMBlendMapModifiers( )
+      : Base( )
 {
    m_enableFrequency = false;
    m_frequency = frequencyDefault;
@@ -234,11 +231,6 @@ void PMBlendMapModifiers::setWaveFormType( PMWaveFormType c )
          m_pMemento->addData( s_pMetaObject, PMWaveFormTypeID, m_waveFormType );
       m_waveFormType = c;
    }
-}
-
-PMDialogEditBase* PMBlendMapModifiers::editWidget( QWidget* parent ) const
-{
-   return new PMBlendMapModifiersEdit( parent );
 }
 
 void PMBlendMapModifiers::restoreMemento( PMMemento* s )

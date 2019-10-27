@@ -33,13 +33,13 @@ class PMViewStructure;
 
 class PMBox : public PMSolidObject
 {
-   typedef PMSolidObject Base;
+   using Base = PMSolidObject;
 public:
    PMBox* objectCopy( PMObject* obj ) { return static_cast<PMBox*>(obj); }
    /**
     * Creates an empty PMBox
     */
-   PMBox( PMPart* part );
+   PMBox( );
    /**
     * Copy constructor
     */
@@ -61,10 +61,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-   /**
-    * Returns a new @ref PMBoxEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
@@ -96,7 +92,10 @@ public:
    virtual void controlPointsChanged( PMControlPointList& list );
    /** */
    virtual void cleanUp() const;
-
+    //
+    //  Get a property by its name
+   virtual PMVariant GetProperty(const QString &aName);
+   virtual PMVariant SetProperty(const QString &aName, const PMVariant& aValue);
 protected:
    /** */
    virtual bool isDefault();

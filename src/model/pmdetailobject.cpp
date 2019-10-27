@@ -20,7 +20,7 @@
 #include "pmdefaults.h"
 
 /** Default local detail value*/
-const bool c_defaulGlobalDetail = true;
+const bool c_defaultGlobalDetail = true;
 const int c_defaultLocalDetailLevel = 1;
 
 /** Static global detail */
@@ -31,10 +31,14 @@ PMMetaObject* PMDetailObject::s_pMetaObject = nullptr;
 
 PMDefinePropertyClass( PMDetailObject, PMDetailObjectProperty );
 
-PMDetailObject::PMDetailObject( PMPart *part ) : Base( part )
+PMDetailObject::PMDetailObject( ) : Base( )
 {
-   m_globalDetail = c_defaulGlobalDetail;
+   m_globalDetail = c_defaultGlobalDetail;
    m_localDetailLevel = c_defaultLocalDetailLevel;
+
+   mProperty.insert({{"globaldetail", c_defaultGlobalDetail},
+                     {"localdetail", c_defaultLocalDetailLevel}});
+
 }
 
 PMDetailObject::PMDetailObject( const PMDetailObject& o ) : Base( o )
@@ -79,7 +83,7 @@ void PMDetailObject::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMDetailObject::readAttributes( const PMXMLHelper& h )
 {
-   m_globalDetail = h.boolAttribute( "global_detail", c_defaulGlobalDetail );
+   m_globalDetail = h.boolAttribute( "global_detail", c_defaultGlobalDetail );
    m_localDetailLevel = h.intAttribute( "local_detail_level", c_defaultLocalDetailLevel );
    Base::readAttributes( h );
 }

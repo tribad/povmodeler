@@ -19,18 +19,15 @@
 #include "pmmaterial.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmmaterialedit.h"
-
-
 
 PMMetaObject* PMMaterial::s_pMetaObject = 0;
-PMObject* createNewMaterial( PMPart* part )
+PMObject* createNewMaterial( )
 {
-   return new PMMaterial( part );
+   return new PMMaterial( );
 }
 
-PMMaterial::PMMaterial( PMPart* part )
-      : Base( part )
+PMMaterial::PMMaterial( )
+      : Base( )
 {
 }
 
@@ -66,10 +63,5 @@ void PMMaterial::cleanUp() const
 QString PMMaterial::description() const
 {
    return ( "material" );
-}
-
-PMDialogEditBase* PMMaterial::editWidget( QWidget* parent ) const
-{
-   return new PMMaterialEdit( parent );
 }
 

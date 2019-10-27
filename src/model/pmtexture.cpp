@@ -19,19 +19,16 @@
 #include "pmtexture.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmtextureedit.h"
-
-
 
 PMDefinePropertyClass( PMTexture, PMTextureProperty );
 
 PMMetaObject* PMTexture::s_pMetaObject = 0;
-PMObject* createNewTexture( PMPart* part )
+PMObject* createNewTexture( )
 {
-   return new PMTexture( part );
+   return new PMTexture( );
 }
 
-PMTexture::PMTexture( PMPart* part ) : Base( part )
+PMTexture::PMTexture( ) : Base( )
 {
    m_uvMapping = false;
 }
@@ -70,11 +67,6 @@ void PMTexture::cleanUp() const
 QString PMTexture::description() const
 {
    return ( "texture" );
-}
-
-PMDialogEditBase* PMTexture::editWidget( QWidget* parent ) const
-{
-   return new PMTextureEdit( parent );
 }
 
 void PMTexture::serialize( QDomElement& e, QDomDocument& doc ) const

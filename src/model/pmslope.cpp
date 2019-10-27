@@ -18,10 +18,7 @@
 #include "pmxmlhelper.h"
 #include "pmvector.h"
 #include "pmslope.h"
-#include "pmslopeedit.h"
 #include "pmmemento.h"
-
-
 
 const double heightDefault = 0;
 const double slopeDefault = 0;
@@ -29,13 +26,13 @@ const double slopeDefault = 0;
 PMDefinePropertyClass( PMSlope, PMSlopeProperty );
 
 PMMetaObject* PMSlope::s_pMetaObject = 0;
-PMObject* createNewSlope( PMPart* part )
+PMObject* createNewSlope( )
 {
-   return new PMSlope( part );
+   return new PMSlope( );
 }
 
-PMSlope::PMSlope( PMPart* part )
-      : Base( part )
+PMSlope::PMSlope( )
+      : Base( )
 {
    m_height = heightDefault;
    m_slope = slopeDefault;
@@ -111,11 +108,6 @@ void PMSlope::setSlope( const double c )
          m_pMemento->addData( s_pMetaObject, PMSlopeID, m_slope );
       m_slope = c;
    }
-}
-
-PMDialogEditBase* PMSlope::editWidget( QWidget* parent ) const
-{
-   return new PMSlopeEdit( parent );
 }
 
 void PMSlope::restoreMemento( PMMemento* s )

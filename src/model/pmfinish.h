@@ -35,7 +35,7 @@ public:
    /**
     * Creates an PMFinish
     */
-   PMFinish( PMPart* part );
+   PMFinish( );
    /**
     * Copy constructor
     */
@@ -59,11 +59,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMFinishEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmfinish" ); }
 

@@ -38,7 +38,7 @@ public:
    /**
     * Creates an empty PMMesh object
     */
-   PMMesh( PMPart* part );
+   PMMesh( );
    /**
     * Copy constructor
     */
@@ -63,11 +63,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMMeshEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

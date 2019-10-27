@@ -19,9 +19,6 @@
 #include "pmfinish.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmfinishedit.h"
-
-
 
 const PMColor emissionColorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );
 const PMColor ambientColorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );
@@ -44,13 +41,13 @@ const double reflectionMetallicDefault = 1.0;
 PMDefinePropertyClass( PMFinish, PMFinishProperty );
 
 PMMetaObject* PMFinish::s_pMetaObject = 0;
-PMObject* createNewFinish( PMPart* part )
+PMObject* createNewFinish( )
 {
-   return new PMFinish( part );
+   return new PMFinish( );
 }
 
-PMFinish::PMFinish( PMPart* part )
-      : Base( part )
+PMFinish::PMFinish( )
+      : Base( )
 {
   m_emissionColor = emissionColorDefault;
   m_ambientColor = ambientColorDefault;
@@ -669,12 +666,6 @@ void PMFinish::setIridTurbulence( double c )
       m_iridTurbulence = c;
    }
 }
-
-PMDialogEditBase* PMFinish::editWidget( QWidget* parent ) const
-{
-   return new PMFinishEdit( parent );
-}
-
 void PMFinish::restoreMemento( PMMemento* s )
 {
 	const QList<PMMementoData*>& changes = s->changes();

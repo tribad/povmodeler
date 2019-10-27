@@ -32,11 +32,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMXMLParser( PMPart* part, QIODevice* device );
+   PMXMLParser( QIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMXMLParser( PMPart* part, const QByteArray& array );
+   PMXMLParser( const QByteArray& array );
    /**
     * Deletes the parser
     */

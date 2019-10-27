@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMListPattern
     */
-   PMListPattern( PMPart* part );
+   PMListPattern( );
    /**
     * Copy constructor
     */
@@ -64,10 +64,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /**
-    * Returns a new @ref PMListPatternEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
 
    /**
     * Returns the color list type
@@ -130,7 +126,7 @@ public:
    /**
     * Creates a texture list
     */
-   PMTextureList( PMPart* part );
+   PMTextureList( );
    /**
     * Copy constructor
     */
@@ -169,7 +165,7 @@ public:
    /**
     * Creates a pigment list
     */
-   PMPigmentList( PMPart* part );
+   PMPigmentList( );
    /**
     * Copy constructor
     */
@@ -208,7 +204,7 @@ public:
    /**
     * Creates a color list
     */
-   PMColorList( PMPart* part );
+   PMColorList( );
    /**
     * Copy constructor
     */
@@ -247,7 +243,7 @@ public:
    /**
     * Creates a density list
     */
-   PMDensityList( PMPart* part );
+   PMDensityList( );
    /**
     * Copy constructor
     */
@@ -286,7 +282,7 @@ public:
    /**
     * Creates a normal list
     */
-   PMNormalList( PMPart* part );
+   PMNormalList( );
    /**
     * Copy constructor
     */
@@ -307,12 +303,6 @@ public:
    virtual PMMetaObject* metaObject() const;
    /** */
    virtual void cleanUp() const;
-
-   /**
-    * Returns a new @ref PMListPatternEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
-
    /** */
    virtual QString pixmap() const { return QString( "pmnormallist" ); }
 

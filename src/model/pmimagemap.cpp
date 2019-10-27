@@ -15,8 +15,8 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
 
-#include "pmimagemapedit.h"
 #include "pmimagemap.h"
 #include "pmpalettevalue.h"
 #include "pmpalettevaluememento.h"
@@ -25,9 +25,6 @@
 #include "pmcompositeobject.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
-#include <QList>
 
 const PMImageMap::PMBitmapType bitmapTypeDefault = PMImageMap::BitmapSys;
 const char *const bitmapFileDefault = 0;
@@ -48,13 +45,13 @@ PMDefineEnumPropertyClass( PMImageMap, PMImageMap::PMMapType,
                            PMMapTypeProperty );
 
 PMMetaObject* PMImageMap::s_pMetaObject = 0;
-PMObject* createNewImageMap( PMPart* part )
+PMObject* createNewImageMap( )
 {
-   return new PMImageMap( part );
+   return new PMImageMap( );
 }
 
-PMImageMap::PMImageMap( PMPart* part )
-      : Base( part )
+PMImageMap::PMImageMap( )
+      : Base( )
 {
    m_bitmapType = bitmapTypeDefault;
    m_bitmapFile = bitmapFileDefault;
@@ -458,11 +455,6 @@ void PMImageMap::setTransmits( const QList<PMPaletteValue>& c )
          ( ( PMPaletteValueMemento* ) m_pMemento )->setTransmitPaletteValues( m_transmits );
       m_transmits = c;
    }
-}
-
-PMDialogEditBase* PMImageMap::editWidget( QWidget* parent ) const
-{
-   return new PMImageMapEdit( parent );
 }
 
 void PMImageMap::restoreMemento( PMMemento* s )

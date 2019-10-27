@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMQuickColor
     */
-   PMQuickColor( PMPart* part );
+   PMQuickColor( );
    /**
     * Copy constructor
     */
@@ -64,10 +64,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /**
-    * Returns a new @ref PMQuickColorEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

@@ -1,8 +1,9 @@
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
 add_library(pmbase
-    pm2dcontrolpoint.cpp  pmcontrolpoint.cpp          pmmath.cpp          pmplanenormalcontrolpoint.cpp  pmscalecontrolpoint.cpp      pmvariant.cpp             pmxmlhelper.cpp
-    pm3dcontrolpoint.cpp  pmdistancecontrolpoint.cpp  pmmatrix.cpp        pmrendermode.cpp               pmsorcontrolpoint.cpp        pmvectorcontrolpoint.cpp  pmxmlparser.cpp
-    pmcolor.cpp           pmheightfieldroam.cpp       pmpalettevalue.cpp  pmrotatecontrolpoint.cpp       pmtranslatecontrolpoint.cpp  pmvector.cpp
-
+    pmmatrix.cpp pmvariant.cpp pmvector.cpp pmmath.cpp pmcolor.cpp pmxmlhelper.cpp pm3dcontrolpoint.cpp pmdistancecontrolpoint.cpp
+    pmplanenormalcontrolpoint.cpp  pmplanenormalcontrolpoint.cpp pm2dcontrolpoint.cpp pmsorcontrolpoint.cpp pmvectorcontrolpoint.cpp
+    pmcontrolpoint.cpp pmscalecontrolpoint.cpp pmrotatecontrolpoint.cpp pmtranslatecontrolpoint.cpp pmresourcelocator.cpp pmtruetypecache.cpp
+    pmrendermode.cpp pmmessage.cpp  pmpalettevalue.cpp
+    pmheightfieldroam.cpp
     )

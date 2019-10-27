@@ -17,18 +17,15 @@
 *                                                                        *
 **************************************************************************/
 
+#include <QList>
+#include <QVector>
 
 #include "pmmesh.h"
-
-
 #include "pmxmlhelper.h"
-#include "pmmeshedit.h"
 #include "pmmemento.h"
 #include "pmtriangle.h"
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
-#include <QList>
-#include <QVector>
 
 const PMVector insideVectorDefault = PMVector( 0.0, 0.0, 0.0 );
 
@@ -85,13 +82,13 @@ private:
 };
 
 PMMetaObject* PMMesh::s_pMetaObject = 0;
-PMObject* createNewMesh( PMPart* part )
+PMObject* createNewMesh( )
 {
-   return new PMMesh( part );
+   return new PMMesh( );
 }
 
-PMMesh::PMMesh( PMPart* part )
-      : Base( part )
+PMMesh::PMMesh( )
+      : Base( )
 {
    m_hierarchy = true;
    m_enableInsideVector = false;
@@ -185,11 +182,6 @@ void PMMesh::setInsideVector( const PMVector& iv )
          m_pMemento->addData( s_pMetaObject, PMInsideVectorID, m_insideVector );
       m_insideVector = iv;
    }
-}
-
-PMDialogEditBase* PMMesh::editWidget( QWidget* parent ) const
-{
-   return new PMMeshEdit( parent );
 }
 
 void PMMesh::createMemento()

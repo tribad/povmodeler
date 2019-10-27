@@ -16,19 +16,16 @@
 **************************************************************************/
 
 
+#include <QTextStream>
+
 #include "pmtext.h"
 
 #include "pmxmlhelper.h"
-#include "pmtextedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pmresourcelocator.h"
 #include "pmtruetypecache.h"
 #include "pmdefaults.h"
-
-
-//Added by qt3to4:
-#include <QTextStream>
 
 const QString c_defaultFont = QString( "" );
 const QString c_defaultText = QString( "" );
@@ -41,13 +38,13 @@ int PMText::s_steps = c_defaultTextSteps;
 PMDefinePropertyClass( PMText, PMTextProperty );
 
 PMMetaObject* PMText::s_pMetaObject = nullptr;
-PMObject* createNewText( PMPart* part )
+PMObject* createNewText( )
 {
-   return new PMText( part );
+   return new PMText( );
 }
 
-PMText::PMText( PMPart* part )
-      : Base( part )
+PMText::PMText( )
+      : Base( )
 {
    m_text = c_defaultText;
    m_font = c_defaultFont;
@@ -162,11 +159,6 @@ void PMText::setOffset( const PMVector& o )
       m_offset.resize( 2 );
       setViewStructureChanged();
    }
-}
-
-PMDialogEditBase* PMText::editWidget( QWidget* parent ) const
-{
-   return new PMTextEdit( parent );
 }
 
 void PMText::restoreMemento( PMMemento* s )

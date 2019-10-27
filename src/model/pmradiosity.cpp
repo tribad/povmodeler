@@ -19,9 +19,6 @@
 #include "pmradiosity.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmradiosityedit.h"
-
-
 
 const double adcBailoutDefault = 0.01;
 const double brightnessDefault = 1.0;
@@ -38,12 +35,12 @@ const int recursionLimitDefault = 2;
 
 PMDefinePropertyClass( PMRadiosity, PMRadiosityProperty );
 PMMetaObject* PMRadiosity::s_pMetaObject = 0;
-PMObject* createNewRadiosity( PMPart* part )
+PMObject* createNewRadiosity( )
 {
-   return new PMRadiosity( part );
+   return new PMRadiosity( );
 }
 
-PMRadiosity::PMRadiosity( PMPart* part ) : Base( part )
+PMRadiosity::PMRadiosity( ) : Base( )
 {
   m_adcBailout = adcBailoutDefault;
   m_alwaysSample = true;
@@ -356,11 +353,6 @@ void PMRadiosity::setRecursionLimit( int c )
          m_pMemento->addData( s_pMetaObject, PMRecursionLimitID, m_recursionLimit );
       m_recursionLimit = c;
    }
-}
-
-PMDialogEditBase* PMRadiosity::editWidget( QWidget* parent ) const
-{
-   return new PMRadiosityEdit( parent );
 }
 
 void PMRadiosity::restoreMemento( PMMemento* s )

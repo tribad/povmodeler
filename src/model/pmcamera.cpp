@@ -19,23 +19,20 @@
 #include "pmcamera.h"
 
 #include "pmxmlhelper.h"
-#include "pmcameraedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
 #include "pmenumproperty.h"
 
-
-
 PMDefinePropertyClass( PMCamera, PMCameraProperty );
 PMDefineEnumPropertyClass( PMCamera, PMCamera::CameraType, PMCameraTypeProperty );
 
 PMViewStructure* PMCamera::s_pDefaultViewStructure = nullptr;
 PMMetaObject* PMCamera::s_pMetaObject = nullptr;
-PMObject* createNewCamera( PMPart* part )
+PMObject* createNewCamera( )
 {
-   return new PMCamera( part );
+   return new PMCamera( );
 }
 
 const PMVector locationDefault = PMVector( 0.0, 0.0, 0.0 );
@@ -57,8 +54,8 @@ const double confidenceDefault = 0.9;
 const double varianceDefault = 0.008;
 const bool c_defaultExport = true;
 
-PMCamera::PMCamera( PMPart* part )
-      : Base( part )
+PMCamera::PMCamera( )
+      : Base( )
 {
    m_location = locationDefault;
    m_lookAt = lookAtDefault;
@@ -440,11 +437,6 @@ void PMCamera::setExportPovray( bool ex )
          m_pMemento->addData( s_pMetaObject, PMExportID, m_export );
       m_export = ex;
    }
-}
-
-PMDialogEditBase* PMCamera::editWidget( QWidget* parent ) const
-{
-   return new PMCameraEdit( parent );
 }
 
 void PMCamera::restoreMemento( PMMemento* s )

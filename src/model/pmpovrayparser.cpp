@@ -20,7 +20,6 @@
 
 
 
-#include "pmpart.h"
 #include "pmscanner.h"
 #include "pmtokens.h"
 
@@ -29,15 +28,14 @@
 #include "pmprototypemanager.h"
 #include "pmxmlhelper.h"
 
-
-PMPovrayParser::PMPovrayParser( PMPart* part, QIODevice* dev )
-      : PMParser( part, dev )
+PMPovrayParser::PMPovrayParser( QIODevice* dev )
+      : PMParser( dev )
 {
    init();
 }
 
-PMPovrayParser::PMPovrayParser( PMPart* part, const QByteArray& array )
-      : PMParser( part, array )
+PMPovrayParser::PMPovrayParser(  const QByteArray& array )
+      : PMParser( array )
 {
    init();
 }
@@ -89,19 +87,19 @@ void PMPovrayParser::nextToken()
                      c->setText( c->text() + '\n' + commentText );
                   else
                   {
-                     c = new PMComment( m_pPart, commentText );
+                     c = new PMComment( commentText );
                      m_skippedComments.append( c );
                   }
                }
                else
                {
-                  c = new PMComment( m_pPart, m_pScanner->sValue() );
+                  c = new PMComment( m_pScanner->sValue() );
                   m_skippedComments.append( c );
                }
                lastCommentLine = m_pScanner->currentLine();
                break;
             case COMMENT_TOK:
-               c = new PMComment( m_pPart, m_pScanner->sValue() );
+               c = new PMComment( m_pScanner->sValue() );
                m_skippedComments.append( c );
                lastCommentLine = -2;
                break;
@@ -223,11 +221,11 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case DIFFERENCE_TOK:
             case INTERSECTION_TOK:
             case MERGE_TOK:
-               child = new PMCSG( m_pPart );
+               child = new PMCSG(  );
                error = !parseCSG( ( PMCSG* ) child );
                break;
             case BOX_TOK:
-               child = new PMBox( m_pPart );
+               child = new PMBox(  );
                error = !parseBox( ( PMBox* ) child );
                break;
             case SPHERE_TOK:
@@ -235,12 +233,12 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                    || ( !parent && m_pTopParent
                         && ( m_pTopParent->type() == "Blob" ) ) )
                {
-                  child = new PMBlobSphere( m_pPart );
+                  child = new PMBlobSphere(  );
                   error = !parseBlobSphere( ( PMBlobSphere* ) child );
                }
                else
                {
-                  child = new PMSphere( m_pPart );
+                  child = new PMSphere(  );
                   error = !parseSphere( ( PMSphere* ) child );
                }
                break;
@@ -249,101 +247,101 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                    || ( !parent && m_pTopParent
                         && ( m_pTopParent->type() == "Blob" ) ) )
                {
-                  child = new PMBlobCylinder( m_pPart );
+                  child = new PMBlobCylinder(  );
                   error = !parseBlobCylinder( ( PMBlobCylinder* ) child );
                }
                else
                {
-                  child = new PMCylinder( m_pPart );
+                  child = new PMCylinder(  );
                   error = !parseCylinder( ( PMCylinder* ) child );
                }
                break;
             case CONE_TOK:
-               child = new PMCone( m_pPart );
+               child = new PMCone(  );
                error = !parseCone( ( PMCone* ) child );
                break;
             case TORUS_TOK:
-               child = new PMTorus( m_pPart );
+               child = new PMTorus(  );
                error = !parseTorus( ( PMTorus* ) child );
                break;
             case BLOB_TOK:
-               child = new PMBlob( m_pPart );
+               child = new PMBlob(  );
                error = !parseBlob( ( PMBlob* ) child );
                break;
             case COMPONENT_TOK:
-               child = new PMBlobSphere( m_pPart );
+               child = new PMBlobSphere(  );
                error = !parseBlobComponent( ( PMBlobSphere* ) child );
                break;
             case HEIGHT_FIELD_TOK:
-               child = new PMHeightField( m_pPart );
+               child = new PMHeightField(  );
                error = !parseHeightField( ( PMHeightField* ) child );
                break;
             case TEXT_TOK:
-               child = new PMText( m_pPart );
+               child = new PMText(  );
                error = !parseText( ( PMText* ) child );
                break;
             case JULIA_FRACTAL_TOK:
-               child = new PMJuliaFractal( m_pPart );
+               child = new PMJuliaFractal(  );
                error = !parseJuliaFractal( ( PMJuliaFractal* ) child );
                break;
             case PLANE_TOK:
-               child = new PMPlane( m_pPart );
+               child = new PMPlane(  );
                error = !parsePlane( ( PMPlane* ) child );
                break;
             case QUADRIC_TOK:
             case CUBIC_TOK:
             case QUARTIC_TOK:
             case POLY_TOK:
-               child = new PMPolynom( m_pPart );
+               child = new PMPolynom(  );
                error = !parsePolynom( ( PMPolynom* ) child );
                break;
             case BICUBIC_PATCH_TOK:
-               child = new PMBicubicPatch( m_pPart );
+               child = new PMBicubicPatch(  );
                error = !parseBicubicPatch( ( PMBicubicPatch* ) child );
                break;
             case DISC_TOK:
-               child = new PMDisc( m_pPart );
+               child = new PMDisc(  );
                error = !parseDisc( ( PMDisc* ) child );
                break;
             case TRIANGLE_TOK:
             case SMOOTH_TRIANGLE_TOK:
-               child = new PMTriangle( m_pPart );
+               child = new PMTriangle(  );
                error = !parseTriangle( ( PMTriangle* ) child );
                break;
             case LATHE_TOK:
-               child = new PMLathe( m_pPart );
+               child = new PMLathe(  );
                error = !parseLathe( ( PMLathe* ) child );
                break;
             case PRISM_TOK:
-               child = new PMPrism( m_pPart );
+               child = new PMPrism(  );
                error = !parsePrism( ( PMPrism* ) child );
                break;
             case SOR_TOK:
-               child = new PMSurfaceOfRevolution( m_pPart );
+               child = new PMSurfaceOfRevolution(  );
                error = !parseSor( ( PMSurfaceOfRevolution* ) child );
                break;
             case SUPERELLIPSOID_TOK:
-               child = new PMSuperquadricEllipsoid( m_pPart );
+               child = new PMSuperquadricEllipsoid(  );
                error = !parseSqe( ( PMSuperquadricEllipsoid* ) child );
                break;
             case CAMERA_TOK:
-               child = new PMCamera( m_pPart );
+               child = new PMCamera(  );
                error = !parseCamera( ( PMCamera* ) child );
                break;
             case LIGHT_SOURCE_TOK:
-               child = new PMLight( m_pPart );
+               child = new PMLight(  );
                error = !parseLight( ( PMLight* ) child );
                break;
             case LOOKS_LIKE_TOK:
-               child = new PMLooksLike( m_pPart );
+               child = new PMLooksLike(  );
                error = !parseLooksLike( ( PMLooksLike* ) child );
                break;
             case PROJECTED_THROUGH_TOK:
-               child = new PMProjectedThrough( m_pPart );
+               child = new PMProjectedThrough(  );
                error = !parseProjectedThrough( ( PMProjectedThrough* ) child );
                break;
             case TEXTURE_TOK:
-               child = new PMTexture( m_pPart );
+               child = new PMTexture(  );
                error = !parseTexture( ( PMTexture* ) child );
                break;
             case AGATE_TOK:
@@ -377,7 +375,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case WOOD_TOK:
             case WAVES_TOK:
             case WRINKLES_TOK:
-               child = new PMPattern( m_pPart );
+               child = new PMPattern(  );
                {
                   bool normal = true;
                   if( parent && ( parent->type() != "Normal" ) )
@@ -422,53 +420,53 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                }
                else
                {
-                  child = new PMBlendMapModifiers( m_pPart );
+                  child = new PMBlendMapModifiers(  );
                   error = !parseBlendMapModifiers( ( PMBlendMapModifiers* ) child );
                }
                break;
             case WARP_TOK:
-               child = new PMWarp( m_pPart );
+               child = new PMWarp(  );
                error = !parseWarp( ( PMWarp* ) child );
                break;
             case PIGMENT_TOK:
-               child = new PMPigment( m_pPart );
+               child = new PMPigment(  );
                error = !parsePigment( ( PMPigment* ) child );
                break;
             case NORMAL_TOK:
-               child = new PMNormal( m_pPart );
+               child = new PMNormal(  );
                error = !parseNormal( ( PMNormal* ) child );
                break;
             case NORMAL_MAP_TOK:
-               child = new PMNormalMap( m_pPart );
+               child = new PMNormalMap(  );
                error = !parseNormalMap( ( PMNormalMap* ) child );
                break;
             case BUMP_MAP_TOK:
-               child = new PMBumpMap( m_pPart );
+               child = new PMBumpMap(  );
                error = !parseBumpMap( ( PMBumpMap* ) child );
                break;
             case SLOPE_MAP_TOK:
-               child = new PMSlopeMap( m_pPart );
+               child = new PMSlopeMap(  );
                error = !parseSlopeMap( ( PMSlopeMap* ) child );
                break;
             case DENSITY_MAP_TOK:
-               child = new PMDensityMap( m_pPart );
+               child = new PMDensityMap(  );
                error = !parseDensityMap( ( PMDensityMap* ) child );
                break;
             case TEXTURE_MAP_TOK:
-               child = new PMTextureMap( m_pPart );
+               child = new PMTextureMap(  );
                error = !parseTextureMap( ( PMTextureMap* ) child );
                break;
             case MATERIAL_MAP_TOK:
-               child = new PMMaterialMap( m_pPart );
+               child = new PMMaterialMap(  );
                error = !parseMaterialMap( ( PMMaterialMap* ) child );
                break;
             case PIGMENT_MAP_TOK:
-               child = new PMPigmentMap( m_pPart );
+               child = new PMPigmentMap(  );
                error = !parsePigmentMap( ( PMPigmentMap* ) child );
                break;
             case COLOR_MAP_TOK:
             case COLOUR_MAP_TOK:
-               child = new PMColorMap( m_pPart );
+               child = new PMColorMap(  );
                error = !parseColorMap( ( PMColorMap* ) child );
                break;
             case CHECKER_TOK:
@@ -504,7 +502,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
 
                if( normal )
                {
-                  child = new PMNormalList( m_pPart );
+                  child = new PMNormalList(  );
                   if( parseFloat( depth, true ) )
                      ( ( PMNormalList* ) child )->setDepth( depth );
 
@@ -528,23 +526,23 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                      case TRANSMIT_TOK:
                      case FILTER_TOK:
                      case ID_TOK:
-                        child = new PMColorList( m_pPart );
+                        child = new PMColorList(  );
                         error = !parseColorList( ( PMColorList* ) child, expect );
                         break;
                      case PIGMENT_TOK:
-                        child = new PMPigmentList( m_pPart );
+                        child = new PMPigmentList(  );
                         error = !parsePigmentList( ( PMPigmentList* ) child, expect );
                         break;
                      case TEXTURE_TOK:
-                        child = new PMTextureList( m_pPart );
+                        child = new PMTextureList(  );
                         error = !parseTextureList( ( PMTextureList* ) child, expect );
                         break;
                      case NORMAL_TOK:
-                        child = new PMNormalList( m_pPart );
+                        child = new PMNormalList(  );
                         error = !parseNormalList( ( PMNormalList* ) child, expect );
                         break;
                      case DENSITY_TOK:
-                        child = new PMDensityList( m_pPart );
+                        child = new PMDensityList(  );
                         error = !parseDensityList( ( PMDensityList* ) child, expect );
                         break;
                      default:
@@ -587,59 +585,59 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                break;
             }
             case IMAGE_MAP_TOK:
-               child = new PMImageMap( m_pPart );
+               child = new PMImageMap(  );
                error = !parseImageMap( ( PMImageMap* ) child );
                break;
             case FINISH_TOK:
-               child = new PMFinish( m_pPart );
+               child = new PMFinish(  );
                error = !parseFinish( ( PMFinish* ) child );
                break;
             case INTERIOR_TOK:
-               child = new PMInterior( m_pPart );
+               child = new PMInterior(  );
                error = !parseInterior( ( PMInterior* ) child );
                break;
             case MEDIA_TOK:
-               child = new PMMedia( m_pPart );
+               child = new PMMedia(  );
                error = !parseMedia( ( PMMedia* ) child );
                break;
             case DENSITY_TOK:
-               child = new PMDensity( m_pPart );
+               child = new PMDensity(  );
                error = !parseDensity( ( PMDensity* ) child );
                break;
             case MATERIAL_TOK:
-               child = new PMMaterial( m_pPart );
+               child = new PMMaterial(  );
                error = !parseMaterial( ( PMMaterial* ) child );
                break;
             case SKY_SPHERE_TOK:
-               child = new PMSkySphere( m_pPart );
+               child = new PMSkySphere(  );
                error = !parseSkySphere( ( PMSkySphere* ) child );
                break;
             case RAINBOW_TOK:
-               child = new PMRainbow( m_pPart );
+               child = new PMRainbow(  );
                error = !parseRainbow( ( PMRainbow* ) child );
                break;
             case FOG_TOK:
-               child = new PMFog( m_pPart );
+               child = new PMFog(  );
                error = !parseFog( ( PMFog* ) child );
                break;
             case GLOBAL_SETTINGS_TOK:
-               child = new PMGlobalSettings( m_pPart );
+               child = new PMGlobalSettings(  );
                error = !parseGlobalSettings( ( PMGlobalSettings* ) child );
                break;
             case SCALE_TOK:
-               child = new PMScale( m_pPart );
+               child = new PMScale(  );
                error = !parseScale( ( PMScale* ) child );
                break;
             case ROTATE_TOK:
-               child = new PMRotate( m_pPart );
+               child = new PMRotate(  );
                error = !parseRotate( ( PMRotate* ) child );
                break;
             case TRANSLATE_TOK:
-               child = new PMTranslate( m_pPart );
+               child = new PMTranslate(  );
                error = !parseTranslate( ( PMTranslate* ) child );
                break;
             case MATRIX_TOK:
-               child = new PMPovrayMatrix( m_pPart );
+               child = new PMPovrayMatrix(  );
                error = !parseMatrix( ( PMPovrayMatrix* ) child );
                break;
             case BOUNDED_BY_TOK:
@@ -647,7 +645,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                   finished = true;
                else
                {
-                  child = new PMBoundedBy( m_pPart );
+                  child = new PMBoundedBy(  );
                   error = !parseBoundedBy( ( PMBoundedBy* ) child );
                }
                break;
@@ -656,44 +654,44 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                   finished = true;
                else
                {
-                  child = new PMClippedBy( m_pPart );
+                  child = new PMClippedBy(  );
                   error = !parseClippedBy( ( PMClippedBy* ) child );
                }
                break;
             case ISOSURFACE_TOK:
-               child = new PMIsoSurface( m_pPart );
+               child = new PMIsoSurface(  );
                error = !parseIsoSurface( ( PMIsoSurface* ) child );
                break;
             case RADIOSITY_TOK:
-               child = new PMRadiosity( m_pPart );
+               child = new PMRadiosity(  );
                error = !parseRadiosity( ( PMRadiosity* ) child );
                break;
             case PHOTONS_TOK:
                if ( parent && ( parent->type() == "GlobalSettings" ) )
                {
-                  child = new PMGlobalPhotons( m_pPart );
+                  child = new PMGlobalPhotons(  );
                   error = !parseGlobalPhotons( ( PMGlobalPhotons* ) child );
                }
                else
                {
-                  child = new PMPhotons( m_pPart );
+                  child = new PMPhotons(  );
                   error =!parsePhotons( ( PMPhotons* ) child );
                }
                break;
             case LIGHT_GROUP_TOK:
-               child = new PMLightGroup( m_pPart );
+               child = new PMLightGroup(  );
                error = !parseLightGroup( ( PMLightGroup* ) child );
                break;
             case INTERIOR_TEXTURE_TOK:
-               child = new PMInteriorTexture( m_pPart );
+               child = new PMInteriorTexture(  );
                error = !parseInteriorTexture( ( PMInteriorTexture* ) child );
                break;
             case SPHERE_SWEEP_TOK:
-               child = new PMSphereSweep( m_pPart );
+               child = new PMSphereSweep(  );
                error = !parseSphereSweep( ( PMSphereSweep* ) child );
                break;
             case MESH_TOK:
-               child = new PMMesh( m_pPart );
+               child = new PMMesh(  );
                error = !parseMesh( ( PMMesh* ) child );
                break;
             case DECLARE_TOK:
@@ -768,7 +766,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                            // misc
                         case LIGHT_SOURCE_TOK:
                         case LIGHT_GROUP_TOK:
-                           child = new PMDeclare( m_pPart );
+                           child = new PMDeclare(  );
                            error = !parseDeclare( ( PMDeclare* ) child );
                            break;
                         default:
@@ -802,7 +800,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                noChild = true;
                break;
             case RAW_POVRAY_TOK:
-               child = new PMRaw( m_pPart, m_pScanner->sValue() );
+               child = new PMRaw( m_pScanner->sValue() );
                error = false;
                nextToken();
                break;
@@ -4501,7 +4499,7 @@ bool PMPovrayParser::parsePigment( PMPigment* pigment, bool parseOuter )
          case ID_TOK:
             if( parseColor( c ) )
             {
-               sc = new PMSolidColor( m_pPart );
+               sc = new PMSolidColor(  );
                c.setSrgb( srgb );
                srgb = false;
                sc->setColor( c );
@@ -4621,7 +4619,7 @@ bool PMPovrayParser::parseTextureMap( PMTextureMap* textureMap )
          if( !parseFloat( f_number1 ) )
             return false;
          mapValues.append( f_number1 );
-         texture = new PMTexture( m_pPart );
+         texture = new PMTexture( );
 
          parseTexture( texture, false );
 
@@ -4676,7 +4674,7 @@ bool PMPovrayParser::parsePigmentMap( PMPigmentMap* pigmentMap )
          if( !parseFloat( f_number1 ) )
             return false;
          mapValues.append( f_number1 );
-         pigment = new PMPigment( m_pPart );
+         pigment = new PMPigment( );
 
          parsePigment( pigment, false );
          if( !insertChild( pigment, pigmentMap ) )
@@ -4729,7 +4727,7 @@ bool PMPovrayParser::parseNormalMap( PMNormalMap* normalMap )
          if( !parseFloat( f_number1 ) )
             return false;
          mapValues.append( f_number1 );
-         normal = new PMNormal( m_pPart );
+         normal = new PMNormal( );
          if( !parseNormal( normal ) )
          {
             delete normal;
@@ -5029,7 +5027,7 @@ bool PMPovrayParser::parseSlopeMap( PMSlopeMap* slopeMap )
          if( !parseFloat( f_number1 ) )
             return false;
          mapValues.append( f_number1 );
-         slope = new PMSlope( m_pPart );
+         slope = new PMSlope( );
          if( !parseSlope( slope ) )
          {
             delete slope;
@@ -5085,7 +5083,7 @@ bool PMPovrayParser::parseDensityMap( PMDensityMap* densityMap )
          if( !parseFloat( f_number1 ) )
             return false;
          mapValues.append( f_number1 );
-         density = new PMDensity( m_pPart );
+         density = new PMDensity( );
          if( !parseDensity( density ) )
          {
             delete density;
@@ -5283,7 +5281,7 @@ bool PMPovrayParser::parsePigmentList( PMPigmentList* pigmentList, int expectedI
    do
    {
       oldConsumed = m_consumedTokens;
-      pigment = new PMPigment( m_pPart );
+      pigment = new PMPigment( );
       if( !parsePigment( pigment ) )
       {
          delete pigment;
@@ -5315,7 +5313,7 @@ bool PMPovrayParser::parseColorList( PMColorList* colorList, int expectedItems )
       {
          return false;
       }
-      sc = new PMSolidColor( m_pPart );
+      sc = new PMSolidColor( );
       sc->setColor( color );
       if( !insertChild( sc, colorList ) )
          delete sc;
@@ -5338,7 +5336,7 @@ bool PMPovrayParser::parseNormalList( PMNormalList* normalList, int expectedItem
    do
    {
       oldConsumed = m_consumedTokens;
-      normal = new PMNormal( m_pPart );
+      normal = new PMNormal( );
       if( !parseNormal( normal ) )
       {
          delete normal;
@@ -5365,7 +5363,7 @@ bool PMPovrayParser::parseTextureList( PMTextureList* textureList, int expectedI
    do
    {
       oldConsumed = m_consumedTokens;
-      texture = new PMTexture( m_pPart );
+      texture = new PMTexture( );
       if( !parseTexture( texture ) )
       {
          delete texture;
@@ -5392,7 +5390,7 @@ bool PMPovrayParser::parseDensityList( PMDensityList* densityList, int expectedI
    do
    {
       oldConsumed = m_consumedTokens;
-      density = new PMDensity( m_pPart );
+      density = new PMDensity( );
       if( !parseDensity( density ) )
       {
          delete density;
@@ -5481,7 +5479,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
                {
                   // ... add the two colors in two different entries ...
                   mapValues.append( f_number1 );
-                  solidColor = new PMSolidColor( m_pPart );
+                  solidColor = new PMSolidColor( );
                   solidColor->setColor( color1 );
                   if( !insertChild( solidColor, colorMap ) )
                      delete solidColor;
@@ -5489,7 +5487,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
                      lastColor = solidColor;
 
                   mapValues.append( f_number2 );
-                  solidColor = new PMSolidColor( m_pPart );
+                  solidColor = new PMSolidColor( );
                   solidColor->setColor( color2 );
                   if( !insertChild( solidColor, colorMap ) )
                      delete solidColor;
@@ -5500,7 +5498,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
                {
                   // ... else just add the last value and color
                   mapValues.append( f_number2 );
-                  solidColor = new PMSolidColor( m_pPart );
+                  solidColor = new PMSolidColor( );
                   solidColor->setColor( color2 );
                   if( !insertChild( solidColor, colorMap ) )
                      delete solidColor;
@@ -5515,7 +5513,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
             if( !parseColor( color1 ) )
                return false;
             mapValues.append( f_number1 );
-            solidColor = new PMSolidColor( m_pPart );
+            solidColor = new PMSolidColor( );
             solidColor->setColor( color1 );
             if( !insertChild( solidColor, colorMap ) )
                delete solidColor;
@@ -6438,81 +6436,81 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
          break;
          // finite solid
       case BLOB_TOK:
-         child = new PMBlob( m_pPart );
+         child = new PMBlob( );
          error = !parseBlob( ( PMBlob* ) child );
          break;
       case BOX_TOK:
-         child = new PMBox( m_pPart );
+         child = new PMBox( );
          error = !parseBox( ( PMBox* ) child );
          break;
       case CONE_TOK:
-         child = new PMCone( m_pPart );
+         child = new PMCone( );
          error = !parseCone( ( PMCone* ) child );
          break;
       case CYLINDER_TOK:
-         child = new PMCylinder( m_pPart );
+         child = new PMCylinder( );
          error = !parseCylinder( ( PMCylinder* ) child );
          break;
       case HEIGHT_FIELD_TOK:
-         child = new PMHeightField( m_pPart );
+         child = new PMHeightField( );
          error = !parseHeightField( ( PMHeightField* ) child );
          break;
       case JULIA_FRACTAL_TOK:
-         child = new PMJuliaFractal( m_pPart );
+         child = new PMJuliaFractal( );
          error = !parseJuliaFractal( ( PMJuliaFractal* ) child );
          break;
       case LATHE_TOK:
-         child = new PMLathe( m_pPart );
+         child = new PMLathe( );
          error = !parseLathe( ( PMLathe* ) child );
          break;
       case PRISM_TOK:
-         child = new PMPrism( m_pPart );
+         child = new PMPrism( );
          error = !parsePrism( ( PMPrism* ) child );
          break;
       case SPHERE_TOK:
-         child = new PMSphere( m_pPart );
+         child = new PMSphere( );
          error = !parseSphere( ( PMSphere* ) child );
          break;
       case SUPERELLIPSOID_TOK:
-         child = new PMSuperquadricEllipsoid( m_pPart );
+         child = new PMSuperquadricEllipsoid( );
          error = !parseSqe( ( PMSuperquadricEllipsoid* ) child );
          break;
       case SOR_TOK:
-         child = new PMSurfaceOfRevolution( m_pPart );
+         child = new PMSurfaceOfRevolution( );
          error = !parseSor( ( PMSurfaceOfRevolution* ) child );
          break;
       case TEXT_TOK:
-         child = new PMText( m_pPart );
+         child = new PMText( );
          error = !parseText( ( PMText* ) child );
          break;
       case TORUS_TOK:
-         child = new PMTorus( m_pPart );
+         child = new PMTorus( );
          error = !parseTorus( ( PMTorus* ) child );
          break;
          // finite patch
       case BICUBIC_PATCH_TOK:
-         child = new PMBicubicPatch( m_pPart );
+         child = new PMBicubicPatch( );
          error = !parseBicubicPatch( ( PMBicubicPatch* ) child );
          break;
       case DISC_TOK:
-         child = new PMDisc( m_pPart );
+         child = new PMDisc( );
          error = !parseDisc( ( PMDisc* ) child );
          break;
       case TRIANGLE_TOK:
       case SMOOTH_TRIANGLE_TOK:
-         child = new PMTriangle( m_pPart );
+         child = new PMTriangle( );
          error = !parseTriangle( ( PMTriangle* ) child );
          break;
          // infinite solid
       case PLANE_TOK:
-         child = new PMPlane( m_pPart );
+         child = new PMPlane( );
          error = !parsePlane( ( PMPlane* ) child );
          break;
       case QUADRIC_TOK:
       case CUBIC_TOK:
       case QUARTIC_TOK:
       case POLY_TOK:
-         child = new PMPolynom( m_pPart );
+         child = new PMPolynom( );
          error = !parsePolynom( ( PMPolynom* ) child );
          break;
          // csg
@@ -6520,14 +6518,14 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
       case DIFFERENCE_TOK:
       case INTERSECTION_TOK:
       case MERGE_TOK:
-         child = new PMCSG( m_pPart );
+         child = new PMCSG( );
          error = !parseCSG( ( PMCSG* ) child );
          break;
          // textures
       case TEXTURE_TOK:
          while( m_token == TEXTURE_TOK )
          {
-            texture = new PMTexture( m_pPart );
+            texture = new PMTexture( );
             if( !parseTexture( texture ) )
                error = true;
             if( !insertChild( texture, decl ) )
@@ -6538,97 +6536,97 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
          }
          break;
       case PIGMENT_TOK:
-         child = new PMPigment( m_pPart );
+         child = new PMPigment( );
          error = !parsePigment( ( PMPigment* ) child );
          break;
       case NORMAL_TOK:
-         child = new PMNormal( m_pPart );
+         child = new PMNormal( );
          error = !parseNormal( ( PMNormal* ) child );
          break;
       case FINISH_TOK:
-         child = new PMFinish( m_pPart );
+         child = new PMFinish( );
          error = !parseFinish( ( PMFinish* ) child );
          break;
       case TEXTURE_MAP_TOK:
-         child = new PMTextureMap( m_pPart );
+         child = new PMTextureMap( );
          error = !parseTextureMap( ( PMTextureMap* ) child );
          break;
       case PIGMENT_MAP_TOK:
-         child = new PMPigmentMap( m_pPart );
+         child = new PMPigmentMap( );
          error = !parsePigmentMap( ( PMPigmentMap* ) child );
          break;
       case COLOR_MAP_TOK:
       case COLOUR_MAP_TOK:
-         child = new PMColorMap( m_pPart );
+         child = new PMColorMap( );
          error = !parseColorMap( ( PMColorMap* ) child );
          break;
       case NORMAL_MAP_TOK:
-         child = new PMNormalMap( m_pPart );
+         child = new PMNormalMap( );
          error = !parseNormalMap( ( PMNormalMap* ) child );
          break;
       case SLOPE_MAP_TOK:
-         child = new PMSlopeMap( m_pPart );
+         child = new PMSlopeMap( );
          error = !parseSlopeMap( ( PMSlopeMap* ) child );
          break;
       case DENSITY_MAP_TOK:
-         child = new PMDensityMap( m_pPart );
+         child = new PMDensityMap( );
          error = !parseDensityMap( ( PMDensityMap* ) child );
          break;
       case INTERIOR_TOK:
-         child = new PMInterior( m_pPart );
+         child = new PMInterior( );
          error = !parseInterior( ( PMInterior* ) child );
          break;
       case MEDIA_TOK:
-         child = new PMMedia( m_pPart );
+         child = new PMMedia( );
          error = !parseMedia( ( PMMedia* ) child );
          break;
       case DENSITY_TOK:
-         child = new PMDensity( m_pPart );
+         child = new PMDensity( );
          error = !parseDensity( ( PMDensity* ) child );
          break;
       case MATERIAL_TOK:
-         child = new PMMaterial( m_pPart );
+         child = new PMMaterial( );
          error = !parseMaterial( ( PMMaterial* ) child );
          break;
       case SKY_SPHERE_TOK:
-         child = new PMSkySphere( m_pPart );
+         child = new PMSkySphere( );
          error = !parseSkySphere( ( PMSkySphere* ) child );
          break;
       case RAINBOW_TOK:
-         child = new PMRainbow( m_pPart );
+         child = new PMRainbow( );
          error = !parseRainbow( ( PMRainbow* ) child );
          break;
       case FOG_TOK:
-         child = new PMFog( m_pPart );
+         child = new PMFog( );
          error = !parseFog( ( PMFog* ) child );
          break;
          // misc
       case LIGHT_SOURCE_TOK:
-         child = new PMLight( m_pPart );
+         child = new PMLight( );
          error = !parseLight( ( PMLight* ) child );
          break;
       case ISOSURFACE_TOK:
-         child = new PMIsoSurface( m_pPart );
+         child = new PMIsoSurface( );
          error = !parseIsoSurface( ( PMIsoSurface* ) child );
          break;
       case PHOTONS_TOK:
-         child = new PMPhotons( m_pPart );
+         child = new PMPhotons( );
          error = !parsePhotons( ( PMPhotons* ) child );
          break;
       case LIGHT_GROUP_TOK:
-         child = new PMLightGroup( m_pPart );
+         child = new PMLightGroup( );
          error = !parseLightGroup( ( PMLightGroup* ) child );
          break;
       case INTERIOR_TEXTURE_TOK:
-         child = new PMInteriorTexture( m_pPart );
+         child = new PMInteriorTexture( );
          error = !parseInteriorTexture( ( PMInteriorTexture* ) child );
          break;
       case SPHERE_SWEEP_TOK:
-         child = new PMSphereSweep( m_pPart );
+         child = new PMSphereSweep( );
          error = !parseSphereSweep( ( PMSphereSweep* ) child );
          break;
       case MESH_TOK:
-         child = new PMMesh( m_pPart );
+         child = new PMMesh( );
          error = !parseMesh( ( PMMesh* ) child );
          break;
    }
@@ -6656,7 +6654,7 @@ bool PMPovrayParser::parseObject( PMCompositeObject* parent )
       switch( m_token )
       {
          case ID_TOK:
-            child = new PMObjectLink( m_pPart );
+            child = new PMObjectLink( );
             error = !parseObjectLink( ( PMObjectLink* ) child );
             if( !insertChild( child, parent ) )
                delete child;

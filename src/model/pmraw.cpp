@@ -19,22 +19,18 @@
 #include "pmraw.h"
 #include "pmxmlhelper.h"
 
-#include "pmrawedit.h"
 #include "pmmemento.h"
-
-
-#include <qtextstream.h>
 
 PMDefinePropertyClass( PMRaw, PMRawProperty );
 
 PMMetaObject* PMRaw::s_pMetaObject = 0;
-PMObject* createNewRaw( PMPart* part )
+PMObject* createNewRaw( )
 {
-   return new PMRaw( part );
+   return new PMRaw( );
 }
 
-PMRaw::PMRaw( PMPart* part )
-      : Base( part )
+PMRaw::PMRaw( )
+      : Base( )
 {
 }
 
@@ -44,8 +40,8 @@ PMRaw::PMRaw( const PMRaw& r )
    m_code = r.m_code;
 }
 
-PMRaw::PMRaw( PMPart* part, const QString& t )
-   : Base( part )
+PMRaw::PMRaw( const QString& t )
+   : Base( )
 {
    m_code = t;
 }
@@ -104,11 +100,6 @@ void PMRaw::readAttributes( const PMXMLHelper& h )
    if( e.isText() ) m_code = e.toText().data();
 
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMRaw::editWidget( QWidget* parent ) const
-{
-   return new PMRawEdit( parent );
 }
 
 void PMRaw::restoreMemento( PMMemento* s )

@@ -21,16 +21,10 @@
 #include "pmcylinder.h"
 
 #include "pmxmlhelper.h"
-#include "pmboxedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
-
-
-
 #include "pmdistancecontrolpoint.h"
-
-#include "pmcylinderedit.h"
 
 const double defaultCylRadius = 0.5;
 const double defaultHalfCylSize = 0.5;
@@ -46,14 +40,14 @@ int PMCylinder::s_parameterKey = 0;
 PMDefinePropertyClass( PMCylinder, PMCylinderProperty );
 
 PMMetaObject* PMCylinder::s_pMetaObject = nullptr;
-PMObject* createNewCylinder( PMPart* part )
+PMObject* createNewCylinder( )
 {
-   return new PMCylinder( part );
+   return new PMCylinder( );
 }
 
 
-PMCylinder::PMCylinder( PMPart* part )
-      : Base( part )
+PMCylinder::PMCylinder(  )
+      : Base(  )
 {
    m_end1 = defaultEnd1;
    m_end2 = defaultEnd2;
@@ -158,11 +152,6 @@ void PMCylinder::setOpen( bool op )
          m_pMemento->addData( s_pMetaObject, PMOpenID, m_open );
       m_open = op;
    }
-}
-
-PMDialogEditBase* PMCylinder::editWidget( QWidget* parent ) const
-{
-   return new PMCylinderEdit( parent );
 }
 
 void PMCylinder::restoreMemento( PMMemento* s )

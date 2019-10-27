@@ -56,14 +56,14 @@ PMPovray35Format::~PMPovray35Format()
 
 }
 
-PMParser* PMPovray35Format::newParser( PMPart* part, QIODevice* dev ) const
+PMParser* PMPovray35Format::newParser( QIODevice* dev ) const
 {
-   return new PMPovrayParser( part, dev );
+   return new PMPovrayParser( dev );
 }
 
-PMParser* PMPovray35Format::newParser( PMPart* part, const QByteArray& data ) const
+PMParser* PMPovray35Format::newParser( const QByteArray& data ) const
 {
-   return new PMPovrayParser( part, data );
+   return new PMPovrayParser( data );
 }
 
 PMSerializer* PMPovray35Format::newSerializer( QIODevice* dev )
@@ -71,7 +71,7 @@ PMSerializer* PMPovray35Format::newSerializer( QIODevice* dev )
    return new PMOutputDevice( dev, this );
 }
 
-PMRenderer* PMPovray35Format::newRenderer( PMPart* ) const
+PMRenderer* PMPovray35Format::newRenderer( ) const
 {
    // TODO
    return nullptr;

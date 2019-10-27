@@ -34,7 +34,7 @@ public:
    /**
     * Creates an empty PMBoundedBy
     */
-   PMBoundedBy( PMPart* part );
+   PMBoundedBy( );
    /**
     * Deletes the object
     */
@@ -59,10 +59,6 @@ public:
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
-   /**
-    * Returns a new @ref PMBoundedByEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

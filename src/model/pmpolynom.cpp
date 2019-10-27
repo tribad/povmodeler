@@ -17,8 +17,6 @@
 
 
 #include "pmpolynom.h"
-#include "pmpolynomedit.h"
-
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 
@@ -75,13 +73,13 @@ private:
 };
 
 PMMetaObject* PMPolynom::s_pMetaObject = 0;
-PMObject* createNewPolynom( PMPart* part )
+PMObject* createNewPolynom( )
 {
-   return new PMPolynom( part );
+   return new PMPolynom( );
 }
 
-PMPolynom::PMPolynom( PMPart* part )
-      : Base( part )
+PMPolynom::PMPolynom( )
+      : Base( )
 {
    int i;
    m_order = c_defaultOrder;
@@ -156,11 +154,6 @@ void PMPolynom::cleanUp() const
       s_pMetaObject = 0;
    }
    Base::cleanUp();
-}
-
-PMDialogEditBase* PMPolynom::editWidget( QWidget* parent ) const
-{
-   return new PMPolynomEdit( parent );
 }
 
 void PMPolynom::setPolynomOrder( int o )

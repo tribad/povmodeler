@@ -16,8 +16,6 @@
 **************************************************************************/
 
 #include "pmrendermode.h"
-
-
 #include "pmxmlhelper.h"
 
 
@@ -58,7 +56,7 @@ PMRenderMode::PMRenderMode( const QDomElement& e )
 {
    init();
 
-   PMXMLHelper hlp( e, nullptr, nullptr, 0, 0 );
+   PMXMLHelper hlp( e, nullptr, 0, 0 );
    m_description = hlp.stringAttribute( "description", m_description );
    m_height = hlp.intAttribute( "height", m_height );
    m_width = hlp.intAttribute( "width", m_width );

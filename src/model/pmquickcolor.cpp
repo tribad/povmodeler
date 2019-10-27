@@ -18,26 +18,24 @@
 **************************************************************************/
 
 
+#include <QLocale>
 #include "pmquickcolor.h"
-
 #include "pmxmlhelper.h"
-#include "pmquickcoloredit.h"
 #include "pmmemento.h"
 
-#include <QLocale>
 
 const PMColor colorDefault = PMColor( 1.0, 1.0, 1.0, 0.0, 0.0 );
 
 PMDefinePropertyClass( PMQuickColor, PMQuickColorProperty );
 
 PMMetaObject* PMQuickColor::s_pMetaObject = 0;
-PMObject* createNewQuickColor( PMPart* part )
+PMObject* createNewQuickColor( )
 {
-   return new PMQuickColor( part );
+   return new PMQuickColor( );
 }
 
-PMQuickColor::PMQuickColor( PMPart* part )
-      : Base( part )
+PMQuickColor::PMQuickColor( )
+      : Base( )
 {
    m_color = colorDefault;
 }
@@ -100,11 +98,6 @@ void PMQuickColor::setColor( const PMColor& c )
       }
       m_color = c;
    }
-}
-
-PMDialogEditBase* PMQuickColor::editWidget( QWidget* parent ) const
-{
-   return new PMQuickColorEdit( parent );
 }
 
 void PMQuickColor::restoreMemento( PMMemento* s )

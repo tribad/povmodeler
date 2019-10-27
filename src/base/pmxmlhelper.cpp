@@ -18,11 +18,10 @@
 #include "pmxmlhelper.h"
 #include <QLocale>
 
-PMXMLHelper::PMXMLHelper( const QDomElement& e, PMPart* p, PMParser* par,
+PMXMLHelper::PMXMLHelper( const QDomElement& e, PMParser* par,
                           int majorDocumentFormat, int minorDocumentFormat )
 {
    m_e = e;
-   m_pPart = p;
    m_pParser = par;
    m_major = majorDocumentFormat;
    m_minor = minorDocumentFormat;

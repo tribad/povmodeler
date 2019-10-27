@@ -34,7 +34,7 @@ public:
    /**
     * Creates an PMTexture
     */
-   PMTexture( PMPart* part );
+   PMTexture( );
    /**
     * Copy constructor
     */
@@ -58,11 +58,6 @@ public:
    virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
-
-   /**
-    * Returns a new @ref PMTextureEdit
-    */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
    /** */
    virtual QString pixmap() const { return QString( "pmtexture" ); }
 

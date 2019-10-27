@@ -18,20 +18,17 @@
 #include "pmblobsphere.h"
 
 #include "pmxmlhelper.h"
-#include "pmblobsphereedit.h"
 #include "pmmemento.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
 
-
-
 PMDefinePropertyClass( PMBlobSphere, PMBlobSphereProperty );
 
 PMMetaObject* PMBlobSphere::s_pMetaObject = 0;
-PMObject* createNewBlobSphere( PMPart* part )
+PMObject* createNewBlobSphere( )
 {
-   return new PMBlobSphere( part );
+   return new PMBlobSphere( );
 }
 
 /** default param for the sphere */
@@ -46,8 +43,8 @@ int PMBlobSphere::s_vStep = c_defaultBlobSphereVSteps;
 int PMBlobSphere::s_uStep = c_defaultBlobSphereUSteps;
 int PMBlobSphere::s_parameterKey = 0;
 
-PMBlobSphere::PMBlobSphere( PMPart* part )
-      : Base( part )
+PMBlobSphere::PMBlobSphere( )
+      : Base( )
 {
    m_radius = c_defaultRadius;
    m_centre = c_defaultCentre;
@@ -105,11 +102,6 @@ void PMBlobSphere::readAttributes( const PMXMLHelper& h )
    m_radius = h.doubleAttribute( "radius", c_defaultRadius );
    m_strength = h.doubleAttribute( "strength", c_defaultStrength );
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMBlobSphere::editWidget( QWidget* parent ) const
-{
-   return new PMBlobSphereEdit( parent );
 }
 
 void PMBlobSphere::restoreMemento( PMMemento* s )

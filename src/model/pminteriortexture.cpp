@@ -19,18 +19,15 @@
 #include "pminteriortexture.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pminteriortextureedit.h"
-
-
 
 PMMetaObject* PMInteriorTexture::s_pMetaObject = 0;
-PMObject* createNewInteriorTexture( PMPart* part )
+PMObject* createNewInteriorTexture( )
 {
-   return new PMInteriorTexture( part );
+   return new PMInteriorTexture( );
 }
 
-PMInteriorTexture::PMInteriorTexture( PMPart* part )
-      : Base( part )
+PMInteriorTexture::PMInteriorTexture( )
+      : Base( )
 {
 }
 
@@ -67,9 +64,3 @@ QString PMInteriorTexture::description() const
 {
    return ( "interior texture" );
 }
-
-PMDialogEditBase* PMInteriorTexture::editWidget( QWidget* parent ) const
-{
-   return new PMInteriorTextureEdit( parent );
-}
-

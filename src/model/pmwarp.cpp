@@ -18,11 +18,8 @@
 #include "pmxmlhelper.h"
 #include "pmvector.h"
 #include "pmwarp.h"
-#include "pmwarpedit.h"
 #include "pmmemento.h"
 #include "pmenumproperty.h"
-
-
 
 const PMVector directionDefault = PMVector( 1.0, 0.0, 0.0 );
 const PMVector offsetDefault = PMVector( 0.0, 0.0, 0.0 );
@@ -46,13 +43,13 @@ PMDefinePropertyClass( PMWarp, PMWarpProperty );
 PMDefineEnumPropertyClass( PMWarp, PMWarp::PMWarpType, PMWarpTypeProperty );
 
 PMMetaObject* PMWarp::s_pMetaObject = 0;
-PMObject* createNewWarp( PMPart* part )
+PMObject* createNewWarp( )
 {
-   return new PMWarp( part );
+   return new PMWarp( );
 }
 
-PMWarp::PMWarp( PMPart* part )
-      : Base( part )
+PMWarp::PMWarp( )
+      : Base( )
 {
    m_warpType = PMWarp::Repeat;
    m_direction = directionDefault;
@@ -465,11 +462,6 @@ void PMWarp::setMajorRadius( const double c )
          m_pMemento->addData( s_pMetaObject, PMMajorRadiusID, m_majorRadius );
       m_majorRadius = c;
    }
-}
-
-PMDialogEditBase* PMWarp::editWidget( QWidget* parent ) const
-{
-   return new PMWarpEdit( parent );
 }
 
 void PMWarp::restoreMemento( PMMemento* s )

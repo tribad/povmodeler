@@ -19,7 +19,6 @@
 #include "pmglobalsettings.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmglobalsettingsedit.h"
 #include "pmenumproperty.h"
 
 const double adcBailoutDefault = 1.0 / 255.0;
@@ -45,13 +44,13 @@ PMDefinePropertyClass( PMGlobalSettings, PMGlobalSettingsProperty );
 PMDefineEnumPropertyClass( PMGlobalSettings, PMGlobalSettings::PMNoiseType, PMNoiseProperty );
 
 PMMetaObject* PMGlobalSettings::s_pMetaObject = nullptr;
-PMObject* createNewGlobalSettings( PMPart* part )
+PMObject* createNewGlobalSettings( )
 {
-   return new PMGlobalSettings( part );
+   return new PMGlobalSettings(  );
 }
 
-PMGlobalSettings::PMGlobalSettings( PMPart* part )
-      : Base( part )
+PMGlobalSettings::PMGlobalSettings( )
+      : Base(  )
 {
   m_adcBailout = adcBailoutDefault;
   m_ambientLight = ambientLightDefault;
@@ -428,11 +427,6 @@ void PMGlobalSettings::setRecursionLimit( int c )
          m_pMemento->addData( s_pMetaObject, PMRecursionLimitID, m_recursionLimit );
       m_recursionLimit = c;
    }
-}
-
-PMDialogEditBase* PMGlobalSettings::editWidget( QWidget* parent ) const
-{
-   return new PMGlobalSettingsEdit( parent );
 }
 
 void PMGlobalSettings::restoreMemento( PMMemento* s )

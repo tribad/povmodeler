@@ -19,14 +19,11 @@
 #include "pmtorus.h"
 
 #include "pmxmlhelper.h"
-#include "pmtorusedit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
-
-
 
 /** default param for the Torus */
 const double c_defaultminorRadius = 0.25;
@@ -43,13 +40,13 @@ int PMTorus::s_parameterKey = 0;
 PMDefinePropertyClass( PMTorus, PMTorusProperty );
 
 PMMetaObject* PMTorus::s_pMetaObject = 0;
-PMObject* createNewTorus( PMPart* part )
+PMObject* createNewTorus( )
 {
-   return new PMTorus( part );
+   return new PMTorus( );
 }
 
-PMTorus::PMTorus( PMPart* part )
-      : Base( part )
+PMTorus::PMTorus( )
+      : Base( )
 {
    m_minorRadius = c_defaultminorRadius;
    m_majorRadius = c_defaultmajorRadius;
@@ -108,12 +105,6 @@ void PMTorus::readAttributes( const PMXMLHelper& h )
    m_sturm = h.boolAttribute( "sturm", c_defaultsturm );
 
    Base::readAttributes( h );
-}
-
-PMDialogEditBase* PMTorus::editWidget( QWidget* parent ) const
-{
-
- return new PMTorusEdit( parent );
 }
 
 void PMTorus::restoreMemento( PMMemento* s )

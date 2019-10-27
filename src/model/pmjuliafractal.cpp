@@ -19,13 +19,10 @@
 #include "pmjuliafractal.h"
 
 #include "pmxmlhelper.h"
-#include "pmjuliafractaledit.h"
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 #include "pmenumproperty.h"
-
-
 
 const PMVector c_defaultJuliaParameter = PMVector( -0.083, 0.0, -0.83, -0.025 );
 const PMVector c_defaultSliceNormal = PMVector( 0.0, 0.0, 0.0, 1.0 );
@@ -46,13 +43,13 @@ PMDefineEnumPropertyClass( PMJuliaFractal, PMJuliaFractal::FunctionType,
                            PMFunctionTypeProperty );
 
 PMMetaObject* PMJuliaFractal::s_pMetaObject = 0;
-PMObject* createNewJuliaFractal( PMPart* part )
+PMObject* createNewJuliaFractal( )
 {
-   return new PMJuliaFractal( part );
+   return new PMJuliaFractal( );
 }
 
-PMJuliaFractal::PMJuliaFractal( PMPart* part )
-      : Base( part )
+PMJuliaFractal::PMJuliaFractal( )
+      : Base( )
 {
    m_juliaParameter = c_defaultJuliaParameter;
    m_algebraType = c_defaultAlgebraType;
@@ -270,11 +267,6 @@ void PMJuliaFractal::setExponent( const PMVector& e )
       m_exponent = e;
       m_exponent.resize( 2 );
    }
-}
-
-PMDialogEditBase* PMJuliaFractal::editWidget( QWidget* parent ) const
-{
-   return new PMJuliaFractalEdit( parent );
 }
 
 void PMJuliaFractal::restoreMemento( PMMemento* s )

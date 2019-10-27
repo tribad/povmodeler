@@ -19,19 +19,16 @@
 #include "pmpigment.h"
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
-#include "pmpigmentedit.h"
-
-
 
 PMDefinePropertyClass( PMPigment, PMPigmentProperty );
 
 PMMetaObject* PMPigment::s_pMetaObject = nullptr;
-PMObject* createNewPigment( PMPart* part )
+PMObject* createNewPigment( )
 {
-   return new PMPigment( part );
+   return new PMPigment( );
 }
 
-PMPigment::PMPigment( PMPart* part ) : Base( part )
+PMPigment::PMPigment( ) : Base( )
 {
    m_uvMapping = false;
 }
@@ -70,11 +67,6 @@ void PMPigment::cleanUp() const
 QString PMPigment::description() const
 {
    return ( "pigment" );
-}
-
-PMDialogEditBase* PMPigment::editWidget( QWidget* parent ) const
-{
-   return new PMPigmentEdit( parent );
 }
 
 void PMPigment::serialize( QDomElement& e, QDomDocument& doc ) const

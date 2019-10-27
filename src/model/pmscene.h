@@ -20,8 +20,6 @@
 #ifndef PMSCENE_H
 #define PMSCENE_H
 
-
-
 #include "pmcompositeobject.h"
 #include "pmrendermode.h"
 
@@ -38,7 +36,7 @@ public:
    /**
     * Creates an empty PMScene
     */
-   PMScene( PMPart* part );
+   PMScene( );
    /**
     * Copy constructor
     */
