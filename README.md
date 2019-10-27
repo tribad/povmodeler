@@ -1,5 +1,16 @@
 # (k)povmodeler
 
+## 27.10.2019
+Today I decided that the newui is the way to go. So I merged it over into the master branch.
+This may be not the way project trees are handled, but it makes me somewhat nervous always working on the branch. As long as I am alone here, its no problem anyway.
+It is still in the beginning. But I learned much things about the old code.
+
+For now I initialize the model tree, can load model files and have a recent files list.
+I have a plan how to organize the needed property edit widgets that are needed for all model classes, thats a huge mass of code anyway.
+
+Anyway that I believe that the original model code can be reduced easily by more than 50% I let it stay as it is because it works.
+Changing the model code as well will only be done if something will not work anymore, e.g. for new features. But for new features there will be a long way to go.
+
 ## 23.10.2019
 Working on a branch I extracted the model tree classes in a way that makes them complete independent from the GUI.
 This does not mean that there are no Qt-classes involved, but nothing that has to do with the user interaction.

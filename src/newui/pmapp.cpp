@@ -111,6 +111,7 @@ void PMApp::doNew() {
     //
     //  Attach the model to the tree view
     mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
+    mPMMainWindow.dockWidgetContents->expandAll();
 }
 void PMApp::doLoad() {
     //
@@ -129,7 +130,6 @@ void PMApp::doLoad() {
         QFileInfo now_visited(to_open);
 
         PMSettings::instance().setValue(LAST_DIRECTORY_VISITED, now_visited.absolutePath());
-
     }
 }
 
@@ -250,11 +250,16 @@ bool PMApp::Load(const QString& aPath) {
         //
         //  Attach the model to the tree view
         mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
+        mPMMainWindow.dockWidgetContents->expandAll();
         //
         //  Put the file to the recent file list and update the menu.
         mRecentFiles.SetFile(aPath);
         updateRecentFilesMenu();
+        //
+        //  Convenient way to get the directory where the file resides.
+        QFileInfo now_visited(aPath);
 
+        mMainWindow.setWindowTitle(now_visited.baseName() + " - povmodeler");
         retval = true;
     }
 
