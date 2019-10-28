@@ -140,6 +140,8 @@ bool PMModel::Load(const QString& aPath) {
         } else {
             success = false;
         }
+    } else  {
+        success = false;
     }
     return success;
 }

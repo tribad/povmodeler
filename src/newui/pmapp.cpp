@@ -107,11 +107,12 @@ void PMApp::doNew() {
     //
     //  We are not checking the pointer here as the constructor throws an
     //  out-of-memory exception anyway if no memory is available for the new object.
-    mActiveModel->Load("__default.kpm");
-    //
-    //  Attach the model to the tree view
-    mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
-    mPMMainWindow.dockWidgetContents->expand(mActiveModel->GetRootIndex());
+    if (mActiveModel->Load("__default.kpm")) {
+        //
+        //  Attach the model to the tree view
+        mPMMainWindow.dockWidgetContents->setModel(mActiveModel);
+        mPMMainWindow.dockWidgetContents->expand(mActiveModel->GetRootIndex());
+    }
 }
 void PMApp::doLoad() {
     //
