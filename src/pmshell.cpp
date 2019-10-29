@@ -43,6 +43,7 @@ PMShell::PMShell( const QUrl &url )
    setAttribute( Qt::WA_DeleteOnClose );
    statusBarLabel = new QLabel( this );
    currentUrl = nullptr;
+   m_pPart    = nullptr;
    /***call pmpart with mainwidget***/
 
    m_viewNumber = 0;
@@ -614,7 +615,9 @@ void PMShell::slotModified(bool m)
 
 void PMShell::modified(bool m)
 {
-   setWindowTitle( m_pPart->url().toDisplayString() );
+    if (m_pPart != 0) {
+        setWindowTitle( m_pPart->url().toDisplayString() );
+    }
 }
 
 void PMShell::slotControlPointMsg( const QString& msg )
