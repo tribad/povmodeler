@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+X-DocPath=povmodeler/index.html
+Exec=povmodeler
+Icon=hi48-app-kpovmodeler
+MimeType=application/x-kpovmodeler;
+Name=PovModeler
+Categories=Qt;Graphics;
