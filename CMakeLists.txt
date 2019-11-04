@@ -44,7 +44,7 @@ add_subdirectory(src)
 
 add_executable(povmodeler add-png-icons.qrc)
 
-target_link_libraries(povmodeler Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype -Wl,--start-group pmgui pmapp pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler -Wl,--start-group Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype pmgui pmapp pmmodel pmbase -Wl,--end-group)
 
 ########### install files ###############
 
@@ -64,7 +64,10 @@ SET (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 ## SET (CPACK_DEBIAN_PACKAGE_DEBUG ON)
 ##
 ##  RPM specific switches
+set (CPACK_RPM_PACKAGE_DEBUG ON)
 set (CPACK_RPM_PACKAGE_AUTOREQ ON)
+set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications")
+##set (CPACK_RPM_PACKAGE_REQUIRES "libQt5Widgets, libQt5Xml, libQt5DBus,libOpenGL, libGLU, libfreetype, libQt5Gui, libQt5Core, libGLX, libstdc++, libm, libgcc_s, libc")
 ##
 ##
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
