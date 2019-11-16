@@ -24,6 +24,8 @@ case $OSID in
     export OSPACKAGE=RPM
     ;;
     debian)
+    export OSPACKAGE=DEB
+    ;;
     linuxmint)
     export OSPACKAGE=DEB
     ;;
