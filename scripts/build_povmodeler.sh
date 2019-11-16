@@ -21,16 +21,19 @@ CPUCOUNT=`cat /proc/cpuinfo | grep processor -c`
 ##  Detect the packager
 case $OSID in
     fedora)
-    export OSPACKAGE=RPM
+        export OSPACKAGE=RPM
+    ;;
+    opensuse-leap)
+        export OSPACKAGE=RPM
     ;;
     debian)
-    export OSPACKAGE=DEB
+        export OSPACKAGE=DEB
     ;;
     linuxmint)
-    export OSPACKAGE=DEB
+        export OSPACKAGE=DEB
     ;;
     *)
-    export OSPACKAGE=TGZ
+        export OSPACKAGE=TGZ
 esac
 
 echo "Building for "${OSID}"-"${OSVERSION}" a "${OSPACKAGE}" package"
