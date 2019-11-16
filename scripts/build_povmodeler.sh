@@ -59,7 +59,7 @@ cmake .
 make clean
 ##
 ##  build
-make -j${CPUCOUNT}
+make -j$((CPUCOUNT+1))
 ##
 ##  strip the symbols from the executable.
 strip povmodeler
