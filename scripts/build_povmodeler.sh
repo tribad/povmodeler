@@ -24,6 +24,7 @@ case $OSID in
     export OSPACKAGE=RPM
     ;;
     debian)
+    linuxmint)
     export OSPACKAGE=DEB
     ;;
     *)
@@ -46,14 +47,17 @@ git pull
 ##  go to the original
 git checkout original
 ##
-##  cleanup old build
-make clean
-##
 ##  re-create build environment
 cmake .
 ##
+##  cleanup old build
+make clean
+##
 ##  build
 make -j${CPUCOUNT}
+##
+##  strip the symbols from the executable.
+strip povmodeler
 ##
 ##  make the package
 cpack -G ${OSPACKAGE}
