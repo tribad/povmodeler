@@ -70,10 +70,10 @@ install( DIRECTORY examples/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler
 install( DIRECTORY library/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler/library )
 ##
 ##  Icon files in various resolutions
-install( FILES hi48-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps/povmodeler.png)
-install( FILES hi32-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps/povmodeler.png)
-install( FILES hi22-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/22x22/apps/povmodeler.png)
-install( FILES hi16-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps/povmodeler.png)
+install( FILES hi48-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps/ RENAME povmodeler.png)
+install( FILES hi32-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps/ RENAME povmodeler.png)
+install( FILES hi22-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/22x22/apps/ RENAME povmodeler.png)
+install( FILES hi16-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps/ RENAME povmodeler.png)
 ##
 ##  Packaging setup.
 ##
@@ -87,7 +87,21 @@ SET (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 ##  RPM specific switches
 set (CPACK_RPM_PACKAGE_DEBUG OFF)
 set (CPACK_RPM_PACKAGE_AUTOREQ ON)
-set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications")
+##
+##  Some systems do not like it to have the directories in the files to create
+set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications"
+                                                   "/usr/share/icons"
+                                                   "/usr/share/icons/hicolor"
+                                                   "/usr/share/icons/hicolor/16x16"
+                                                   "/usr/share/icons/hicolor/16x16/apps"
+                                                   "/usr/share/icons/hicolor/22x22"
+                                                   "/usr/share/icons/hicolor/22x22/apps"
+                                                   "/usr/share/icons/hicolor/32x32"
+                                                   "/usr/share/icons/hicolor/32x32/apps"
+                                                   "/usr/share/icons/hicolor/48x48"
+                                                   "/usr/share/icons/hicolor/48x48/apps"
+                                                   )
+
 ##set (CPACK_RPM_PACKAGE_REQUIRES "libQt5Widgets, libQt5Xml, libQt5DBus,libOpenGL, libGLU, libfreetype, libQt5Gui, libQt5Core, libGLX, libstdc++, libm, libgcc_s, libc")
 ##
 ##
