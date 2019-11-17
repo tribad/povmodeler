@@ -1,8 +1,10 @@
 [Desktop Entry]
+Encoding=UTF-8
+Name=Pov Modeler
 Type=Application
+Comment=Pov Modeler
 X-DocPath=povmodeler/index.html
 Exec=povmodeler
-Icon=hi48-app-kpovmodeler
+Icon=povmodeler.png
 MimeType=application/x-kpovmodeler;
-Name=PovModeler
 Categories=Qt;Graphics;

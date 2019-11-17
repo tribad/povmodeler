@@ -15,4 +15,4 @@
 *                                                                        *
 **************************************************************************/
 
-#define POVMODELER_VERSION "1.1.3"
+#define POVMODELER_VERSION "${POVMODELER_VERSION_MAJOR}.${POVMODELER_VERSION_MINOR}.${POVMODELER_VERSION_PATCH}"

@@ -32,8 +32,14 @@ include(FeatureSummary)
 include(GNUInstallDirs)
 
 add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
+##
+##  Setup the version info to be used in version.h and the packages.
+set(POVMODELER_VERSION_MAJOR "1")
+set(POVMODELER_VERSION_MINOR "1")
+set(POVMODELER_VERSION_PATCH "4")
 
 configure_file(config-povmodeler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-povmodeler.h )
+configure_file(version.h.in src/version.h)
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
@@ -43,20 +49,35 @@ include_directories(src ${CMAKE_SOURCE_DIR})
 add_subdirectory(src)
 
 add_executable(povmodeler add-png-icons.qrc)
-
+##
+##  Static linkage to the povmodeler sub-systems.
+##  Using --start-group/--end-group to have a recursive symbol resolution.
 target_link_libraries(povmodeler -Wl,--start-group Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype pmgui pmapp pmmodel pmbase -Wl,--end-group)
-
-########### install files ###############
-
+##
+##
+##  Here we describe the files and positions of
+##  to be installed files.
 install( PROGRAMS povmodeler DESTINATION  ${CMAKE_INSTALL_BINDIR} )
+##
+##  desktop file
 install( FILES povmodeler.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
-install( FILES povraydocmap.xml baseinsertrules.xml
-    hi16-app-kpovmodeler.png   hi22-app-kpovmodeler.png hi32-app-kpovmodeler.png  hi48-app-kpovmodeler.png questionmark.png
-    DESTINATION  ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler )
-
+##
+##  application specific files
+install( FILES povraydocmap.xml baseinsertrules.xml questionmark.png DESTINATION  ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler)
+##
+## Examples and libraries.
 install( DIRECTORY examples/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler/examples )
 install( DIRECTORY library/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/povmodeler/library )
-
+##
+##  Icon files in various resolutions
+install( FILES hi48-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps/povmodeler.png)
+install( FILES hi32-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps/povmodeler.png)
+install( FILES hi22-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/22x22/apps/povmodeler.png)
+install( FILES hi16-app-povmodeler.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps/povmodeler.png)
+##
+##  Packaging setup.
+##
+##  Only supported on unix systems.
 IF (UNIX)
 ##
 ##  Debian specific switches
@@ -75,9 +96,10 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "This is the former KPovModeler now PovMod
 SET(CPACK_PACKAGE_VENDOR "Simulated-Universe")
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-SET(CPACK_PACKAGE_VERSION_MAJOR "0")
-SET(CPACK_PACKAGE_VERSION_MINOR "1")
-SET(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}")
+SET(CPACK_PACKAGE_VERSION_MAJOR ${POVMODELER_VERSION_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${POVMODELER_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${POVMODELER_VERSION_PATCH})
+SET(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
 SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}")
 SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}-$ENV{OSID}-$ENV{OSVERSION}")
 SET(CPACK_PACKAGE_CONTACT "Hans-Juergen Lange <hjl@simulated-universe.de>")
