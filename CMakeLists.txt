@@ -10,9 +10,14 @@ set(OpenGL_GL_PREFERENCE GLVND)
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    set(POVMODELER_GL_LIB ${OPENGL_gl_LIBRARY})
+    set(POVMODELER_GLU_LIB ${OPENGL_glu_LIBRARY})
+    set(POVMODELER_FREETYPE_LIB "freetype")
+else()
+    set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
 endif()
 
-find_package (OpenGL REQUIRED)
+find_package (OpenGL COMPONENTS OpenGL REQUIRED)
 find_package(Freetype REQUIRED)
 find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
 
@@ -30,6 +35,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(FeatureSummary)
 include(GNUInstallDirs)
+
 
 add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
 ##
@@ -52,7 +58,7 @@ add_executable(povmodeler add-png-icons.qrc)
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -Wl,--start-group Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus OpenGL::OpenGL OpenGL::GLU Freetype::Freetype pmgui pmapp pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler -Wl,--start-group Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of
