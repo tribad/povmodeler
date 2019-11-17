@@ -8,19 +8,19 @@ PMIMenuBar::PMIMenuBar()
     m = AddMenu("File");
     //
     //  addAction() calls here are the standard calls to the QMenu object.
-    m->addAction(new QAction( "New" ));
-    m->addAction(new QAction("Open"));
+    m->addAction(new QAction( "New" , nullptr));
+    m->addAction(new QAction("Open", nullptr));
 
     m->addMenu(AddMenu("Recent File", "File/Recent File"));
 
-    m->addAction(new QAction("Save"));
-    m->addAction(new QAction("Save as"));
-    m->addAction(new QAction("Revert"));
+    m->addAction(new QAction("Save", nullptr));
+    m->addAction(new QAction("Save as", nullptr));
+    m->addAction(new QAction("Revert", nullptr));
     m->addSeparator();
-    m->addAction(new QAction("Print"));
+    m->addAction(new QAction("Print", nullptr));
     m->addSeparator();
-    m->addAction(new QAction("Close"));
-    m->addAction(new QAction("Quit"));
+    m->addAction(new QAction("Close", nullptr));
+    m->addAction(new QAction("Quit", nullptr));
 
     AddMenu("Edit");
 

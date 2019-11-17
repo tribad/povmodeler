@@ -155,8 +155,8 @@ PMPart::PMPart( QWidget* parentWidget,
         if (file != nullptr) {
             QAction* before = menuBar->GetAction("File", "Revert");
 
-            file->insertAction( before , new QAction("Import") );
-            file->insertAction( before , new QAction("Export") );
+            file->insertAction( before , new QAction("Import", nullptr) );
+            file->insertAction( before , new QAction("Export", nullptr) );
         }
     }
 
@@ -368,7 +368,7 @@ QMenu* PMPart::getMenu(const QString& name )
 
 QAction* PMPart::actionCollection( const QString& name, const QString& text )
 {
-    QAction* retval = new QAction(name);
+    QAction* retval = new QAction(name, nullptr);
     QString s = name;
     //
     //  remove 'new_' prefix setup path for the icon.
