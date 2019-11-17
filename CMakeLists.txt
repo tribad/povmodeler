@@ -43,7 +43,7 @@ configure_file(version.h.in src/version.h)
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
-add_compile_options (-O0 -g -Wall)
+add_compile_options (-O0 -g -Wall -std=c++11)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
 add_subdirectory(src)
