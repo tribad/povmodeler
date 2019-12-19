@@ -21,7 +21,7 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
-#include <qopengl.h>
+#include <QtOpenGL>
 #endif
 #include "pmdebug.h"
 #include "pmvector.h"

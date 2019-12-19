@@ -26,7 +26,7 @@
 #include "math.h"
 
 #include <QString>
-#include <qopengl.h>
+#include <qgl.h>
 class PMVector;
 
 /**

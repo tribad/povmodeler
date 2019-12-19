@@ -1,0 +1,16 @@
+// *************************************************************************************************************
+//
+//  Modul-Name     : config.h.in
+//
+//  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
+//
+// *************************************************************************************************************
+#pragma once
+#ifndef CONFIG_INC
+#define CONFIG_INC
+
+#ifndef STANDARD_DATA_ROOT_DIR
+#define STANDARD_DATA_ROOT_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATAROOTDIR}"
+#endif 
+
+#endif

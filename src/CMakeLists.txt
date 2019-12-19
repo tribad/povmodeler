@@ -1,10 +1,14 @@
-find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
 
-include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5DBus_INCLUDE_DIRS}  ${Qt5Xml_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS})
 
+if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
+else()
+     find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
+     qt5_add_dbus_interface(dbusadapter org.povmodeler.xml povmodeleradaptor)
+endif()
+##
+##  Here we define anything related to the components and files and other that is part of
+##  the povmodeler source tree.
 include_directories(gui model base)
-
-qt5_add_dbus_interface(dbusadapter org.povmodeler.xml povmodeleradaptor)
 
 add_compile_options(-fPIC)
 

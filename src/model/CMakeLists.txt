@@ -1,5 +1,5 @@
-find_package(Qt5Core REQUIRED)
-
+##
+##  Here we define anything we need to build the libpmmodel.a library
 add_library(pmmodel
     pmbicubicpatch.cpp       pmcone.cpp          pmglobalphotons.cpp     pmlight.cpp        pmnamedobject.cpp          pmpovray31format.cpp         pmradiosity.cpp                pmsorsegment.cpp     pmtranslate.cpp
     pmblendmapmodifiers.cpp  pmcontrolpoint.cpp  pmglobalsettings.cpp    pmlightgroup.cpp   pmnormal.cpp               pmpovray31serialization.cpp  pmrainbow.cpp                  pmsphere.cpp         pmtriangle.cpp

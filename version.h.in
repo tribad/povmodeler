@@ -14,5 +14,10 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
+#pragma once
+#ifndef VERSION_INC
+#define VERSION_INC
 
 #define POVMODELER_VERSION "${POVMODELER_VERSION_MAJOR}.${POVMODELER_VERSION_MINOR}.${POVMODELER_VERSION_PATCH}"
+
+#endif

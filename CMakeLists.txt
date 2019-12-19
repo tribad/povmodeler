@@ -1,25 +1,51 @@
 ##
 ##  This is the cmake intro
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.6)
 project(povmodeler)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
+##
+##  Here we look for the OpenGL support.
 set(OpenGL_GL_PREFERENCE GLVND)
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
     set(POVMODELER_GL_LIB ${OPENGL_gl_LIBRARY})
     set(POVMODELER_GLU_LIB ${OPENGL_glu_LIBRARY})
-    set(POVMODELER_FREETYPE_LIB "freetype")
+    if(CMAKE_VERSION VERSION_LESS "3.5.0")
+    
+    endif()
 else()
     set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
 endif()
 
 find_package (OpenGL COMPONENTS OpenGL REQUIRED)
+##
+##  Here we try to find the freetype library support.
+
+set(POVMODELER_FREETYPE_LIB "freetype")
+
 find_package(Freetype REQUIRED)
-find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
+##
+##  Here we try to find the qt components.
+if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
+    ##
+    ##  setting up the include directories needed.
+    include_directories($ENV{QT_INCLUDE_DIR}/QtDBus)   
+    include_directories($ENV{QT_INCLUDE_DIR}/Qt)   
+    include_directories($ENV{QT_INCLUDE_DIR}/QtXml)   
+    include_directories($ENV{QT_INCLUDE_DIR}/QtCore)   
+    include_directories($ENV{QT_INCLUDE_DIR}/QtGui)   
+    ##
+    ##  Setting up the libraries.
+    set(POVMODELER_QT_LIB -lQtGui -lQtCore -lQtDBus -lQtXml)
+else()
+    if ($ENV{QT_VERSION_MAJOR} STREQUAL "5")
+        find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
+    endif()
+endif()
+
 
 set(
     CMAKE_MODULE_PATH
@@ -46,6 +72,7 @@ set(POVMODELER_VERSION_PATCH "4")
 
 configure_file(config-povmodeler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-povmodeler.h )
 configure_file(version.h.in src/version.h)
+configure_file(config.h.in src/config.h)
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
@@ -58,7 +85,7 @@ add_executable(povmodeler add-png-icons.qrc)
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -Wl,--start-group Qt5::Widgets Qt5::Core Qt5::Xml Qt5::DBus ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler -Wl,--start-group ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of

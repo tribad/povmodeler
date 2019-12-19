@@ -15,6 +15,30 @@ else
     echo "Could not find os-release information"
 fi;
 ##
+## Check if QMAKE is set to some location
+if [ -z $QMAKE ] ; then
+    for QMAKE in /usr/local/bin /usr/bin ; do 
+        if [ -x ${QMAKE}/qmake ] ; then 
+            echo Checking $QMAKE for a usable qt version.
+            ##
+            ##  Get the qmake version info
+            QMAKE_RESULT=`${QMAKE}/qmake --version`
+            ##
+            ##  Get the version
+            export QT_VERSION=`echo $QMAKE_RESULT | awk '{print substr($0, match ($0, "[0-9]+[.][0-9]+[.][0-9]+"), RLENGTH)}'`
+            qt_version=( ${QT_VERSION//./ } )
+            export QT_VERSION_MAJOR="${qt_version[0]}"
+            export QT_VERSION_MINOR="${qt_version[1]}"
+            export QT_VERSION_PATCH="${qt_version[2]}"
+            ##
+            ##  Get the path. Be aware of the bunch of backslashes. They are because they get more and more reduced so at the end
+            ##  awk see's a \s
+            export QMAKE_PATH=`echo $QMAKE_RESULT | awk '{print substr($0, match ($0, "[0-9]+[.][0-9]+[.][0-9]+\\\\sin\\\\s")+RLENGTH)}'`
+            export QT_INCLUDE_DIR=${QMAKE_PATH}/../include
+        fi;
+    done 
+fi;
+##
 ##  Checking the number of CPUs available
 CPUCOUNT=`cat /proc/cpuinfo | grep processor -c`
 ##
@@ -31,6 +55,9 @@ case $OSID in
     ;;
     linuxmint)
         export OSPACKAGE=DEB
+    ;;
+    slackware)
+        export OSPACKAGE=NONE
     ;;
     *)
         export OSPACKAGE=TGZ
@@ -65,5 +92,7 @@ make -j$((CPUCOUNT+1))
 strip povmodeler
 ##
 ##  make the package
-cpack -G ${OSPACKAGE}
+if [ "$OSPACKAGE" != "NONE" ] ; then
+    cpack -G ${OSPACKAGE}
+fi;
 
