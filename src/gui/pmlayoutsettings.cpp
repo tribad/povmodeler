@@ -105,8 +105,13 @@ PMLayoutSettings::PMLayoutSettings( QWidget* parent )
    m_pViewEntries->setModel( m_model );
    m_pViewEntries->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum );
    m_pViewEntries->setSelectionBehavior(QAbstractItemView::SelectRows);
+#if QT_VERSION >= 0x050000
    m_pViewEntries->horizontalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
    m_pViewEntries->verticalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
+#else
+   m_pViewEntries->horizontalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+   m_pViewEntries->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+#endif
    m_pViewEntries->setEnabled( true );
    m_pViewEntries->setEditTriggers( QAbstractItemView::NoEditTriggers );
    m_pViewEntries->setMaximumHeight( 150 );

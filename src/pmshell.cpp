@@ -21,7 +21,9 @@
 #include <QMenuBar>
 #include <QTimer>
 #include <QSettings>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#endif
 #include <QMessageBox>
 #include <QShowEvent>
 
@@ -61,9 +63,9 @@ PMShell::PMShell( const QUrl &url )
     //
     //  construct most of the menubar content
     mMenuBar         = new PMIMenuBar;
-
+#if QT_VERSION >= 0x050000
     mMenuBar->GetMenu("File/Recent File")->setToolTipsVisible(true);
-
+#endif
     setMenuBar(mMenuBar);
     //
     //  Connect the actions to the slots.
@@ -96,7 +98,7 @@ PMShell::PMShell( const QUrl &url )
       currentUrl = url;
    }
 
-   setWindowTitle( url.toDisplayString() );
+   setWindowTitle( url.toString() );
 
    QSettings qset;
    restoreState( qset.value("mainwindow/state").toByteArray() );
@@ -129,15 +131,15 @@ void PMShell::setupActions()
 {
     //
     //  File menu specific connects
-    connect( mMenuBar->GetAction("File", "New"),     &QAction::triggered, this, &PMShell::slotFileNew );
-    connect( mMenuBar->GetAction("File", "Open"),    &QAction::triggered, this, &PMShell::slotFileOpen );
-    connect( mMenuBar->GetMenu("File/Recent File"),  &QMenu::triggered,   this, &PMShell::slotOpenRecent );
-    connect( mMenuBar->GetAction("File", "Save"),    &QAction::triggered, this, &PMShell::slotFileSave );
-    connect( mMenuBar->GetAction("File", "Save as"), &QAction::triggered, this, &PMShell::slotFileSaveAs );
-    connect( mMenuBar->GetAction("File", "Revert"),  &QAction::triggered, this, &PMShell::slotFileRevert );
-    connect( mMenuBar->GetAction("File", "Print"),   &QAction::triggered, this, &PMShell::slotFilePrint );
-    connect( mMenuBar->GetAction("File", "Close"),   &QAction::triggered, this, &PMShell::slotFileClose );
-    connect( mMenuBar->GetAction("File", "Quit"),    &QAction::triggered, this, &PMShell::shellClose );
+    connect( mMenuBar->GetAction("File", "New"),     SIGNAL(triggered()), this, SLOT(slotFileNew()) );
+    connect( mMenuBar->GetAction("File", "Open"),    SIGNAL(triggered()), this, SLOT(slotFileOpen()) );
+    connect( mMenuBar->GetMenu("File/Recent File"),  SIGNAL(triggered()),   this, SLOT(slotOpenRecent()) );
+    connect( mMenuBar->GetAction("File", "Save"),    SIGNAL(triggered()), this, SLOT(slotFileSave()) );
+    connect( mMenuBar->GetAction("File", "Save as"), SIGNAL(triggered()), this, SLOT(slotFileSaveAs()) );
+    connect( mMenuBar->GetAction("File", "Revert"),  SIGNAL(triggered()), this, SLOT(slotFileRevert()) );
+    connect( mMenuBar->GetAction("File", "Print"),   SIGNAL(triggered()), this, SLOT(slotFilePrint ()));
+    connect( mMenuBar->GetAction("File", "Close"),   SIGNAL(triggered()), this, SLOT(slotFileClose()) );
+    connect( mMenuBar->GetAction("File", "Quit"),    SIGNAL(triggered()), this, SLOT(shellClose()) );
     //
     //  Settings specific connects.
     connect( mMenuBar->GetAction("Settings", "Show &List"),       SIGNAL( triggered() ), this, SLOT( slotShowList() ) );
@@ -316,7 +318,7 @@ void PMShell::openUrl( const QUrl &url )
    if( !m_pPart->ismodified && m_pPart->url().isEmpty() )
    {
       m_pPart->openFileQt( url );
-      setWindowTitle( m_pPart->url().toDisplayString() );
+      setWindowTitle( m_pPart->url().toString() );
    }
    else
    {
@@ -342,11 +344,16 @@ void PMShell::slotFileNew()
 
 void PMShell::slotFileOpen()
 {
+#if QT_VERSION >= 0x050000
    QUrl url = QFileDialog::getOpenFileUrl( this, "File", QUrl(), QString( "*.kpm|" ) +
      "Povray Modeler Files ( *.kpm )" +
      "\n*|" + "All Files" );
+#else
+   QUrl url = QFileDialog::getOpenFileName( this, "File", QString(), QString( "*.kpm|" ) +
+     "Povray Modeler Files ( *.kpm )" +
+     "\n*|" + "All Files" );
+#endif
 
-   // add_recentFiles( url );
 
    if( !url.isEmpty() )
       openUrl( url );
@@ -379,7 +386,7 @@ void PMShell::restoreRecent()
         for ( int i = 0; i < recent_urls.size(); ++i )
         {
            QAction* a = new QAction(this);
-           a->setText( recent_urls.at(i).toUrl().fileName() );
+           a->setText( QFileInfo( recent_urls.at(i).toUrl().path() ).fileName() );
            a->setData( recent_urls.at(i).toUrl() );
            a->setToolTip( recent_urls.at(i).toString() );
            recentFileAction.insert( 0, a );
@@ -404,7 +411,7 @@ void PMShell::slotFileSave()
       else
          saveAs();
 
-      setWindowTitle( m_pPart->url().toDisplayString() );
+      setWindowTitle( m_pPart->url().toString() );
    }
    else
       emit statusMsg( tr( "No changes need to be saved" ) );
@@ -424,12 +431,16 @@ void PMShell::saveAs()
 
    if( dlg.exec() )
    {
+#if QT_VERSION >= 0x050000
        currentUrl = dlg.selectedUrls().at( 0 );
+#else
+       currentUrl = dlg.selectedFiles().at(0);
+#endif
        if( QFileInfo( currentUrl.path() ).completeSuffix().isEmpty() )
           currentUrl.setPath( currentUrl.path() + ".kpm" );
 
       if( m_pPart->saveFileQt( currentUrl ) )
-          setWindowTitle( currentUrl.toDisplayString() );
+          setWindowTitle( currentUrl.toString() );
        else
           QMessageBox::warning( this, "Error", tr( "Could not save the file." ) );
    }
@@ -499,7 +510,7 @@ void PMShell::slotShowPath()
         pathAction->setText( tr( "Show &Path" ) );
     }
 
-    setWindowTitle( m_pPart->url().toDisplayString() );
+    setWindowTitle( m_pPart->url().toString() );
 }
 
 void PMShell::slotSettings()
@@ -610,13 +621,13 @@ void PMShell::showEvent( QShowEvent* ){
 
 void PMShell::slotModified(bool m)
 {
-   setWindowTitle( m_pPart->url().toDisplayString() );
+   setWindowTitle( m_pPart->url().toString() );
 }
 
 void PMShell::modified(bool m)
 {
     if (m_pPart != 0) {
-        setWindowTitle( m_pPart->url().toDisplayString() );
+        setWindowTitle( m_pPart->url().toString() );
     }
 }
 

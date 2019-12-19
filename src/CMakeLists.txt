@@ -1,6 +1,7 @@
 
 
 if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
+     find_package(Qt4)
 else()
      find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
      qt5_add_dbus_interface(dbusadapter org.povmodeler.xml povmodeleradaptor)

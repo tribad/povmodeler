@@ -31,10 +31,20 @@
 #include <QColor>
 #include <QStack>
 #include <QTimerEvent>
-#include <QOpenGLWidget>
-#include <QOpenGLContext>
+#if QT_VERSION >= 0x050000
+    #include <QOpenGLWidget>
+    #include <QOpenGLContext>
+    #include <QOpenGLFunctions>
+#else
+    #include <QGLWidget>
+    #include <QGLContext>
+    #include <QGLFunctions>
+
+    using QOpenGLWidget = QGLWidget;
+    using QOpenGLContext = QGLContext;
+    using QOpenGLFunctions = QGLFunctions;
+#endif
 #include "libpovmodeler_export.h"
-#include <QOpenGLFunctions>
 
 class PMGLView;
 class PMCamera;

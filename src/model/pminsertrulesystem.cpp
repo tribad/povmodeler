@@ -14,7 +14,7 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
-
+#include "config.h"
 #include "pminsertrulesystem.h"
 #include "pmprototypemanager.h"
 #include "pmpart.h"
@@ -22,7 +22,9 @@
 #include "pmdebug.h"
 
 #include <QFile>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#endif
 //Added by qt3to4:
 
 
@@ -828,10 +830,10 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
    m_loadedFiles.push_back( fileName );
 
 
-   QString ruleFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString( "povmodeler/" + fileName ) );
+   QString ruleFile = QString(STANDARD_DATA_ROOT_DIR  "/povmodeler/" + fileName ) ;
    if( ruleFile.isEmpty() )
    {
-      ruleFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString( "./" + fileName ) );
+      ruleFile = QString( STANDARD_DATA_ROOT_DIR "/" + fileName );
       if( ruleFile.isEmpty() )
       {
          qCritical(  ) << "Rule file 'povmodeler/" << fileName

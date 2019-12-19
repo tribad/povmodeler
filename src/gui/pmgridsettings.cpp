@@ -93,7 +93,7 @@ PMGridSettings::PMGridSettings( QWidget* parent )
 
    vlayout->addStretch( 1 );
 
-   connect( m_pGridColor, &QPushButton::clicked, this, &PMGridSettings::selectColor );
+   connect( m_pGridColor, SIGNAL(clicked()) , this, SLOT(selectColor()) );
 }
 
 void PMGridSettings::selectColor()

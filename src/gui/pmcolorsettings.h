@@ -23,6 +23,16 @@
 #include "pmsettingsdialog.h"
 #include <QPushButton>
 
+//
+//  A color button
+class PMColorButton : public QPushButton {
+    Q_OBJECT
+public:
+    PMColorButton(QWidget* parent = 0);
+public slots:
+    void doit();
+};
+
 /**
  * Colors configuration dialog page
  */
@@ -43,7 +53,7 @@ public:
    /** */
    virtual void displayDefaults();
 
-private slots:
+public:
    void selectColor( QPushButton *b );
    
 private:
@@ -53,11 +63,6 @@ private:
    QPushButton* m_pControlPointsColor[2];
    QPushButton* m_pAxesColor[3];
    QPushButton* m_pFieldOfViewColor;
-
-signals:
-    void btn( QPushButton* sentBtn );
-
-
 };
 
 

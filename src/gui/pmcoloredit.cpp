@@ -113,7 +113,10 @@ PMColorEdit::PMColorEdit( bool filterAndTransmit, QWidget* parent )
       connect( m_edits[3], SIGNAL( dataChanged() ), SLOT( slotEditChanged() ) );
       connect( m_edits[4], SIGNAL( dataChanged() ), SLOT( slotEditChanged() ) );
    }
-   connect( m_pButton, &QPushButton::clicked, [=]() { PMColorEdit::selectColor( m_pButton ); } );
+   connect( m_pButton, SIGNAL(clicked()) , this , SLOT( slotSrgbChanged()));
+
+
+   //  { PMColorEdit::selectColor( m_pButton ); } );
    //SLOT( slotColorChanged( const QColor& ) ) );
 }
 

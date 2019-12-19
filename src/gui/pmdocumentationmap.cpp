@@ -14,13 +14,15 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
-
+#include "config.h"
 #include "pmdocumentationmap.h"
 
 #include <QFile>
 #include <QtXml/qdom.h>
 #include <QList>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#endif
 #include <QSettings>
 
 #include "pmdebug.h"
@@ -126,8 +128,11 @@ void PMDocumentationMap::loadMap()
    if( !m_mapLoaded )
    {
       m_mapLoaded = true;
-      
+#if QT_VERSION >= 0x050000 
       QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "povmodeler/povraydocmap.xml" );
+#else
+      QString fileName = STANDARD_DATA_ROOT_DIR "/povmodeler/povraydocmap.xml" ;
+#endif
       if( fileName.isEmpty() )
       {
          qCritical(  ) << "Povray documentation map not found" << endl;

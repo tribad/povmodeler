@@ -45,10 +45,14 @@
 #include <OpenGL/glu.h>
 #else
 #include <GL/glu.h> // Only needed for gluPerspective
-#include <QtX11Extras/QX11Info>
+#if QT_VERSION >= 0x050000
+    #include <QtX11Extras/QX11Info>
+#else
+    #include <QtGui/QX11Info>
+#endif
 #endif
 #include <QAbstractEventDispatcher>
-#include <QSurfaceFormat>
+//#include <QSurfaceFormat>
 #include <QResizeEvent>
 #include "pmglview.h"
 
@@ -116,9 +120,13 @@ PMRenderManager::PMRenderManager( QWidget *parent )
    m_pResize = new QResizeEvent( QSize( 1, 1 ), QSize( 1, 1 ) );
    this->resizeEvent( m_pResize );
 
-
+#if QT_VERSION >= 0x050000
     QSurfaceFormat format;
     format.setProfile( QSurfaceFormat::CoreProfile );
+#else
+    QGLFormat format;
+    format.setProfile( QGLFormat::CoreProfile );
+#endif
     this->setFormat( format );
 }
 
@@ -382,8 +390,11 @@ void PMRenderManager::renderTask()
             emit aboutToUpdate( m_pCurrentGlView );
 
             if( m_bStopTask || m_bStartTask ) break;
-
+#if QT_VERSION >= 0x050000
             QImage image = this->grabFramebuffer();
+#else
+            QImage image = this->grabFrameBuffer();
+#endif
             //image.save("/home/alberto/xxx.png");
             m_pCurrentGlView->setRenderedScene( QPixmap::fromImage( image ) );
             //this->context()->swapBuffers( this->context()->surface() );

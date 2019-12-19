@@ -23,8 +23,11 @@
 #include "pmtreeview.h"
 #include "pmdialogview.h"
 #include "pmglview.h"
-
-#include <QtPrintSupport/QPrinter>
+#if QT_VERSION >= 0x050000
+    #include <QtPrintSupport/QPrinter>
+#else
+    #include <QPrinter>
+#endif
 #include <QPainter>
 #include <QSplitter>
 #include <QLayout>

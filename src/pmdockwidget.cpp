@@ -16,6 +16,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
+#include "pmdebug.h"
 #include "pmdockwidget.h"
 #include "pmdockwidget_private.h"
 
@@ -44,7 +45,6 @@
 #include <X11/Xlib.h>
 #endif
 
-#include "pmdebug.h"
 
 #include <QStatusBar>
 
@@ -517,7 +517,6 @@ void PMDockWidget::applyToWidget( QWidget* s, const QPoint& p )
 		if (d->transient && d->_parent)
 			XSetTransientForHint( QX11Info::display(), winId(), d->_parent->winId() );
 
-		KWindowSystem::setType( winId(), d->windowType );
 #endif
 
 	}
@@ -1281,7 +1280,7 @@ PMDockManager::PMDockManager( QWidget* mainWindow  )
     menu = new QMenu();
 
     connect( menu, SIGNAL( aboutToShow() ), SLOT( slotMenuPopup() ) );
-    connect( menu, &QMenu::triggered, this, &PMDockManager::slotMenuActivated );
+    connect( menu, SIGNAL(triggered()), this, SLOT(slotMenuActivated()) );
 
 	childDock = new QList<QObject*>();
 }

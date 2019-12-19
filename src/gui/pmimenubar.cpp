@@ -50,10 +50,17 @@ PMIMenuBar::PMIMenuBar()
     //
     //  This addition is a marker for the toolbar initialization sequence.
     //  As it can be searched for and new toolbar activation action can be added later.
+#if QT_VERSION >= 0x050000
     m->addSection("Toolbars");
-
+#else
+   m->addAction("Toolbars")->setEnabled(false);
+#endif
     m->addAction("");
+#if QT_VERSION >= 0x050000
     m->addSection("App. Layout");
+#else
+   m->addAction("App. Layout")->setEnabled(false);
+#endif
     m->addAction("Preferences");
     m->addAction("Save Options");
 }

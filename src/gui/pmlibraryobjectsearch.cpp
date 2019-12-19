@@ -80,8 +80,13 @@ PMLibraryObjectSearch::PMLibraryObjectSearch( QWidget* parent ) :
    m_pFileList->setModel( m_model );
    m_pFileList->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum );
    m_pFileList->setSelectionBehavior(QAbstractItemView::SelectRows);
+#if QT_VERSION >= 0x050000
    m_pFileList->horizontalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
    m_pFileList->verticalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
+#else
+   m_pFileList->horizontalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+   m_pFileList->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+#endif
    m_pFileList->setEnabled( true );
    m_pFileList->setEditTriggers( QAbstractItemView::NoEditTriggers );
 

@@ -16,6 +16,7 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
+#include "config.h"
 #include "pmshell.h"
 #include "pmdebug.h"
 #include "pmviewfactory.h"
@@ -31,7 +32,9 @@
 #include <QVBoxLayout>
 #include <QListWidget>
 #include <QPushButton>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#endif
 #include <QObject>
 
 
@@ -656,8 +659,11 @@ void PMViewLayoutManager::loadData()
       m_layouts.clear();
 
    m_layoutsLoaded = true;
-
+#if QT_VERSION >= 0x050000
    QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "povmodeler/viewlayouts.xml" );
+#else
+   QString fileName = QString(STANDARD_DATA_ROOT_DIR "/povmodeler/viewlayouts.xml" );
+#endif
    if( fileName.isEmpty() )
    {
       // Generate a default layout
@@ -734,7 +740,11 @@ void PMViewLayoutManager::loadData()
 
 void PMViewLayoutManager::saveData()
 {
+#if QT_VERSION >= 0x050000
    QString fileName = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + "povmodeler/viewlayouts.xml" ;
+#else
+   QString fileName = STANDARD_DATA_ROOT_DIR "/povmodeler/viewlayouts.xml" ;
+#endif
    if( fileName.isEmpty() )
    {
       qCritical(  ) << tr( "View layouts not found." ) << endl;
@@ -881,7 +891,11 @@ PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* parent )
       : QDialogButtonBox( parent)
 {
 	setWindowTitle( tr( "Save View Layout" ) );
+#if QT_VERSION >= 0x050000
     QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+#else
+    QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, this);
+#endif
     QWidget *mainWidget = new QWidget( this );
 	QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout( mainLayout );

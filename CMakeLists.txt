@@ -3,8 +3,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(povmodeler)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOMOC TRUE)
+set(CMAKE_AUTORCC TRUE)
 ##
 ##  Here we look for the OpenGL support.
 set(OpenGL_GL_PREFERENCE GLVND)
@@ -14,7 +14,6 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(POVMODELER_GL_LIB ${OPENGL_gl_LIBRARY})
     set(POVMODELER_GLU_LIB ${OPENGL_glu_LIBRARY})
     if(CMAKE_VERSION VERSION_LESS "3.5.0")
-    
     endif()
 else()
     set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
@@ -32,17 +31,26 @@ find_package(Freetype REQUIRED)
 if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
     ##
     ##  setting up the include directories needed.
+    if (NOT DEFINED $ENV{QT_INCLUDE_DIR})
+        ##message( FATAL_ERROR "QT_INCLUDE_DIR not set")
+    endif()
     include_directories($ENV{QT_INCLUDE_DIR}/QtDBus)   
     include_directories($ENV{QT_INCLUDE_DIR}/Qt)   
     include_directories($ENV{QT_INCLUDE_DIR}/QtXml)   
     include_directories($ENV{QT_INCLUDE_DIR}/QtCore)   
     include_directories($ENV{QT_INCLUDE_DIR}/QtGui)   
+    include_directories($ENV{QT_INCLUDE_DIR}/QtOpenGL)   
     ##
     ##  Setting up the libraries.
-    set(POVMODELER_QT_LIB -lQtGui -lQtCore -lQtDBus -lQtXml)
+    set(POVMODELER_QT_LIB -lQtGui -lQtCore -lQtDBus -lQtXml -lQtOpenGL -lX11)
+    find_package(Qt4)
 else()
     if ($ENV{QT_VERSION_MAJOR} STREQUAL "5")
         find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
+    else()
+        if ($ENV{QT_VERSION_MAJOR} STREQUAL "4")
+            find_package(Qt4 REQUIRED DBus Xml Core Widgets OpenGL)
+        endif()
     endif()
 endif()
 
@@ -85,7 +93,7 @@ add_executable(povmodeler add-png-icons.qrc)
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -Wl,--start-group ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler -std=c++11 -Wl,--start-group ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of

@@ -26,9 +26,10 @@
 
 #include <QTemporaryFile>
 //#include <kglobalsettings.h>
+#include <QDesktopWidget>
 #include <QScreen>
-#include <QMimeType>
-#include <QMimeDatabase>
+//#include <QMimeType>
+//#include <QMimeDatabase>
 #include <QFileDialog>
 #include <QPushButton>
 #include <QLayout>
@@ -172,10 +173,14 @@ bool PMPovrayWidget::render( const QByteArray& scene, const PMRenderMode& m,
 
       w = 16;
       h += 16;
-
+      
+      QRect  dw;
+#if QT_VERSION >= 0x050000
       QScreen *screen = QGuiApplication::primaryScreen();
-      QRect  dw = screen->geometry();
-
+      dw = screen->geometry();
+#else
+      dw = QApplication::desktop()->geometry();
+#endif
       ///QRect dw = KGlobalSettings::desktopGeometry(this);
       if( w > dw.width() ) w = dw.width();
 
@@ -249,8 +254,11 @@ void PMPovrayWidget::slotSave()
    QTemporaryFile* tempFile = 0;
    QFile* file = 0;
    bool ok = true;
-
+#if QT_VERSION >= 0x050000
    QUrl url = QFileDialog::getSaveFileUrl( this, tr( "Save Image File" ), QUrl() );  // QUrl(), KImageIO::pattern( KImageIO::Writing ) );
+#else
+   QUrl url = QFileDialog::getSaveFileName( this, tr( "Save Image File" ), QString() );  // QUrl(), KImageIO::pattern( KImageIO::Writing ) );
+#endif
    if( url.isEmpty() )
       return;
    if( !PMShell::overwriteURL( url ) )
@@ -265,7 +273,7 @@ void PMPovrayWidget::slotSave()
    }
 
    ///QMimeDatabase mimeDatabase;
-   const QFileInfo fi( url.fileName() );
+   const QFileInfo fi( url.path() );
    //const QMimeType mime = mimeDatabase.mimeTypeForFile( fi );
 
    QByteArray format = fi.completeSuffix().toLatin1();

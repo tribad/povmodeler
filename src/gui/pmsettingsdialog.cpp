@@ -16,7 +16,7 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
-
+#include "config.h"
 #include "pmsettingsdialog.h"
 
 #define KPM_WITH_OBJECT_LIBRARY
@@ -40,8 +40,9 @@
 #include <QResizeEvent>
 #include <QIcon>
 #include <QSettings>
+#if QT_VERSION >= 0x050000
 #include <QStandardPaths>
-
+#endif
 PMSettingsDialogPage::PMSettingsDialogPage( QWidget* parent )
       : QWidget( parent )
 {
@@ -64,7 +65,7 @@ PMSettingsDialog::PMSettingsDialog( PMPart* part, QWidget* parent )
     PMSettingsDialogPage* page;
     m_pPart = part;
     QStringList strpath;
-    strpath << QStandardPaths::HomeLocation + "/.local/share/povmodeler/icons/povicons";
+    strpath << QDesktopServices::storageLocation(QDesktopServices::HomeLocation) + "/.local/share/povmodeler/icons/povicons";
     QIcon::setThemeSearchPaths( strpath );
     QIcon::setThemeName("povicons");
     page = new PMPovraySettings();

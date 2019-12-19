@@ -22,7 +22,6 @@
 //#include "pmfactory.h"
 #include "pmtexturemap.h"
 #include <QPixmap>
-#include <QStandardPaths>
 
 //called from slotRefresh make the whole treeView, pmscene is topLevelItem
 PMTreeViewItem::PMTreeViewItem( PMObject* object, QTreeWidget *parent )

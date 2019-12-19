@@ -22,7 +22,7 @@
 #include "pmdefaults.h"
 #include "pmresourcelocator.h"
 #include "pmtext.h"
-
+#include <QUrl>
 #include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>

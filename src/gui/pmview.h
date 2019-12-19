@@ -24,8 +24,11 @@
 
 // include files for Qt
 #include <QWidget>
+#if QT_VERSION >= 0x050000
 #include <QtPrintSupport/QPrinter>
-
+#else
+#include <QPrinter>
+#endif
 class PMTreeView;
 class PMDialogView;
 class PMPart;

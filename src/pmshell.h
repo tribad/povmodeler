@@ -27,6 +27,7 @@
 #include "version.h"
 
 #include <QMenu>
+#include <QUrl>
 #include "libpovmodeler_export.h"
 #include <QToolBar>
 #include "pmimenubar.h"

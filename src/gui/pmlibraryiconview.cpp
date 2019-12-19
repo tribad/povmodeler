@@ -24,7 +24,7 @@
 #include <QDir>
 #include <QList>
 #include <QDropEvent>
-#include <QMimeType>
+//#include <QMimeType>
 #include <QMimeData>
 #include <QUrl>
 //#include <kio/job.h>

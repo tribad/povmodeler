@@ -105,7 +105,11 @@ void PMVectorListEdit::init( int dimensions )
                  this, SLOT( slotTextChanged( QStandardItem* ) ) );
 
    setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum );
+#if QT_VERSION >= 0x050000
    horizontalHeader()->setSectionResizeMode( QHeaderView::Stretch );
+#else
+   horizontalHeader()->setResizeMode( QHeaderView::Stretch );
+#endif
    setEnabled( true );
 }
 

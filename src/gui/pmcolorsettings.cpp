@@ -28,6 +28,14 @@
 #include <QGridLayout>
 #include <QColorDialog>
 
+PMColorButton::PMColorButton(QWidget* parent) : QPushButton(parent) {
+}
+
+void PMColorButton::doit() {
+    if (parent() != nullptr) {
+        static_cast<PMColorSettings*>(parent())->selectColor(this);
+    }
+}
 
 PMColorSettings::PMColorSettings( QWidget* parent )
       : PMSettingsDialogPage( parent )
@@ -101,17 +109,16 @@ PMColorSettings::PMColorSettings( QWidget* parent )
    hlayout->addWidget( m_pFieldOfViewColor );
    hlayout->addStretch( 1 );
 
-   connect( m_pBackgroundColor, &QPushButton::clicked, [=] { emit btn(m_pBackgroundColor); } );
-   connect( m_pGraphicalObjectsColor[0], &QPushButton::clicked, [=] { emit btn(m_pGraphicalObjectsColor[0]); } );
-   connect( m_pGraphicalObjectsColor[1], &QPushButton::clicked, [=] { emit btn(m_pGraphicalObjectsColor[1]); } );
-   connect( m_pControlPointsColor[0], &QPushButton::clicked, [=] { emit btn(m_pControlPointsColor[0]); } );
-   connect( m_pControlPointsColor[1], &QPushButton::clicked, [=] { emit btn(m_pControlPointsColor[1]); } );
-   connect( m_pAxesColor[0], &QPushButton::clicked, [=] { emit btn(m_pAxesColor[0]); } );
-   connect( m_pAxesColor[1], &QPushButton::clicked, [=] { emit btn(m_pAxesColor[1]); } );
-   connect( m_pAxesColor[2], &QPushButton::clicked, [=] { emit btn(m_pAxesColor[2]); } );
-   connect( m_pFieldOfViewColor, &QPushButton::clicked, [=] { emit btn(m_pFieldOfViewColor); } );
-   //connect( this, SIGNAL(btn(QPushButton*)), this, SLOT(selectColor(QPushButton*)) );
-   connect( this, &PMColorSettings::btn, this, &PMColorSettings::selectColor );
+   connect( m_pBackgroundColor, SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pGraphicalObjectsColor[0], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pGraphicalObjectsColor[1], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pControlPointsColor[0], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pControlPointsColor[1], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pAxesColor[0],SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pAxesColor[1], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pAxesColor[2], SIGNAL(clicked()), this, SLOT(doit()));
+   connect( m_pFieldOfViewColor, SIGNAL(clickedi()) , this, SLOT(doit()));
+   connect( this, SIGNAL(btn(QPushButton*)), this, SLOT(selectColor(QPushButton*)) );
 }
 
 void PMColorSettings::selectColor( QPushButton* b )

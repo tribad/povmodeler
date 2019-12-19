@@ -64,7 +64,7 @@
 //#include "kstandardaction.h"
 //#include "kactioncollection.h"
 //#include "ktoolbarlabelaction.h"
-#include "povmodeleradaptor.h"
+//#include "povmodeleradaptor.h"
 #include <QApplication>
 #include <QtGui>
 #include <QDir>
@@ -74,7 +74,9 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QStack>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#endif
 #include <QComboBox>
 // include files for KDE
 #include <QIcon>
@@ -397,13 +399,13 @@ void PMPart::initCopyPasteActions()
    //if( m_pCutAction ) return;
 
    m_pCutAction = editMenu->addAction( "Cut" );
-   connect( m_pCutAction, &QAction::triggered, this, &PMPart::slotEditCut );
+   connect( m_pCutAction, SIGNAL(triggered()), this, SLOT(slotEditCut()) );
 
    m_pCopyAction = editMenu->addAction( "Copy" );
-   connect( m_pCopyAction, &QAction::triggered, this, &PMPart::slotEditCopy );
+   connect( m_pCopyAction, SIGNAL(triggered()), this, SLOT(slotEditCopy()) );
 
    m_pPasteAction = editMenu->addAction( "Paste" );
-   connect( m_pPasteAction, &QAction::triggered, this, &PMPart::slotEditPaste );
+   connect( m_pPasteAction, SIGNAL(triggered()), this, SLOT(slotEditPaste ()));
 
 
    //m_pDeleteAction = new QAction( tr( "Delete" ), "edittrash", Qt::Key_Delete, this, SLOT( slotEditDelete() ), actionCollection(), "edit_delete" );
@@ -513,7 +515,7 @@ void PMPart::initActions(PMIMenuBar* menuBar)
    menu_gdl->addActions( detail->actions() );
 
    viewMenu->addMenu( menu_gdl );
-   connect( detail, &QActionGroup::triggered, this, &PMPart::slotGlobalDetailLevelChanged );
+   connect( detail, SIGNAL(triggered()), this, SLOT(slotGlobalDetailLevelChanged()) );
 
    // new objects
     if( isReadWrite() )
@@ -905,10 +907,10 @@ void PMPart::initActions(PMIMenuBar* menuBar)
 
         editMenu->addAction(m_pUndoAction = ac = actionCollection( "Undo", "Undo" ));
         ac->setEnabled( false );
-        connect( ac, &QAction::triggered, this, &PMPart::slotEditUndo );
+        connect( ac, SIGNAL(triggered()), this, SLOT(slotEditUndo()) );
         editMenu->addAction(m_pRedoAction = ac = actionCollection( "Redo", "Redo" ));
         ac->setEnabled( false );
-        connect( ac, &QAction::triggered, this, &PMPart::slotEditRedo );
+        connect( ac, SIGNAL(triggered()), this, SLOT(slotEditRedo()) );
 
         disableReadWriteActions(false);
    }

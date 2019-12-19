@@ -15,35 +15,67 @@
 *                                                                        *
 **************************************************************************/
 
-
+#include <iostream>
 #include <QApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 #include <QLocale>
 #include "pmshell.h"
-#include "pmrendermanager.h"
+//#include "pmrendermanager.h"
 #include "version.h"
+
+static void print_help() {
+}
+
+static void process_long_parameter(QString parameter)
+{
+    if (parameter == "help") {
+        print_help();
+    } else {
+    std::cerr << "unrecognized long option : " << parameter.toUtf8().constData() << std::endl;
+    }
+}
 
 int main( int argc, char* argv[] )
 {
     PMShell* shell = nullptr;
 
     QApplication app( argc, argv ); // PORTING SCRIPT: move this to before the KAboutData initialization
-    QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
-    parser.process( app ); // PORTING SCRIPT: move this to after any parser.addOption
-    parser.addPositionalArgument( QLatin1String( "[file]" ), "File to open" );
-    parser.addOption( QCommandLineOption( QStringList() << QLatin1String( "no-dri" ),  "Disables direct rendering" ) );
+
+    /*
+     * Parse the program parameters.
+     */
+    QList<QString> positionalArguments;
+    int i = 1;
+
+    while ((i<argc) && (argv[i]!=0)) {
+        char *s=argv[i];
+
+        if (*s=='-') {
+            s++;
+            switch (*s) {
+            case 'h':
+            case '?':
+            case '-':    //  Long parameter
+                s++;     //  Move on to parameter name
+                process_long_parameter(s);
+                break;
+            default:
+                std::cerr << "unrecognized option : " << s << std::endl;
+                break;
+            }
+        } else {
+            positionalArguments.push_back(QString(s));
+        }
+        i++;
+    }
 
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
 
-    if( parser.positionalArguments().count() > 0 )
+    if( positionalArguments.count() > 0 )
     {
-        for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
+        for( int i = 0 ; i < positionalArguments.count() ; i++ )
         {
-            shell = new PMShell( parser.positionalArguments().at( i ) );
+            shell = new PMShell( positionalArguments.at( i ) );
             shell->show();
         }
     }
@@ -52,7 +84,5 @@ int main( int argc, char* argv[] )
         shell = new PMShell;
         shell->show();
     }
-
-    parser.clearPositionalArguments();
     return app.exec();
 }

@@ -2878,8 +2878,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
       return false;
    if( !parseToken( '{' ) )
       return false;
-
-   int minp = 2;
+int minp = 2;
    while( !stop )
    {
       switch( m_token )
@@ -2965,7 +2964,6 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
    if( !parseToken( '{' ) ) return false;
    //
    //  Check for usage of minp.
-   int minp = 3;
    while( !stop )
    {
       switch( m_token )
@@ -2973,22 +2971,18 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
          case LINEAR_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::LinearSpline );
             nextToken();
-            minp = 3;
             break;
          case QUADRATIC_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::QuadraticSpline );
             nextToken();
-            minp = 4;
             break;
          case CUBIC_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::CubicSpline );
             nextToken();
-            minp = 5;
             break;
          case BEZIER_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::BezierSpline );
             nextToken();
-            minp = 4;
             break;
          case LINEAR_SWEEP_TOK:
             pNewPrism->setSweepType( PMPrism::LinearSweep );

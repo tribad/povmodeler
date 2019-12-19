@@ -16,7 +16,7 @@
 *  (at your option) any later version.                                   *
 *                                                                        *
 **************************************************************************/
-
+#include "config.h"
 #include "pmobjectlibrarysettings.h"
 
 #include "pmlibrarymanager.h"
@@ -36,7 +36,11 @@
 #include <QMessageBox>
 
 #include <QListWidget>
-#include <QStandardPaths>
+#if QT_VERSION >= 0x050000
+    #include <QStandardPaths>
+#else
+    #include <QDesktopServices>
+#endif
 
 PMObjectLibrarySettings::PMObjectLibrarySettings( QWidget* parent )
       : PMSettingsDialogPage( parent )
@@ -159,7 +163,11 @@ void PMObjectLibrarySettings::slotCreateObjectLibrary()
    {
       libfilename = h.name();
       //h.setPath( KStandardDirs::locateLocal( "appdata", "library/" ) + libfilename.trimmed() + "/" );
+#if QT_VERSION >= 0x050000
       h.setPath( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) + QLatin1Char('/') + "library/" + libfilename.trimmed() + "/" );
+#else
+      h.setPath( QDesktopServices::storageLocation(QDesktopServices::DataLocation) + QLatin1Char('/') + "library/" + libfilename.trimmed() + "/" );
+#endif
       // Create the new library
       switch( h.createLibrary() )
       {

@@ -16,3 +16,4 @@ povmodeler.includes
 src/povmodeleradaptor.*
 src/version.h
 src/config.h
+moc_*.cpp

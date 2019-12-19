@@ -135,10 +135,15 @@ bool PMPovrayRenderWidget::render( const QByteArray& scene,
     //get user input modify args
     QInputDialog qi;
     qi.setInputMode( QInputDialog::TextInput );
+#if QT_VERSION >= 0x050000
     qi.setOptions( QInputDialog::UsePlainTextEditForTextInput );
     m_args = qi.getMultiLineText( this, "povray", "                             ______________________cmdline____________________                                   ",
                                    m_args, nullptr, Qt::Widget, Qt::ImhMultiLine );
 
+#else
+    qi.setOptions( QInputDialog::NoButtons );
+    m_args = qi.textValue();
+#endif
     m_args.replace( "\n", " " );
     m_args.replace( "  ", " " );
     m_list = m_args.split( " " );
