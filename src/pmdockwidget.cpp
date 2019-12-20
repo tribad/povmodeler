@@ -1718,3 +1718,96 @@ PMDockWidget* PMDockManager::findWidgetParentDock( QWidget* w ) const
 	return found;
 }
 
+
+PMDockArea::PMDockArea( QWidget* parent)
+		:QWidget( parent)
+{
+	QString new_name = objectName() + QString("_DockManager");
+	dockManager = new PMDockManager( this );
+	dockManager->setObjectName(new_name);
+    mainDockWidget = nullptr;
+}
+
+PMDockArea::~PMDockArea()
+{
+	delete dockManager;
+}
+
+PMDockWidget* PMDockArea::createDockWidget( const QPixmap &pixmap, QWidget* parent, const QString& strCaption, const QString& strTabPageLabel)
+{
+	return new PMDockWidget( dockManager, pixmap, parent, strCaption, strTabPageLabel );
+}
+
+void PMDockArea::makeDockVisible( PMDockWidget* dock )
+{
+    if ( dock != nullptr)
+		dock->makeDockVisible();
+}
+
+void PMDockArea::makeDockInvisible( PMDockWidget* dock )
+{
+    if ( dock != nullptr)
+		dock->undock();
+}
+
+void PMDockArea::makeWidgetDockVisible( QWidget* widget )
+{
+	makeDockVisible( dockManager->findWidgetParentDock(widget) );
+}
+
+void PMDockArea::writeDockConfig(QDomElement &base)
+{
+	dockManager->writeConfig(base);
+}
+
+void PMDockArea::readDockConfig(QDomElement &base)
+{
+	dockManager->readConfig(base);
+}
+
+void PMDockArea::slotDockWidgetUndocked()
+{
+	QObject* pSender = (QObject*) sender();
+	if (!pSender->inherits("PMDockWidget")) return;
+	PMDockWidget* pDW = (PMDockWidget*) pSender;
+	emit dockWidgetHasUndocked( pDW);
+}
+
+void PMDockArea::resizeEvent(QResizeEvent *rsize)
+{
+  QWidget::resizeEvent(rsize);
+  if (!children().isEmpty()){
+#ifndef NO_KDE2
+//    qDebug(282)<<"K3DockArea::resize";
+#endif
+    QList<QWidget *> list = findChildren<QWidget*>();
+
+    foreach( QWidget *w, list )
+    {
+      w->setGeometry(QRect(QPoint(0,0),size()));
+    }
+#if 0
+    K3DockSplitter *split;
+//    for (unsigned int i=0;i<children()->count();i++)
+    {
+//    	QPtrList<QObject> list(children());
+//       QObject *obj=((QPtrList<QObject*>)children())->at(i);
+	QObject *obj=children()->getFirst();
+       if (split = dynamic_cast<K3DockSplitter*>(obj))
+       {
+          split->setGeometry( QRect(QPoint(0,0), size() ));
+//	  break;
+       }
+    }
+#endif
+   }
+}
+
+void PMDockArea::setMainDockWidget( PMDockWidget* mdw )
+{
+	if ( mainDockWidget == mdw ) return;
+	mainDockWidget = mdw;
+	mdw->applyToWidget(this);
+}
+
+

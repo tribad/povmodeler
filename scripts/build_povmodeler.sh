@@ -35,6 +35,7 @@ if [ -z $QMAKE ] ; then
             ##  awk see's a \s
             export QMAKE_PATH=`echo $QMAKE_RESULT | awk '{print substr($0, match ($0, "[0-9]+[.][0-9]+[.][0-9]+\\\\sin\\\\s")+RLENGTH)}'`
             export QT_INCLUDE_DIR=${QMAKE_PATH}/../include
+            export QT_LIBRARY_DIR=${QMAKE_PATH}/../lib
         fi;
     done 
 fi;

@@ -44,7 +44,7 @@ if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
     include_directories($ENV{QT_INCLUDE_DIR}/QtWidgets)   
     ##
     ##  Setting up the libraries.
-    set(POVMODELER_QT_LIB -L$ENV{QT_LIBRARY_DIR} -lQtGui -lQtCore -lQtDBus -lQtXml -lQtOpenGL -lX11)
+    set(POVMODELER_QT_LIB -lQtGui -lQtCore -lQtDBus -lQtXml -lQtOpenGL -lX11)
     find_package(Qt4)
 else()
     if ($ENV{QT_VERSION_MAJOR} STREQUAL "5")
