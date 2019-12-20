@@ -209,8 +209,6 @@ PMPart::PMPart( QWidget* parentWidget,
    connect( &m_commandManager, SIGNAL( idChanged( PMObject*, const QString& ) ),
             SLOT( slotIDChanged( PMObject*, const QString& ) ) );
 
-   IPMShell* shellIfc = shell;
-
    QDBusConnection::sessionBus().registerObject("/PMPart", this);
    //new org::kpovmodeler( this );
    // eticre no plugin PMPluginManager::theManager()->registerPart( this );
@@ -515,7 +513,7 @@ void PMPart::initActions(PMIMenuBar* menuBar)
    menu_gdl->addActions( detail->actions() );
 
    viewMenu->addMenu( menu_gdl );
-   connect( detail, SIGNAL(triggered()), this, SLOT(slotGlobalDetailLevelChanged()) );
+   connect( detail, SIGNAL(triggered(QAction*)), this, SLOT(slotGlobalDetailLevelChanged(QAction*)) );
 
    // new objects
     if( isReadWrite() )

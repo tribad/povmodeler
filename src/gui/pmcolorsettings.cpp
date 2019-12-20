@@ -109,15 +109,15 @@ PMColorSettings::PMColorSettings( QWidget* parent )
    hlayout->addWidget( m_pFieldOfViewColor );
    hlayout->addStretch( 1 );
 
-   connect( m_pBackgroundColor, SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pGraphicalObjectsColor[0], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pGraphicalObjectsColor[1], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pControlPointsColor[0], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pControlPointsColor[1], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pAxesColor[0],SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pAxesColor[1], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pAxesColor[2], SIGNAL(clicked()), this, SLOT(doit()));
-   connect( m_pFieldOfViewColor, SIGNAL(clickedi()) , this, SLOT(doit()));
+   connect( m_pBackgroundColor, SIGNAL(clicked()), m_pBackgroundColor, SLOT(doit()));
+   connect( m_pGraphicalObjectsColor[0], SIGNAL(clicked()), m_pGraphicalObjectsColor[0], SLOT(doit()));
+   connect( m_pGraphicalObjectsColor[1], SIGNAL(clicked()), m_pGraphicalObjectsColor[1], SLOT(doit()));
+   connect( m_pControlPointsColor[0], SIGNAL(clicked()), m_pControlPointsColor[0], SLOT(doit()));
+   connect( m_pControlPointsColor[1], SIGNAL(clicked()), m_pControlPointsColor[1], SLOT(doit()));
+   connect( m_pAxesColor[0],SIGNAL(clicked()), m_pAxesColor[0], SLOT(doit()));
+   connect( m_pAxesColor[1], SIGNAL(clicked()), m_pAxesColor[1], SLOT(doit()));
+   connect( m_pAxesColor[2], SIGNAL(clicked()), m_pAxesColor[2], SLOT(doit()));
+   connect( m_pFieldOfViewColor, SIGNAL(clickedi()) , m_pFieldOfViewColor, SLOT(doit()));
    connect( this, SIGNAL(btn(QPushButton*)), this, SLOT(selectColor(QPushButton*)) );
 }
 

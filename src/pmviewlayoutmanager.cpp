@@ -653,22 +653,7 @@ QStringList PMViewLayoutManager::availableLayouts()
    return result;
 }
 
-void PMViewLayoutManager::loadData()
-{
-   if( m_layoutsLoaded )
-      m_layouts.clear();
-
-   m_layoutsLoaded = true;
-#if QT_VERSION >= 0x050000
-   QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "povmodeler/viewlayouts.xml" );
-#else
-   QString fileName = QString(STANDARD_DATA_ROOT_DIR "/povmodeler/viewlayouts.xml" );
-#endif
-   if( fileName.isEmpty() )
-   {
-      // Generate a default layout
-      // I have a feeling this shouldn't be here but hey, it works for now
-      // TODO Must find a way to move this cleanly to PMShell
+void PMViewLayoutManager::initDefault() {
       PMViewLayout a;
       a.setName( tr( "Default" ) );
       PMViewLayoutEntry p;
@@ -703,7 +688,22 @@ void PMViewLayoutManager::loadData()
 
       m_layouts.append( a );
       m_defaultLayout = a.name();
+}
 
+void PMViewLayoutManager::loadData()
+{
+   if( m_layoutsLoaded )
+      m_layouts.clear();
+
+   m_layoutsLoaded = true;
+#if QT_VERSION >= 0x050000
+   QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "povmodeler/viewlayouts.xml" );
+#else
+   QString fileName = QString(STANDARD_DATA_ROOT_DIR "/povmodeler/viewlayouts.xml" );
+#endif
+   if( fileName.isEmpty() )
+   {
+      initDefault();
       return;
    }
 
@@ -712,6 +712,7 @@ void PMViewLayoutManager::loadData()
    {
       qCritical(  ) << tr( "Could not open the view layouts file." )
                         << endl;
+      initDefault();
       return;
    }
 
@@ -781,7 +782,6 @@ void PMViewLayoutManager::saveData()
 PMViewLayoutManager* PMViewLayoutManager::theManager()
 {
    if( !s_pInstance )
-      //s_staticDeleter.setObject( s_pInstance, new PMViewLayoutManager() );
        s_pInstance = new PMViewLayoutManager() ;
    return s_pInstance;
 }

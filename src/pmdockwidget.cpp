@@ -149,11 +149,12 @@ public:
 PMDockMainWindow::PMDockMainWindow( QWidget* parent, Qt::WindowFlags f )//pmshell start program
         :QMainWindow( parent, f )
 {
-	dockManager = new PMDockManager( this );
+    //
+    //  As the dock main window gets created first we create the dock manager here.
+    dockManager    = new PMDockManager( this );
     mainDockWidget = nullptr;
 
     d = new PMDockMainWindowPrivate();
-    //PartBase::setPartObject( this );
 
     m_pMain = new PMDockMain( this );
     QMainWindow::setCentralWidget( m_pMain ) ;
@@ -161,7 +162,7 @@ PMDockMainWindow::PMDockMainWindow( QWidget* parent, Qt::WindowFlags f )//pmshel
 
 PMDockMainWindow::~PMDockMainWindow()
 {
-    qDebug() << "dockmainwindow desctructor";
+   qDebug() << "dockmainwindow desctructor";
    delete m_pMain;
    m_pMain = nullptr;
    delete dockManager;
@@ -170,7 +171,7 @@ PMDockMainWindow::~PMDockMainWindow()
 
 void PMDockMainWindow::slotSetStatusBarText( const QString & text )
 {
-	statusBar()->showMessage( text );
+    statusBar()->showMessage( text );
 }
 
 void PMDockMainWindow::setMainDockWidget( PMDockWidget* mdw )
@@ -181,50 +182,47 @@ void PMDockMainWindow::setMainDockWidget( PMDockWidget* mdw )
 
 void PMDockMainWindow::setView( QWidget *view )
 {
-	//if ( view->isA("PMDockWidget") ){
-	//	if ( view->parent() != this ) ((PMDockWidget*)view)->applyToWidget( this );
-	//}
-	m_pMain->setTopWidget(view);
+    m_pMain->setTopWidget(view);
 }
 
 PMDockWidget* PMDockMainWindow::createDockWidget( const QPixmap &pixmap, QWidget* parent, const QString& strCaption, const QString& strTabPageLabel)
 {
-	return new PMDockWidget( dockManager, pixmap, parent, strCaption, strTabPageLabel );
+    return new PMDockWidget( dockManager, pixmap, parent, strCaption, strTabPageLabel );
 }
 
 void PMDockMainWindow::makeDockVisible( PMDockWidget* dock )
 {
     if ( dock != nullptr)
-		dock->makeDockVisible();
+        dock->makeDockVisible();
 }
 
 void PMDockMainWindow::makeDockInvisible( PMDockWidget* dock )
 {
     if ( dock != nullptr)
-		dock->undock();
+        dock->undock();
 }
 
 void PMDockMainWindow::makeWidgetDockVisible( QWidget* widget )
 {
-	makeDockVisible( dockManager->findWidgetParentDock(widget) );
+    makeDockVisible( dockManager->findWidgetParentDock(widget) );
 }
 
 void PMDockMainWindow::writeDockConfig(QDomElement &base)
 {
-	dockManager->writeConfig(base);
+    dockManager->writeConfig(base);
 }
 
 void PMDockMainWindow::readDockConfig(QDomElement &base)
 {
-	dockManager->readConfig(base);
+    dockManager->readConfig(base);
 }
 
 void PMDockMainWindow::slotDockWidgetUndocked()
 {
     QObject* pSender = static_cast<QObject*>(sender());
-	if (!pSender->inherits("PMDockWidget")) return;
+    if (!pSender->inherits("PMDockWidget")) return;
     PMDockWidget* pDW = static_cast<PMDockWidget*>(pSender);
-	emit dockWidgetHasUndocked( pDW);
+    emit dockWidgetHasUndocked( pDW);
 }
 
 /*************************************************************************/
@@ -1267,22 +1265,22 @@ PMDockManager::PMDockManager( QWidget* mainWindow  )
 		,undockProcess(false)
 		,dropCancel(true)
 {
-	d = new PMDockManagerPrivate;
-	d->splitterOpaqueResize = false;
-	d->splitterKeepSize = false;
-	d->splitterHighResolution = false;
-	d->readyToDrag = false;
+    d = new PMDockManagerPrivate;
+    d->splitterOpaqueResize = false;
+    d->splitterKeepSize = false;
+    d->splitterHighResolution = false;
+    d->readyToDrag = false;
 
-	main->installEventFilter( this );
+    main->installEventFilter( this );
 
-	undockProcess = false;
+    undockProcess = false;
 
     menu = new QMenu();
 
     connect( menu, SIGNAL( aboutToShow() ), SLOT( slotMenuPopup() ) );
-    connect( menu, SIGNAL(triggered()), this, SLOT(slotMenuActivated()) );
+    connect( menu, SIGNAL(triggered(QAction*)), this, SLOT(slotMenuActivated(QAction*)) );
 
-	childDock = new QList<QObject*>();
+    childDock = new QList<QObject*>();
 }
 
 PMDockManager::~PMDockManager()
@@ -1720,98 +1718,3 @@ PMDockWidget* PMDockManager::findWidgetParentDock( QWidget* w ) const
 	return found;
 }
 
-#ifdef _JOWENN_EXPERIMENTAL_
-
-PMDockArea::PMDockArea( QWidget* parent)
-		:QWidget( parent)
-{
-	QString new_name = objectName() + QString("_DockManager");
-	dockManager = new PMDockManager( this );
-	dockManager->setObjectName(new_name);
-    mainDockWidget = nullptr;
-}
-
-PMDockArea::~PMDockArea()
-{
-	delete dockManager;
-}
-
-PMDockWidget* PMDockArea::createDockWidget( const QPixmap &pixmap, QWidget* parent, const QString& strCaption, const QString& strTabPageLabel)
-{
-	return new PMDockWidget( dockManager, pixmap, parent, strCaption, strTabPageLabel );
-}
-
-void PMDockArea::makeDockVisible( PMDockWidget* dock )
-{
-    if ( dock != nullptr)
-		dock->makeDockVisible();
-}
-
-void PMDockArea::makeDockInvisible( PMDockWidget* dock )
-{
-    if ( dock != nullptr)
-		dock->undock();
-}
-
-void PMDockArea::makeWidgetDockVisible( QWidget* widget )
-{
-	makeDockVisible( dockManager->findWidgetParentDock(widget) );
-}
-
-void PMDockArea::writeDockConfig(QDomElement &base)
-{
-	dockManager->writeConfig(base);
-}
-
-void PMDockArea::readDockConfig(QDomElement &base)
-{
-	dockManager->readConfig(base);
-}
-
-void PMDockArea::slotDockWidgetUndocked()
-{
-	QObject* pSender = (QObject*) sender();
-	if (!pSender->inherits("PMDockWidget")) return;
-	PMDockWidget* pDW = (PMDockWidget*) pSender;
-	emit dockWidgetHasUndocked( pDW);
-}
-
-void PMDockArea::resizeEvent(QResizeEvent *rsize)
-{
-  QWidget::resizeEvent(rsize);
-  if (!children().isEmpty()){
-#ifndef NO_KDE2
-//    qDebug(282)<<"K3DockArea::resize";
-#endif
-    QList<QWidget *> list = findChildren<QWidget*>();
-
-    foreach( QWidget *w, list )
-    {
-      w->setGeometry(QRect(QPoint(0,0),size()));
-    }
-#if 0
-    K3DockSplitter *split;
-//    for (unsigned int i=0;i<children()->count();i++)
-    {
-//    	QPtrList<QObject> list(children());
-//       QObject *obj=((QPtrList<QObject*>)children())->at(i);
-	QObject *obj=children()->getFirst();
-       if (split = dynamic_cast<K3DockSplitter*>(obj))
-       {
-          split->setGeometry( QRect(QPoint(0,0), size() ));
-//	  break;
-       }
-    }
-#endif
-   }
-}
-
-void PMDockArea::setMainDockWidget( PMDockWidget* mdw )
-{
-	if ( mainDockWidget == mdw ) return;
-	mainDockWidget = mdw;
-	mdw->applyToWidget(this);
-}
-
-
-#endif

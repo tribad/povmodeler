@@ -266,6 +266,9 @@ public:
     */
    void fillPopupMenu( QMenu* pMenu );
 private:
+   //
+   //  Creating a internal default layout.
+   void initDefault();
    /**
     * Constructor
     */

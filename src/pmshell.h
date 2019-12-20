@@ -135,6 +135,8 @@ public slots:
    void slotSelectedLayout( QAction* action );
    void slotSaveViewLayout();
    void slotViewsMenuAboutToShow();
+
+   void shellClose();
 protected:
     virtual bool queryClose();
 	virtual void showEvent( QShowEvent* );
@@ -152,7 +154,6 @@ public:
     virtual void modified(bool m);
 private:
    void closeEvent( QCloseEvent *event );
-   void shellClose();
 
    void restoreRecent();
    QList<QAction*>recentFileAction;

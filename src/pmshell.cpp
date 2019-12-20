@@ -82,15 +82,12 @@ PMShell::PMShell( const QUrl &url )
         addToolBar(toolbar);
     }
     restoreRecent();
-    //restoreOptions();
     setSize();
     setupView();
 
     m_pStatusBar = statusBar();
     m_pStatusBar->addWidget ( statusBarLabel, 1 );
     statusBarLabel->setText(" Status Bar ");
-    //m_pStatusBar->showMessage( " ", c_statusBarInfo, 1 );
-    //m_pStatusBar->showMessage( "" , c_statusBarControlPoints );
 
    if( !url.isEmpty() )
    {
@@ -133,7 +130,7 @@ void PMShell::setupActions()
     //  File menu specific connects
     connect( mMenuBar->GetAction("File", "New"),     SIGNAL(triggered()), this, SLOT(slotFileNew()) );
     connect( mMenuBar->GetAction("File", "Open"),    SIGNAL(triggered()), this, SLOT(slotFileOpen()) );
-    connect( mMenuBar->GetMenu("File/Recent File"),  SIGNAL(triggered()),   this, SLOT(slotOpenRecent()) );
+    connect( mMenuBar->GetMenu("File/Recent File"),  SIGNAL(triggered(QAction*)),   this, SLOT(slotOpenRecent(QAction*)) );
     connect( mMenuBar->GetAction("File", "Save"),    SIGNAL(triggered()), this, SLOT(slotFileSave()) );
     connect( mMenuBar->GetAction("File", "Save as"), SIGNAL(triggered()), this, SLOT(slotFileSaveAs()) );
     connect( mMenuBar->GetAction("File", "Revert"),  SIGNAL(triggered()), this, SLOT(slotFileRevert()) );
@@ -406,11 +403,11 @@ void PMShell::slotFileSave()
 
    if( m_pPart->ismodified )
    {
-      if( !currentUrl.isEmpty() && m_pPart->isReadWrite() )
+      if( !currentUrl.isEmpty() && m_pPart->isReadWrite() ){
          m_pPart->saveFileQt( currentUrl );
-      else
+      } else {
          saveAs();
-
+      }
       setWindowTitle( m_pPart->url().toString() );
    }
    else
