@@ -49,8 +49,9 @@ fi;
 ##  Get the last updates
 git pull
 ##
-##  go to the original
-git checkout original
+##  go to the requested branch
+BRANCH=${1:-original}
+git checkout $BRANCH
 ##
 ##  re-create build environment
 cmake .
