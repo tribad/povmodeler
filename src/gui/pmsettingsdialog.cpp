@@ -41,7 +41,7 @@
 #include <QIcon>
 #include <QSettings>
 #if QT_VERSION >= 0x050000
-#include <QStandardPaths>
+     #include <QStandardPaths>
 #endif
 PMSettingsDialogPage::PMSettingsDialogPage( QWidget* parent )
       : QWidget( parent )
@@ -64,8 +64,14 @@ PMSettingsDialog::PMSettingsDialog( PMPart* part, QWidget* parent )
 
     PMSettingsDialogPage* page;
     m_pPart = part;
+
+#if QT_VERSION >= 0x050000
+    QStringList strpath;
+    strpath << QStandardPaths::locate(QStandardPaths::HomeLocation, "/.local/share/povmodeler/icons/povicons");
+#else
     QStringList strpath;
     strpath << QDesktopServices::storageLocation(QDesktopServices::HomeLocation) + "/.local/share/povmodeler/icons/povicons";
+#endif
     QIcon::setThemeSearchPaths( strpath );
     QIcon::setThemeName("povicons");
     page = new PMPovraySettings();
