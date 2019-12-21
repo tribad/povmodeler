@@ -1,6 +1,6 @@
 
 
-if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
+if (NOT DEFINED ID OR ${ID} STREQUAL "slackware")
      find_package(Qt4)
 else()
      find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)

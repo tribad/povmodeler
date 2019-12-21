@@ -6,7 +6,7 @@ project(povmodeler)
 ##  Load values from the os-release information.
 if (EXISTS "/etc/os-release")
     file(STRINGS "/etc/os-release" OSINFO)
-    foreach(NameAndValue ${ConfigContents})
+    foreach(NameAndValue ${OSINFO})
         # Strip leading spaces
         string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
         # Find variable name
@@ -44,6 +44,17 @@ find_package (OpenGL COMPONENTS OpenGL REQUIRED)
 set(POVMODELER_FREETYPE_LIB "freetype")
 
 find_package(Freetype REQUIRED)
+
+##
+##  Checking the distro mostly for decision for Qt4 and Qt5
+if (${ID} STREQUAL "slackware")
+    set(QT_VERSION_MAJOR "4")
+    set(QT_MODULE_PREFIX "Qt")
+else()
+    set(QT_VERSION_MAJOR "5")
+    set(QT_MODULE_PREFIX "Qt5")
+    find_package(Qt5 COMPONENTS Core)
+endif()
 ##
 ##  Here we try to find the qt components.
 ##  We expect a working pkg-config tool cause this is the most common way to 
@@ -51,7 +62,7 @@ find_package(Freetype REQUIRED)
 find_program(PKG_CONFIG "pkg-config")
 if (DEFINED PKG_CONFIG)
     foreach(qt_module Core Gui Widgets OpenGL Xml DBus)
-        exec_program(pkg-config ARGS --cflags-only-I --silence-errors Qt${qt_module} OUTPUT_VARIABLE QT_INCLUDE)
+        exec_program(pkg-config ARGS --cflags-only-I --silence-errors ${QT_MODULE_PREFIX}${qt_module} OUTPUT_VARIABLE QT_INCLUDE)
         ##
         ##  Only process found module info.
         if (NOT ${QT_INCLUDE} STREQUAL "")
@@ -64,7 +75,7 @@ if (DEFINED PKG_CONFIG)
         endif()
         ##
         ##  Doing it again for the libraries.
-        exec_program(pkg-config ARGS --libs-only-l --silence-errors Qt${qt_module} OUTPUT_VARIABLE QT_LIBS)
+        exec_program(pkg-config ARGS --libs-only-l --silence-errors ${QT_MODULE_PREFIX}${qt_module} OUTPUT_VARIABLE QT_LIBS)
         ##
         ##  Only process found module info.
         if (NOT ${QT_LIBS} STREQUAL "")
@@ -78,16 +89,20 @@ if (DEFINED PKG_CONFIG)
     endforeach(qt_module)
     ##
     ##  Reduce the list.
-    list(REMOVE_DUPLICATES inclist)
+    ##  if it exists.
+    if (NOT "${inclist}" STREQUAL "")
+        list(REMOVE_DUPLICATES inclist)
+        ##
+        ##  Now add them to the compiler options.
+        foreach(inc ${inclist})
+            add_compile_options(${inc})
+        endforeach(inc)
+    endif()
     ##
-    ##  Now add them to the compiler options.
-    foreach(inc ${inclist})
-        add_compile_options(${inc})
-    endforeach(inc)
-    list(REMOVE_DUPLICATES liblist)
-    foreach(lib ${liblist})
-        ##string(REPLACE POVMODELER_QT_LIB ${POVMODELER_QT_LIB} " " ${lib})
-    endforeach(lib)
+    ##  same with the library list.
+    if (DEFINED liblist AND NOT "${liblist}" STREQUAL "")
+        list(REMOVE_DUPLICATES liblist)
+    endif()
 else()
     message("pkg-config not found")
 endif()
