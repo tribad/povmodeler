@@ -2,7 +2,25 @@
 ##  This is the cmake intro
 cmake_minimum_required(VERSION 2.6)
 project(povmodeler)
-
+##
+##  Load values from the os-release information.
+if (EXISTS "/etc/os-release")
+    file(STRINGS "/etc/os-release" OSINFO)
+    foreach(NameAndValue ${ConfigContents})
+        # Strip leading spaces
+        string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
+        # Find variable name
+        string(REGEX MATCH "^[^=]+" Name ${NameAndValue})
+        # Find the value
+        string(REPLACE "${Name}=" "" Value ${NameAndValue})
+        # Set the variable
+        set(${Name} "${Value}")
+    endforeach()
+else()
+    message(WARNING "os-release info not found")
+endif()
+##
+##
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
 ##
@@ -28,32 +46,50 @@ set(POVMODELER_FREETYPE_LIB "freetype")
 find_package(Freetype REQUIRED)
 ##
 ##  Here we try to find the qt components.
-if (NOT DEFINED $ENV{OSID} OR $ENV{OSID} STREQUAL "slackware")
-    ##
-    ##  setting up the include directories needed.
-    if (NOT DEFINED $ENV{QT_INCLUDE_DIR})
-        ##message( FATAL_ERROR "QT_INCLUDE_DIR not set")
-    endif()
-    include_directories($ENV{QT_INCLUDE_DIR})
-    include_directories($ENV{QT_INCLUDE_DIR}/QtDBus)   
-    include_directories($ENV{QT_INCLUDE_DIR}/Qt)   
-    include_directories($ENV{QT_INCLUDE_DIR}/QtXml)   
-    include_directories($ENV{QT_INCLUDE_DIR}/QtCore)   
-    include_directories($ENV{QT_INCLUDE_DIR}/QtGui)   
-    include_directories($ENV{QT_INCLUDE_DIR}/QtOpenGL)   
-    include_directories($ENV{QT_INCLUDE_DIR}/QtWidgets)   
-    ##
-    ##  Setting up the libraries.
-    set(POVMODELER_QT_LIB -lQtGui -lQtCore -lQtDBus -lQtXml -lQtOpenGL -lX11)
-    find_package(Qt4)
-else()
-    if ($ENV{QT_VERSION_MAJOR} STREQUAL "5")
-        find_package(Qt5 COMPONENTS DBus Xml Core Widgets REQUIRED)
-    else()
-        if ($ENV{QT_VERSION_MAJOR} STREQUAL "4")
-            find_package(Qt4 REQUIRED DBus Xml Core Widgets OpenGL)
+##  We expect a working pkg-config tool cause this is the most common way to 
+##  extract information of the installation pathes and more for the packages.
+find_program(PKG_CONFIG "pkg-config")
+if (DEFINED PKG_CONFIG)
+    foreach(qt_module Core Gui Widgets OpenGL Xml DBus)
+        exec_program(pkg-config ARGS --cflags-only-I --silence-errors Qt${qt_module} OUTPUT_VARIABLE QT_INCLUDE)
+        ##
+        ##  Only process found module info.
+        if (NOT ${QT_INCLUDE} STREQUAL "")
+            ##
+            ##  if there are multiple -I's in the result we need to make a list of it.
+            string(REPLACE " " ";" QT_INCLUDE ${QT_INCLUDE})
+            ##
+            ## and make a big list from it.
+            list(APPEND inclist ${QT_INCLUDE})
         endif()
-    endif()
+        ##
+        ##  Doing it again for the libraries.
+        exec_program(pkg-config ARGS --libs-only-l --silence-errors Qt${qt_module} OUTPUT_VARIABLE QT_LIBS)
+        ##
+        ##  Only process found module info.
+        if (NOT ${QT_LIBS} STREQUAL "")
+            ##
+            ##  if there are multiple -I's in the result we need to make a list of it.
+            string(REPLACE " " ";" QT_LIBS ${QT_LIBS})
+            ##
+            ## and make a big list from it.
+            list(APPEND liblist ${QT_LIBS})
+        endif()
+    endforeach(qt_module)
+    ##
+    ##  Reduce the list.
+    list(REMOVE_DUPLICATES inclist)
+    ##
+    ##  Now add them to the compiler options.
+    foreach(inc ${inclist})
+        add_compile_options(${inc})
+    endforeach(inc)
+    list(REMOVE_DUPLICATES liblist)
+    foreach(lib ${liblist})
+        ##string(REPLACE POVMODELER_QT_LIB ${POVMODELER_QT_LIB} " " ${lib})
+    endforeach(lib)
+else()
+    message("pkg-config not found")
 endif()
 
 
@@ -89,13 +125,14 @@ include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++11)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
+
 add_subdirectory(src)
 
 add_executable(povmodeler add-png-icons.qrc)
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -std=c++11 -Wl,--start-group ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
+target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} pmgui pmapp pmmodel pmbase -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of
