@@ -31,8 +31,6 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
     set(POVMODELER_GL_LIB ${OPENGL_gl_LIBRARY})
     set(POVMODELER_GLU_LIB ${OPENGL_glu_LIBRARY})
-    if(CMAKE_VERSION VERSION_LESS "3.5.0")
-    endif()
 else()
     set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
 endif()
@@ -143,7 +141,16 @@ include_directories(src ${CMAKE_SOURCE_DIR})
 
 add_subdirectory(src)
 
-add_executable(povmodeler add-png-icons.qrc)
+if(CMAKE_VERSION VERSION_LESS "3.0.0")
+    ##
+    ##  pre AUTORCC generation of the resource file
+    ##  has always an ending of cxx.
+    ##  and we do not care about the position in the directory tree.
+    QT4_ADD_RESOURCES("qrc_add-png-icons" add-png-icons.qrc)
+    add_executable(povmodeler qrc_add-png-icons.cxx)
+else()
+    add_executable(povmodeler add-png-icons.qrc)
+endif()
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.

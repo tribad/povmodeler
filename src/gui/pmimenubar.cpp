@@ -4,7 +4,6 @@
 PMIMenuBar::PMIMenuBar()
 {
     QMenu* m;
-
     m = AddMenu("File");
     //
     //  addAction() calls here are the standard calls to the QMenu object.
