@@ -82,6 +82,7 @@ PMShell::PMShell( const QUrl &url )
         addToolBar(toolbar);
     }
     restoreRecent();
+    restoreOptions();
     setSize();
     setupView();
 
@@ -525,29 +526,37 @@ void PMShell::updateGUI()
 
 void PMShell::saveOptions()
 {
-   QSettings qset;
-   qset.setValue( "Appearance/ShowStatusbar", m_pStatusbarAction->isChecked() );
-   slotShowStatusbar( m_pStatusbarAction->isChecked() );
-   // eticre save recent file m_pRecent->saveEntries( "RecentFile" );
+    QSettings qset;
+    QAction*  statusBarAction = mMenuBar->GetAction("Settings", "Show &Status Bar");
 
-   if( m_pPart )
-       m_pPart->saveConfig();
+    if (statusBarAction != nullptr) {
+        qset.setValue( "Appearance/ShowStatusbar", statusBarAction->isChecked() );
+        slotShowStatusbar( statusBarAction->isChecked() );
+    } else {
 
-   //config.sync();
+    }
+
+    if ( m_pPart ) {
+        m_pPart->saveConfig();
+    }
 }
 
 void PMShell::restoreOptions()
 {
-   QSettings qset;
-   bool show;
+    QSettings qset;
+    bool      show = true;
 
-   show = qset.value( "Appearance/ShowStatusbar", true ).value<bool>();
-   m_pStatusbarAction->blockSignals( true );
-   m_pStatusbarAction->setChecked( show );
-   m_pStatusbarAction->blockSignals( false );
-   statusBar()->setVisible(show);
+    QAction*  statusBarAction = mMenuBar->GetAction("Settings", "Show &Status Bar");
 
-   // eticre save recent filem_pRecent->loadEntries( "RecentFile" );
+    if (statusBarAction != nullptr) {
+        show = qset.value( "Appearance/ShowStatusbar", true ).value<bool>();
+        statusBarAction->blockSignals( true );
+        statusBarAction->setChecked( show );
+        statusBarAction->blockSignals( false );
+    } else {
+
+    }
+    statusBar()->setVisible(show);
 }
 
 void PMShell::setWindowTitle( const QString& caption )

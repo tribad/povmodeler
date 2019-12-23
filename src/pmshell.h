@@ -162,7 +162,6 @@ private:
 
    //KRecentFilesAction* m_pRecent;
 
-   QAction*        m_pStatusbarAction;
    QStatusBar*     m_pStatusBar;
    QLabel*         statusBarLabel;
    PMPart*         m_pPart;
