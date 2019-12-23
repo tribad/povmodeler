@@ -40,9 +40,11 @@ case $OSID in
 esac
 
 echo "Building for "${OSID}"-"${OSVERSION}" a "${OSPACKAGE}" package"
-
 ##
-## if  we are root expecting a clone there.
+##  remove an old build
+rm -rf /tmp/povmodeler
+##
+## clone there.
 cd /tmp
 ##
 ##
@@ -85,5 +87,4 @@ else
     makepkg -l y -c n ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz
     cp -a ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz ~
 fi;
-rm -rf /tmp/povmodeler
 
