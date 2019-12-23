@@ -84,7 +84,7 @@ else
     make install DESTDIR=/tmp/build
     cp ../slack-desc /tmp/build/install
     cd /tmp/build/
-    makepkg -l y -c n ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz
-    cp -a ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz ~
+    makepkg -l y -c n /tmp/povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz
+    cp -a /tmp/povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz ~
 fi;
 
