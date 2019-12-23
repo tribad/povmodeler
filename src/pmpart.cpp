@@ -137,6 +137,7 @@ PMPart::PMPart( QWidget* parentWidget,
                     //
                     //  We insert the toolbars actions right before the action following "Toolbars"
                     before = *(++action);
+                    break;
                 }
             }
             //
