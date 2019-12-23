@@ -32,6 +32,7 @@ set(CMAKE_AUTORCC TRUE)
 ##
 ##  Here we look for the OpenGL support.
 set(OpenGL_GL_PREFERENCE GLVND)
+find_package (OpenGL COMPONENTS OpenGL REQUIRED)
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -41,7 +42,6 @@ else()
     set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
 endif()
 
-find_package (OpenGL COMPONENTS OpenGL REQUIRED)
 ##
 ##  Here we try to find the freetype library support.
 
