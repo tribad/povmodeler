@@ -83,7 +83,7 @@ else
     cp ../slack-desc /tmp/build/install
     cd /tmp/build/
     makepkg -l y -c n ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz
-    cp -a ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz /root/
+    cp -a ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz ~
 fi;
 rm -rf /tmp/povmodeler
 
