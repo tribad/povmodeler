@@ -156,10 +156,6 @@ include(GNUInstallDirs)
 add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
 ##
 ##  Setup the version info to be used in version.h and the packages.
-set(POVMODELER_VERSION_MAJOR "1")
-set(POVMODELER_VERSION_MINOR "1")
-set(POVMODELER_VERSION_PATCH "4")
-
 configure_file(version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
 configure_file(config.h.in ${CMAKE_SOURCE_DIR}/src/config.h)
 
