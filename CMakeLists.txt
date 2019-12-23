@@ -188,7 +188,7 @@ target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} $
 ##
 ##  Here we describe the files and positions of
 ##  to be installed files.
-install( PROGRAMS povmodeler DESTINATION  ${CMAKE_INSTALL_BINDIR} )
+install( PROGRAMS ${CMAKE_BINARY_DIR}/povmodeler DESTINATION  ${CMAKE_INSTALL_BINDIR} )
 ##
 ##  desktop file
 install( FILES povmodeler.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
