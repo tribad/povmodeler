@@ -17,3 +17,4 @@ src/povmodeleradaptor.*
 src/version.h
 src/config.h
 moc_*.cpp
+build/
