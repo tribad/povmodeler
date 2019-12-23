@@ -76,7 +76,7 @@ strip -s povmodeler
 ##  make the package
 if [ "$OSPACKAGE" != "SLACK" ] ; then
     cpack -G ${OSPACKAGE}
-    cp -a povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}* /root
+    cp -a povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}* ~
 else
     mkdir -p /tmp/build/install
     make install DESTDIR=/tmp/build
