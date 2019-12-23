@@ -19,6 +19,7 @@ if (EXISTS "/etc/os-release")
         string(REGEX MATCH "^[^=]+" Name ${NameAndValue})
         # Find the value
         string(REPLACE "${Name}=" "" Value ${NameAndValue})
+        string(REPLACE "\"" "" Value ${Value})
         # Set the variable
         set(${Name} "${Value}")
     endforeach()
@@ -233,7 +234,6 @@ set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications"
                                                    "/usr/share/icons/hicolor/48x48/apps"
                                                    )
 
-##set (CPACK_RPM_PACKAGE_REQUIRES "libQt5Widgets, libQt5Xml, libQt5DBus,libOpenGL, libGLU, libfreetype, libQt5Gui, libQt5Core, libGLX, libstdc++, libm, libgcc_s, libc")
 ##
 ##
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
@@ -246,7 +246,7 @@ SET(CPACK_PACKAGE_VERSION_MINOR ${POVMODELER_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${POVMODELER_VERSION_PATCH})
 SET(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
 SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}")
-SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}-$ENV{OSID}-$ENV{OSVERSION}")
+SET(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}-${ID}-${VERSION_ID}")
 SET(CPACK_PACKAGE_CONTACT "Hans-Juergen Lange <hjl@simulated-universe.de>")
 SET(CPACK_PACKAGE_SECTION "graphics")
 INCLUDE(CPack)
