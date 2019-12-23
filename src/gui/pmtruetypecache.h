@@ -24,7 +24,7 @@
 
 #include <QCache>
 
-#include "config-povmodeler.h"
+#include "config.h"
 
 #ifdef HAVE_FREETYPE
 #include "ft2build.h"
