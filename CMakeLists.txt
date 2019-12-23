@@ -27,8 +27,8 @@ else()
 endif()
 ##
 ##  Load povmodeler version number
-if (EXISTS "/etc/os-release")
-    file(STRINGS ${CMAKE_SOURCE_DIR}"/VERSION" VINFO)
+if (EXISTS ${CMAKE_SOURCE_DIR}/VERSION)
+    file(STRINGS ${CMAKE_SOURCE_DIR}/VERSION VINFO)
     foreach(NameAndValue ${VINFO})
         # Strip leading spaces
         string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
