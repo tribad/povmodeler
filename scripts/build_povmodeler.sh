@@ -55,6 +55,13 @@ cd povmodeler
 BRANCH=${1:-original}
 git checkout $BRANCH
 ##
+##  before starting to build get the version
+if [ -e VERSION ] ; then
+    source VERSION
+else
+    echo "Could not read version info"
+fi;
+##
 ##  re-create build environment
 mkdir build
 cd build
@@ -74,6 +81,8 @@ else
     make install DESTDIR=/tmp/build
     cp ../slack-desc /tmp/build/install
     cd /tmp/build/
-    makepkg -l y -c n ../povmodeler-${VERSION}-x86_64-${OSVERSION}.tgz
+    makepkg -l y -c n ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz
+    cp -a ../povmodeler-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-x86_64-${OSVERSION}.tgz /root/
 fi;
+rm -rf /tmp/povmodeler
 

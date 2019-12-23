@@ -26,6 +26,29 @@ else()
     message(WARNING "os-release info not found")
 endif()
 ##
+##  Load povmodeler version number
+if (EXISTS "/etc/os-release")
+    file(STRINGS ${CMAKE_SOURCE_DIR}"/VERSION" VINFO)
+    foreach(NameAndValue ${VINFO})
+        # Strip leading spaces
+        string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
+        # Find variable name
+        string(REGEX MATCH "^[^=]+" Name ${NameAndValue})
+        # Find the value
+        string(REPLACE "${Name}=" "" Value ${NameAndValue})
+        # Set the variable
+        set(${Name} "${Value}")
+    endforeach()
+    set(POVMODELER_VERSION_MAJOR "${VERSION_MAJOR}")
+    set(POVMODELER_VERSION_MINOR "${VERSION_MINOR}")
+    set(POVMODELER_VERSION_PATCH "${VERSION_PATCH}")
+else()
+    message(WARNING "version info not found")
+    set(POVMODELER_VERSION_MAJOR "1")
+    set(POVMODELER_VERSION_MINOR "1")
+    set(POVMODELER_VERSION_PATCH "0")
+endif()
+##
 ##
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
@@ -136,7 +159,6 @@ set(POVMODELER_VERSION_MAJOR "1")
 set(POVMODELER_VERSION_MINOR "1")
 set(POVMODELER_VERSION_PATCH "4")
 
-##configure_file(config-povmodeler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-povmodeler.h )
 configure_file(version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
 configure_file(config.h.in ${CMAKE_SOURCE_DIR}/src/config.h)
 
