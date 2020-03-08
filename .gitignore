@@ -14,3 +14,11 @@ povmodeler.includes
 *_autogen/
 *.moc
 src/povmodeleradaptor.*
+.*
+build/
+old-stuff/*
+povmodeler.creator.*
+src/config.h
+src/generatedfiles
+src/version.h
+
