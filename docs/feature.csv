@@ -1,0 +1,11 @@
+Pos.,Description,Prio
+,Tree View,
+,Tool Boxes instead of toolbars for the model items.,
+,Modern OpenGL for the render views,
+,Properties Pane,
+,Storage of the model in a DB,
+,Reading kpovmodeler files,
+,Animation support,
+,Support of OpenGL shaders to create textures and the like.,
+,Referencing other format model files.,
+,Multiuser support,
