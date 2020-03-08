@@ -15,4 +15,5 @@ add_compile_options(-fPIC)
 
 add_library(pmapp
     main.cpp
+    CModellerApp.cpp
 )

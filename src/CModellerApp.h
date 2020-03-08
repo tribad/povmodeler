@@ -1,17 +1,21 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : main.h
+//  Modul-Name     : CModellerApp.h
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef MAIN_INC
-#define MAIN_INC
+#ifndef CMODELLERAPP_INC
+#define CMODELLERAPP_INC
+#include <QApplication>
 //
-//  List of forwards needed in this module.
-class CModellerApp;
-int main(int argc, char** argv) ;
+//  This is the class
+class CModellerApp : public QApplication {
+Q_OBJECT
+public:
+    CModellerApp(int aArgc, char** aArgv) ;
+    virtual ~CModellerApp() ;
+};
 
-
-#endif  // MAIN_INC
+#endif  // CMODELLERAPP_INC

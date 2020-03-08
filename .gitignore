@@ -21,4 +21,4 @@ povmodeler.creator.*
 src/config.h
 src/generatedfiles
 src/version.h
-
+*.bak

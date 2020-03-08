@@ -1,19 +1,19 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : main.cpp
+//  Modul-Name     : CModellerApp.cpp
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
-#include "main.h"
 #include "CModellerApp.h"
 // Optional
-int main(int argc, char** argv) {
-    int retval = 0;
-// User-Defined-Code:AAAAAAFwukSfIpDfer4=
-    CModellerApp application(argc, argv);
-    application.exec();
-// End-Of-UDC:AAAAAAFwukSfIpDfer4=
-    return  (retval);
+CModellerApp::CModellerApp(int aArgc, char** aArgv) : QApplication(aArgc, aArgv) {
+// User-Defined-Code:AAAAAAFwunztA5H0NRk=
+// End-Of-UDC:AAAAAAFwunztA5H0NRk=
+}
+
+CModellerApp::~CModellerApp()  {
+// User-Defined-Code:AAAAAAFwuoAt/JIQqI8=
+// End-Of-UDC:AAAAAAFwuoAt/JIQqI8=
 }
 
