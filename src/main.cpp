@@ -37,23 +37,6 @@ int main( int argc, char* argv[] )
     QCoreApplication::setOrganizationName( "povmodeler" );
     QCoreApplication::setApplicationName( "povmodeler" );
 
-#if 0
-    if( parser.positionalArguments().count() > 0 )
-    {
-        //
-        //  Each parameter left is a file name to be opened.
-        for( int i = 0 ; i < parser.positionalArguments().count() ; i++ )
-        {
-            shell = new PMShell( parser.positionalArguments().at( i ) );
-            shell->show();
-        }
-    }
-    else
-    {
-        shell = new PMShell;
-        shell->show();
-    }
-#endif
     PMApp appclass;
 
     return app.exec();
