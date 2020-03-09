@@ -180,6 +180,12 @@ set (MODELSTORE_SOURCE
     CLightGroup.cpp
     CLightSource.cpp
     CScene.cpp
+    CJuliaFractal.cpp
+    CLathe.cpp
+    COvus.cpp
+    CParametric.cpp
+    CPrism.cpp
+
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})
 ##

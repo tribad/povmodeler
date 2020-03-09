@@ -45,6 +45,11 @@
 #include "CCylinder.h"
 #include "CHeightField.h"
 #include "CIsoSurface.h"
+#include "CJuliaFractal.h"
+#include "CLathe.h"
+#include "COvus.h"
+#include "CParametric.h"
+#include "CPrism.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -70,6 +75,11 @@ public:
         addsimobjfactory(&cylinder_factory);
         addsimobjfactory(&heightfield_factory);
         addsimobjfactory(&isosurface_factory);
+        addsimobjfactory(&juliafractal_factory);
+        addsimobjfactory(&lathe_factory);
+        addsimobjfactory(&ovus_factory);
+        addsimobjfactory(&parametric_factory);
+        addsimobjfactory(&prism_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);
