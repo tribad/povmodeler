@@ -53,4 +53,16 @@ The storage node has all information available to handle the different render no
 
 As all data will be stored in the storage node the render nodes only need access to the data stored there. At best all data is stored in the database and gets streamed from there to the render nodes.
 
+\section{Modeller}
+The modeller will have a GUI very much like the kpovmodeller. The first implementation will use some code from the storage node to use it as a standalone solution. 
+
+And anyways we creating here all anew the modeller should be able to read the old kpovmodeler files. So for a first try there is no need to use the storage node software.
+
+\section{Storage Node}
+I did create already a software that could handle the model. It is able to manage multiple modelers and renderers as well. But it is somehow larger with its components and I must have a look on the source what parts to make available in the next steps.
+
+\section{Render Manager}
+The render manager is a command line tool that handles the communication with the storage node. This way the storage node knows what machines are connected for what purpose.
+
+
 \end{document}
