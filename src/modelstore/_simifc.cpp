@@ -50,6 +50,12 @@
 #include "COvus.h"
 #include "CParametric.h"
 #include "CPrism.h"
+#include "CSphere.h"
+#include "CSphereSweep.h"
+#include "CSuperQuadricElipsoid.h"
+#include "CSurfaceOfRevolution.h"
+#include "CText.h"
+#include "CTorus.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -80,6 +86,12 @@ public:
         addsimobjfactory(&ovus_factory);
         addsimobjfactory(&parametric_factory);
         addsimobjfactory(&prism_factory);
+        addsimobjfactory(&sphere_factory);
+        addsimobjfactory(&spheresweap_factory);
+        addsimobjfactory(&superquadricelipsoid_factory);
+        addsimobjfactory(&surfaceofrevolution_factory);
+        addsimobjfactory(&text_factory);
+        addsimobjfactory(&torus_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);

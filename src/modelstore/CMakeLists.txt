@@ -185,6 +185,13 @@ set (MODELSTORE_SOURCE
     COvus.cpp
     CParametric.cpp
     CPrism.cpp
+    CSphere.cpp
+    CSphereSweep.cpp
+    CSuperQuadricElipsoid.cpp
+    CSurfaceOfRevolution.cpp
+    CText.cpp
+    CTorus.cpp
+
 
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})
