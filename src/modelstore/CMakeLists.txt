@@ -164,11 +164,12 @@ include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
-include_directories(../include /usr/include/libxml2)
+include_directories(../modelifc /usr/include/libxml2)
 
 set (MODELSTORE_SOURCE 
     _simifc.cpp
     generated.cpp
+    CProject.cpp
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})
 ##

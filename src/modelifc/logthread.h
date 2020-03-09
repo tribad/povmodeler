@@ -57,7 +57,6 @@ private:
     void SyslogOutput(CMsgWriteLog* aMsg);
 public:
     static CLogThread Instance;
-    bool              bRunning;
 private:
     uint64_t  Modul;
     uint8_t   Medium;

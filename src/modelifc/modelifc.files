@@ -1,4 +1,6 @@
 CMakeLists.txt
+CThread.cpp
+CThread.h
 commtarget.h
 config.h
 coreifc.cpp
@@ -8,7 +10,11 @@ helper.h
 helper.h
 json.cpp
 json.h
+logger.cpp
 logger.h
+logger.h
+logthread.cpp
+logthread.h
 msg.h
 netpack.h
 pointerindex.cpp

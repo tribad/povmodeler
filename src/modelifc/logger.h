@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <sstream>
+#include <set>
 
 #define MAX_LOGMESSAGE  (16384u)
 /*
@@ -51,7 +52,8 @@ public:
     int Write(LogLevel aLevel, const char* aFormat,  ...) ;
     int Write(LogLevel aLevel, const std::string& aMsg);
     int Write(LogLevel aLevel, const std::ostringstream&);
-
+private:
+    static std::set<CLogger*> logger;
 private:
     char     buffer[MAX_LOGMESSAGE];
     uint64_t modul;

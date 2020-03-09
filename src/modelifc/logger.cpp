@@ -7,7 +7,7 @@
 #include <logthread.h>
 //
 //  Zeroing the pointers.
-std::set<CLogger*> logger;
+std::set<CLogger*> CLogger::logger;
 //
 //  Dont use it for global instances of any kind.
 //  It cannot be guaranteed that the LogThread has been constructed already.

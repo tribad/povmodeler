@@ -13,7 +13,7 @@ CLogThread::CLogThread()
     //  Always startup with all moduls logging allowed
     Modul    = UINT64_MAX;
     Medium   = MEDIATYPE_CONSOLE;
-    bRunning = false;
+    Running = false;
 }
 
 CLogThread::~CLogThread() {
@@ -24,7 +24,7 @@ bool CLogThread::InitInstance() {
     bool retval = false;
 
     if (CThread::InitInstance()) {
-        retval = bRunning = true;
+        retval = Running = true;
     }
     return retval;
 }
@@ -32,7 +32,7 @@ bool CLogThread::InitInstance() {
 long CLogThread::Run() {
     tMsg* msg = 0;
 
-    for (;bRunning;) {
+    for (;Running;) {
         q.Wait();
 
         msg = q.Get();

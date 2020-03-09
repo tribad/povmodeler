@@ -4724,7 +4724,7 @@
 											},
 											"name": "ExtraInclude",
 											"kind": "string",
-											"value": "coreifc.h"
+											"value": "coreifc.h logthread.h"
 										}
 									],
 									"stereotype": {
