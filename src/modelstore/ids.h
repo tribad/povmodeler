@@ -11,11 +11,12 @@
 //
 //
 //  This is the list of object ids used to identify object types in the DB
-#define IDO_CPROJECT (0xf155679e3654ed26)
+#define IDO_PROJECT (0xd488ea14033d86f8)
 //
 //
 //  This is the list of attribute ids used to identify object attributes in the DB
-#define IDA_STATE    (0x9abc62b337d172c6)
+#define IDA_NAME    (0x842f3af822536317)
+#define IDA_STATE   (0x9abc62b337d172c6)
 //
 //
 //  This is the list of enumeration ids used to identify object enumerators in the DB

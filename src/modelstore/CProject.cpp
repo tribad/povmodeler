@@ -20,6 +20,7 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
+#include "CObjectBase.h"
 #include "CProject.h"
 // Optional
 /*
@@ -48,8 +49,8 @@ static std::map<objectid_t, CProject*> t_store;
 // **************************************************************************
 static int save(tSimObj* obj, uint64_t aCycle, ... ) {
     int result = 0;
-// User-Defined-Code: save-cproject
-// End-Of-UDC: save-cproject
+// User-Defined-Code: save-project
+// End-Of-UDC: save-project
     return (result);
 }
 
@@ -64,9 +65,12 @@ static int save(tSimObj* obj, uint64_t aCycle, ... ) {
 // **************************************************************************
 static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err = 0;
-    CProject* cproject_var = (CProject*)obj;
+    CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        *((tVariant*)(&project_var->Name)) = value;
+        break;
     default:
         err = -1;
         break;
@@ -80,7 +84,7 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
 // **************************************************************************
 static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex) {
     tVariant retval;
-    CProject* cproject_var = (CProject*)obj;
+    CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
     default:
@@ -95,7 +99,7 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
 // **************************************************************************
 static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err=0;
-    CProject* cproject_var = (CProject*)obj;
+    CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
     default:
@@ -203,18 +207,18 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
 }
 // **************************************************************************
 //
-//  Method-Name   : create_cproject_obj()
+//  Method-Name   : create_project_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_cproject_obj(objectid_t  oid) {
-    CProject* newcproject = new CProject;
+static tSimObj* create_project_obj(objectid_t  oid) {
+    CProject* newproject = new CProject;
 
-    if (newcproject != 0) {
-        tSimObj* newobj = newcproject;
+    if (newproject != 0) {
+        tSimObj* newobj = newproject;
 
-        newobj->type        = IDO_CPROJECT;
+        newobj->type        = IDO_PROJECT;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -224,26 +228,26 @@ static tSimObj* create_cproject_obj(objectid_t  oid) {
         newobj->process     = process_sig;
         newobj->syncprocess = process_msg;
         if (0xc0000000 & oid) {
-            t_store.insert(std::pair<templateid_t, CProject*>(oid, newcproject));
+            t_store.insert(std::pair<templateid_t, CProject*>(oid, newproject));
         }
     } else {
     }
-    return ((tSimObj*)newcproject);
+    return ((tSimObj*)newproject);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_cproject_obj()
+//  Method-Name   : create_new_project_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_cproject_obj(objectid_t  oid) {
-    CProject* newcproject = new CProject;
+static tSimObj* create_new_project_obj(objectid_t  oid) {
+    CProject* newproject = new CProject;
 
-    if (newcproject != 0) {
-        tSimObj* newobj = newcproject;
+    if (newproject != 0) {
+        tSimObj* newobj = newproject;
 
-        newobj->type        = IDO_CPROJECT;
+        newobj->type        = IDO_PROJECT;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -254,33 +258,33 @@ static tSimObj* create_new_cproject_obj(objectid_t  oid) {
         newobj->syncprocess = process_msg;
         //
         //  Create the object in the db.
-        stdb_createobj(oid, IDO_CPROJECT);
+        stdb_createobj(oid, IDO_PROJECT);
         //
         //  Now fill the attributes with values.
         //
         //  create the attribute data in the DB.
     } else {
     }
-    return ((tSimObj*)newcproject);
+    return ((tSimObj*)newproject);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_cproject_obj_from_template()
+//  Method-Name   : create_new_project_obj_from_template()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_cproject_obj_from_template(templateid_t  tid, objectid_t  oid) {
-    CProject* newcproject = 0;
+static tSimObj* create_new_project_obj_from_template(templateid_t  tid, objectid_t  oid) {
+    CProject* newproject = 0;
     std::map<objectid_t, CProject*>::iterator found;
 
     found = t_store.find(tid);
     if (found != t_store.end()) {
-        newcproject = new CProject;
-        if (newcproject != 0) {
-            tSimObj* newobj = newcproject;
+        newproject = new CProject;
+        if (newproject != 0) {
+            tSimObj* newobj = newproject;
 
-            newobj->type        = IDO_CPROJECT;
+            newobj->type        = IDO_PROJECT;
             newobj->objid       = oid;
             newobj->parent      = 0;
             newobj->setvalue    = setvalue;
@@ -291,7 +295,7 @@ static tSimObj* create_new_cproject_obj_from_template(templateid_t  tid, objecti
             newobj->syncprocess = process_msg;
             //
             //  Create the object in the db.
-            stdb_createobj(oid, IDO_CPROJECT);
+            stdb_createobj(oid, IDO_PROJECT);
             //
             //
             //  Copy data from template.
@@ -300,7 +304,7 @@ static tSimObj* create_new_cproject_obj_from_template(templateid_t  tid, objecti
         }
     } else {
     }
-    return ((tSimObj*)newcproject);
+    return ((tSimObj*)newproject);
 }
 
-tObjLib cproject_factory= {0, 0, 0, IDO_CPROJECT, create_cproject_obj, create_new_cproject_obj, create_new_cproject_obj_from_template};
+tObjLib project_factory= {0, 0, 0, IDO_PROJECT, create_project_obj, create_new_project_obj, create_new_project_obj_from_template};

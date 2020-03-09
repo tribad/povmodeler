@@ -33,6 +33,7 @@
 //
 //                       M o d e l   i n c l u d e s
 
+#include "CObjectBase.h"
 #include "CProject.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
@@ -48,7 +49,7 @@ public:
     CGeneratedSimIfc() {
         mainviewport = 0;
 
-        addsimobjfactory(&cproject_factory);
+        addsimobjfactory(&project_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);
@@ -213,6 +214,6 @@ CGeneratedSimIfc simifc;
 CSimIfc* siminit(void) {
     //
     //  Create the main viewport object CProject
-    simifc.CreateObject(0ul, IDO_CPROJECT);
+    simifc.CreateObject(0ul, IDO_PROJECT);
     return &simifc;
 }

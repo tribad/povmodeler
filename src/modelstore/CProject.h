@@ -6,13 +6,13 @@
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef CPROJECT_INC
-#define CPROJECT_INC
+#ifndef PROJECT_INC
+#define PROJECT_INC
 //
 //  Forward declarations
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
-struct CProject : public tSimObj {
+struct CProject : public tSimObj, public CObjectBase {
     /*
      *  These are the message and signal processing functions.
      */
@@ -23,8 +23,9 @@ public:
      *  Here are the attributes of the object defined.
      */
 public:
+    CSimAttribute Name;
 };
 
-extern tObjLib cproject_factory;
+extern tObjLib project_factory;
 
-#endif  // CPROJECT_INC
+#endif  // PROJECT_INC
