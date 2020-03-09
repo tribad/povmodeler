@@ -20,8 +20,8 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
-#include "CObjectBase.h"
 #include "CProject.h"
+#include "CObjectBase.h"
 // Optional
 /*
  *  private macros

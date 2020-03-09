@@ -12,7 +12,7 @@
 //  Forward declarations
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
-struct CProject : public tSimObj, public CObjectBase {
+struct CProject : public tSimObj {
     /*
      *  These are the message and signal processing functions.
      */
