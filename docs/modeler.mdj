@@ -4724,7 +4724,7 @@
 											},
 											"name": "ExtraInclude",
 											"kind": "string",
-											"value": "coreifc.h logthread.h"
+											"value": "simifc.h coreifc.h logthread.h appcore/0.1.4/tMsgStartCycleReq.h"
 										}
 									],
 									"stereotype": {
@@ -4738,7 +4738,7 @@
 												"$ref": "AAAAAAFwukQ1yZCvRpA="
 											},
 											"name": "__coreIfc",
-											"type": "CCoreIfc"
+											"type": "CCoreIfc*"
 										}
 									],
 									"operations": [

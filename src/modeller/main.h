@@ -11,7 +11,7 @@
 //
 //  List of forwards needed in this module.
 class CModellerApp;
-extern CCoreIfc __coreIfc;
+extern CCoreIfc* __coreIfc;
 int main(int argc, char** argv) ;
 
 

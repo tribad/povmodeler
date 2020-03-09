@@ -30,6 +30,7 @@ simattrbase.h
 simattribute.cpp
 simattribute.h
 simifc.h
+simifc.h
 simobj.h
 simobjfactory.h
 variant.h
