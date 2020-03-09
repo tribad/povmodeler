@@ -163,30 +163,35 @@ include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
-include_directories(src ${CMAKE_SOURCE_DIR} ../modelifc)
+include_directories(src ${CMAKE_SOURCE_DIR})
+include_directories(../include /usr/include/libxml2)
 
-set (POVMODELER_SOURCE 
-     main.cpp
-     CModellerApp.cpp
+set (MODELSTORE_SOURCE 
+     coreifc.cpp
+     json.cpp
+     variant.cpp
+     helper.cpp
+     pointerindex.cpp
+     ptrnode.cpp
+     logger.cpp
+     logthread.cpp
+     CEvent.cpp
+     CMutex.cpp
+     CThread.cpp
+     CSystemTime.cpp
+     msgthread.cpp
+     msgqueue.cpp
+     simapi.cpp
+     simobjfactory.cpp
+     simattrarray.cpp
+     simattrbase.cpp
+     simattribute.cpp
 )
-##
-##
-link_directories(../../modelstore/build ../../modelifc/build)
-
-if(CMAKE_VERSION VERSION_LESS "3.0.0")
-    ##
-    ##  pre AUTORCC generation of the resource file
-    ##  has always an ending of cxx.
-    ##  and we do not care about the position in the directory tree.
-    QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
-    add_executable(povmodeler qrc_add-png-icons.cxx ${POVMODELER_SOURCE})
-else()
-    add_executable(povmodeler povmodeler-png-icons.qrc ${POVMODELER_SOURCE})
-endif()
+add_library(modelifc SHARED ${MODELSTORE_SOURCE})
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -pthread -std=c++14 -Wl,--start-group -lX11 -lpthread -lxml2 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} -lmodelifc -lmodelstore -Wl,--end-group)
+##target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of

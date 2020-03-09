@@ -28,8 +28,8 @@ else()
 endif()
 ##
 ##  Load povmodeler version number
-if (EXISTS ${CMAKE_SOURCE_DIR}/VERSION)
-    file(STRINGS ${CMAKE_SOURCE_DIR}/VERSION VINFO)
+if (EXISTS ${CMAKE_SOURCE_DIR}/../VERSION)
+    file(STRINGS ${CMAKE_SOURCE_DIR}/../VERSION VINFO)
     foreach(NameAndValue ${VINFO})
         # Strip leading spaces
         string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
@@ -156,30 +156,25 @@ include(GNUInstallDirs)
 add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
 ##
 ##  Setup the version info to be used in version.h and the packages.
-configure_file(version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
-configure_file(config.h.in ${CMAKE_SOURCE_DIR}/src/config.h)
+configure_file(../version.h.in ${CMAKE_SOURCE_DIR}/version.h)
+configure_file(config.h.in ${CMAKE_SOURCE_DIR}/config.h)
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
-add_compile_options (-O0 -g -Wall -std=c++11)
+add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
+include_directories(../include /usr/include/libxml2)
 
-if(CMAKE_VERSION VERSION_LESS "3.0.0")
-    ##
-    ##  pre AUTORCC generation of the resource file
-    ##  has always an ending of cxx.
-    ##  and we do not care about the position in the directory tree.
-    QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
-    add_executable(povmodeler qrc_add-png-icons.cxx)
-else()
-    add_executable(povmodeler povmodeler-png-icons.qrc)
-endif()
+set (MODELSTORE_SOURCE 
+    _simifc.cpp
+    generated.cpp
+)
+add_library(modelstore SHARED ${MODELSTORE_SOURCE})
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  pmapp -Wl,--end-group)
-target_link_libraries(modelstore -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  model -Wl,--end-group)
+##target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of
@@ -234,8 +229,8 @@ set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications"
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "This is the former KPovModeler now PovModeler because stripped off the KDE stuff")
 SET(CPACK_PACKAGE_VENDOR "Simulated-Universe")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../../README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${POVMODELER_VERSION_MAJOR})
 SET(CPACK_PACKAGE_VERSION_MINOR ${POVMODELER_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${POVMODELER_VERSION_PATCH})

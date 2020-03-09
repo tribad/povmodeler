@@ -1,18 +1,18 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : main.h
+//  Modul-Name     : config.h.in
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef MAIN_INC
-#define MAIN_INC
-//
-//  List of forwards needed in this module.
-class CModellerApp;
-extern CCoreIfc __coreIfc;
-int main(int argc, char** argv) ;
+#ifndef CONFIG_INC
+#define CONFIG_INC
 
+#ifndef STANDARD_DATA_ROOT_DIR
+#define STANDARD_DATA_ROOT_DIR "/usr/local/share"
+#endif 
 
-#endif  // MAIN_INC
+#define HAVE_FREETYPE 1
+
+#endif
