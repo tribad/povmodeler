@@ -170,6 +170,16 @@ set (MODELSTORE_SOURCE
     _simifc.cpp
     generated.cpp
     CProject.cpp
+    CBlob.cpp
+    CBox.cpp
+    CCamera.cpp
+    CCone.cpp
+    CCylinder.cpp
+    CHeightField.cpp
+    CIsoSurface.cpp
+    CLightGroup.cpp
+    CLightSource.cpp
+    CScene.cpp
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})
 ##

@@ -35,6 +35,16 @@
 
 #include "CObjectBase.h"
 #include "CProject.h"
+#include "CScene.h"
+#include "CCamera.h"
+#include "CLightSource.h"
+#include "CLightGroup.h"
+#include "CBlob.h"
+#include "CBox.h"
+#include "CCone.h"
+#include "CCylinder.h"
+#include "CHeightField.h"
+#include "CIsoSurface.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -50,6 +60,16 @@ public:
         mainviewport = 0;
 
         addsimobjfactory(&project_factory);
+        addsimobjfactory(&scene_factory);
+        addsimobjfactory(&camera_factory);
+        addsimobjfactory(&lightsource_factory);
+        addsimobjfactory(&lightgroup_factory);
+        addsimobjfactory(&blob_factory);
+        addsimobjfactory(&box_factory);
+        addsimobjfactory(&cone_factory);
+        addsimobjfactory(&cylinder_factory);
+        addsimobjfactory(&heightfield_factory);
+        addsimobjfactory(&isosurface_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);
