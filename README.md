@@ -1,4 +1,21 @@
-# (k)povmodeler
+# povmodeler
+
+## 09.03.2020
+As of the analysis of the original code I came to the conclusion that it has a way to large complexity. Many components have been developed at times where memory consumption and computational power has been not that huge as today. So the architecture and design decision have been good at its time.
+
+With the newui try I tested myself whether I would be able to handle Qt and to check how hard it would be to stay on the old code. Unfortunatly I found that I was right with my first assumptions. To extend the code and may make the povmodeler fit for some more years to be in use would be very hard.
+
+In times of blender/maya and others a new "modeler" for povray makes no sense as the old povmodeler still works, more or less. So what make povray exceptional to others? Why do I stick on povray despite the fact that it is somehow inconvenient to handle with its text files? 
+
+Animations! 
+
+But even that is somehow inconvenient as it is allways a mess to get the camera movement the right way, the objects at their positions or let them move the way I think. Here a modeler may have a chance to live some more years.
+
+So what next?
+
+I started to make it anew. First moved all old code out of the way and freshened the repository. Trying to make it some more organized. So that is the thing for now.
+
+
 
 ## 27.10.2019
 Today I decided that the newui is the way to go. So I merged it over into the master branch.

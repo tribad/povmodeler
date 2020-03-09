@@ -1,0 +1,56 @@
+\documentclass[english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\usepackage{longtable}
+
+%opening
+\title{}
+\author{Hans-Jürgen Lange $<$hjl@simulated-universe.de$>$}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	This is a description of the ideas behind the development of the modeler. As the world alreadys has a lot of graphical modelers, and for povray some editors as well, what would be the benefit of a new modeler.
+
+\end{abstract}
+
+\section{Intention}
+So first I must admit, I am not a graphics designer. But I have a lot of fun with let some objects move around in a video. povray comes with some good support to handle animations, but the more complex the movement grows the more bulky povray with its scripting language will be.
+
+And even with only a view movements in a scene from some point on you need more and more computational power and it all is very uneasy to handle.
+
+The original kpovmodeler has some good ideas in that it split up the whole scene into its components in a tree and allows the designer to change almost everything that you would do in the povray source.
+
+But it has no support for animations and so your still stuck at that.
+
+\section{Animations!}
+For to handle animations it needs more than to define a starting and ending frame number. As an animation typically shows up in a larger scene with objects each as complex as in the rendering of single frame you have to handle far more resources.
+
+A single animation is fun. But it is often part of a collection of scenes that together will make up a complete video. 
+
+So it make sense to allow multiple scenes that share the resources that are used. 
+
+Working on multiple scenes may involve several designers. Maybe one does some fancy textures while others may create a crater on a moon.
+
+So it would be good to allow multiple designers to work on the animation at the same time.
+
+The third point that animations may require is computational power. 
+
+For a simple preview of a single object the local OpenGL or povray rendering may be sufficient. But to create a complete scene, or all at once, will need some sort of render farm, that needs to be managed.
+
+\begin{figure}[!h]
+	\includegraphics[width=0.7\linewidth]{{"./png/Model/System Description_10"}.png}
+	\caption{How it may be}
+	\label{fig:system-it-may-be}
+\end{figure}
+
+To allow multiple users to work on the model it is stored in some sort of database. This database is not even responsible to handle the data but to handle the communication to the render managers on the different render nodes as well. So the modeller software only does its communication with the storage node.
+
+The storage node has all information available to handle the different render nodes.
+
+As all data will be stored in the storage node the render nodes only need access to the data stored there. At best all data is stored in the database and gets streamed from there to the render nodes.
+
+\end{document}
