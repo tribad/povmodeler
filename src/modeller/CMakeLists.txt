@@ -28,8 +28,8 @@ else()
 endif()
 ##
 ##  Load povmodeler version number
-if (EXISTS ${CMAKE_SOURCE_DIR}/../VERSION)
-    file(STRINGS ${CMAKE_SOURCE_DIR}/../VERSION VINFO)
+if (EXISTS ${CMAKE_SOURCE_DIR}/VERSION)
+    file(STRINGS ${CMAKE_SOURCE_DIR}/VERSION VINFO)
     foreach(NameAndValue ${VINFO})
         # Strip leading spaces
         string(REGEX REPLACE "^[ ]+" "" NameAndValue ${NameAndValue})
@@ -156,14 +156,14 @@ include(GNUInstallDirs)
 add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
 ##
 ##  Setup the version info to be used in version.h and the packages.
-configure_file(../version.h.in ${CMAKE_SOURCE_DIR}/version.h)
-configure_file(config.h.in ${CMAKE_SOURCE_DIR}/config.h)
+configure_file(${CMAKE_SOURCE_DIR}/version.h.in version.h)
+configure_file(config.h.in config.h)
 
 include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
-include_directories(src ${CMAKE_SOURCE_DIR} ../modelifc)
+include_directories(${CMAKE_SOURCE_DIR}/src/modelifc ${CMAKE_SOURCE_DIR}/src/modelstore)
 
 set (POVMODELER_SOURCE 
      main.cpp
@@ -171,7 +171,7 @@ set (POVMODELER_SOURCE
 )
 ##
 ##
-link_directories(../../modelstore/build ../../modelifc/build)
+link_directories(${CMAKE_SOURCE_DIR}/src/modelstore/build ${CMAKE_SOURCE_DIR}/src/modelifc/build)
 
 if(CMAKE_VERSION VERSION_LESS "3.0.0")
     ##
@@ -186,7 +186,7 @@ endif()
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -pthread -std=c++14 -Wl,--start-group -lX11 -lpthread -lxml2 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} -lmodelifc -lmodelstore -Wl,--end-group)
+target_link_libraries(povmodeler -pthread -std=c++14 -Wl,--start-group -lX11 -lpthread -lxml2 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB} modelstore -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of

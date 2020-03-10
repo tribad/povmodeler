@@ -53,89 +53,6 @@ endif()
 ##
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
-##
-##  Here we look for the OpenGL support.
-set(OpenGL_GL_PREFERENCE GLVND)
-find_package (OpenGL COMPONENTS OpenGL REQUIRED)
-
-if(CMAKE_VERSION VERSION_LESS "3.7.0")
-    set(CMAKE_INCLUDE_CURRENT_DIR ON)
-    set(POVMODELER_GL_LIB ${OPENGL_gl_LIBRARY})
-    set(POVMODELER_GLU_LIB ${OPENGL_glu_LIBRARY})
-else()
-    set(POVMODELER_TARGETS OpenGL::OpenGL OpenGL::GLU Freetype::Freetype)
-endif()
-
-##
-##  Here we try to find the freetype library support.
-
-set(POVMODELER_FREETYPE_LIB "freetype")
-
-find_package(Freetype REQUIRED)
-
-##
-##  Checking the distro mostly for decision for Qt4 and Qt5
-if (${ID} STREQUAL "slackware")
-    set(QT_VERSION_MAJOR "4")
-    set(QT_MODULE_PREFIX "Qt")
-    find_package(Qt4)
-else()
-    set(QT_VERSION_MAJOR "5")
-    set(QT_MODULE_PREFIX "Qt5")
-    find_package(Qt5 COMPONENTS Core)
-endif()
-##
-##  Here we try to find the qt components.
-##  We expect a working pkg-config tool cause this is the most common way to 
-##  extract information of the installation pathes and more for the packages.
-find_program(PKG_CONFIG "pkg-config")
-if (DEFINED PKG_CONFIG)
-    foreach(qt_module Core Gui Widgets OpenGL Xml DBus)
-        exec_program(pkg-config ARGS --cflags-only-I --silence-errors ${QT_MODULE_PREFIX}${qt_module} OUTPUT_VARIABLE QT_INCLUDE)
-        ##
-        ##  Only process found module info.
-        if (NOT ${QT_INCLUDE} STREQUAL "")
-            ##
-            ##  if there are multiple -I's in the result we need to make a list of it.
-            string(REPLACE " " ";" QT_INCLUDE ${QT_INCLUDE})
-            ##
-            ## and make a big list from it.
-            list(APPEND inclist ${QT_INCLUDE})
-        endif()
-        ##
-        ##  Doing it again for the libraries.
-        exec_program(pkg-config ARGS --libs-only-l --silence-errors ${QT_MODULE_PREFIX}${qt_module} OUTPUT_VARIABLE QT_LIBS)
-        ##
-        ##  Only process found module info.
-        if (NOT ${QT_LIBS} STREQUAL "")
-            ##
-            ##  if there are multiple -I's in the result we need to make a list of it.
-            string(REPLACE " " ";" QT_LIBS ${QT_LIBS})
-            ##
-            ## and make a big list from it.
-            list(APPEND liblist ${QT_LIBS})
-        endif()
-    endforeach(qt_module)
-    ##
-    ##  Reduce the list.
-    ##  if it exists.
-    if (NOT "${inclist}" STREQUAL "")
-        list(REMOVE_DUPLICATES inclist)
-        ##
-        ##  Now add them to the compiler options.
-        foreach(inc ${inclist})
-            add_compile_options(${inc})
-        endforeach(inc)
-    endif()
-    ##
-    ##  same with the library list.
-    if (DEFINED liblist AND NOT "${liblist}" STREQUAL "")
-        list(REMOVE_DUPLICATES liblist)
-    endif()
-else()
-    message("pkg-config not found")
-endif()
-
 
 set(
     CMAKE_MODULE_PATH
@@ -145,41 +62,25 @@ set(
 ##  This is the application install dir. Set fixed for now. Should be changed.
 set (XDG_APPS_INSTALL_DIR /usr/local/bin)
 
-
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(FeatureSummary)
 include(GNUInstallDirs)
-
-
-add_feature_info(FREETYPE_FOUND "libfreetype" "FreeType lib is needed to build the povmodeler project" "http://freetype.sf.net" FALSE "" "")
 ##
 ##  Setup the version info to be used in version.h and the packages.
-configure_file(version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
-configure_file(config.h.in ${CMAKE_SOURCE_DIR}/src/config.h)
+configure_file(${CMAKE_SOURCE_DIR}/version.h.in version.h)
+configure_file(config.h.in config.h)
 
-include_directories(${FREETYPE_INCLUDE_DIR})
-include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++11)
 
 include_directories(src ${CMAKE_SOURCE_DIR})
 
-if(CMAKE_VERSION VERSION_LESS "3.0.0")
-    ##
-    ##  pre AUTORCC generation of the resource file
-    ##  has always an ending of cxx.
-    ##  and we do not care about the position in the directory tree.
-    QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
-    add_executable(povmodeler qrc_add-png-icons.cxx)
-else()
-    add_executable(povmodeler povmodeler-png-icons.qrc)
-endif()
+add_executable(rendermgr main.cpp)
 ##
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.
-target_link_libraries(povmodeler -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  pmapp -Wl,--end-group)
-target_link_libraries(modelstore -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  model -Wl,--end-group)
+target_link_libraries(rendermgr -std=c++11 -Wl,--start-group -lX11 ${liblist} ${POVMODELER_QT_LIB} ${POVMODELER_GLU_LIB} ${POVMODELER_GL_LIB} ${POVMODELER_TARGETS} ${POVMODELER_FREETYPE_LIB}  -Wl,--end-group)
 ##
 ##
 ##  Here we describe the files and positions of
@@ -234,8 +135,8 @@ set (CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/applications"
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "This is the former KPovModeler now PovModeler because stripped off the KDE stuff")
 SET(CPACK_PACKAGE_VENDOR "Simulated-Universe")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${POVMODELER_VERSION_MAJOR})
 SET(CPACK_PACKAGE_VERSION_MINOR ${POVMODELER_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${POVMODELER_VERSION_PATCH})
