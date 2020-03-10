@@ -4633,7 +4633,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFwvlvtdRQYY5s="
 							},
-							"name": "modeler storage"
+							"name": "modeler store"
 						}
 					],
 					"stereotype": "Linux"

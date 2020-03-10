@@ -42,6 +42,7 @@ The third point that animations may require is computational power.
 For a simple preview of a single object the local OpenGL or povray rendering may be sufficient. But to create a complete scene, or all at once, will need some sort of render farm, that needs to be managed.
 
 \begin{figure}[!h]
+	\centering
 	\includegraphics[width=0.7\linewidth]{{"./png/Model/System Description_10"}.png}
 	\caption{How it may be}
 	\label{fig:system-it-may-be}
@@ -60,6 +61,29 @@ And anyways we creating here all anew the modeller should be able to read the ol
 
 \section{Storage Node}
 I did create already a software that could handle the model. It is able to manage multiple modelers and renderers as well. But it is somehow larger with its components and I must have a look on the source what parts to make available in the next steps.
+
+\subsection{Model Classes}
+The model classes are generated with my very own code generation tool. The model store normaly runs as part of a larger application environment. But even here it is perfectly suited to handle the model items.
+
+Because the code gets generated there is much more in there as we may need. On the other hand the code need no checking as it is not produced by copy\&paste. So I do not expect bugs from copying code.
+
+As one of the basic classes I defined a CObjectBase class.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.4\linewidth]{{"./png/Model/Realization/modelstore/Object Base_17"}.png}
+	\caption{The base object}
+	\label{fig:the-base-object}
+\end{figure}
+
+The linkage between an object and the contained ones is generated into the code. It works even if the objects are stored in a database.
+
+As the model items are fully abstract the compiler does not know what kind of model item is contained. It may be anything from with in the model store.
+
+Another benefit of the generated code is the ability to define templates of the classes that can be used to create new instances.
+As the two lists for restricting the placement of a model item into the tree depend on the model item itself we can define these lists in the templates. As long as we use the templates for the instantiation of new model items we will always have these list copyed.
+
+This works best with the database as storage as we may update the templates and with the next loading of the database content we have new placement restrictions.
 
 \section{Render Manager}
 The render manager is a command line tool that handles the communication with the storage node. This way the storage node knows what machines are connected for what purpose.
