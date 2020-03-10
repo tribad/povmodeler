@@ -8,6 +8,9 @@
 #pragma once
 #ifndef CMODELLERAPP_INC
 #define CMODELLERAPP_INC
+#include <coreifc.h>
+#include <simifc.h>
+#include <logthread.h>
 #include <QApplication>
 //
 //  This is the class
@@ -17,5 +20,7 @@ public:
     CModellerApp(int aArgc, char** aArgv) ;
     virtual ~CModellerApp() ;
 };
+extern CCoreIfc* __coreIfc;
+extern CSimIfc*  gStoreIfc;
 
 #endif  // CMODELLERAPP_INC

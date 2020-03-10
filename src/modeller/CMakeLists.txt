@@ -181,7 +181,7 @@ if(CMAKE_VERSION VERSION_LESS "3.0.0")
     QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
     add_executable(povmodeler qrc_add-png-icons.cxx ${POVMODELER_SOURCE})
 else()
-    add_executable(povmodeler povmodeler-png-icons.qrc ${POVMODELER_SOURCE})
+    add_executable(povmodeler povmodeler-png-icons.qrc modeller.ui ${POVMODELER_SOURCE})
 endif()
 ##
 ##  Static linkage to the povmodeler sub-systems.
