@@ -5072,7 +5072,7 @@
 															"top": -32,
 															"width": 266.8427734375,
 															"height": 13,
-															"text": "{ExtraInclude=\"logthread.h \"}",
+															"text": "{ExtraInclude=\"logthread.h  ui_modeller.h\"}",
 															"horizontalAlignment": 1
 														}
 													],
@@ -5116,7 +5116,7 @@
 															"font": "Arial;13;0",
 															"left": -35,
 															"top": -11,
-															"width": 124.63623046875,
+															"width": 206.97802734375,
 															"height": 13,
 															"text": "~__coreIfc: CCoreIfc*",
 															"horizontalAlignment": 0
@@ -5133,9 +5133,43 @@
 															"font": "Arial;13;0",
 															"left": -35,
 															"top": 4,
-															"width": 124.63623046875,
+															"width": 206.97802734375,
 															"height": 13,
 															"text": "~gStoreIfc: CSimIfc*",
+															"horizontalAlignment": 0
+														},
+														{
+															"_type": "UMLAttributeView",
+															"_id": "AAAAAAFwxI0euA8S79c=",
+															"_parent": {
+																"$ref": "AAAAAAFwumZ5+5EWykY="
+															},
+															"model": {
+																"$ref": "AAAAAAFwxI0ekg8PErw="
+															},
+															"font": "Arial;13;0",
+															"left": -35,
+															"top": 19,
+															"width": 206.97802734375,
+															"height": 13,
+															"text": "-mMainWindow: QMainWindow",
+															"horizontalAlignment": 0
+														},
+														{
+															"_type": "UMLAttributeView",
+															"_id": "AAAAAAFwxLnS4A8d6zU=",
+															"_parent": {
+																"$ref": "AAAAAAFwumZ5+5EWykY="
+															},
+															"model": {
+																"$ref": "AAAAAAFwxLnSuQ8aYYI="
+															},
+															"font": "Arial;13;0",
+															"left": -35,
+															"top": 34,
+															"width": 206.97802734375,
+															"height": 13,
+															"text": "-mUIMainWindow: Ui_MainWindow",
 															"horizontalAlignment": 0
 														}
 													],
@@ -5143,8 +5177,8 @@
 													"font": "Arial;13;0",
 													"left": -40,
 													"top": -16,
-													"width": 134.63623046875,
-													"height": 38
+													"width": 216.97802734375,
+													"height": 68
 												},
 												{
 													"_type": "UMLOperationCompartmentView",
@@ -5661,7 +5695,7 @@
 											},
 											"name": "ExtraInclude",
 											"kind": "string",
-											"value": "logthread.h "
+											"value": "logthread.h  ui_modeller.h"
 										}
 									],
 									"stereotype": {
@@ -5687,6 +5721,29 @@
 											"name": "gStoreIfc",
 											"visibility": "package",
 											"type": "CSimIfc*"
+										},
+										{
+											"_type": "UMLAttribute",
+											"_id": "AAAAAAFwxI0ekg8PErw=",
+											"_parent": {
+												"$ref": "AAAAAAFwumZ5+pEOyB8="
+											},
+											"name": "mMainWindow",
+											"documentation": "This is the Qt widget that will hold the ui main window",
+											"visibility": "private",
+											"type": {
+												"$ref": "AAAAAAFwxIyMwg8KtHM="
+											}
+										},
+										{
+											"_type": "UMLAttribute",
+											"_id": "AAAAAAFwxLnSuQ8aYYI=",
+											"_parent": {
+												"$ref": "AAAAAAFwumZ5+pEOyB8="
+											},
+											"name": "mUIMainWindow",
+											"visibility": "private",
+											"type": "Ui_MainWindow"
 										}
 									],
 									"operations": [
@@ -16782,6 +16839,17 @@
 												"$ref": "AAAAAAFwumWKu5EFPZk="
 											},
 											"name": "QApplication",
+											"stereotype": {
+												"$ref": "AAAAAAFwuf5EW2+R6S8="
+											}
+										},
+										{
+											"_type": "UMLClass",
+											"_id": "AAAAAAFwxIyMwg8KtHM=",
+											"_parent": {
+												"$ref": "AAAAAAFwumWKu5EFPZk="
+											},
+											"name": "QMainWindow",
 											"stereotype": {
 												"$ref": "AAAAAAFwuf5EW2+R6S8="
 											}

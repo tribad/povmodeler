@@ -53,6 +53,10 @@ endif()
 ##
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 ##
 ##  Here we look for the OpenGL support.
 set(OpenGL_GL_PREFERENCE GLVND)
@@ -165,9 +169,12 @@ add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/modelifc ${CMAKE_SOURCE_DIR}/src/modelstore)
 
+## set(AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR})
+
 set (POVMODELER_SOURCE 
      main.cpp
      CModellerApp.cpp
+     modeller.ui
 )
 ##
 ##
@@ -181,7 +188,7 @@ if(CMAKE_VERSION VERSION_LESS "3.0.0")
     QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
     add_executable(povmodeler qrc_add-png-icons.cxx ${POVMODELER_SOURCE})
 else()
-    add_executable(povmodeler povmodeler-png-icons.qrc modeller.ui ${POVMODELER_SOURCE})
+    add_executable(povmodeler povmodeler-png-icons.qrc  ${POVMODELER_SOURCE})
 endif()
 ##
 ##  Static linkage to the povmodeler sub-systems.

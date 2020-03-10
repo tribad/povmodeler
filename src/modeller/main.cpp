@@ -8,8 +8,10 @@
 #include <coreifc.h>
 #include <simifc.h>
 #include <logthread.h>
+#include <ui_modeller.h>
 #include "main.h"
 #include <QApplication>
+#include <QMainWindow>
 #include "CModellerApp.h"
 // Optional
 int main(int argc, char** argv) {

@@ -165,7 +165,7 @@
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="SigPMTreeWidget" name="dockWidgetContents">
+   <widget class="QWidget" name="dockWidgetContents">
     <property name="sizePolicy">
      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
       <horstretch>0</horstretch>
@@ -187,7 +187,7 @@
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="SigPMPropertyWidget" name="dockWidgetContents_2"/>
+   <widget class="QWidget" name="dockWidgetContents_2"/>
   </widget>
   <action name="actionAbout">
    <property name="icon">
@@ -1297,20 +1297,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>SigPMTreeWidget</class>
-   <extends>QWidget</extends>
-   <header>sigpmtreewidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>SigPMPropertyWidget</class>
-   <extends>QWidget</extends>
-   <header>sigpmpropertywidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

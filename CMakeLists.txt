@@ -78,7 +78,7 @@ if (${ID} STREQUAL "slackware")
 else()
     set(QT_VERSION_MAJOR "5")
     set(QT_MODULE_PREFIX "Qt5")
-    find_package(Qt5 COMPONENTS Core)
+    find_package(Qt5 COMPONENTS Core Widgets)
 endif()
 ##
 ##  Here we try to find the qt components.
@@ -132,6 +132,9 @@ else()
     message("pkg-config not found")
 endif()
 
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(
     CMAKE_MODULE_PATH
@@ -163,20 +166,9 @@ set (POVMODELER_SOURCE
      CModellerApp.cpp
 )
 add_subdirectory(src)
-##
-##
-if(CMAKE_VERSION VERSION_LESS "3.0.0")
-    ##
-    ##  pre AUTORCC generation of the resource file
-    ##  has always an ending of cxx.
-    ##  and we do not care about the position in the directory tree.
-    QT4_ADD_RESOURCES("qrc_add-png-icons" povmodeler-png-icons.qrc)
-##    add_executable(povmodeler qrc_add-png-icons.cxx)
-else()
-##    add_executable(povmodeler povmodeler-png-icons.qrc)
-endif()
-##add_executable(rendermgr dummy.cpp)
+
 add_custom_target(the_whole ALL)
+
 add_dependencies(the_whole povmodeler rendermgr)
 ##  Static linkage to the povmodeler sub-systems.
 ##  Using --start-group/--end-group to have a recursive symbol resolution.

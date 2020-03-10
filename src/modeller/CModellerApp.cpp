@@ -21,6 +21,10 @@ CModellerApp::CModellerApp(int aArgc, char** aArgv) : QApplication(aArgc, aArgv)
 
     __coreIfc = new CCoreIfc;
     gStoreIfc = siminit();
+
+    mUIMainWindow.setupUi(&mMainWindow);
+
+    mMainWindow.show();
 // End-Of-UDC:AAAAAAFwunztA5H0NRk=
 }
 
