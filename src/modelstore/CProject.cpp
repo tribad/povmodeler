@@ -21,7 +21,6 @@
 //
 //                       M o d e l   i n c l u d e s
 #include "CProject.h"
-#include "CObjectBase.h"
 // Optional
 /*
  *  private macros
@@ -71,6 +70,12 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     case IDA_NAME:
         *((tVariant*)(&project_var->Name)) = value;
         break;
+    case IDA_OBJECTSBEFORE:
+        project_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        project_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err = -1;
         break;
@@ -87,6 +92,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        retval = project_var->Name;
+        break;
     default:
         break;
     }
@@ -102,6 +110,15 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        project_var->Name = value;
+        break;
+    case IDA_OBJECTSBEFORE:
+        project_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        project_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err=-1;
         break;
@@ -299,6 +316,8 @@ static tSimObj* create_new_project_obj_from_template(templateid_t  tid, objectid
             //
             //
             //  Copy data from template.
+            newproject->ObjectsBefore = found->second->ObjectsBefore;
+            newproject->ObjectsAfter = found->second->ObjectsAfter;
             //
         } else {
         }

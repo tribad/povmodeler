@@ -71,6 +71,7 @@ public:
         mainviewport = 0;
 
         addsimobjfactory(&project_factory);
+        addsimobjfactory(&cobjectbase_factory);
         addsimobjfactory(&scene_factory);
         addsimobjfactory(&camera_factory);
         addsimobjfactory(&lightsource_factory);

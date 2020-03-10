@@ -13,6 +13,7 @@
 #define IDO_BLOB                 cast (x'8735a71ac9753573' as bigint)
 #define IDO_BOX                  cast (x'b3d06d8a67f03546' as bigint)
 #define IDO_CAMERA               cast (x'e605a5961472634d' as bigint)
+#define IDO_COBJECTBASE          cast (x'400233cd655190b9' as bigint)
 #define IDO_CONE                 cast (x'27bd9d502d1be332' as bigint)
 #define IDO_CYLINDER             cast (x'e0c10378cb5065e4' as bigint)
 #define IDO_HEIGHTFIELD          cast (x'503ca38958f6df1b' as bigint)
@@ -36,6 +37,8 @@
 --
 --  This is the list of attribute ids used to identify object attributes in the DB
 #define IDA_NAME                 cast (x'842f3af822536317' as bigint)
+#define IDA_OBJECTSAFTER         cast (x'd13a065a54dcaf71' as bigint)
+#define IDA_OBJECTSBEFORE        cast (x'2a1abb6f6646910d' as bigint)
 #define IDA_STATE                cast (x'9abc62b337d172c6' as bigint)
 --
 --

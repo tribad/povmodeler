@@ -9,10 +9,25 @@
 #ifndef COBJECTBASE_INC
 #define COBJECTBASE_INC
 //
-//  This is the class
-class CObjectBase {
+//  Forward declarations
+//
+//                   S i m o b j e c t    d e c l a r a t i o n
+struct CObjectBase : public tSimObj {
+    /*
+     *  These are the message and signal processing functions.
+     */
 public:
-    std::string Name;
+    tMsg* DefaultMsgHandler(tMsg* aMsg);
+    bool  DefaultSigHandler(tSig* aSignal);
+    /*
+     *  Here are the attributes of the object defined.
+     */
+public:
+    CSimAttribute                  Name;
+    std::map< uint64_t, tVariant > ObjectsBefore;
+    std::map< uint64_t, tVariant > ObjectsAfter;
 };
+
+extern tObjLib cobjectbase_factory;
 
 #endif  // COBJECTBASE_INC

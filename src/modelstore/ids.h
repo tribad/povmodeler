@@ -14,6 +14,7 @@
 #define IDO_BLOB                 (0x8735a71ac9753573)
 #define IDO_BOX                  (0xb3d06d8a67f03546)
 #define IDO_CAMERA               (0xe605a5961472634d)
+#define IDO_COBJECTBASE          (0x400233cd655190b9)
 #define IDO_CONE                 (0x27bd9d502d1be332)
 #define IDO_CYLINDER             (0xe0c10378cb5065e4)
 #define IDO_HEIGHTFIELD          (0x503ca38958f6df1b)
@@ -37,6 +38,8 @@
 //
 //  This is the list of attribute ids used to identify object attributes in the DB
 #define IDA_NAME                 (0x842f3af822536317)
+#define IDA_OBJECTSAFTER         (0xd13a065a54dcaf71)
+#define IDA_OBJECTSBEFORE        (0x2a1abb6f6646910d)
 #define IDA_STATE                (0x9abc62b337d172c6)
 //
 //
