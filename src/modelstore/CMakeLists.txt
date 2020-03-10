@@ -202,6 +202,13 @@ set (MODELSTORE_SOURCE
     CDifference.cpp
     CIntersection.cpp
     CMerge.cpp
+    CFinish.cpp
+    CHalo.cpp
+    CNormal.cpp
+    CPatternedTexture.cpp
+    CPigment.cpp
+    CTexture.cpp
+    UVMapping.cpp
 
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})

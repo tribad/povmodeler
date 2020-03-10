@@ -67,6 +67,13 @@
 #include "CIntersection.h"
 #include "CDifference.h"
 #include "CMerge.h"
+#include "CPigment.h"
+#include "CNormal.h"
+#include "CFinish.h"
+#include "CHalo.h"
+#include "CPatternedTexture.h"
+#include "UVMapping.h"
+#include "CTexture.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -81,7 +88,7 @@ public:
     CGeneratedSimIfc() {
         mainviewport = 0;
 
-        addsimobjfactory(&cobjectbase_factory);
+        addsimobjfactory(&objectbase_factory);
         addsimobjfactory(&project_factory);
         addsimobjfactory(&scene_factory);
         addsimobjfactory(&camera_factory);
@@ -115,6 +122,13 @@ public:
         addsimobjfactory(&intersection_factory);
         addsimobjfactory(&difference_factory);
         addsimobjfactory(&merge_factory);
+        addsimobjfactory(&pigment_factory);
+        addsimobjfactory(&normal_factory);
+        addsimobjfactory(&finish_factory);
+        addsimobjfactory(&halo_factory);
+        addsimobjfactory(&patternedtexture_factory);
+        addsimobjfactory(&uvmapping_factory);
+        addsimobjfactory(&texture_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);
@@ -279,6 +293,6 @@ CGeneratedSimIfc simifc;
 CSimIfc* siminit(void) {
     //
     //  Create the main viewport object CObjectBase
-    simifc.CreateObject(0ul, IDO_COBJECTBASE);
+    simifc.CreateObject(0ul, IDO_OBJECTBASE);
     return &simifc;
 }

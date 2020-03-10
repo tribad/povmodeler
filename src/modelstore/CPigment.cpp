@@ -1,6 +1,6 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : CObjectBase.cpp
+//  Modul-Name     : CPigment.cpp
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
@@ -20,7 +20,7 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
-#include "CObjectBase.h"
+#include "CPigment.h"
 // Optional
 /*
  *  private macros
@@ -34,7 +34,7 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
 /*
  *  The template storage map
  */
-static std::map<objectid_t, CObjectBase*> t_store;
+static std::map<objectid_t, CPigment*> t_store;
 /*
  *
  *       !!!!    Here is a collection of functions that are editable.   !!!!
@@ -48,8 +48,8 @@ static std::map<objectid_t, CObjectBase*> t_store;
 // **************************************************************************
 static int save(tSimObj* obj, uint64_t aCycle, ... ) {
     int result = 0;
-// User-Defined-Code: save-objectbase
-// End-Of-UDC: save-objectbase
+// User-Defined-Code: save-pigment
+// End-Of-UDC: save-pigment
     return (result);
 }
 
@@ -64,18 +64,9 @@ static int save(tSimObj* obj, uint64_t aCycle, ... ) {
 // **************************************************************************
 static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err = 0;
-    CObjectBase* objectbase_var = (CObjectBase*)obj;
+    CPigment* pigment_var = (CPigment*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        *((tVariant*)(&objectbase_var->Name)) = value;
-        break;
-    case IDA_OBJECTSBEFORE:
-        objectbase_var->ObjectsBefore[valueindex] = value;
-        break;
-    case IDA_OBJECTSAFTER:
-        objectbase_var->ObjectsAfter[valueindex] = value;
-        break;
     default:
         err = -1;
         break;
@@ -89,12 +80,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
 // **************************************************************************
 static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex) {
     tVariant retval;
-    CObjectBase* objectbase_var = (CObjectBase*)obj;
+    CPigment* pigment_var = (CPigment*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        retval = objectbase_var->Name;
-        break;
     default:
         break;
     }
@@ -107,18 +95,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
 // **************************************************************************
 static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err=0;
-    CObjectBase* objectbase_var = (CObjectBase*)obj;
+    CPigment* pigment_var = (CPigment*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        objectbase_var->Name = value;
-        break;
-    case IDA_OBJECTSBEFORE:
-        objectbase_var->ObjectsBefore[valueindex] = value;
-        break;
-    case IDA_OBJECTSAFTER:
-        objectbase_var->ObjectsAfter[valueindex] = value;
-        break;
     default:
         err=-1;
         break;
@@ -133,7 +112,7 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
 //
 // **************************************************************************
 static void init_object(tSimObj * obj, uint64_t  aCycle) {
-    CObjectBase* thisobj = (CObjectBase*)obj;
+    CPigment* thisobj = (CPigment*)obj;
     /*
      * Fill all references with the pointers.
      */
@@ -153,7 +132,7 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
 //  Generated source code.
 //
 // **************************************************************************
-bool CObjectBase::DefaultSigHandler(tSig *sig) {
+bool CPigment::DefaultSigHandler(tSig *sig) {
     bool retval = false;
 // User-Defined-Code: default-sig-handler
 // End-Of-UDC: default-sig-handler
@@ -167,7 +146,7 @@ bool CObjectBase::DefaultSigHandler(tSig *sig) {
 //  Generated source code.
 //
 // **************************************************************************
-tMsg* CObjectBase::DefaultMsgHandler(tMsg *msg) {
+tMsg* CPigment::DefaultMsgHandler(tMsg *msg) {
     tMsg* retval = 0;
 // User-Defined-Code: default-msg-handler
 // End-Of-UDC: default-msg-handler
@@ -182,7 +161,7 @@ tMsg* CObjectBase::DefaultMsgHandler(tMsg *msg) {
 //
 // **************************************************************************
 static void process_sig(tSimObj * obj, tSig *sig) {
-    CObjectBase* thisobj = (CObjectBase*)obj;
+    CPigment* thisobj = (CPigment*)obj;
 
     switch (sig->id) {
     default:
@@ -208,7 +187,7 @@ static void process_sig(tSimObj * obj, tSig *sig) {
 //
 // **************************************************************************
 static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
-    CObjectBase*thisobj=(CObjectBase*)obj;
+    CPigment*thisobj=(CPigment*)obj;
     tMsg *retmsg=0;
 
     switch (msg->id) {
@@ -224,18 +203,18 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
 }
 // **************************************************************************
 //
-//  Method-Name   : create_objectbase_obj()
+//  Method-Name   : create_pigment_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_objectbase_obj(objectid_t  oid) {
-    CObjectBase* newobjectbase = new CObjectBase;
+static tSimObj* create_pigment_obj(objectid_t  oid) {
+    CPigment* newpigment = new CPigment;
 
-    if (newobjectbase != 0) {
-        tSimObj* newobj = newobjectbase;
+    if (newpigment != 0) {
+        tSimObj* newobj = newpigment;
 
-        newobj->type        = IDO_OBJECTBASE;
+        newobj->type        = IDO_PIGMENT;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -245,26 +224,26 @@ static tSimObj* create_objectbase_obj(objectid_t  oid) {
         newobj->process     = process_sig;
         newobj->syncprocess = process_msg;
         if (0xc0000000 & oid) {
-            t_store.insert(std::pair<templateid_t, CObjectBase*>(oid, newobjectbase));
+            t_store.insert(std::pair<templateid_t, CPigment*>(oid, newpigment));
         }
     } else {
     }
-    return ((tSimObj*)newobjectbase);
+    return ((tSimObj*)newpigment);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_objectbase_obj()
+//  Method-Name   : create_new_pigment_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_objectbase_obj(objectid_t  oid) {
-    CObjectBase* newobjectbase = new CObjectBase;
+static tSimObj* create_new_pigment_obj(objectid_t  oid) {
+    CPigment* newpigment = new CPigment;
 
-    if (newobjectbase != 0) {
-        tSimObj* newobj = newobjectbase;
+    if (newpigment != 0) {
+        tSimObj* newobj = newpigment;
 
-        newobj->type        = IDO_OBJECTBASE;
+        newobj->type        = IDO_PIGMENT;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -275,33 +254,33 @@ static tSimObj* create_new_objectbase_obj(objectid_t  oid) {
         newobj->syncprocess = process_msg;
         //
         //  Create the object in the db.
-        stdb_createobj(oid, IDO_OBJECTBASE);
+        stdb_createobj(oid, IDO_PIGMENT);
         //
         //  Now fill the attributes with values.
         //
         //  create the attribute data in the DB.
     } else {
     }
-    return ((tSimObj*)newobjectbase);
+    return ((tSimObj*)newpigment);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_objectbase_obj_from_template()
+//  Method-Name   : create_new_pigment_obj_from_template()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_objectbase_obj_from_template(templateid_t  tid, objectid_t  oid) {
-    CObjectBase* newobjectbase = 0;
-    std::map<objectid_t, CObjectBase*>::iterator found;
+static tSimObj* create_new_pigment_obj_from_template(templateid_t  tid, objectid_t  oid) {
+    CPigment* newpigment = 0;
+    std::map<objectid_t, CPigment*>::iterator found;
 
     found = t_store.find(tid);
     if (found != t_store.end()) {
-        newobjectbase = new CObjectBase;
-        if (newobjectbase != 0) {
-            tSimObj* newobj = newobjectbase;
+        newpigment = new CPigment;
+        if (newpigment != 0) {
+            tSimObj* newobj = newpigment;
 
-            newobj->type        = IDO_OBJECTBASE;
+            newobj->type        = IDO_PIGMENT;
             newobj->objid       = oid;
             newobj->parent      = 0;
             newobj->setvalue    = setvalue;
@@ -312,18 +291,16 @@ static tSimObj* create_new_objectbase_obj_from_template(templateid_t  tid, objec
             newobj->syncprocess = process_msg;
             //
             //  Create the object in the db.
-            stdb_createobj(oid, IDO_OBJECTBASE);
+            stdb_createobj(oid, IDO_PIGMENT);
             //
             //
             //  Copy data from template.
-            newobjectbase->ObjectsBefore = found->second->ObjectsBefore;
-            newobjectbase->ObjectsAfter = found->second->ObjectsAfter;
             //
         } else {
         }
     } else {
     }
-    return ((tSimObj*)newobjectbase);
+    return ((tSimObj*)newpigment);
 }
 
-tObjLib objectbase_factory= {0, 0, 0, IDO_OBJECTBASE, create_objectbase_obj, create_new_objectbase_obj, create_new_objectbase_obj_from_template};
+tObjLib pigment_factory= {0, 0, 0, IDO_PIGMENT, create_pigment_obj, create_new_pigment_obj, create_new_pigment_obj_from_template};

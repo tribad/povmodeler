@@ -1,18 +1,18 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : CObjectBase.h
+//  Modul-Name     : UVMapping.h
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef OBJECTBASE_INC
-#define OBJECTBASE_INC
+#ifndef UVMAPPING_INC
+#define UVMAPPING_INC
 //
 //  Forward declarations
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
-struct CObjectBase : public tSimObj {
+struct UVMapping : public tSimObj {
     /*
      *  These are the message and signal processing functions.
      */
@@ -23,11 +23,8 @@ public:
      *  Here are the attributes of the object defined.
      */
 public:
-    CSimAttribute                  Name;
-    std::map< uint64_t, tVariant > ObjectsBefore;
-    std::map< uint64_t, tVariant > ObjectsAfter;
 };
 
-extern tObjLib objectbase_factory;
+extern tObjLib uvmapping_factory;
 
-#endif  // OBJECTBASE_INC
+#endif  // UVMAPPING_INC
