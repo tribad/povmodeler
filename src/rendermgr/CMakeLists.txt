@@ -51,8 +51,8 @@ else()
 endif()
 ##
 ##
-set(CMAKE_AUTOMOC TRUE)
-set(CMAKE_AUTORCC TRUE)
+set(CMAKE_AUTOMOC FALSE)
+set(CMAKE_AUTORCC FALSE)
 
 set(
     CMAKE_MODULE_PATH
