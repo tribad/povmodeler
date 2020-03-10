@@ -63,6 +63,10 @@
 #include "CPolygon.h"
 #include "CTriangle.h"
 #include "CSmoothTriangle.h"
+#include "CUnion.h"
+#include "CIntersection.h"
+#include "CDifference.h"
+#include "CMerge.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -107,6 +111,10 @@ public:
         addsimobjfactory(&polygon_factory);
         addsimobjfactory(&triangle_factory);
         addsimobjfactory(&smoothtriangle_factory);
+        addsimobjfactory(&union_factory);
+        addsimobjfactory(&intersection_factory);
+        addsimobjfactory(&difference_factory);
+        addsimobjfactory(&merge_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);

@@ -198,6 +198,10 @@ set (MODELSTORE_SOURCE
     CPolygon.cpp
     CSmoothTriangle.cpp
     CTriangle.cpp
+    CUnion.cpp
+    CDifference.cpp
+    CIntersection.cpp
+    CMerge.cpp
 
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})

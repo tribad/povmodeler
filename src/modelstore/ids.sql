@@ -17,13 +17,16 @@
 #define IDO_COBJECTBASE          cast (x'400233cd655190b9' as bigint)
 #define IDO_CONE                 cast (x'27bd9d502d1be332' as bigint)
 #define IDO_CYLINDER             cast (x'e0c10378cb5065e4' as bigint)
+#define IDO_DIFFERENCE           cast (x'2d5d89dbb771ff50' as bigint)
 #define IDO_DISC                 cast (x'1cf211b599101169' as bigint)
 #define IDO_HEIGHTFIELD          cast (x'503ca38958f6df1b' as bigint)
+#define IDO_INTERSECTION         cast (x'b44862be89e481a1' as bigint)
 #define IDO_ISOSURFACE           cast (x'0ca9ea1ba1f82b3e' as bigint)
 #define IDO_JULIAFRACTAL         cast (x'b24bfe3743d723c5' as bigint)
 #define IDO_LATHE                cast (x'f25ccc811f8d84cb' as bigint)
 #define IDO_LIGHTGROUP           cast (x'd3dddcbedd8522c3' as bigint)
 #define IDO_LIGHTSOURCE          cast (x'ab0a21f74fe572fb' as bigint)
+#define IDO_MERGE                cast (x'e5b0a54bc73d5bbe' as bigint)
 #define IDO_MESH                 cast (x'dce5132574109b8c' as bigint)
 #define IDO_MESH2                cast (x'c1debc6029903f83' as bigint)
 #define IDO_OVUS                 cast (x'9c5580b710afd5b1' as bigint)
@@ -40,6 +43,7 @@
 #define IDO_TEXT                 cast (x'e1b44377806eeb20' as bigint)
 #define IDO_TORUS                cast (x'69b4fd5e45a90879' as bigint)
 #define IDO_TRIANGLE             cast (x'b579af2a7e288d4d' as bigint)
+#define IDO_UNION                cast (x'0ec5dd421a392046' as bigint)
 --
 --
 --  This is the list of attribute ids used to identify object attributes in the DB

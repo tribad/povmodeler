@@ -18,13 +18,16 @@
 #define IDO_COBJECTBASE          (0x400233cd655190b9)
 #define IDO_CONE                 (0x27bd9d502d1be332)
 #define IDO_CYLINDER             (0xe0c10378cb5065e4)
+#define IDO_DIFFERENCE           (0x2d5d89dbb771ff50)
 #define IDO_DISC                 (0x1cf211b599101169)
 #define IDO_HEIGHTFIELD          (0x503ca38958f6df1b)
+#define IDO_INTERSECTION         (0xb44862be89e481a1)
 #define IDO_ISOSURFACE           (0x0ca9ea1ba1f82b3e)
 #define IDO_JULIAFRACTAL         (0xb24bfe3743d723c5)
 #define IDO_LATHE                (0xf25ccc811f8d84cb)
 #define IDO_LIGHTGROUP           (0xd3dddcbedd8522c3)
 #define IDO_LIGHTSOURCE          (0xab0a21f74fe572fb)
+#define IDO_MERGE                (0xe5b0a54bc73d5bbe)
 #define IDO_MESH                 (0xdce5132574109b8c)
 #define IDO_MESH2                (0xc1debc6029903f83)
 #define IDO_OVUS                 (0x9c5580b710afd5b1)
@@ -41,6 +44,7 @@
 #define IDO_TEXT                 (0xe1b44377806eeb20)
 #define IDO_TORUS                (0x69b4fd5e45a90879)
 #define IDO_TRIANGLE             (0xb579af2a7e288d4d)
+#define IDO_UNION                (0x0ec5dd421a392046)
 //
 //
 //  This is the list of attribute ids used to identify object attributes in the DB
