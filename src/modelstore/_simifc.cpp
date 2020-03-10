@@ -33,8 +33,8 @@
 //
 //                       M o d e l   i n c l u d e s
 
-#include "CProject.h"
 #include "CObjectBase.h"
+#include "CProject.h"
 #include "CScene.h"
 #include "CCamera.h"
 #include "CLightSource.h"
@@ -56,6 +56,13 @@
 #include "CSurfaceOfRevolution.h"
 #include "CText.h"
 #include "CTorus.h"
+#include "CBicubicPatch.h"
+#include "CDisc.h"
+#include "CMesh.h"
+#include "CMesh2.h"
+#include "CPolygon.h"
+#include "CTriangle.h"
+#include "CSmoothTriangle.h"
 //
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
@@ -70,8 +77,8 @@ public:
     CGeneratedSimIfc() {
         mainviewport = 0;
 
-        addsimobjfactory(&project_factory);
         addsimobjfactory(&cobjectbase_factory);
+        addsimobjfactory(&project_factory);
         addsimobjfactory(&scene_factory);
         addsimobjfactory(&camera_factory);
         addsimobjfactory(&lightsource_factory);
@@ -93,6 +100,13 @@ public:
         addsimobjfactory(&surfaceofrevolution_factory);
         addsimobjfactory(&text_factory);
         addsimobjfactory(&torus_factory);
+        addsimobjfactory(&bicubicpatch_factory);
+        addsimobjfactory(&disc_factory);
+        addsimobjfactory(&mesh_factory);
+        addsimobjfactory(&mesh2_factory);
+        addsimobjfactory(&polygon_factory);
+        addsimobjfactory(&triangle_factory);
+        addsimobjfactory(&smoothtriangle_factory);
 }
     virtual ~CGeneratedSimIfc() {}
     virtual int       CreateObject(uint64_t oid, uint64_t tid);
@@ -256,7 +270,7 @@ CGeneratedSimIfc simifc;
 // **************************************************************************
 CSimIfc* siminit(void) {
     //
-    //  Create the main viewport object CProject
-    simifc.CreateObject(0ul, IDO_PROJECT);
+    //  Create the main viewport object CObjectBase
+    simifc.CreateObject(0ul, IDO_COBJECTBASE);
     return &simifc;
 }

@@ -67,6 +67,15 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        *((tVariant*)(&scene_var->Name)) = value;
+        break;
+    case IDA_OBJECTSBEFORE:
+        scene_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        scene_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err = -1;
         break;
@@ -83,6 +92,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        retval = scene_var->Name;
+        break;
     default:
         break;
     }
@@ -98,6 +110,15 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        scene_var->Name = value;
+        break;
+    case IDA_OBJECTSBEFORE:
+        scene_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        scene_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err=-1;
         break;
@@ -295,6 +316,8 @@ static tSimObj* create_new_scene_obj_from_template(templateid_t  tid, objectid_t
             //
             //
             //  Copy data from template.
+            newscene->ObjectsBefore = found->second->ObjectsBefore;
+            newscene->ObjectsAfter = found->second->ObjectsAfter;
             //
         } else {
         }

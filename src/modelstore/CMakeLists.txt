@@ -191,7 +191,13 @@ set (MODELSTORE_SOURCE
     CSurfaceOfRevolution.cpp
     CText.cpp
     CTorus.cpp
-
+    CBicubicPatch.cpp
+    CDisc.cpp
+    CMesh.cpp
+    CMesh2.cpp
+    CPolygon.cpp
+    CSmoothTriangle.cpp
+    CTriangle.cpp
 
 )
 add_library(modelstore SHARED ${MODELSTORE_SOURCE})

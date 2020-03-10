@@ -1,6 +1,6 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : CCamera.cpp
+//  Modul-Name     : CMesh.cpp
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
@@ -20,7 +20,7 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
-#include "CCamera.h"
+#include "CMesh.h"
 // Optional
 /*
  *  private macros
@@ -34,7 +34,7 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
 /*
  *  The template storage map
  */
-static std::map<objectid_t, CCamera*> t_store;
+static std::map<objectid_t, CMesh*> t_store;
 /*
  *
  *       !!!!    Here is a collection of functions that are editable.   !!!!
@@ -48,8 +48,8 @@ static std::map<objectid_t, CCamera*> t_store;
 // **************************************************************************
 static int save(tSimObj* obj, uint64_t aCycle, ... ) {
     int result = 0;
-// User-Defined-Code: save-camera
-// End-Of-UDC: save-camera
+// User-Defined-Code: save-mesh
+// End-Of-UDC: save-mesh
     return (result);
 }
 
@@ -64,18 +64,9 @@ static int save(tSimObj* obj, uint64_t aCycle, ... ) {
 // **************************************************************************
 static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err = 0;
-    CCamera* camera_var = (CCamera*)obj;
+    CMesh* mesh_var = (CMesh*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        *((tVariant*)(&camera_var->Name)) = value;
-        break;
-    case IDA_OBJECTSBEFORE:
-        camera_var->ObjectsBefore[valueindex] = value;
-        break;
-    case IDA_OBJECTSAFTER:
-        camera_var->ObjectsAfter[valueindex] = value;
-        break;
     default:
         err = -1;
         break;
@@ -89,12 +80,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
 // **************************************************************************
 static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex) {
     tVariant retval;
-    CCamera* camera_var = (CCamera*)obj;
+    CMesh* mesh_var = (CMesh*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        retval = camera_var->Name;
-        break;
     default:
         break;
     }
@@ -107,18 +95,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
 // **************************************************************************
 static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex, const tVariant& value) {
     int err=0;
-    CCamera* camera_var = (CCamera*)obj;
+    CMesh* mesh_var = (CMesh*)obj;
 
     switch (valueid) {
-    case IDA_NAME:
-        camera_var->Name = value;
-        break;
-    case IDA_OBJECTSBEFORE:
-        camera_var->ObjectsBefore[valueindex] = value;
-        break;
-    case IDA_OBJECTSAFTER:
-        camera_var->ObjectsAfter[valueindex] = value;
-        break;
     default:
         err=-1;
         break;
@@ -133,7 +112,7 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
 //
 // **************************************************************************
 static void init_object(tSimObj * obj, uint64_t  aCycle) {
-    CCamera* thisobj = (CCamera*)obj;
+    CMesh* thisobj = (CMesh*)obj;
     /*
      * Fill all references with the pointers.
      */
@@ -153,7 +132,7 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
 //  Generated source code.
 //
 // **************************************************************************
-bool CCamera::DefaultSigHandler(tSig *sig) {
+bool CMesh::DefaultSigHandler(tSig *sig) {
     bool retval = false;
 // User-Defined-Code: default-sig-handler
 // End-Of-UDC: default-sig-handler
@@ -167,7 +146,7 @@ bool CCamera::DefaultSigHandler(tSig *sig) {
 //  Generated source code.
 //
 // **************************************************************************
-tMsg* CCamera::DefaultMsgHandler(tMsg *msg) {
+tMsg* CMesh::DefaultMsgHandler(tMsg *msg) {
     tMsg* retval = 0;
 // User-Defined-Code: default-msg-handler
 // End-Of-UDC: default-msg-handler
@@ -182,7 +161,7 @@ tMsg* CCamera::DefaultMsgHandler(tMsg *msg) {
 //
 // **************************************************************************
 static void process_sig(tSimObj * obj, tSig *sig) {
-    CCamera* thisobj = (CCamera*)obj;
+    CMesh* thisobj = (CMesh*)obj;
 
     switch (sig->id) {
     default:
@@ -208,7 +187,7 @@ static void process_sig(tSimObj * obj, tSig *sig) {
 //
 // **************************************************************************
 static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
-    CCamera*thisobj=(CCamera*)obj;
+    CMesh*thisobj=(CMesh*)obj;
     tMsg *retmsg=0;
 
     switch (msg->id) {
@@ -224,18 +203,18 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
 }
 // **************************************************************************
 //
-//  Method-Name   : create_camera_obj()
+//  Method-Name   : create_mesh_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_camera_obj(objectid_t  oid) {
-    CCamera* newcamera = new CCamera;
+static tSimObj* create_mesh_obj(objectid_t  oid) {
+    CMesh* newmesh = new CMesh;
 
-    if (newcamera != 0) {
-        tSimObj* newobj = newcamera;
+    if (newmesh != 0) {
+        tSimObj* newobj = newmesh;
 
-        newobj->type        = IDO_CAMERA;
+        newobj->type        = IDO_MESH;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -245,26 +224,26 @@ static tSimObj* create_camera_obj(objectid_t  oid) {
         newobj->process     = process_sig;
         newobj->syncprocess = process_msg;
         if (0xc0000000 & oid) {
-            t_store.insert(std::pair<templateid_t, CCamera*>(oid, newcamera));
+            t_store.insert(std::pair<templateid_t, CMesh*>(oid, newmesh));
         }
     } else {
     }
-    return ((tSimObj*)newcamera);
+    return ((tSimObj*)newmesh);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_camera_obj()
+//  Method-Name   : create_new_mesh_obj()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_camera_obj(objectid_t  oid) {
-    CCamera* newcamera = new CCamera;
+static tSimObj* create_new_mesh_obj(objectid_t  oid) {
+    CMesh* newmesh = new CMesh;
 
-    if (newcamera != 0) {
-        tSimObj* newobj = newcamera;
+    if (newmesh != 0) {
+        tSimObj* newobj = newmesh;
 
-        newobj->type        = IDO_CAMERA;
+        newobj->type        = IDO_MESH;
         newobj->objid       = oid;
         newobj->parent      = 0;
         newobj->setvalue    = setvalue;
@@ -275,33 +254,33 @@ static tSimObj* create_new_camera_obj(objectid_t  oid) {
         newobj->syncprocess = process_msg;
         //
         //  Create the object in the db.
-        stdb_createobj(oid, IDO_CAMERA);
+        stdb_createobj(oid, IDO_MESH);
         //
         //  Now fill the attributes with values.
         //
         //  create the attribute data in the DB.
     } else {
     }
-    return ((tSimObj*)newcamera);
+    return ((tSimObj*)newmesh);
 }
 // **************************************************************************
 //
-//  Method-Name   : create_new_camera_obj_from_template()
+//  Method-Name   : create_new_mesh_obj_from_template()
 //
 //  Generated source code.
 //
 // **************************************************************************
-static tSimObj* create_new_camera_obj_from_template(templateid_t  tid, objectid_t  oid) {
-    CCamera* newcamera = 0;
-    std::map<objectid_t, CCamera*>::iterator found;
+static tSimObj* create_new_mesh_obj_from_template(templateid_t  tid, objectid_t  oid) {
+    CMesh* newmesh = 0;
+    std::map<objectid_t, CMesh*>::iterator found;
 
     found = t_store.find(tid);
     if (found != t_store.end()) {
-        newcamera = new CCamera;
-        if (newcamera != 0) {
-            tSimObj* newobj = newcamera;
+        newmesh = new CMesh;
+        if (newmesh != 0) {
+            tSimObj* newobj = newmesh;
 
-            newobj->type        = IDO_CAMERA;
+            newobj->type        = IDO_MESH;
             newobj->objid       = oid;
             newobj->parent      = 0;
             newobj->setvalue    = setvalue;
@@ -312,18 +291,16 @@ static tSimObj* create_new_camera_obj_from_template(templateid_t  tid, objectid_
             newobj->syncprocess = process_msg;
             //
             //  Create the object in the db.
-            stdb_createobj(oid, IDO_CAMERA);
+            stdb_createobj(oid, IDO_MESH);
             //
             //
             //  Copy data from template.
-            newcamera->ObjectsBefore = found->second->ObjectsBefore;
-            newcamera->ObjectsAfter = found->second->ObjectsAfter;
             //
         } else {
         }
     } else {
     }
-    return ((tSimObj*)newcamera);
+    return ((tSimObj*)newmesh);
 }
 
-tObjLib camera_factory= {0, 0, 0, IDO_CAMERA, create_camera_obj, create_new_camera_obj, create_new_camera_obj_from_template};
+tObjLib mesh_factory= {0, 0, 0, IDO_MESH, create_mesh_obj, create_new_mesh_obj, create_new_mesh_obj_from_template};

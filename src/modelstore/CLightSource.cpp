@@ -67,6 +67,15 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CLightSource* lightsource_var = (CLightSource*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        *((tVariant*)(&lightsource_var->Name)) = value;
+        break;
+    case IDA_OBJECTSBEFORE:
+        lightsource_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        lightsource_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err = -1;
         break;
@@ -83,6 +92,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CLightSource* lightsource_var = (CLightSource*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        retval = lightsource_var->Name;
+        break;
     default:
         break;
     }
@@ -98,6 +110,15 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CLightSource* lightsource_var = (CLightSource*)obj;
 
     switch (valueid) {
+    case IDA_NAME:
+        lightsource_var->Name = value;
+        break;
+    case IDA_OBJECTSBEFORE:
+        lightsource_var->ObjectsBefore[valueindex] = value;
+        break;
+    case IDA_OBJECTSAFTER:
+        lightsource_var->ObjectsAfter[valueindex] = value;
+        break;
     default:
         err=-1;
         break;
@@ -295,6 +316,8 @@ static tSimObj* create_new_lightsource_obj_from_template(templateid_t  tid, obje
             //
             //
             //  Copy data from template.
+            newlightsource->ObjectsBefore = found->second->ObjectsBefore;
+            newlightsource->ObjectsAfter = found->second->ObjectsAfter;
             //
         } else {
         }

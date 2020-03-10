@@ -1,18 +1,18 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : CLightSource.h
+//  Modul-Name     : CDisc.h
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef LIGHTSOURCE_INC
-#define LIGHTSOURCE_INC
+#ifndef DISC_INC
+#define DISC_INC
 //
 //  Forward declarations
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
-struct CLightSource : public tSimObj {
+struct CDisc : public tSimObj {
     /*
      *  These are the message and signal processing functions.
      */
@@ -23,11 +23,8 @@ public:
      *  Here are the attributes of the object defined.
      */
 public:
-    CSimAttribute                  Name;
-    std::map< uint64_t, tVariant > ObjectsBefore;
-    std::map< uint64_t, tVariant > ObjectsAfter;
 };
 
-extern tObjLib lightsource_factory;
+extern tObjLib disc_factory;
 
-#endif  // LIGHTSOURCE_INC
+#endif  // DISC_INC

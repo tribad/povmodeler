@@ -23,6 +23,9 @@ public:
      *  Here are the attributes of the object defined.
      */
 public:
+    CSimAttribute                  Name;
+    std::map< uint64_t, tVariant > ObjectsBefore;
+    std::map< uint64_t, tVariant > ObjectsAfter;
 };
 
 extern tObjLib lightgroup_factory;
