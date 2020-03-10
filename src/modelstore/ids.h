@@ -55,6 +55,8 @@
 //
 //
 //  This is the list of attribute ids used to identify object attributes in the DB
+#define IDA_                     (0x393985c5a9d65040)
+#define IDA_CONTAINED            (0x1bc8faac8dfa28fb)
 #define IDA_NAME                 (0x842f3af822536317)
 #define IDA_OBJECTSAFTER         (0xd13a065a54dcaf71)
 #define IDA_OBJECTSBEFORE        (0x2a1abb6f6646910d)

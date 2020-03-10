@@ -26,6 +26,7 @@ public:
     CSimAttribute                  Name;
     std::map< uint64_t, tVariant > ObjectsBefore;
     std::map< uint64_t, tVariant > ObjectsAfter;
+    CSimAttrArray                  contained;
 };
 
 extern tObjLib project_factory;

@@ -76,6 +76,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     case IDA_OBJECTSAFTER:
         project_var->ObjectsAfter[valueindex] = value;
         break;
+    case IDA_CONTAINED:
+        *((tVariant*)(&project_var->contained[valueindex])) = tSimObjRef(value, simidx.Find(value));
+        break;
     default:
         err = -1;
         break;
@@ -137,6 +140,12 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
     /*
      * Fill all references with the pointers.
      */
+    for (tSimAttrArrayIter i = thisobj->contained.begin(); i != thisobj->contained.end(); ++i) {
+        i->second.ptr = simidx.Find(i->second.ul);
+        if (i->second.ptr != 0) {
+            ((tSimObj*)(i->second.ptr))->parent = obj;
+        }
+    }
     /*
      *  This object has no statemachine.
      */
