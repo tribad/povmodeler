@@ -5,12 +5,14 @@
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
-#include <coreifc.h>
+#include <msgthread.h>
 #include <simifc.h>
+#include <coreifc.h>
 #include <logthread.h>
 #include <ui_modeller.h>
 #include "main.h"
 #include <QApplication>
+#include "CModelStoreThread.h"
 #include <QMainWindow>
 #include "CModellerApp.h"
 // Optional

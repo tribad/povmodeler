@@ -8,11 +8,13 @@
 #pragma once
 #ifndef CMODELLERAPP_INC
 #define CMODELLERAPP_INC
-#include <coreifc.h>
+#include <msgthread.h>
 #include <simifc.h>
+#include <coreifc.h>
 #include <logthread.h>
 #include <ui_modeller.h>
 #include <QApplication>
+#include "CModelStoreThread.h"
 #include <QMainWindow>
 //
 //  This is the class
@@ -21,11 +23,11 @@ Q_OBJECT
 public:
     CModellerApp(int aArgc, char** aArgv) ;
     virtual ~CModellerApp() ;
+public:
+    CModelStoreThread mStoreThread;
 private:
-    QMainWindow   mMainWindow;
-    Ui_MainWindow mUIMainWindow;
+    Ui_MainWindow     mUIMainWindow;
+    QMainWindow       mMainWindow;
 };
-extern CCoreIfc* __coreIfc;
-extern CSimIfc*  gStoreIfc;
 
 #endif  // CMODELLERAPP_INC

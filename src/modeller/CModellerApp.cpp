@@ -9,21 +9,23 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CModellerApp.h"
 // Optional
-CCoreIfc* __coreIfc;
-CSimIfc* gStoreIfc;
 CModellerApp::CModellerApp(int aArgc, char** aArgv) : QApplication(aArgc, aArgv) {
 // User-Defined-Code:AAAAAAFwunztA5H0NRk=
     //
     //  Starting the logging thread and wait until its running. On fast multicore machines this
     //  is needed to allow the complete initialization of the thread before continue
     CLogThread::Instance.Create();
-    while (!CLogThread::Instance.Running);
-
-    __coreIfc = new CCoreIfc;
-    gStoreIfc = siminit();
-
+    while (!CLogThread::Instance.Running) ;
+    //
+    //  As of the singleton behaviour the constructor of CModelStoreThread gets called yet
+    //  We wait as with the logthread until it is up and running.
+    CModelStoreThread::GetInstance().Create();
+    while (!CModelStoreThread::GetInstance().Running) ;
+    //
+    //  Create the main window
     mUIMainWindow.setupUi(&mMainWindow);
-
+    //
+    //  Let the show() beginn ;)
     mMainWindow.show();
 // End-Of-UDC:AAAAAAFwunztA5H0NRk=
 }
