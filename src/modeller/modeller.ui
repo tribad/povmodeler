@@ -47,15 +47,7 @@
     <addaction name="actionOpen"/>
     <addaction name="actionOpen_Recent"/>
     <addaction name="actionSave"/>
-    <addaction name="actionSave_as"/>
-    <addaction name="actionImport"/>
-    <addaction name="actionExport"/>
-    <addaction name="actionRevert"/>
-    <addaction name="separator"/>
-    <addaction name="actionPrint"/>
-    <addaction name="separator"/>
     <addaction name="actionClose"/>
-    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -152,8 +144,6 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
-   <addaction name="actionSave_as"/>
-   <addaction name="actionPrint"/>
   </widget>
   <widget class="QDockWidget" name="treeDockWidget">
    <property name="sizePolicy">

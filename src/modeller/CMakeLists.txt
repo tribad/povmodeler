@@ -176,6 +176,14 @@ set (POVMODELER_SOURCE
      modeller.ui
      CModellerApp.cpp
      CModelStoreThread.cpp
+     IIncomingMessages.cpp
+     IOutgoingMessages.cpp
+     CGUI.cpp
+     IFileMenu.cpp
+     IEditMenu.cpp
+     IViewMenu.cpp
+     ISettingsMenu.cpp
+     IHelpMenu.cpp
 )
 ##
 ##
