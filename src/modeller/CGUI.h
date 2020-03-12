@@ -13,6 +13,9 @@
 #include <QMainWindow>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
+#include "IViewMenu.h"
+#include "ISettingsMenu.h"
+#include "IHelpMenu.h"
 //
 //  This is the class
 class CGUI : public QObject {
@@ -20,12 +23,14 @@ Q_OBJECT
 public:
     virtual ~CGUI() = default;
     CGUI() ;
-public:
-    IEditMenu     mEditMenu;
 private:
     Ui_MainWindow mUIMainWindow;
     QMainWindow   mMainWindow;
     IFileMenu     mFileMenu;
+    IEditMenu     mEditMenu;
+    IViewMenu     mViewMenu;
+    ISettingsMenu mSettingsMenu;
+    IHelpMenu     mHelpMenu;
 };
 
 #endif  // CGUI_INC

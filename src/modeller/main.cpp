@@ -19,6 +19,9 @@
 #include <QMainWindow>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
+#include "IViewMenu.h"
+#include "ISettingsMenu.h"
+#include "IHelpMenu.h"
 #include "CGUI.h"
 #include "CModellerApp.h"
 // Optional
