@@ -9,18 +9,15 @@
 #ifndef CMODELSTORETHREAD_INC
 #define CMODELSTORETHREAD_INC
 //
-//  List of forwards needed in this module.
-class IIncomingMessages;
-//
 //  This is the class
 class CModelStoreThread : public CMsgThread {
 public:
     virtual ~CModelStoreThread() = default;
-    CModelStoreThread() ;
-    static CModelStoreThread& GetInstance(void) ;
+    CModelStoreThread(IIncomingMessages& aIncomingMessage) ;
     virtual void Process(tMsg* aMsg) ;
+public:
+    IIncomingMessages& mMsgToModeller;
 private:
-    IIncomingMessages* mMsgToModeller;
     CSimIfc*           mStoreIfc;
 };
 extern CCoreIfc* __coreIfc;

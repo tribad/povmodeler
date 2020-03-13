@@ -179,11 +179,15 @@ set (POVMODELER_SOURCE
      IIncomingMessages.cpp
      IOutgoingMessages.cpp
      CGUI.cpp
+     IGUIInput.cpp
      IFileMenu.cpp
      IEditMenu.cpp
      IViewMenu.cpp
      ISettingsMenu.cpp
      IHelpMenu.cpp
+     CModel.cpp
+     IModelInput.cpp
+
 )
 ##
 ##

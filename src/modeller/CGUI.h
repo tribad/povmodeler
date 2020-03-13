@@ -10,19 +10,21 @@
 #define CGUI_INC
 #include <ui_modeller.h>
 #include <QObject>
+#include "IGUIInput.h"
 #include <QMainWindow>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
 #include "IViewMenu.h"
 #include "ISettingsMenu.h"
 #include "IHelpMenu.h"
+#include "IModelInput.h"
 //
 //  This is the class
-class CGUI : public QObject {
+class CGUI : public QObject, public IGUIInput {
 Q_OBJECT
 public:
     virtual ~CGUI() = default;
-    CGUI() ;
+    CGUI(IModelInput& aModelInput) ;
 private:
     Ui_MainWindow mUIMainWindow;
     QMainWindow   mMainWindow;

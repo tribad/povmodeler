@@ -9,8 +9,7 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CModellerApp.h"
 // Optional
-#include "IIncomingMessages.h"
-CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv) {
+CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv), mStoreThread(mModel), mGUI(mModel), mModel(mGUI, mStoreThread.q) {
 // User-Defined-Code:AAAAAAFwunztA5H0NRk=
     //
     //  Starting the logging thread and wait until its running. On fast multicore machines this
@@ -20,8 +19,8 @@ CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv
     //
     //  As of the singleton behaviour the constructor of CModelStoreThread gets called yet
     //  We wait as with the logthread until it is up and running.
-    CModelStoreThread::GetInstance().Create();
-    while (!CModelStoreThread::GetInstance().Running) ;
+    mStoreThread.Create();
+    while (!mStoreThread.Running) ;
 // End-Of-UDC:AAAAAAFwunztA5H0NRk=
 }
 

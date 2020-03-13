@@ -9,7 +9,7 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CGUI.h"
 // Optional
-CGUI::CGUI() : QObject(nullptr) {
+CGUI::CGUI(IModelInput& aModelInput) : CGUI::QObject(nullptr) {
 // User-Defined-Code:AAAAAAFwzcKk4/mOpCI=
     //
     //  Create the main window
@@ -17,7 +17,7 @@ CGUI::CGUI() : QObject(nullptr) {
 
     mMainWindow.show();
 
-    connect(mUIMainWindow.actionNew, SIGNAL(triggered()), &mFileMenu, SLOT(New()));
+    CGUI::connect(mUIMainWindow.actionNew, SIGNAL(triggered()), &mFileMenu, SLOT(New()));
     connect(mUIMainWindow.actionOpen, SIGNAL(triggered()), &mFileMenu, SLOT(Load()));
     connect(mUIMainWindow.actionOpen_Recent, SIGNAL(triggered()), &mFileMenu, SLOT(LoadRecent()));
     connect(mUIMainWindow.actionSave, SIGNAL(triggered()), &mFileMenu, SLOT(Save()));

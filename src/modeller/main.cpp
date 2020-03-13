@@ -6,23 +6,27 @@
 //
 // *************************************************************************************************************
 #include <msgthread.h>
-#include <msg.h>
 #include <simifc.h>
 #include <coreifc.h>
+#include <msg.h>
 #include <ui_modeller.h>
+#include <msgqueue.h>
 #include <logthread.h>
 #include "main.h"
 #include <QApplication>
 #include "IIncomingMessages.h"
 #include "CModelStoreThread.h"
 #include <QObject>
+#include "IGUIInput.h"
 #include <QMainWindow>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
 #include "IViewMenu.h"
 #include "ISettingsMenu.h"
 #include "IHelpMenu.h"
+#include "IModelInput.h"
 #include "CGUI.h"
+#include "CModel.h"
 #include "CModellerApp.h"
 // Optional
 int main(int argc, char** argv) {

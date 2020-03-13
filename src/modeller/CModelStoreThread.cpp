@@ -6,26 +6,18 @@
 //
 // *************************************************************************************************************
 #include <msgthread.h>
-#include <msg.h>
 #include <simifc.h>
 #include <coreifc.h>
+#include <msg.h>
+#include "IIncomingMessages.h"
 #include "CModelStoreThread.h"
 // Optional
-#include "IIncomingMessages.h"
 CCoreIfc* __coreIfc;
-CModelStoreThread::CModelStoreThread()  {
+CModelStoreThread::CModelStoreThread(IIncomingMessages& aIncomingMessage) : mMsgToModeller(aIncomingMessage) {
 // User-Defined-Code:AAAAAAFwyK4jX/XQMGg=
     __coreIfc = new CCoreIfc;
     mStoreIfc = siminit();
 // End-Of-UDC:AAAAAAFwyK4jX/XQMGg=
-}
-
-CModelStoreThread& CModelStoreThread::GetInstance(void) {
-// User-Defined-Code:AAAAAAFwyKvB/vW7ltw=
-    static CModelStoreThread instance;
-
-    return instance;
-// End-Of-UDC:AAAAAAFwyKvB/vW7ltw=
 }
 
 void CModelStoreThread::Process(tMsg* aMsg) {
@@ -45,7 +37,7 @@ void CModelStoreThread::Process(tMsg* aMsg) {
                 }
             }
         } else if (aMsg->dst.type == eCommTarget::Node) {
-            mMsgToModeller->Process(aMsg);
+            mMsgToModeller.Process(aMsg);
         }
     }
 // End-Of-UDC:AAAAAAFwyQZvavvNUd8=
