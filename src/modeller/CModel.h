@@ -14,6 +14,10 @@ class CModel : public IModelInput, public IIncomingMessages {
 public:
     virtual ~CModel() = default;
     CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) ;
+    virtual void LoadKpovModelerFile(QString aFileName) ;
+public:
+    IGUIInput& mGUIInput;
+    CMsgQueue& mStoreOutput;
 };
 
 #endif  // CMODEL_INC

@@ -8,17 +8,17 @@
 #pragma once
 #ifndef CMODELLERAPP_INC
 #define CMODELLERAPP_INC
+#include <QApplication>
 #include <msgthread.h>
 #include <simifc.h>
 #include <coreifc.h>
 #include <msg.h>
+#include <QObject>
 #include <ui_modeller.h>
-#include <msgqueue.h>
 #include <logthread.h>
-#include <QApplication>
+#include <QSettings>
 #include "IIncomingMessages.h"
 #include "CModelStoreThread.h"
-#include <QObject>
 #include "IGUIInput.h"
 #include <QMainWindow>
 #include <QString>
@@ -29,8 +29,8 @@
 #include "IHelpMenu.h"
 #include "IModelInput.h"
 #include "CGUI.h"
+#include <msgqueue.h>
 #include "CModel.h"
-#include <QSettings>
 #include "CSettings.h"
 //
 //  List of forwards needed in this module.

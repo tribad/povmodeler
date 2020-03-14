@@ -8,8 +8,8 @@
 #pragma once
 #ifndef CGUI_INC
 #define CGUI_INC
-#include <ui_modeller.h>
 #include <QObject>
+#include <ui_modeller.h>
 #include "IGUIInput.h"
 #include <QMainWindow>
 #include <QString>
@@ -28,6 +28,8 @@ public:
     CGUI(IModelInput& aModelInput) ;
 public slots:
     void Load(QString aFileName) ;
+public:
+    IModelInput&  mModelInput;
 private:
     Ui_MainWindow mUIMainWindow;
     QMainWindow   mMainWindow;

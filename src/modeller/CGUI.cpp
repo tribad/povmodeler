@@ -9,7 +9,7 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CGUI.h"
 // Optional
-CGUI::CGUI(IModelInput& aModelInput) : CGUI::QObject(nullptr) {
+CGUI::CGUI(IModelInput& aModelInput) : QObject(nullptr), mModelInput(aModelInput) {
 // User-Defined-Code:AAAAAAFwzcKk4/mOpCI=
     //
     //  Create the main window
@@ -41,6 +41,14 @@ CGUI::CGUI(IModelInput& aModelInput) : CGUI::QObject(nullptr) {
 
 void CGUI::Load(QString aFileName) {
 // User-Defined-Code:AAAAAAFw2C0TxW3A1eI=
+    QFileInfo fi(aFileName);
+    //
+    //  Check if we load an old kpovmodeler file
+    if (fi.suffix() == "kpm") {
+        mModelInput.LoadKpovModelerFile(aFileName);
+    } else {
+
+    }
 // End-Of-UDC:AAAAAAFw2C0TxW3A1eI=
 }
 

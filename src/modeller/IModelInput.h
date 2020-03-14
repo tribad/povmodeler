@@ -13,7 +13,8 @@
 class IModelInput {
 public:
     IModelInput() = default;
-    ~IModelInput() = default;
+    virtual ~IModelInput() = default;
+    virtual void LoadKpovModelerFile(QString aFileName) ;
 };
 
 #endif  // IMODELINPUT_INC

@@ -20,6 +20,7 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
+#include <stdint.h>
 #include "CLightSource.h"
 // Optional
 /*

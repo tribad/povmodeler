@@ -8,11 +8,11 @@
 #pragma once
 #ifndef IFILEMENU_INC
 #define IFILEMENU_INC
+#include <QObject>
+#include <QSettings>
 #include <QDir>
 #include <QFileDialog>
-#include <QObject>
 #include <QString>
-#include <QSettings>
 #include "CSettings.h"
 //
 //  List of forwards needed in this module.
