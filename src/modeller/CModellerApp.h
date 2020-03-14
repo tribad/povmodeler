@@ -21,6 +21,7 @@
 #include <QObject>
 #include "IGUIInput.h"
 #include <QMainWindow>
+#include <QString>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
 #include "IViewMenu.h"
@@ -29,6 +30,11 @@
 #include "IModelInput.h"
 #include "CGUI.h"
 #include "CModel.h"
+#include <QSettings>
+#include "CSettings.h"
+//
+//  List of forwards needed in this module.
+class CSettings;
 //
 //  This is the class
 class CModellerApp : public QApplication {

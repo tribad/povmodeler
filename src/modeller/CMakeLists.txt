@@ -175,6 +175,7 @@ set (POVMODELER_SOURCE
      main.cpp
      modeller.ui
      CModellerApp.cpp
+     CSettings.cpp
      CModelStoreThread.cpp
      IIncomingMessages.cpp
      IOutgoingMessages.cpp

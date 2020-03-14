@@ -19,6 +19,7 @@
 #include <QObject>
 #include "IGUIInput.h"
 #include <QMainWindow>
+#include <QString>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
 #include "IViewMenu.h"

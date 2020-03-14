@@ -12,6 +12,7 @@
 #include <QObject>
 #include "IGUIInput.h"
 #include <QMainWindow>
+#include <QString>
 #include "IFileMenu.h"
 #include "IEditMenu.h"
 #include "IViewMenu.h"
@@ -25,6 +26,8 @@ Q_OBJECT
 public:
     virtual ~CGUI() = default;
     CGUI(IModelInput& aModelInput) ;
+public slots:
+    void Load(QString aFileName) ;
 private:
     Ui_MainWindow mUIMainWindow;
     QMainWindow   mMainWindow;

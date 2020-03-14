@@ -8,7 +8,15 @@
 #pragma once
 #ifndef IFILEMENU_INC
 #define IFILEMENU_INC
+#include <QDir>
+#include <QFileDialog>
 #include <QObject>
+#include <QString>
+#include <QSettings>
+#include "CSettings.h"
+//
+//  List of forwards needed in this module.
+class CSettings;
 //
 //  This is the class
 class IFileMenu : public QObject {
@@ -22,6 +30,8 @@ public slots:
     void LoadRecent(void) ;
     void Save(void) ;
     void Close(void) ;
+signals:
+    void Load(QString aFileName) ;
 };
 
 #endif  // IFILEMENU_INC

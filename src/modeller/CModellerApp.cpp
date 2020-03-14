@@ -9,8 +9,12 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CModellerApp.h"
 // Optional
+#include <QSettings>
+#include "CSettings.h"
 CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv), mStoreThread(mModel), mGUI(mModel), mModel(mGUI, mStoreThread.q) {
 // User-Defined-Code:AAAAAAFwunztA5H0NRk=
+    QCoreApplication::setOrganizationName( "povmodeler" );
+    QCoreApplication::setApplicationName( "povmodeler" );
     //
     //  Starting the logging thread and wait until its running. On fast multicore machines this
     //  is needed to allow the complete initialization of the thread before continue
