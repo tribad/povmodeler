@@ -177,9 +177,7 @@ set (POVMODELER_SOURCE
      CModellerApp.cpp
      CSettings.cpp
      CModelStoreThread.cpp
-     IOutgoingMessages.cpp
      CGUI.cpp
-     IGUIInput.cpp
      IFileMenu.cpp
      IEditMenu.cpp
      IViewMenu.cpp

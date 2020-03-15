@@ -13,7 +13,6 @@
 class IGUIInput {
 public:
     ~IGUIInput() = default;
-    IGUIInput() ;
 };
 
 #endif  // IGUIINPUT_INC
