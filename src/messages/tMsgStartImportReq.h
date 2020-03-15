@@ -11,6 +11,7 @@
 
 #include <simobj.h>
 #include <helper.h>
+#include <string>
 
 #define IDM_STARTIMPORTREQ 0xadbad44c9df6819e
 //
@@ -58,14 +59,20 @@ struct tMsgStartImportReq : public tMsg {
                 dst.obj.id  = 0;
             }
             dst.type    = eCommTarget::Object;
+            j=find(json, "FileName");
+            if (j!=0) {
+                FileName=to_string(j);
+            }
         }
     }
     virtual ~tMsgStartImportReq() {}
     virtual std::ostream& json(std::ostream& output) {
         output << "\"MsgId\": \"StartImportReq\"";
+        output <<  ", \"FileName\":\"" << helper::escape(this->FileName) << "\"";
 
         return output;
     }
+    std::string FileName;
 };
 
 #endif  // TMSGSTARTIMPORTREQ_INC

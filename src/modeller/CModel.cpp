@@ -21,8 +21,12 @@
 #include "CModelStateCtrl.h"
 #include "eModelState.h"
 #include "CModel.h"
+#include "CModelBaseState.h"
+#include "CModelIdleState.h"
+#include "CModelLoadingState.h"
+#include "CModelImportState.h"
 // Optional
-#include "tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReply.h"
 #include "tMsgAddElementReply.h"
 #include "tMsgStartImportReq.h"
 #include "tMsgAddElementReq.h"
@@ -41,7 +45,10 @@ void CModel::ProcessIdle(tMsg* aMsg) {
 
 CModel::CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) : CModelStateCtrl(aGUIInput, aOutgoingMessage) {
 // User-Defined-Code:AAAAAAFw04XnBkMJfPs=
+    //
+    //  Initialization of the statemachine
     mState  = eModelState::Idle;
+    mStateList = {new CModelIdleState, new CModelLoadingState, new CModelImportState};
 // End-Of-UDC:AAAAAAFw04XnBkMJfPs=
 }
 
@@ -87,17 +94,10 @@ void CModel::LoadKpovModelerFile(QString aFileName) {
 
 void CModel::Process(tMsg* aMsg) {
 // User-Defined-Code:AAAAAAFw3agVRf3SzQg=
-    //
-    // As for the first implementation we stay on simple methods switching
-    switch (mState) {
-    case eModelState::Idle:
-        ProcessIdle(aMsg);
-        break;
-    default:
-        break;
+    if (mState != eModelState::EmergencySafe) {
+        mState = mStateList[(unsigned)mState]->Process(*this, aMsg);
     }
     delete aMsg;
-
 // End-Of-UDC:AAAAAAFw3agVRf3SzQg=
 }
 

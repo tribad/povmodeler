@@ -346,6 +346,10 @@ static tMsg* msg_from_json_startimportreq(tJSON*  json) {
     }
     newsig->dst.type    = eCommTarget::Object;
     newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    j=find(json, "FileName");
+    if (j!=0) {
+        newsig->FileName=to_string(j);
+    }
     return ((tMsg*)(newsig));
 }
 // **************************************************************************
@@ -358,6 +362,7 @@ static tMsg* msg_from_json_startimportreq(tJSON*  json) {
 static std::ostream& msg_to_json_startimportreq(tMsg* aMsg, std::ostream& output) {
     tMsgStartImportReq* msg=(tMsgStartImportReq*)aMsg;
     output << "\"MsgId\": \"StartImportReq\"";
+    output <<  ", \"FileName\":\"" << helper::escape(msg->FileName) << "\"";
     return (output);
 }
 // **************************************************************************
@@ -379,6 +384,14 @@ static tMsg* msg_from_json_startimportreply(tJSON*  json) {
     }
     newsig->dst.type    = eCommTarget::Object;
     newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    j=find(json, "FileName");
+    if (j!=0) {
+        newsig->FileName=to_string(j);
+    }
+    j=find(json, "ProjectId");
+    if (j!=0) {
+        newsig->ProjectId=to_uint64_t(j);
+    }
     return ((tMsg*)(newsig));
 }
 // **************************************************************************
@@ -391,6 +404,8 @@ static tMsg* msg_from_json_startimportreply(tJSON*  json) {
 static std::ostream& msg_to_json_startimportreply(tMsg* aMsg, std::ostream& output) {
     tMsgStartImportReply* msg=(tMsgStartImportReply*)aMsg;
     output << "\"MsgId\": \"StartImportReply\"";
+    output <<  ", \"FileName\":\"" << helper::escape(msg->FileName) << "\"";
+    output <<  ", \"ProjectId\":" << (int64_t)msg->ProjectId;
     return (output);
 }
 // **************************************************************************

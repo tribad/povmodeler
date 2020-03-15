@@ -10,8 +10,22 @@
 #include "CModellerApp.h"
 // Optional
 #include "CModelNode.h"
+#include "CModelStateCtrl.h"
+#include "eModelState.h"
+#include "../messages/tMsgStartImportReply.h"
+#include "CModelBaseState.h"
 #include <QSettings>
 #include "CSettings.h"
+int main(int argc, char** argv) {
+    int retval = 0;
+// User-Defined-Code:AAAAAAFw3pam6idaC1I=
+    CModellerApp application(argc, argv);
+
+    retval = application.exec();
+// End-Of-UDC:AAAAAAFw3pam6idaC1I=
+    return  (retval);
+}
+
 CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv), mStoreThread(mModel), mGUI(mModel), mModel(mGUI, mStoreThread.q) {
 // User-Defined-Code:AAAAAAFwunztA5H0NRk=
     QCoreApplication::setOrganizationName( "povmodeler" );

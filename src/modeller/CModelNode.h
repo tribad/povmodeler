@@ -9,6 +9,9 @@
 #ifndef CMODELNODE_INC
 #define CMODELNODE_INC
 //
+//  List of forwards from forwards list.
+class CModelNode;
+//
 //  This is the class
 class CModelNode {
 public:

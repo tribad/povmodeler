@@ -20,7 +20,6 @@
 #include "ids.h"
 //
 //                       M o d e l   i n c l u d e s
-#include <stdint.h>
 #include "CProject.h"
 // Optional
 /*
@@ -68,6 +67,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        *((tVariant*)(&project_var->FileName)) = value;
+        break;
     case IDA_NAME:
         *((tVariant*)(&project_var->Name)) = value;
         break;
@@ -96,6 +98,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        retval = project_var->FileName;
+        break;
     case IDA_NAME:
         retval = project_var->Name;
         break;
@@ -114,6 +119,9 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CProject* project_var = (CProject*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        project_var->FileName = value;
+        break;
     case IDA_NAME:
         project_var->Name = value;
         break;

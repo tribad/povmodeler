@@ -15,9 +15,6 @@
 #include <QString>
 #include "CSettings.h"
 //
-//  List of forwards needed in this module.
-class CSettings;
-//
 //  This is the class
 class IFileMenu : public QObject {
 Q_OBJECT

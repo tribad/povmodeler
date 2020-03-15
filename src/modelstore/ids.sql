@@ -57,6 +57,7 @@
 --  This is the list of attribute ids used to identify object attributes in the DB
 #define IDA_                     cast (x'393985c5a9d65040' as bigint)
 #define IDA_CONTAINED            cast (x'1bc8faac8dfa28fb' as bigint)
+#define IDA_FILENAME             cast (x'fb2f66815da913c6' as bigint)
 #define IDA_NAME                 cast (x'842f3af822536317' as bigint)
 #define IDA_OBJECTSAFTER         cast (x'd13a065a54dcaf71' as bigint)
 #define IDA_OBJECTSBEFORE        cast (x'2a1abb6f6646910d' as bigint)

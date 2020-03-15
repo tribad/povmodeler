@@ -172,7 +172,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src/modelifc ${CMAKE_SOURCE_DIR}/src/mod
 ## set(AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR})
 
 set (POVMODELER_SOURCE 
-     main.cpp
      modeller.ui
      CModellerApp.cpp
      CSettings.cpp

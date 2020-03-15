@@ -18,10 +18,4 @@
 #include "CModelBaseState.h"
 #include "CModelLoadingState.h"
 // Optional
-eModelState CModelLoadingState::Process(CModelStateCtrl& aCtrl, tMsg* aMsg) {
-    eModelState retval = eModelState::Idle;
-// User-Defined-Code:AAAAAAFw3fnWehxQ3gg=
-// End-Of-UDC:AAAAAAFw3fnWehxQ3gg=
-    return  (retval);
-}
-
+#include "../messages/tMsgStartImportReply.h"

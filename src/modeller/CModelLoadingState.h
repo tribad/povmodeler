@@ -9,15 +9,15 @@
 #ifndef CMODELLOADINGSTATE_INC
 #define CMODELLOADINGSTATE_INC
 //
-//  List of forwards needed in this module.
+//  List of forwards from forwards list.
 class CModelNode;
+class tMsgStartImportReply;
 //
 //  This is the class
 class CModelLoadingState : public CModelBaseState {
 public:
     CModelLoadingState() = default;
     virtual ~CModelLoadingState() = default;
-    virtual eModelState Process(CModelStateCtrl& aCtrl, tMsg* aMsg) ;
 };
 
 #endif  // CMODELLOADINGSTATE_INC

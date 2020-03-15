@@ -22,10 +22,11 @@
 //                       M o d e l   i n c l u d e s
 #include "CMainViewport.h"
 // Optional
-#include "tMsgStartImportReq.h"
-#include "tMsgAddElementReq.h"
-#include "tMsgStartImportReply.h"
-#include "tMsgAddElementReply.h"
+#include <string>
+#include "../messages/tMsgStartImportReq.h"
+#include "../messages/tMsgAddElementReq.h"
+#include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgAddElementReply.h"
 /*
  *  private macros
  */
@@ -53,6 +54,13 @@ static std::map<objectid_t, CMainViewport*> t_store;
 tMsg* CMainViewport::process(tMsgStartImportReq* msg) {
     tMsg* retval=0;
 // User-Defined-Code:startimportreq
+    tMsgStartImportReply* reply = new tMsgStartImportReply;
+
+    reply->dst.type        = eCommTarget::Node;
+    reply->dst.node.nodeid = 0;
+
+    retval = reply;
+
     delete msg;
 // End-Of-UDC:startimportreq
     return (retval);

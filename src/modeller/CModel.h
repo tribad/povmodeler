@@ -9,8 +9,10 @@
 #ifndef CMODEL_INC
 #define CMODEL_INC
 //
-//  List of forwards needed in this module.
+//  List of forwards from forwards list.
 class CModelNode;
+class CModelBaseState;
+class tMsgStartImportReply;
 class tMsgStartImportReply;
 class tMsgAddElementReply;
 //
@@ -24,7 +26,8 @@ public:
 private:
     void ProcessIdle(tMsg* aMsg) ;
 public:
-    eModelState mState;
+    eModelState                   mState;
+    std::vector<CModelBaseState*> mStateList;
 };
 
 #endif  // CMODEL_INC

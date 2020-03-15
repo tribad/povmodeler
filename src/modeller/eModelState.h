@@ -13,7 +13,8 @@
 enum class eModelState {
     Idle,
     Loading,
-    Import
+    Import,
+    EmergencySafe
 };
 
 #endif  // EMODELSTATE_INC

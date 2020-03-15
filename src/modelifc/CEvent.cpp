@@ -52,7 +52,7 @@ CEvent::~CEvent() {
 //
 // **************************************************************************
 bool CEvent::Wait(uint64_t aWait) {
-    int result;
+    int result = 0;
     
     pthread_mutex_lock(&mutex);
     if (CheckCondition()) {

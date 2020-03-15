@@ -16,7 +16,7 @@ public:
     virtual void ProcessWaitTimeout() {}
     virtual void ExitInstance() {}
 public:
-    uint64_t  waittimeout;
+    uint64_t  waittimeout = 0;
     CMsgQueue q;
 };
 

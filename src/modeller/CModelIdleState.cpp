@@ -18,10 +18,11 @@
 #include "CModelBaseState.h"
 #include "CModelIdleState.h"
 // Optional
-eModelState CModelIdleState::Process(CModelStateCtrl& aCtrl, tMsg* aMsg) {
+#include "../messages/tMsgStartImportReply.h"
+eModelState CModelIdleState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) {
     eModelState retval = eModelState::Idle;
-// User-Defined-Code:AAAAAAFw3fnHXRwi2r8=
-// End-Of-UDC:AAAAAAFw3fnHXRwi2r8=
+// User-Defined-Code:AAAAAAFw3kO/hyY5nhY=
+// End-Of-UDC:AAAAAAFw3kO/hyY5nhY=
     return  (retval);
 }
 

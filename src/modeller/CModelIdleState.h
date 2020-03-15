@@ -9,15 +9,17 @@
 #ifndef CMODELIDLESTATE_INC
 #define CMODELIDLESTATE_INC
 //
-//  List of forwards needed in this module.
+//  List of forwards from forwards list.
 class CModelNode;
+class tMsgStartImportReply;
 //
 //  This is the class
 class CModelIdleState : public CModelBaseState {
 public:
     CModelIdleState() = default;
     virtual ~CModelIdleState() = default;
-    virtual eModelState Process(CModelStateCtrl& aCtrl, tMsg* aMsg) ;
+protected:
+    virtual eModelState Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) ;
 };
 
 #endif  // CMODELIDLESTATE_INC

@@ -40,9 +40,9 @@
 #include "CModel.h"
 #include "CSettings.h"
 //
-//  List of forwards needed in this module.
+//  List of forwards from forwards list.
 class CModelNode;
-class CSettings;
+class CModelBaseState;
 //
 //  This is the class
 class CModellerApp : public QApplication {
@@ -56,5 +56,8 @@ private:
     CGUI              mGUI;
     CModel            mModel;
 };
+//
+//  These are the operations defined with package scope.
+int main(int argc, char** argv) ;
 
 #endif  // CMODELLERAPP_INC

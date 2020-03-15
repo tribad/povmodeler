@@ -11,6 +11,8 @@
 
 #include <simobj.h>
 #include <helper.h>
+#include <string>
+#include <stdint.h>
 
 #define IDM_STARTIMPORTREPLY 0xfbfa1a026615a839
 //
@@ -58,14 +60,26 @@ struct tMsgStartImportReply : public tMsg {
                 dst.obj.id  = 0;
             }
             dst.type    = eCommTarget::Object;
+            j=find(json, "FileName");
+            if (j!=0) {
+                FileName=to_string(j);
+            }
+            j=find(json, "ProjectId");
+            if (j!=0) {
+                ProjectId=to_uint64_t(j);
+            }
         }
     }
     virtual ~tMsgStartImportReply() {}
     virtual std::ostream& json(std::ostream& output) {
         output << "\"MsgId\": \"StartImportReply\"";
+        output <<  ", \"FileName\":\"" << helper::escape(this->FileName) << "\"";
+        output <<  ", \"ProjectId\":" << (int64_t)this->ProjectId;
 
         return output;
     }
+    std::string FileName;
+    uint64_t    ProjectId;
 };
 
 #endif  // TMSGSTARTIMPORTREPLY_INC

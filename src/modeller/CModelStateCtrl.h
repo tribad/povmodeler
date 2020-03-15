@@ -9,7 +9,7 @@
 #ifndef CMODELSTATECTRL_INC
 #define CMODELSTATECTRL_INC
 //
-//  List of forwards needed in this module.
+//  List of forwards from forwards list.
 class CModelNode;
 //
 //  This is the class
