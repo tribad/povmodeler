@@ -10,15 +10,16 @@
 #define CMODELLERAPP_INC
 #include <QApplication>
 #include <msgthread.h>
+#include <msg.h>
 #include <simifc.h>
 #include <coreifc.h>
-#include <msg.h>
 #include <QObject>
 #include <ui_modeller.h>
 #include <vector>
 #include <variant.h>
 #include <map>
 #include <string>
+#include <msgqueue.h>
 #include <logthread.h>
 #include <QSettings>
 #include "IIncomingMessages.h"
@@ -34,8 +35,8 @@
 #include "IModelInput.h"
 #include "CGUI.h"
 #include "CModelNode.h"
+#include "CModelStateCtrl.h"
 #include "eModelState.h"
-#include <msgqueue.h>
 #include "CModel.h"
 #include "CSettings.h"
 //

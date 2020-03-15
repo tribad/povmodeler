@@ -31,8 +31,9 @@
 #include "IModelInput.h"
 #include "CGUI.h"
 #include "CModelNode.h"
-#include "eModelState.h"
 #include <msgqueue.h>
+#include "CModelStateCtrl.h"
+#include "eModelState.h"
 #include "CModel.h"
 #include "CModellerApp.h"
 // Optional

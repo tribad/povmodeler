@@ -184,6 +184,11 @@ set (POVMODELER_SOURCE
      ISettingsMenu.cpp
      IHelpMenu.cpp
      CModel.cpp
+     CModelStateCtrl.cpp
+     CModelBaseState.cpp
+     CModelIdleState.cpp
+     CModelLoadingState.cpp
+     CModelImportState.cpp
      CModelNode.cpp
 
 )

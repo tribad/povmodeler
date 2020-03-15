@@ -6,9 +6,9 @@
 //
 // *************************************************************************************************************
 #include <msgthread.h>
+#include <msg.h>
 #include <simifc.h>
 #include <coreifc.h>
-#include <msg.h>
 #include "IIncomingMessages.h"
 #include "CModelStoreThread.h"
 // Optional

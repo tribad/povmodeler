@@ -15,19 +15,16 @@ class tMsgStartImportReply;
 class tMsgAddElementReply;
 //
 //  This is the class
-class CModel : public IIncomingMessages, public IModelInput {
+class CModel : public IIncomingMessages, public IModelInput, public CModelStateCtrl {
 public:
     virtual ~CModel() = default;
     CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) ;
     virtual void LoadKpovModelerFile(QString aFileName) ;
     virtual void Process(tMsg* aMsg) ;
-public:
-    IGUIInput&  mGUIInput;
-    eModelState mState;
-    CMsgQueue&  mStoreOutput;
 private:
-    CModelNode  mRoot;
-    CModelNode* mActual;
+    void ProcessIdle(tMsg* aMsg) ;
+public:
+    eModelState mState;
 };
 
 #endif  // CMODEL_INC
