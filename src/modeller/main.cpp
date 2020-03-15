@@ -10,6 +10,10 @@
 #include <coreifc.h>
 #include <msg.h>
 #include <ui_modeller.h>
+#include <vector>
+#include <variant.h>
+#include <map>
+#include <string>
 #include <logthread.h>
 #include "main.h"
 #include <QApplication>
@@ -26,6 +30,8 @@
 #include "IHelpMenu.h"
 #include "IModelInput.h"
 #include "CGUI.h"
+#include "CModelNode.h"
+#include "eModelState.h"
 #include <msgqueue.h>
 #include "CModel.h"
 #include "CModellerApp.h"

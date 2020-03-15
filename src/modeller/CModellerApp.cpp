@@ -9,6 +9,7 @@
 //  All needed headers in header file. This is needed for the moc tool.
 #include "CModellerApp.h"
 // Optional
+#include "CModelNode.h"
 #include <QSettings>
 #include "CSettings.h"
 CModellerApp::CModellerApp(int& aArgc, char** aArgv) : QApplication(aArgc, aArgv), mStoreThread(mModel), mGUI(mModel), mModel(mGUI, mStoreThread.q) {

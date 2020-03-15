@@ -1,15 +1,19 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : IModelInput.cpp
+//  Modul-Name     : eModelState.h
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
-#include <QString>
-#include "IModelInput.h"
-// Optional
-void IModelInput::LoadKpovModelerFile(QString aFileName) {
-// User-Defined-Code:AAAAAAFw2NmS4HbrUQk=
-// End-Of-UDC:AAAAAAFw2NmS4HbrUQk=
-}
+#pragma once
+#ifndef EMODELSTATE_INC
+#define EMODELSTATE_INC
+//
+//                   E n u m e r a t i o n    d e c l a r a t i o n
+enum class eModelState {
+    Idle,
+    Loading,
+    Import
+};
 
+#endif  // EMODELSTATE_INC

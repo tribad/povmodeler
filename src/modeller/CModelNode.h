@@ -1,19 +1,24 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : IModelInput.h
+//  Modul-Name     : CModelNode.h
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
 // *************************************************************************************************************
 #pragma once
-#ifndef IMODELINPUT_INC
-#define IMODELINPUT_INC
+#ifndef CMODELNODE_INC
+#define CMODELNODE_INC
 //
 //  This is the class
-class IModelInput {
+class CModelNode {
 public:
-    virtual ~IModelInput() = default;
-    virtual void LoadKpovModelerFile(QString aFileName) = 0;
+    CModelNode() = default;
+    ~CModelNode() = default;
+    bool isEmpty(void) ;
+private:
+    std::vector<CModelNode*>        mSubNode;
+    CModelNode*                     mParent;
+    std::map<std::string, tVariant> mProperty;
 };
 
-#endif  // IMODELINPUT_INC
+#endif  // CMODELNODE_INC

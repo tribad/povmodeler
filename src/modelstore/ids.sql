@@ -27,6 +27,7 @@
 #define IDO_LATHE                cast (x'f25ccc811f8d84cb' as bigint)
 #define IDO_LIGHTGROUP           cast (x'd3dddcbedd8522c3' as bigint)
 #define IDO_LIGHTSOURCE          cast (x'ab0a21f74fe572fb' as bigint)
+#define IDO_MAINVIEWPORT         cast (x'6bedfacb0ab2e1a7' as bigint)
 #define IDO_MERGE                cast (x'e5b0a54bc73d5bbe' as bigint)
 #define IDO_MESH                 cast (x'dce5132574109b8c' as bigint)
 #define IDO_MESH2                cast (x'c1debc6029903f83' as bigint)

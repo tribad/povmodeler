@@ -76,12 +76,13 @@ configure_file(config.h.in config.h)
 
 add_compile_options (-O0 -g -Wall -std=c++14 -fPIC -Wno-unused-variable)
 
-include_directories(${CMAKE_SOURCE_DIR}/src/modelifc /usr/include/libxml2 ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/src/messages ${CMAKE_SOURCE_DIR}/src/modelifc /usr/include/libxml2 ${CMAKE_CURRENT_SOURCE_DIR})
 
 set (MODELSTORE_SOURCE 
     _simifc.cpp
     generated.cpp
     CObjectBase.cpp
+    CMainViewport.cpp
     CProject.cpp
     CBlob.cpp
     CBox.cpp

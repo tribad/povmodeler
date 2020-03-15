@@ -10,5 +10,10 @@
 #define IOUTGOINGMESSAGES_INC
 //
 //  This is the class
+class IOutgoingMessages {
+public:
+    IOutgoingMessages() = default;
+    ~IOutgoingMessages() = default;
+};
 
 #endif  // IOUTGOINGMESSAGES_INC

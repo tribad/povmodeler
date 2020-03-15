@@ -15,6 +15,10 @@
 #include <msg.h>
 #include <QObject>
 #include <ui_modeller.h>
+#include <vector>
+#include <variant.h>
+#include <map>
+#include <string>
 #include <logthread.h>
 #include <QSettings>
 #include "IIncomingMessages.h"
@@ -29,11 +33,14 @@
 #include "IHelpMenu.h"
 #include "IModelInput.h"
 #include "CGUI.h"
+#include "CModelNode.h"
+#include "eModelState.h"
 #include <msgqueue.h>
 #include "CModel.h"
 #include "CSettings.h"
 //
 //  List of forwards needed in this module.
+class CModelNode;
 class CSettings;
 //
 //  This is the class

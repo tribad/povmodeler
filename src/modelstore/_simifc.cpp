@@ -32,8 +32,15 @@
 #include <tSigInvalidIndication.h>
 //
 //                       M o d e l   i n c l u d e s
+#include "tMsgStartImportReq.h"
+#include "tMsgStartImportReply.h"
+#include "tMsgEndImportReq.h"
+#include "tMsgEndImportReply.h"
+#include "tMsgAddElementReq.h"
+#include "tMsgAddElementReply.h"
 
 #include "CObjectBase.h"
+#include "CMainViewport.h"
 #include "CProject.h"
 #include "CScene.h"
 #include "CCamera.h"
@@ -78,6 +85,18 @@
 //            S t a t i c   F u n c t i o n    p r o t o t y p e s
 //
 //
+static tMsg* msg_from_json_startimportreq(tJSON*  json);
+static std::ostream& msg_to_json_startimportreq(tMsg* aMsg, std::ostream& output);
+static tMsg* msg_from_json_startimportreply(tJSON*  json);
+static std::ostream& msg_to_json_startimportreply(tMsg* aMsg, std::ostream& output);
+static tMsg* msg_from_json_endimportreq(tJSON*  json);
+static std::ostream& msg_to_json_endimportreq(tMsg* aMsg, std::ostream& output);
+static tMsg* msg_from_json_endimportreply(tJSON*  json);
+static std::ostream& msg_to_json_endimportreply(tMsg* aMsg, std::ostream& output);
+static tMsg* msg_from_json_addelementreq(tJSON*  json);
+static std::ostream& msg_to_json_addelementreq(tMsg* aMsg, std::ostream& output);
+static tMsg* msg_from_json_addelementreply(tJSON*  json);
+static std::ostream& msg_to_json_addelementreply(tMsg* aMsg, std::ostream& output);
 typedef tMsg*  (*msg_from_json_op)(tJSON*);
 typedef std::ostream& (*msg_to_json_op)(tMsg*, std::ostream&);
 typedef tSig*  (*sig_from_json_op)(tJSON*);
@@ -87,8 +106,21 @@ class CGeneratedSimIfc : public CSimIfc {
 public:
     CGeneratedSimIfc() {
         mainviewport = 0;
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("startimportreq", msg_from_json_startimportreq));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_STARTIMPORTREQ, msg_to_json_startimportreq));
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("startimportreply", msg_from_json_startimportreply));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_STARTIMPORTREPLY, msg_to_json_startimportreply));
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("endimportreq", msg_from_json_endimportreq));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_ENDIMPORTREQ, msg_to_json_endimportreq));
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("endimportreply", msg_from_json_endimportreply));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_ENDIMPORTREPLY, msg_to_json_endimportreply));
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("addelementreq", msg_from_json_addelementreq));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_ADDELEMENTREQ, msg_to_json_addelementreq));
+        msgfrommap.insert(std::pair<std::string, msg_from_json_op>("addelementreply", msg_from_json_addelementreply));
+        msgtomap.insert(std::pair<uint64_t, msg_to_json_op>(IDM_ADDELEMENTREPLY, msg_to_json_addelementreply));
 
         addsimobjfactory(&objectbase_factory);
+        addsimobjfactory(&mainviewport_factory);
         addsimobjfactory(&project_factory);
         addsimobjfactory(&scene_factory);
         addsimobjfactory(&camera_factory);
@@ -226,7 +258,19 @@ tMsg* CGeneratedSimIfc::Process(tCommTarget& src, tJSON* aJson) {
              tMsg*       msg = 0;
              std::string id  = helper::tolower( ((tJSONValue*)(j))->value );
 
-             {
+             if (id == "startimportreq") {
+                 msg = new tMsgStartImportReq(aJson);
+             } else if (id == "startimportreply") {
+                 msg = new tMsgStartImportReply(aJson);
+             } else if (id == "endimportreq") {
+                 msg = new tMsgEndImportReq(aJson);
+             } else if (id == "endimportreply") {
+                 msg = new tMsgEndImportReply(aJson);
+             } else if (id == "addelementreq") {
+                 msg = new tMsgAddElementReq(aJson);
+             } else if (id == "addelementreply") {
+                 msg = new tMsgAddElementReply(aJson);
+             } else {
              }
              if (msg != 0) {
                  msg->src = src;
@@ -285,6 +329,204 @@ tNetPack* CGeneratedSimIfc::ProcessRaw(tNetPack* aPackage) {
 CGeneratedSimIfc simifc;
 // **************************************************************************
 //
+//  Method-Name   : msg_from_json_startimportreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_startimportreq(tJSON*  json) {
+    tMsgStartImportReq* newsig = new tMsgStartImportReq;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_startimportreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_startimportreq(tMsg* aMsg, std::ostream& output) {
+    tMsgStartImportReq* msg=(tMsgStartImportReq*)aMsg;
+    output << "\"MsgId\": \"StartImportReq\"";
+    return (output);
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_from_json_startimportreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_startimportreply(tJSON*  json) {
+    tMsgStartImportReply* newsig = new tMsgStartImportReply;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_startimportreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_startimportreply(tMsg* aMsg, std::ostream& output) {
+    tMsgStartImportReply* msg=(tMsgStartImportReply*)aMsg;
+    output << "\"MsgId\": \"StartImportReply\"";
+    return (output);
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_from_json_endimportreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_endimportreq(tJSON*  json) {
+    tMsgEndImportReq* newsig = new tMsgEndImportReq;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_endimportreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_endimportreq(tMsg* aMsg, std::ostream& output) {
+    tMsgEndImportReq* msg=(tMsgEndImportReq*)aMsg;
+    output << "\"MsgId\": \"EndImportReq\"";
+    return (output);
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_from_json_endimportreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_endimportreply(tJSON*  json) {
+    tMsgEndImportReply* newsig = new tMsgEndImportReply;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_endimportreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_endimportreply(tMsg* aMsg, std::ostream& output) {
+    tMsgEndImportReply* msg=(tMsgEndImportReply*)aMsg;
+    output << "\"MsgId\": \"EndImportReply\"";
+    return (output);
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_from_json_addelementreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_addelementreq(tJSON*  json) {
+    tMsgAddElementReq* newsig = new tMsgAddElementReq;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_addelementreq()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_addelementreq(tMsg* aMsg, std::ostream& output) {
+    tMsgAddElementReq* msg=(tMsgAddElementReq*)aMsg;
+    output << "\"MsgId\": \"AddElementReq\"";
+    return (output);
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_from_json_addelementreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static tMsg* msg_from_json_addelementreply(tJSON*  json) {
+    tMsgAddElementReply* newsig = new tMsgAddElementReply;
+    tJSON *j;
+
+    j=find(json, "Destination");
+    if (j != 0) {
+        newsig->dst.obj.id  = to_objectid_t(j);
+    } else {
+        newsig->dst.obj.id  = 0;
+    }
+    newsig->dst.type    = eCommTarget::Object;
+    newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    return ((tMsg*)(newsig));
+}
+// **************************************************************************
+//
+//  Method-Name   : msg_to_json_addelementreply()
+//
+//  Generated source code.
+//
+// **************************************************************************
+static std::ostream& msg_to_json_addelementreply(tMsg* aMsg, std::ostream& output) {
+    tMsgAddElementReply* msg=(tMsgAddElementReply*)aMsg;
+    output << "\"MsgId\": \"AddElementReply\"";
+    return (output);
+}
+// **************************************************************************
+//
 //  Method-Name   : siminit()
 //
 //  Generated source code.
@@ -292,7 +534,7 @@ CGeneratedSimIfc simifc;
 // **************************************************************************
 CSimIfc* siminit(void) {
     //
-    //  Create the main viewport object CObjectBase
-    simifc.CreateObject(0ul, IDO_OBJECTBASE);
+    //  Create the main viewport object CMainViewport
+    simifc.CreateObject(0ul, IDO_MAINVIEWPORT);
     return &simifc;
 }

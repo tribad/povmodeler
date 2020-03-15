@@ -12,9 +12,8 @@
 //  This is the class
 class IIncomingMessages {
 public:
-    IIncomingMessages() = default;
-    virtual ~IIncomingMessages() = default;
-    virtual void Process(tMsg* aMsg) ;
+    ~IIncomingMessages() = default;
+    virtual void Process(tMsg* aMsg) = 0;
 };
 
 #endif  // IINCOMINGMESSAGES_INC

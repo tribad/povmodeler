@@ -167,7 +167,7 @@ include_directories(${FREETYPE_INCLUDE_DIR})
 include_directories("/usr/include/freetype2")
 add_compile_options (-O0 -g -Wall -std=c++14 -fPIC)
 
-include_directories(${CMAKE_SOURCE_DIR}/src/modelifc ${CMAKE_SOURCE_DIR}/src/modelstore)
+include_directories(${CMAKE_SOURCE_DIR}/src/modelifc ${CMAKE_SOURCE_DIR}/src/modelstore ${CMAKE_SOURCE_DIR}/src/messages /usr/include/libxml2)
 
 ## set(AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -177,7 +177,6 @@ set (POVMODELER_SOURCE
      CModellerApp.cpp
      CSettings.cpp
      CModelStoreThread.cpp
-     IIncomingMessages.cpp
      IOutgoingMessages.cpp
      CGUI.cpp
      IGUIInput.cpp
@@ -187,7 +186,7 @@ set (POVMODELER_SOURCE
      ISettingsMenu.cpp
      IHelpMenu.cpp
      CModel.cpp
-     IModelInput.cpp
+     CModelNode.cpp
 
 )
 ##

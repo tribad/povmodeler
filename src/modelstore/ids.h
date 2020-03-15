@@ -28,6 +28,7 @@
 #define IDO_LATHE                (0xf25ccc811f8d84cb)
 #define IDO_LIGHTGROUP           (0xd3dddcbedd8522c3)
 #define IDO_LIGHTSOURCE          (0xab0a21f74fe572fb)
+#define IDO_MAINVIEWPORT         (0x6bedfacb0ab2e1a7)
 #define IDO_MERGE                (0xe5b0a54bc73d5bbe)
 #define IDO_MESH                 (0xdce5132574109b8c)
 #define IDO_MESH2                (0xc1debc6029903f83)

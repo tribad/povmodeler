@@ -9,15 +9,25 @@
 #ifndef CMODEL_INC
 #define CMODEL_INC
 //
+//  List of forwards needed in this module.
+class CModelNode;
+class tMsgStartImportReply;
+class tMsgAddElementReply;
+//
 //  This is the class
-class CModel : public IModelInput, public IIncomingMessages {
+class CModel : public IIncomingMessages, public IModelInput {
 public:
     virtual ~CModel() = default;
     CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) ;
     virtual void LoadKpovModelerFile(QString aFileName) ;
+    virtual void Process(tMsg* aMsg) ;
 public:
-    IGUIInput& mGUIInput;
-    CMsgQueue& mStoreOutput;
+    IGUIInput&  mGUIInput;
+    eModelState mState;
+    CMsgQueue&  mStoreOutput;
+private:
+    CModelNode  mRoot;
+    CModelNode* mActual;
 };
 
 #endif  // CMODEL_INC
