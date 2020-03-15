@@ -18,10 +18,18 @@
 #include "CModelBaseState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReq.h"
 eModelState CModelBaseState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) {
     eModelState retval = eModelState::Idle;
 // User-Defined-Code:AAAAAAFw3kIa4yYmPHs=
 // End-Of-UDC:AAAAAAFw3kIa4yYmPHs=
+    return  (retval);
+}
+
+eModelState CModelBaseState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReq* aMsg) {
+    eModelState retval = eModelState::Idle;
+// User-Defined-Code:AAAAAAFw3tnuJCwXNpA=
+// End-Of-UDC:AAAAAAFw3tnuJCwXNpA=
     return  (retval);
 }
 
@@ -31,6 +39,9 @@ eModelState CModelBaseState::Process(CModelStateCtrl& aCtrl, tMsg* aMsg) {
     switch (aMsg->id) {
     case IDM_STARTIMPORTREPLY:
         retval = Process(aCtrl, (tMsgStartImportReply*)aMsg);
+        break;
+    case IDM_STARTIMPORTREQ:
+        retval = Process(aCtrl, (tMsgStartImportReq*)aMsg);
         break;
     default:
         break;

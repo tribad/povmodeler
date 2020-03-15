@@ -59,6 +59,8 @@ tMsg* CMainViewport::process(tMsgStartImportReq* msg) {
     reply->dst.type        = eCommTarget::Node;
     reply->dst.node.nodeid = 0;
 
+    reply->FileName = msg->FileName;
+
     retval = reply;
 
     delete msg;

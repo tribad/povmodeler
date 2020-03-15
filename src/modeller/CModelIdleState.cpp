@@ -19,10 +19,14 @@
 #include "CModelIdleState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
-eModelState CModelIdleState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) {
+#include "../messages/tMsgStartImportReq.h"
+eModelState CModelIdleState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReq* aMsg) {
     eModelState retval = eModelState::Idle;
-// User-Defined-Code:AAAAAAFw3kO/hyY5nhY=
-// End-Of-UDC:AAAAAAFw3kO/hyY5nhY=
+// User-Defined-Code:AAAAAAFw3tFz8yvfUzo=
+    //
+    //  We do not delete the message as it would be send to the model store.
+    retval = eModelState::Import;
+// End-Of-UDC:AAAAAAFw3tFz8yvfUzo=
     return  (retval);
 }
 

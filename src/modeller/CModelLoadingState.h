@@ -12,6 +12,7 @@
 //  List of forwards from forwards list.
 class CModelNode;
 class tMsgStartImportReply;
+class tMsgStartImportReq;
 //
 //  This is the class
 class CModelLoadingState : public CModelBaseState {

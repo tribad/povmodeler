@@ -12,6 +12,7 @@
 //  List of forwards from forwards list.
 class CModelNode;
 class tMsgStartImportReply;
+class tMsgStartImportReq;
 //
 //  This is the class
 class CModelIdleState : public CModelBaseState {
@@ -19,7 +20,7 @@ public:
     CModelIdleState() = default;
     virtual ~CModelIdleState() = default;
 protected:
-    virtual eModelState Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) ;
+    virtual eModelState Process(CModelStateCtrl& aCtrl, tMsgStartImportReq* aMsg) ;
 };
 
 #endif  // CMODELIDLESTATE_INC

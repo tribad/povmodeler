@@ -24,11 +24,15 @@
 #include "CModelBaseState.h"
 #include "CModelIdleState.h"
 #include "CModelLoadingState.h"
+#include <QXmlStreamReader>
+#include <QFile>
 #include "CModelImportState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReq.h"
+#include <QXmlStreamReader>
+#include <QFile>
 #include "tMsgAddElementReply.h"
-#include "tMsgStartImportReq.h"
 #include "tMsgAddElementReq.h"
 void CModel::ProcessIdle(tMsg* aMsg) {
 // User-Defined-Code:AAAAAAFw3eVTGgyJsF8=
@@ -54,18 +58,22 @@ CModel::CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) : CModelStateC
 
 void CModel::LoadKpovModelerFile(QString aFileName) {
 // User-Defined-Code:AAAAAAFw2NpNF3fIStY=
-    QXmlStreamReader            xml;
-    QFile                       infile(aFileName);
-    QXmlStreamReader::TokenType tt;
-    //
-    //  Do the open
-    infile.open(QIODevice::ReadOnly);
-    if (infile.isOpen()) {
-        tMsg* startreq = new tMsgStartImportReq ;
+    tMsgStartImportReq* startreq = new tMsgStartImportReq ;
 
-        startreq->dst  = {0, nullptr};
+    startreq->dst  = {0, nullptr};
+    startreq->FileName = aFileName.toStdString();
+    //
+    //  We do send the message first into the actual state.
+    //  This can be achieved by calling our own process method.
+    //  This should switch into the right state for to receive the reply.
+    Process(startreq);
+    //
+    //  Now we should be in the right state and can send the message to the model store.
+    if (mState == eModelState::Import) {
         mStoreOutput.Put(startreq);
     } else {
+
+    }
 #if 0
         //
         // Only working on an open file.
@@ -88,7 +96,7 @@ void CModel::LoadKpovModelerFile(QString aFileName) {
             }
         }
 #endif
-    }
+
 // End-Of-UDC:AAAAAAFw2NpNF3fIStY=
 }
 
@@ -97,7 +105,6 @@ void CModel::Process(tMsg* aMsg) {
     if (mState != eModelState::EmergencySafe) {
         mState = mStateList[(unsigned)mState]->Process(*this, aMsg);
     }
-    delete aMsg;
 // End-Of-UDC:AAAAAAFw3agVRf3SzQg=
 }
 

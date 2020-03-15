@@ -19,3 +19,4 @@
 #include "CModelLoadingState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReq.h"

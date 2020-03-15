@@ -38,6 +38,7 @@
 #include "CModellerApp.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReq.h"
 #include "CModelBaseState.h"
 #include <QApplication>
 #include <QObject>

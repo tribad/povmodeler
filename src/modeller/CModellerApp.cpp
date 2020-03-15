@@ -13,6 +13,7 @@
 #include "CModelStateCtrl.h"
 #include "eModelState.h"
 #include "../messages/tMsgStartImportReply.h"
+#include "../messages/tMsgStartImportReq.h"
 #include "CModelBaseState.h"
 #include <QSettings>
 #include "CSettings.h"

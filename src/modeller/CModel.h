@@ -13,6 +13,7 @@
 class CModelNode;
 class CModelBaseState;
 class tMsgStartImportReply;
+class tMsgStartImportReq;
 class tMsgStartImportReply;
 class tMsgAddElementReply;
 //
