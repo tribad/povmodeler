@@ -61,6 +61,8 @@
 #define IDA_NAME                 cast (x'842f3af822536317' as bigint)
 #define IDA_OBJECTSAFTER         cast (x'd13a065a54dcaf71' as bigint)
 #define IDA_OBJECTSBEFORE        cast (x'2a1abb6f6646910d' as bigint)
+#define IDA_PROJECTS             cast (x'950e5781489b5fdb' as bigint)
+#define IDA_SCENES               cast (x'd380b0d2d8e315f4' as bigint)
 #define IDA_STATE                cast (x'9abc62b337d172c6' as bigint)
 --
 --

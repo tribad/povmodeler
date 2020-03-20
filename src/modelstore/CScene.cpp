@@ -22,6 +22,8 @@
 //                       M o d e l   i n c l u d e s
 #include "CScene.h"
 // Optional
+#include <string>
+#include "../messages/tMsgStartImportReq.h"
 /*
  *  private macros
  */
@@ -39,6 +41,20 @@ static std::map<objectid_t, CScene*> t_store;
  *
  *       !!!!    Here is a collection of functions that are editable.   !!!!
  */
+/* **************************************************************************
+ *
+ *  Method-Name   : startimportreq()
+ *
+ *  Partial generated source code.
+ *
+ * *************************************************************************/
+tMsg* CScene::process(tMsgStartImportReq* msg) {
+    tMsg* retval=0;
+// User-Defined-Code:startimportreq
+    FileName = msg->FileName;
+// End-Of-UDC:startimportreq
+    return (retval);
+}
 // **************************************************************************
 //
 //  Method-Name   : save()
@@ -67,6 +83,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        *((tVariant*)(&scene_var->FileName)) = value;
+        break;
     case IDA_NAME:
         *((tVariant*)(&scene_var->Name)) = value;
         break;
@@ -95,6 +114,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        retval = scene_var->FileName;
+        break;
     case IDA_NAME:
         retval = scene_var->Name;
         break;
@@ -113,6 +135,9 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CScene* scene_var = (CScene*)obj;
 
     switch (valueid) {
+    case IDA_FILENAME:
+        scene_var->FileName = value;
+        break;
     case IDA_NAME:
         scene_var->Name = value;
         break;
@@ -221,6 +246,9 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
     tMsg *retmsg=0;
 
     switch (msg->id) {
+    case IDM_STARTIMPORTREQ:
+        retmsg = thisobj->process((tMsgStartImportReq*)(msg));
+        break;
     default:
         if (((msg->type == MSG_TYPE_REPLY) || (msg->type == MSG_TYPE_INDICATION)) && (obj->parent != 0) && (obj != obj->parent)) {
             retmsg = obj->parent->syncprocess(obj->parent, msg);

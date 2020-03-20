@@ -187,7 +187,7 @@ set (POVMODELER_SOURCE
      CModelBaseState.cpp
      CModelIdleState.cpp
      CModelLoadingState.cpp
-     CModelImportState.cpp
+     CModelImportKpmState.cpp
      CModelNode.cpp
 
 )

@@ -171,8 +171,9 @@ public:
     virtual tMsg*     Process(tCommTarget& src, tJSON* aJson);
     virtual tNetPack* Process(tNetPack* aPackage);
     virtual tNetPack* ProcessRaw(tNetPack* aPackage);
-private:
+public:
     tSimObj*                                mainviewport;
+private:
     std::map<std::string, sig_from_json_op> sigfrommap;
     std::map<uint64_t,    sig_to_json_op>   sigtomap;
     std::map<std::string, msg_from_json_op> msgfrommap;
@@ -551,5 +552,8 @@ CSimIfc* siminit(void) {
     //
     //  Create the main viewport object CMainViewport
     simifc.CreateObject(0ul, IDO_MAINVIEWPORT);
+    if (simifc.mainviewport != nullptr) {
+        simifc.mainviewport->update(simifc.mainviewport, 0u);
+    }
     return &simifc;
 }

@@ -1,6 +1,6 @@
 // *************************************************************************************************************
 //
-//  Modul-Name     : CModelImportState.cpp
+//  Modul-Name     : CModelImportKpmState.cpp
 //
 //  Copyrights by Hans-Juergen Lange <hjl@simulated-universe.de>. All rights reserved.
 //
@@ -18,11 +18,11 @@
 #include "CModelBaseState.h"
 #include <QXmlStreamReader>
 #include <QFile>
-#include "CModelImportState.h"
+#include "CModelImportKpmState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
 #include "../messages/tMsgStartImportReq.h"
-eModelState CModelImportState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) {
+eModelState CModelImportKpmState::Process(CModelStateCtrl& aCtrl, tMsgStartImportReply* aMsg) {
     eModelState retval = eModelState::Idle;
 // User-Defined-Code:AAAAAAFw3kO/hyY5nhY=
     QXmlStreamReader::TokenType token_type;

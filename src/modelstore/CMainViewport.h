@@ -27,6 +27,7 @@ public:
      *  Here are the attributes of the object defined.
      */
 public:
+    CSimAttrArray Projects;
 };
 
 extern tObjLib mainviewport_factory;

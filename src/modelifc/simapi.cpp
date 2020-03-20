@@ -41,8 +41,6 @@ void DeleteObject(tSimObj* obj) {
     FreeObject(obj);
 }
 
-
-
 tMsg* SendMsg(const tSimAttrArrayIter &iter, tMsg* msg) {
     tSimObjRef ref = iter->second;
     tMsg*      retval = 0;

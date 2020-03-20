@@ -26,7 +26,7 @@
 #include "CModelLoadingState.h"
 #include <QXmlStreamReader>
 #include <QFile>
-#include "CModelImportState.h"
+#include "CModelImportKpmState.h"
 // Optional
 #include "../messages/tMsgStartImportReply.h"
 #include "../messages/tMsgStartImportReq.h"
@@ -52,7 +52,7 @@ CModel::CModel(IGUIInput& aGUIInput, CMsgQueue& aOutgoingMessage) : CModelStateC
     //
     //  Initialization of the statemachine
     mState  = eModelState::Idle;
-    mStateList = {new CModelIdleState, new CModelLoadingState, new CModelImportState};
+    mStateList = {new CModelIdleState, new CModelLoadingState, new CModelImportKpmState};
 // End-Of-UDC:AAAAAAFw04XnBkMJfPs=
 }
 
@@ -74,29 +74,6 @@ void CModel::LoadKpovModelerFile(QString aFileName) {
     } else {
 
     }
-#if 0
-        //
-        // Only working on an open file.
-        xml.setDevice(&infile);
-        //
-        //  Run as long as there is no error.
-        while (!xml.atEnd()) {
-            tt = xml.readNext();
-            //
-            //  Check for errors before do any further processing.
-            if (!xml.hasError()) {
-                std::cerr << "------\n";
-                std::cerr << tt << std::endl;
-
-                for (auto a : xml.attributes()) {
-                    std::cerr << a.name().toString().toStdString().c_str() << "::" << a.value().toString().toStdString().c_str() << std::endl;
-                }
-            } else {
-                std::cerr << xml.errorString().toStdString().c_str() << std::endl;
-            }
-        }
-#endif
-
 // End-Of-UDC:AAAAAAFw2NpNF3fIStY=
 }
 

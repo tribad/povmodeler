@@ -55,12 +55,32 @@ tMsg* CMainViewport::process(tMsgStartImportReq* msg) {
     tMsg* retval=0;
 // User-Defined-Code:startimportreq
     tMsgStartImportReply* reply = new tMsgStartImportReply;
+    //
+    // Create and init a new project
+    tSimObj* newproj = NewObject(IDO_PROJECT, this);
 
+    if (newproj != nullptr) {
+        //
+        //  Setting up the reference to the project into the projects array
+        //  and send the project the start import request.
+        //  So the project can init itself as needed.
+        tVariant objref = tObjectRef { newproj->objid, newproj};
+
+        SetValue(this, IDA_PROJECTS, objref);
+        //
+        //  The project shall not delete the message.
+        SendMsg(newproj, msg);
+    }
+    //
+    //  Make the reply ready.
     reply->dst.type        = eCommTarget::Node;
     reply->dst.node.nodeid = 0;
-
+    //
+    //  We return the filename back to the modeller so it can do the loading
+    //  Within its own statemachine.
     reply->FileName = msg->FileName;
-
+    //
+    //  Exit sequence
     retval = reply;
 
     delete msg;
@@ -108,6 +128,9 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
+    case IDA_PROJECTS:
+        *((tVariant*)(&mainviewport_var->Projects[valueindex])) = tSimObjRef(value, simidx.Find(value));
+        break;
     default:
         err = -1;
         break;
@@ -124,6 +147,9 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
+    case IDA_PROJECTS:
+        retval = mainviewport_var->Projects[valueindex];
+        break;
     default:
         break;
     }
@@ -139,6 +165,9 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
+    case IDA_PROJECTS:
+        mainviewport_var->Projects[valueindex] = value;
+        break;
     default:
         err=-1;
         break;
@@ -157,6 +186,12 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
     /*
      * Fill all references with the pointers.
      */
+    for (tSimAttrArrayIter i = thisobj->Projects.begin(); i != thisobj->Projects.end(); ++i) {
+        i->second.ptr = simidx.Find(i->second.ul);
+        if (i->second.ptr != 0) {
+            ((tSimObj*)(i->second.ptr))->parent = obj;
+        }
+    }
     /*
      *  This object has no statemachine.
      */
@@ -273,6 +308,7 @@ static tSimObj* create_mainviewport_obj(objectid_t  oid) {
         if (0xc0000000 & oid) {
             t_store.insert(std::pair<templateid_t, CMainViewport*>(oid, newmainviewport));
         }
+        newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
     } else {
     }
     return ((tSimObj*)newmainviewport);
@@ -304,6 +340,7 @@ static tSimObj* create_new_mainviewport_obj(objectid_t  oid) {
         stdb_createobj(oid, IDO_MAINVIEWPORT);
         //
         //  Now fill the attributes with values.
+        newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
         //
         //  create the attribute data in the DB.
     } else {
@@ -340,6 +377,7 @@ static tSimObj* create_new_mainviewport_obj_from_template(templateid_t  tid, obj
             //  Create the object in the db.
             stdb_createobj(oid, IDO_MAINVIEWPORT);
             //
+            newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
             //
             //  Copy data from template.
             //
