@@ -24,6 +24,10 @@
 // Optional
 #include <string>
 #include "../messages/tMsgStartImportReq.h"
+#include "../messages/eModelElementFormat.h"
+#include "../messages/tElementProperty.h"
+#include "../messages/tMsgAddElementReq.h"
+#include "../messages/tMsgAddElementReply.h"
 /*
  *  private macros
  */
@@ -65,12 +69,25 @@ tMsg* CProject::process(tMsgStartImportReq* msg) {
         //  So the project can init itself as needed.
         tVariant objref = tObjectRef { newscene->objid, newscene};
 
-        SetValue(this, IDA_SCENES, objref);
+        contained[0] = objref;
         //
         //  The project shall not delete the message.
         SendMsg(newscene, msg);
     }
 // End-Of-UDC:startimportreq
+    return (retval);
+}
+/* **************************************************************************
+ *
+ *  Method-Name   : addelementreq()
+ *
+ *  Partial generated source code.
+ *
+ * *************************************************************************/
+tMsg* CProject::process(tMsgAddElementReq* msg) {
+    tMsg* retval=0;
+// User-Defined-Code:addelementreq
+// End-Of-UDC:addelementreq
     return (retval);
 }
 // **************************************************************************
@@ -113,9 +130,6 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     case IDA_OBJECTSAFTER:
         project_var->ObjectsAfter[valueindex] = value;
         break;
-    case IDA_SCENES:
-        *((tVariant*)(&project_var->Scenes[valueindex])) = tSimObjRef(value, simidx.Find(value));
-        break;
     case IDA_CONTAINED:
         *((tVariant*)(&project_var->contained[valueindex])) = tSimObjRef(value, simidx.Find(value));
         break;
@@ -138,8 +152,8 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     case IDA_FILENAME:
         retval = project_var->FileName;
         break;
-    case IDA_SCENES:
-        retval = project_var->Scenes[valueindex];
+    case IDA_CONTAINED:
+        retval = project_var->contained[valueindex];
         break;
     case IDA_NAME:
         retval = project_var->Name;
@@ -162,8 +176,8 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     case IDA_FILENAME:
         project_var->FileName = value;
         break;
-    case IDA_SCENES:
-        project_var->Scenes[valueindex] = value;
+    case IDA_CONTAINED:
+        project_var->contained[valueindex] = value;
         break;
     case IDA_NAME:
         project_var->Name = value;
@@ -192,12 +206,6 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
     /*
      * Fill all references with the pointers.
      */
-    for (tSimAttrArrayIter i = thisobj->Scenes.begin(); i != thisobj->Scenes.end(); ++i) {
-        i->second.ptr = simidx.Find(i->second.ul);
-        if (i->second.ptr != 0) {
-            ((tSimObj*)(i->second.ptr))->parent = obj;
-        }
-    }
     for (tSimAttrArrayIter i = thisobj->contained.begin(); i != thisobj->contained.end(); ++i) {
         i->second.ptr = simidx.Find(i->second.ul);
         if (i->second.ptr != 0) {
@@ -282,6 +290,9 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
     case IDM_STARTIMPORTREQ:
         retmsg = thisobj->process((tMsgStartImportReq*)(msg));
         break;
+    case IDM_ADDELEMENTREQ:
+        retmsg = thisobj->process((tMsgAddElementReq*)(msg));
+        break;
     default:
         if (((msg->type == MSG_TYPE_REPLY) || (msg->type == MSG_TYPE_INDICATION)) && (obj->parent != 0) && (obj != obj->parent)) {
             retmsg = obj->parent->syncprocess(obj->parent, msg);
@@ -317,7 +328,7 @@ static tSimObj* create_project_obj(objectid_t  oid) {
         if (0xc0000000 & oid) {
             t_store.insert(std::pair<templateid_t, CProject*>(oid, newproject));
         }
-        newproject->Scenes = CSimAttrArray(oid, IDA_SCENES, eSimAttrType::Reference);
+        newproject->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
     } else {
     }
     return ((tSimObj*)newproject);
@@ -349,7 +360,7 @@ static tSimObj* create_new_project_obj(objectid_t  oid) {
         stdb_createobj(oid, IDO_PROJECT);
         //
         //  Now fill the attributes with values.
-        newproject->Scenes = CSimAttrArray(oid, IDA_SCENES, eSimAttrType::Reference);
+        newproject->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
         //
         //  create the attribute data in the DB.
     } else {
@@ -386,7 +397,7 @@ static tSimObj* create_new_project_obj_from_template(templateid_t  tid, objectid
             //  Create the object in the db.
             stdb_createobj(oid, IDO_PROJECT);
             //
-            newproject->Scenes = CSimAttrArray(oid, IDA_SCENES, eSimAttrType::Reference);
+            newproject->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
             //
             //  Copy data from template.
             newproject->ObjectsBefore = found->second->ObjectsBefore;

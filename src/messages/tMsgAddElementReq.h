@@ -11,6 +11,9 @@
 
 #include <simobj.h>
 #include <helper.h>
+#include <string>
+#include "eModelElementFormat.h"
+#include "tElementProperty.h"
 
 #define IDM_ADDELEMENTREQ 0x24309728bddfea8e
 //
@@ -58,14 +61,36 @@ struct tMsgAddElementReq : public tMsg {
                 dst.obj.id  = 0;
             }
             dst.type    = eCommTarget::Object;
+            j=find(json, "Name");
+            if (j!=0) {
+                Name=to_string(j);
+            }
         }
     }
     virtual ~tMsgAddElementReq() {}
     virtual std::ostream& json(std::ostream& output) {
         output << "\"MsgId\": \"AddElementReq\"";
+        output <<  ", \"Name\":\"" << helper::escape(this->Name) << "\"";
+        output <<  ", \"Format\":" << (int64_t)this->Format;
+        output <<  ", \"Property\": [ ";
+        for (std::vector<tElementProperty>::iterator b = this->Property.begin(); b != this->Property.end(); ++b) {
+            if (b == this->Property.begin()) {
+                output <<  "{\n";
+            } else {
+                output <<  ", {\n";
+            }
+    // struct
+            output <<  "\"Name\":\"" << helper::escape(b->Name) << "\"";
+            output <<  ", \"Value\":\"" << helper::escape(b->Value) << "\"";
+            output <<  "}\n";
+        }
+        output <<  "]\n";
 
         return output;
     }
+    std::string                     Name;
+    eModelElementFormat             Format;
+    std::vector< tElementProperty > Property;
 };
 
 #endif  // TMSGADDELEMENTREQ_INC

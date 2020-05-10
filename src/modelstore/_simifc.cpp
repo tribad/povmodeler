@@ -36,6 +36,8 @@
 #include "tMsgStartImportReply.h"
 #include "tMsgEndImportReq.h"
 #include "tMsgEndImportReply.h"
+#include "eModelElementFormat.h"
+#include "tElementProperty.h"
 #include "tMsgAddElementReq.h"
 #include "tMsgAddElementReply.h"
 
@@ -494,6 +496,10 @@ static tMsg* msg_from_json_addelementreq(tJSON*  json) {
     }
     newsig->dst.type    = eCommTarget::Object;
     newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    j=find(json, "Name");
+    if (j!=0) {
+        newsig->Name=to_string(j);
+    }
     return ((tMsg*)(newsig));
 }
 // **************************************************************************
@@ -506,6 +512,21 @@ static tMsg* msg_from_json_addelementreq(tJSON*  json) {
 static std::ostream& msg_to_json_addelementreq(tMsg* aMsg, std::ostream& output) {
     tMsgAddElementReq* msg=(tMsgAddElementReq*)aMsg;
     output << "\"MsgId\": \"AddElementReq\"";
+    output <<  ", \"Name\":\"" << helper::escape(msg->Name) << "\"";
+    output <<  ", \"Format\":" << (int64_t)msg->Format;
+    output <<  ", \"Property\": [ ";
+    for (std::vector<tElementProperty>::iterator a = msg->Property.begin(); a != msg->Property.end(); ++a) {
+        if (a == msg->Property.begin()) {
+            output <<  "{\n";
+        } else {
+            output <<  ", {\n";
+        }
+// struct
+        output <<  "\"Name\":\"" << helper::escape(a->Name) << "\"";
+        output <<  ", \"Value\":\"" << helper::escape(a->Value) << "\"";
+        output <<  "}\n";
+    }
+    output <<  "]\n";
     return (output);
 }
 // **************************************************************************
@@ -527,6 +548,10 @@ static tMsg* msg_from_json_addelementreply(tJSON*  json) {
     }
     newsig->dst.type    = eCommTarget::Object;
     newsig->dst.obj.ptr = simidx.Find(newsig->dst.obj.id);
+    j=find(json, "Error");
+    if (j!=0) {
+        newsig->Error=to_int(j);
+    }
     return ((tMsg*)(newsig));
 }
 // **************************************************************************
@@ -539,6 +564,7 @@ static tMsg* msg_from_json_addelementreply(tJSON*  json) {
 static std::ostream& msg_to_json_addelementreply(tMsg* aMsg, std::ostream& output) {
     tMsgAddElementReply* msg=(tMsgAddElementReply*)aMsg;
     output << "\"MsgId\": \"AddElementReply\"";
+    output <<  ", \"Error\":" << msg->Error;
     return (output);
 }
 // **************************************************************************

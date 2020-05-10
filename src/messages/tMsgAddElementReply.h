@@ -58,14 +58,20 @@ struct tMsgAddElementReply : public tMsg {
                 dst.obj.id  = 0;
             }
             dst.type    = eCommTarget::Object;
+            j=find(json, "Error");
+            if (j!=0) {
+                Error=to_int(j);
+            }
         }
     }
     virtual ~tMsgAddElementReply() {}
     virtual std::ostream& json(std::ostream& output) {
         output << "\"MsgId\": \"AddElementReply\"";
+        output <<  ", \"Error\":" << this->Error;
 
         return output;
     }
+    int Error;
 };
 
 #endif  // TMSGADDELEMENTREPLY_INC

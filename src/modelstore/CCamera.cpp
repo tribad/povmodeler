@@ -22,6 +22,11 @@
 //                       M o d e l   i n c l u d e s
 #include "CCamera.h"
 // Optional
+#include <string>
+#include "../messages/eModelElementFormat.h"
+#include "../messages/tElementProperty.h"
+#include "../messages/tMsgAddElementReq.h"
+#include "../messages/tMsgAddElementReply.h"
 /*
  *  private macros
  */
@@ -39,6 +44,19 @@ static std::map<objectid_t, CCamera*> t_store;
  *
  *       !!!!    Here is a collection of functions that are editable.   !!!!
  */
+/* **************************************************************************
+ *
+ *  Method-Name   : addelementreq()
+ *
+ *  Partial generated source code.
+ *
+ * *************************************************************************/
+tMsg* CCamera::process(tMsgAddElementReq* msg) {
+    tMsg* retval=0;
+// User-Defined-Code:addelementreq
+// End-Of-UDC:addelementreq
+    return (retval);
+}
 // **************************************************************************
 //
 //  Method-Name   : save()
@@ -221,6 +239,9 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
     tMsg *retmsg=0;
 
     switch (msg->id) {
+    case IDM_ADDELEMENTREQ:
+        retmsg = thisobj->process((tMsgAddElementReq*)(msg));
+        break;
     default:
         if (((msg->type == MSG_TYPE_REPLY) || (msg->type == MSG_TYPE_INDICATION)) && (obj->parent != 0) && (obj != obj->parent)) {
             retmsg = obj->parent->syncprocess(obj->parent, msg);

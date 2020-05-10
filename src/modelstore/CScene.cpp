@@ -24,6 +24,10 @@
 // Optional
 #include <string>
 #include "../messages/tMsgStartImportReq.h"
+#include "../messages/eModelElementFormat.h"
+#include "../messages/tElementProperty.h"
+#include "../messages/tMsgAddElementReq.h"
+#include "../messages/tMsgAddElementReply.h"
 /*
  *  private macros
  */
@@ -53,6 +57,19 @@ tMsg* CScene::process(tMsgStartImportReq* msg) {
 // User-Defined-Code:startimportreq
     FileName = msg->FileName;
 // End-Of-UDC:startimportreq
+    return (retval);
+}
+/* **************************************************************************
+ *
+ *  Method-Name   : addelementreq()
+ *
+ *  Partial generated source code.
+ *
+ * *************************************************************************/
+tMsg* CScene::process(tMsgAddElementReq* msg) {
+    tMsg* retval=0;
+// User-Defined-Code:addelementreq
+// End-Of-UDC:addelementreq
     return (retval);
 }
 // **************************************************************************
@@ -248,6 +265,9 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
     switch (msg->id) {
     case IDM_STARTIMPORTREQ:
         retmsg = thisobj->process((tMsgStartImportReq*)(msg));
+        break;
+    case IDM_ADDELEMENTREQ:
+        retmsg = thisobj->process((tMsgAddElementReq*)(msg));
         break;
     default:
         if (((msg->type == MSG_TYPE_REPLY) || (msg->type == MSG_TYPE_INDICATION)) && (obj->parent != 0) && (obj != obj->parent)) {

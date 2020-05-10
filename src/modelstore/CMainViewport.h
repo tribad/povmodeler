@@ -11,7 +11,6 @@
 //
 //  Forward declarations
 class tMsgStartImportReq;
-class tMsgAddElementReq;
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
 struct CMainViewport : public tSimObj {
@@ -20,14 +19,13 @@ struct CMainViewport : public tSimObj {
      */
 public:
     tMsg* process(tMsgStartImportReq* msg) ;
-    tMsg* process(tMsgAddElementReq* msg) ;
     tMsg* DefaultMsgHandler(tMsg* aMsg);
     bool  DefaultSigHandler(tSig* aSignal);
     /*
      *  Here are the attributes of the object defined.
      */
 public:
-    CSimAttrArray Projects;
+    CSimAttrArray contained;
 };
 
 extern tObjLib mainviewport_factory;

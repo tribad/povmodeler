@@ -33,6 +33,8 @@
 #include <QXmlStreamReader>
 #include <QFile>
 #include "tMsgAddElementReply.h"
+#include "eModelElementFormat.h"
+#include "tElementProperty.h"
 #include "tMsgAddElementReq.h"
 void CModel::ProcessIdle(tMsg* aMsg) {
 // User-Defined-Code:AAAAAAFw3eVTGgyJsF8=

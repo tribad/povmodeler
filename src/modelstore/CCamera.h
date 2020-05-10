@@ -10,6 +10,7 @@
 #define CAMERA_INC
 //
 //  Forward declarations
+class tMsgAddElementReq;
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
 struct CCamera : public tSimObj {
@@ -17,6 +18,7 @@ struct CCamera : public tSimObj {
      *  These are the message and signal processing functions.
      */
 public:
+    tMsg* process(tMsgAddElementReq* msg) ;
     tMsg* DefaultMsgHandler(tMsg* aMsg);
     bool  DefaultSigHandler(tSig* aSignal);
     /*

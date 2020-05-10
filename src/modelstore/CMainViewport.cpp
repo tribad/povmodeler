@@ -24,9 +24,7 @@
 // Optional
 #include <string>
 #include "../messages/tMsgStartImportReq.h"
-#include "../messages/tMsgAddElementReq.h"
 #include "../messages/tMsgStartImportReply.h"
-#include "../messages/tMsgAddElementReply.h"
 /*
  *  private macros
  */
@@ -66,7 +64,7 @@ tMsg* CMainViewport::process(tMsgStartImportReq* msg) {
         //  So the project can init itself as needed.
         tVariant objref = tObjectRef { newproj->objid, newproj};
 
-        SetValue(this, IDA_PROJECTS, objref);
+        contained[0] = objref;
         //
         //  The project shall not delete the message.
         SendMsg(newproj, msg);
@@ -85,19 +83,6 @@ tMsg* CMainViewport::process(tMsgStartImportReq* msg) {
 
     delete msg;
 // End-Of-UDC:startimportreq
-    return (retval);
-}
-/* **************************************************************************
- *
- *  Method-Name   : addelementreq()
- *
- *  Partial generated source code.
- *
- * *************************************************************************/
-tMsg* CMainViewport::process(tMsgAddElementReq* msg) {
-    tMsg* retval=0;
-// User-Defined-Code:addelementreq
-// End-Of-UDC:addelementreq
     return (retval);
 }
 // **************************************************************************
@@ -128,8 +113,8 @@ static int setvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valueindex,
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
-    case IDA_PROJECTS:
-        *((tVariant*)(&mainviewport_var->Projects[valueindex])) = tSimObjRef(value, simidx.Find(value));
+    case IDA_CONTAINED:
+        *((tVariant*)(&mainviewport_var->contained[valueindex])) = tSimObjRef(value, simidx.Find(value));
         break;
     default:
         err = -1;
@@ -147,8 +132,8 @@ static tVariant getvalue(tSimObj * obj, valueid_t  valueid, valueindex_t  valuei
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
-    case IDA_PROJECTS:
-        retval = mainviewport_var->Projects[valueindex];
+    case IDA_CONTAINED:
+        retval = mainviewport_var->contained[valueindex];
         break;
     default:
         break;
@@ -165,8 +150,8 @@ static int setvaluedb(tSimObj * obj, valueid_t  valueid, valueindex_t  valueinde
     CMainViewport* mainviewport_var = (CMainViewport*)obj;
 
     switch (valueid) {
-    case IDA_PROJECTS:
-        mainviewport_var->Projects[valueindex] = value;
+    case IDA_CONTAINED:
+        mainviewport_var->contained[valueindex] = value;
         break;
     default:
         err=-1;
@@ -186,7 +171,7 @@ static void init_object(tSimObj * obj, uint64_t  aCycle) {
     /*
      * Fill all references with the pointers.
      */
-    for (tSimAttrArrayIter i = thisobj->Projects.begin(); i != thisobj->Projects.end(); ++i) {
+    for (tSimAttrArrayIter i = thisobj->contained.begin(); i != thisobj->contained.end(); ++i) {
         i->second.ptr = simidx.Find(i->second.ul);
         if (i->second.ptr != 0) {
             ((tSimObj*)(i->second.ptr))->parent = obj;
@@ -270,9 +255,6 @@ static tMsg* process_msg(tSimObj * obj, tMsg * msg) {
     case IDM_STARTIMPORTREQ:
         retmsg = thisobj->process((tMsgStartImportReq*)(msg));
         break;
-    case IDM_ADDELEMENTREQ:
-        retmsg = thisobj->process((tMsgAddElementReq*)(msg));
-        break;
     default:
         if (((msg->type == MSG_TYPE_REPLY) || (msg->type == MSG_TYPE_INDICATION)) && (obj->parent != 0) && (obj != obj->parent)) {
             retmsg = obj->parent->syncprocess(obj->parent, msg);
@@ -308,7 +290,7 @@ static tSimObj* create_mainviewport_obj(objectid_t  oid) {
         if (0xc0000000 & oid) {
             t_store.insert(std::pair<templateid_t, CMainViewport*>(oid, newmainviewport));
         }
-        newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
+        newmainviewport->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
     } else {
     }
     return ((tSimObj*)newmainviewport);
@@ -340,7 +322,7 @@ static tSimObj* create_new_mainviewport_obj(objectid_t  oid) {
         stdb_createobj(oid, IDO_MAINVIEWPORT);
         //
         //  Now fill the attributes with values.
-        newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
+        newmainviewport->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
         //
         //  create the attribute data in the DB.
     } else {
@@ -377,7 +359,7 @@ static tSimObj* create_new_mainviewport_obj_from_template(templateid_t  tid, obj
             //  Create the object in the db.
             stdb_createobj(oid, IDO_MAINVIEWPORT);
             //
-            newmainviewport->Projects = CSimAttrArray(oid, IDA_PROJECTS, eSimAttrType::Reference);
+            newmainviewport->contained = CSimAttrArray(oid, IDA_CONTAINED, eSimAttrType::Reference);
             //
             //  Copy data from template.
             //

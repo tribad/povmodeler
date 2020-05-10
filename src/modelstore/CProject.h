@@ -11,6 +11,7 @@
 //
 //  Forward declarations
 class tMsgStartImportReq;
+class tMsgAddElementReq;
 //
 //                   S i m o b j e c t    d e c l a r a t i o n
 struct CProject : public tSimObj {
@@ -19,6 +20,7 @@ struct CProject : public tSimObj {
      */
 public:
     tMsg* process(tMsgStartImportReq* msg) ;
+    tMsg* process(tMsgAddElementReq* msg) ;
     tMsg* DefaultMsgHandler(tMsg* aMsg);
     bool  DefaultSigHandler(tSig* aSignal);
     /*
@@ -29,7 +31,6 @@ public:
     CSimAttribute                  Name;
     std::map< uint64_t, tVariant > ObjectsBefore;
     std::map< uint64_t, tVariant > ObjectsAfter;
-    CSimAttrArray                  Scenes;
     CSimAttrArray                  contained;
 };
 

@@ -62,8 +62,6 @@
 #define IDA_NAME                 (0x842f3af822536317)
 #define IDA_OBJECTSAFTER         (0xd13a065a54dcaf71)
 #define IDA_OBJECTSBEFORE        (0x2a1abb6f6646910d)
-#define IDA_PROJECTS             (0x950e5781489b5fdb)
-#define IDA_SCENES               (0xd380b0d2d8e315f4)
 #define IDA_STATE                (0x9abc62b337d172c6)
 //
 //
